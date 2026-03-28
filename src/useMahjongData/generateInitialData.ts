@@ -10,7 +10,7 @@ export const generateInitialData = (numberOfPlayers: number = 4): MahjongData =>
     for(let i = 0; i < numberOfPlayers; i++) {
         hands.push({ 
             unexposed: wall.splice(0, 13), 
-            exposed: [] 
+            exposed: [], 
         })
     }
 

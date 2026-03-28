@@ -13,7 +13,7 @@ type Props = {
 export default function ReferenceHand({ hand, onClick, expanded = false, pinned = false }: Props) {
     return (
         <button
-            className="text text-left w-full flex justify-between gap-1 even:bg-gray-200 whitespace-nowrap"
+            className="text text-left w-full flex justify-between gap-1 p-1 even:bg-gray-200 whitespace-nowrap"
             onClick={onClick}
         >
             <span>
@@ -29,8 +29,10 @@ export default function ReferenceHand({ hand, onClick, expanded = false, pinned 
             </span>
             <span className="text-taupe-600 text-sm me-1">
                 {expanded && <span className="me-2">({hand.text})</span>}
-                {hand.concealed ? "C" : expanded && "X"}
-                {expanded && hand.value}
+                <span>
+                    {hand.concealed ? "C" : expanded && "X"}
+                    {expanded && hand.value}
+                </span>
             </span>
         </button>
     )

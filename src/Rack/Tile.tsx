@@ -3,17 +3,32 @@ import type { MahjongTile, Size } from "../types"
 import { useTheme } from "../useTheme"
 
 type Props = {
-    tile: MahjongTile
+    tile?: MahjongTile
     size?: Size
     selected?: boolean
     tipped?: boolean
-    covered?: boolean
+    message?: string
 }
 
 const sizes = {
-    sm: 4,
-    md: 6.5,
-    lg: 7
+    sm: {
+        shadowHeight: 4,
+        tileClassName: "h-10 md:h-16",
+        numberClassName: "text-xs md:text-base",
+        suitClassName: "text-md md:text-2xl"
+    },
+    md: {
+        shadowHeight: 5,
+        tileClassName: "h-12 md:h-20",
+        numberClassName: "text-lg",
+        suitClassName: "text-3xl"
+    },
+    lg: {
+        shadowHeight: 6,
+        tileClassName: "h-14 md:h-24",
+        numberClassName: "text-sm md:text-[1.4rem]",
+        suitClassName: "text-2xl md:text-4xl"
+    },
 }
 
 const generateBoxShadow = (height: number, tipped: boolean, topColor: string, bottomColor: string) => {
@@ -25,43 +40,42 @@ const generateBoxShadow = (height: number, tipped: boolean, topColor: string, bo
     return shadow
 }
 
-export default function Tile({ tile, size = "lg", selected = false, tipped = false, covered = false }: Props) {
+export default function Tile({ tile, size = "lg", selected = false, tipped = false, message = "" }: Props) {
     const { tileLight, tileDark } = useTheme()
+    const { shadowHeight, tileClassName, numberClassName, suitClassName } = sizes[size]
 
-    if (covered)
-        return <div
-            className="border aspect-[2.1/3] rounded-lg"
-            style={{ 
-                height: sizes[size] + "rem",
-                backgroundColor: tileLight,
-                borderColor: tileDark,
-                boxShadow: generateBoxShadow(sizes[size], tipped, "var(--color-taupe-200)", tileDark)
-            }}
-        ></div>
+    const tileStyle = !tile ? {
+        backgroundColor: tileLight,
+        borderColor: tileDark,
+        boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark)
+    } : {
+        boxShadow: generateBoxShadow(shadowHeight, tipped, tileDark, "var(--color-taupe-200)")
+    }
 
     return (
         <div
             className={clsx(
-                "border aspect-[2.1/3] relative rounded-lg flex items-center justify-center select-none",
-                selected ? "bg-amber-100 border-amber-300" : "bg-taupe-50 border-taupe-200"
+                "border aspect-[2.1/3] rounded-lg relative flex items-center justify-center",
+                selected ? "bg-amber-100 border-amber-300" : "bg-taupe-50 border-taupe-200",
+                tileClassName
             )}
-            style={{ 
-                height: sizes[size] + "rem",
-                boxShadow: generateBoxShadow(sizes[size], tipped, tileDark, "var(--color-taupe-200)")
-            }}
+            style={tileStyle}
         >
-            <span
-                className="absolute top-0 left-0 font-bold"
-                style={{ fontSize: sizes[size] / 4 + "rem" }}
-            >
-                &nbsp;{tile.number}
-            </span>
-            <div
-                className="text-shadow"
-                style={{ fontSize: sizes[size] / 2.5 + "rem" }}
-            >
-                {tile.suit}
-            </div>
+            {tile && (
+                <>
+                    <span
+                        className={clsx("absolute top-0 left-0 font-bold", numberClassName)}
+                    >
+                        &nbsp;{tile.number}
+                    </span>
+                    <div
+                        className={clsx("text-shadow pt-1", suitClassName)}
+                    >
+                        {tile.suit}
+                    </div>
+                </>
+            )}
+            { message && <div className="text-white text-[0.8rem] md:text-base text-center opacity-60">{message}</div>}
         </div>
     )
 }

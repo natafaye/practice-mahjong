@@ -25,12 +25,12 @@ export default function ReferenceCard({ className }: Props) {
 
   return (
     <div className={clsx(
-      "flex flex-col align-top bg-white p-4 pb-0 rounded-lg rounded-b-none",
-      maximized ? "absolute top-0 left-0 right-0 bottom-0" : "max-h-50",
+      "flex flex-col align-top bg-white p-4 md:pb-0 rounded-lg md:rounded-b-none",
+      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "max-h-[70%] md:max-h-full",
       className
     )}>
       <div className="pb-2 flex">
-        <div className="grow shrink columns-[34rem]">
+        <div className="grow shrink min-w-0 columns-1 2xl:columns-2">
           {pinnedIndexes.map(index => (
             <ReferenceHand
               key={index}
@@ -42,30 +42,39 @@ export default function ReferenceCard({ className }: Props) {
           ))}
           {pinnedIndexes.length === 0 && <span className="text-taupe-400">No hands pinned</span>}
         </div>
-        <div>
-          <button className="text-taupe-600 text-2xl ms-auto ps-3" onClick={() => setMaximized(!maximized)}>
+        <div className="text-end shrink">
+          <button
+            className="text-taupe-600 md:text-2xl ms-auto ps-3"
+            onClick={() => setMaximized(!maximized)}
+          >
             <FontAwesomeIcon icon={maximized ? faMinimize : faMaximize} />
           </button>
-          <button className="text-taupe-600 text-2xl ms-auto ps-3" onClick={() => setExpanded(!expanded)}>
+          {!maximized && <button
+            className="text-taupe-600 md:text-2xl ms-auto ps-3"
+            onClick={() => setExpanded(!expanded)}
+          >
             <FontAwesomeIcon icon={expanded ? faAngleDown : faAngleUp} />
-          </button>
+          </button>}
         </div>
       </div>
       {(expanded || maximized) && (
-        <div className="overflow-y-auto h-full pt-3 border-t-taupe-400 border-t-2">
+        <div className="overflow-y-auto flex-1 min-h-0 pt-3 border-t-taupe-400 border-t-2">
           <div className={clsx(maximized ? "columns-[34rem]" : "columns-[14rem]")}>
             {mahjongHandSections.map(section => (
               <div key={section} className="mb-3">
-                <h3 className="font-bold text-lg">{section}</h3>
-                {mahjongHands.filter(hand => hand.section === section).map((hand, index) => (
-                  <ReferenceHand
-                    key={index}
-                    hand={hand}
-                    expanded={maximized}
-                    pinned={pinnedIndexes.includes(mahjongHands.indexOf(hand))}
-                    onClick={() => pin(mahjongHands.indexOf(hand))}
-                  />
-                ))}
+                <h3 className="font-bold">{section}</h3>
+                {mahjongHands.filter(hand => hand.section === section).map((hand, index) => {
+                  const pinned = pinnedIndexes.includes(mahjongHands.indexOf(hand))
+                  return (
+                    <ReferenceHand
+                      key={index}
+                      hand={hand}
+                      expanded={maximized}
+                      pinned={pinned}
+                      onClick={() => pin(mahjongHands.indexOf(hand))}
+                    />
+                  )
+                })}
               </div>
             ))}
           </div>
