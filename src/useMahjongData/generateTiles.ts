@@ -1,8 +1,11 @@
 import type { MahjongTile } from "../types";
 
-const SUITS = ["🎍", "🔵", "中"]
-const WIND_SUIT = "🍃"
-const WINDS = ["N", "E", "W", "S"]
+export const DOTS = "🔵"
+export const BAMS = "🎍"
+export const CRAKS = "中"
+export const SUITS = [DOTS, BAMS, CRAKS]
+export const WIND_SUIT = "🍃"
+export const WINDS = ["N", "E", "W", "S"]
 export const FLOWERS = ["🌸", "💮", "🌷", "🪻", "🌼", "🌻", "🌹", "🏵️"]
 export const JOKER_SUIT = "🦄"
 

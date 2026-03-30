@@ -1,4 +1,4 @@
-import type { MahjongHandData, MahjongHandSet, MahjongTile } from "../types";
+import type { MahjongHand, MahjongHandSet, MahjongTile } from "../types";
 import { FLOWERS, JOKER_SUIT } from "./generateTiles";
 
 // Types matching your dataset structure
@@ -28,7 +28,7 @@ const getNumberCombinations = (sets: MahjongHandSet[]): string[][] => {
 };
 
 // Main matching function
-export const checkHandMatch = (playerTiles: MahjongTile[], targetHand: MahjongHandData): number => {
+export const checkHandMatch = (playerTiles: MahjongTile[], targetHand: MahjongHand): number => {
     // 1. Convert player hand to an inventory map
     const baseInventory: Record<string, number> = {};
     

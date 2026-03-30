@@ -1,0 +1,9 @@
+Fix resizing issues
+Only allow pinning 6 hands max
+Bottom bar (undo, restart, quit, etc)
+Create special logic for "Any 5 Consec. Nos., Pair Any No. in Run, Kongs Match Pair"
+Adding a meld puts it in the wrong order
+Don't do a joker substitution if you can't use the joker (if you're worse off after)
+Change tile setup to have 20 drop spots they can move between
+Make the tiles wiggle if waiting on the user to interact with them
+After a joker swap make the switched tile bounce

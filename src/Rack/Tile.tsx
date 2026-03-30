@@ -2,12 +2,12 @@ import clsx from "clsx"
 import type { MahjongTile, Size } from "../types"
 import { useTheme } from "../useTheme"
 
-type Props = {
+export type TileProps = {
     tile?: MahjongTile
     size?: Size
     selected?: boolean
     tipped?: boolean
-    message?: string
+    message?: string | number
 }
 
 const sizes = {
@@ -40,7 +40,7 @@ const generateBoxShadow = (height: number, tipped: boolean, topColor: string, bo
     return shadow
 }
 
-export default function Tile({ tile, size = "lg", selected = false, tipped = false, message = "" }: Props) {
+export default function Tile({ tile, size = "lg", selected = false, tipped = false, message = "" }: TileProps) {
     const { tileLight, tileDark } = useTheme()
     const { shadowHeight, tileClassName, numberClassName, suitClassName } = sizes[size]
 
@@ -75,7 +75,7 @@ export default function Tile({ tile, size = "lg", selected = false, tipped = fal
                     </div>
                 </>
             )}
-            { message && <div className="text-white text-[0.8rem] md:text-base text-center opacity-60">{message}</div>}
+            { message && <div className="text-white text-[0.8rem] md:text-base text-center opacity-50">{message}</div>}
         </div>
     )
 }

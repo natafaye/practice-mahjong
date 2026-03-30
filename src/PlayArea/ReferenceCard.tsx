@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { mahjongHands, mahjongHandSections } from "../useMahjongData/mahjongHands"
+import { MAHJONG_HANDS, MAHJONG_HAND_SECTIONS } from "../useMahjongData/MAHJONG_HANDS"
 import { useState } from "react"
 import { faAngleDown, faAngleUp, faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -26,7 +26,7 @@ export default function ReferenceCard({ className }: Props) {
   return (
     <div className={clsx(
       "flex flex-col align-top bg-white p-4 md:pb-0 rounded-lg md:rounded-b-none",
-      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "max-h-[70%] md:max-h-full",
+      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "md:max-h-full",
       className
     )}>
       <div className="pb-2 flex">
@@ -34,7 +34,7 @@ export default function ReferenceCard({ className }: Props) {
           {pinnedIndexes.map(index => (
             <ReferenceHand
               key={index}
-              hand={mahjongHands[index]}
+              hand={MAHJONG_HANDS[index]}
               onClick={() => unpin(index)}
               expanded
               pinned
@@ -58,20 +58,20 @@ export default function ReferenceCard({ className }: Props) {
         </div>
       </div>
       {(expanded || maximized) && (
-        <div className="overflow-y-auto flex-1 min-h-0 pt-3 border-t-taupe-400 border-t-2">
+        <div className="overflow-y-auto flex-1 min-h-0 pt-3 pb-4 border-t-taupe-400 border-t-2">
           <div className={clsx(maximized ? "columns-[34rem]" : "columns-[14rem]")}>
-            {mahjongHandSections.map(section => (
+            {MAHJONG_HAND_SECTIONS.map(section => (
               <div key={section} className="mb-3">
                 <h3 className="font-bold">{section}</h3>
-                {mahjongHands.filter(hand => hand.section === section).map((hand, index) => {
-                  const pinned = pinnedIndexes.includes(mahjongHands.indexOf(hand))
+                {MAHJONG_HANDS.filter(hand => hand.section === section).map((hand, index) => {
+                  const pinned = pinnedIndexes.includes(MAHJONG_HANDS.indexOf(hand))
                   return (
                     <ReferenceHand
-                      key={index}
+                      key={section + "_" + index}
                       hand={hand}
                       expanded={maximized}
                       pinned={pinned}
-                      onClick={() => pin(mahjongHands.indexOf(hand))}
+                      onClick={() => pin(MAHJONG_HANDS.indexOf(hand))}
                     />
                   )
                 })}
