@@ -22,13 +22,9 @@ export type MahjongAction =
     | { type: 'PICK_UP_DISCARD'; payload: { playerIndex: number } }
     | { type: 'SKIP_DISCARD' }
     | { type: 'SKIP_DISCARD_AI' }
+    | { type: 'REARRANGE_UNEXPOSED'; payload: { startIndex: number; endIndex: number } }
 
     | { type: 'EXPOSE_TILES'; payload: { playerIndex: number; tileIndices: number[] } }
-    | { type: 'REARRANGE_UNEXPOSED'; payload: { 
-        playerIndex: number; 
-        startIndex: number; 
-        endIndex: number 
-    } }
 
 export function mahjongReducer(state: MahjongData, action: MahjongAction): MahjongData {
     console.log(state, action)
@@ -188,6 +184,50 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
             }
         }
 
+        case 'REARRANGE_UNEXPOSED': {
+            const { startIndex, endIndex } = action.payload;
+            if (startIndex === endIndex) return state;
+
+            const newPlayers = clonePlayers();
+            const unexposed = newPlayers[THIS_PLAYER].unexposed;
+            const itemToMove = unexposed[startIndex];
+
+            // Temporarily replace the starting spot with a GAP
+            unexposed[startIndex] = GAP;
+
+            // If the target is empty, just drop it there
+            if (unexposed[endIndex] === GAP) {
+                unexposed[endIndex] = itemToMove;
+                return { ...state, players: newPlayers };
+            }
+
+            // If the target is occupied find the nearest empty GAP
+            let leftEmpty = -1;
+            let rightEmpty = -1;
+            for (let i = endIndex - 1; i >= 0; i--) {
+                if (unexposed[i] === GAP) { leftEmpty = i; break; }
+            }
+            for (let i = endIndex + 1; i < unexposed.length; i++) {
+                if (unexposed[i] === GAP) { rightEmpty = i; break; }
+            }
+            const distLeft = leftEmpty === -1 ? Infinity : endIndex - leftEmpty;
+            const distRight = rightEmpty === -1 ? Infinity : rightEmpty - endIndex;
+            if (distLeft < distRight && leftEmpty !== -1) {
+                // Shift left
+                for (let i = leftEmpty; i < endIndex; i++) {
+                    unexposed[i] = unexposed[i + 1];
+                }
+            } else if (rightEmpty !== -1) {
+                // Shift right
+                for (let i = rightEmpty; i > endIndex; i--) {
+                    unexposed[i] = unexposed[i - 1];
+                }
+            }
+            // Insert the dragged tile into the now-cleared target slot
+            unexposed[endIndex] = itemToMove;
+            return { ...state, players: newPlayers };
+        }
+
         case 'EXPOSE_TILES': {
             const { playerIndex, tileIndices } = action.payload;
             const newPlayers = clonePlayers();
@@ -206,19 +246,6 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
 
             // Push the new meld to exposed, followed by a GAP to separate it from future melds
             exposed.push(...tilesToExpose, GAP);
-
-            return { ...state, players: newPlayers };
-        }
-
-        case 'REARRANGE_UNEXPOSED': {
-            const { playerIndex, startIndex, endIndex } = action.payload;
-            const newPlayers = clonePlayers();
-            const unexposed = newPlayers[playerIndex].unexposed;
-
-            // Remove the tile from its original position
-            const [movedTile] = unexposed.splice(startIndex, 1);
-            // Insert it into the new position
-            unexposed.splice(endIndex, 0, movedTile);
 
             return { ...state, players: newPlayers };
         }

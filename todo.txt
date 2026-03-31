@@ -7,3 +7,5 @@ Don't do a joker substitution if you can't use the joker (if you're worse off af
 Change tile setup to have 20 drop spots they can move between
 Make the tiles wiggle if waiting on the user to interact with them
 After a joker swap make the switched tile bounce
+Adding a tile adds a new slot, needs to replace a gap
+Allow dragging from deal

@@ -1,14 +1,16 @@
-import { DRAWING, type MahjongData } from "../types"
+import { DRAWING, GAP, type MahjongData, type MahjongPlayer, type MahjongTile } from "../types"
 import { generateTiles } from "./generateTiles"
-import { sortTiles } from "./sortTiles"
+import { sortTiles, SUIT_ORDER } from "./sortTiles"
 
 export const THIS_PLAYER = 0
 
 export const generateInitialData = (numberOfPlayers: number = 4): MahjongData => {
+    // Generate and shuffle the wall
     const wall = generateTiles()
     shuffleArray(wall)
 
-    const players = []
+    // Deal out the hands
+    const players: MahjongPlayer[] = []
     for(let i = 0; i < numberOfPlayers; i++) {
         players.push({ 
             index: i,
@@ -16,8 +18,13 @@ export const generateInitialData = (numberOfPlayers: number = 4): MahjongData =>
             unexposed: wall.splice(0, 13), 
             exposed: [], 
         })
-        if(i === THIS_PLAYER) players.at(-1)!.unexposed.sort(sortTiles)
     }
+
+    // Sort this player's hand and add gaps
+    const unexposed = players[THIS_PLAYER].unexposed as MahjongTile[]
+    unexposed.sort(sortTiles)
+    // Loop through all the suits and add a gap on the end
+    players[THIS_PLAYER].unexposed = SUIT_ORDER.flatMap(suit => [...unexposed.filter(t => t.suit === suit), GAP])
 
     return {
         currentPlayer: 0, //Math.floor(Math.random() * numberOfPlayers),

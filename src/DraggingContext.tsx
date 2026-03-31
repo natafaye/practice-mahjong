@@ -1,9 +1,10 @@
-import type { ActionDispatch, ReactNode } from "react"
-import { DragDropProvider, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
+import { type ActionDispatch, type ReactNode } from "react"
+import { DragDropProvider, DragOverlay, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
 import type { MahjongAction } from "./useMahjongData/useMahjongData"
 import { getJokerSwapIndex } from "./useMahjongData/getJokerSwapIndex"
 import type { MahjongTile } from "./types"
 import { THIS_PLAYER } from "./useMahjongData/generateInitialData"
+import Tile from "./Rack/Tile"
 
 type Props = {
     children: ReactNode
@@ -11,18 +12,31 @@ type Props = {
     isTurn: boolean
 }
 
-export default function SortingContext({ children, dispatch, isTurn }: Props) {
+export default function DraggingContext({ children, dispatch, isTurn }: Props) {
     const onDragStart: DragStartEvent = ({ operation: { source } }) => {
         console.log('Started dragging', source?.id);
     }
 
     const onDragOver: DragOverEvent = ({ operation: { source, target } }) => {
+        if (!target || !source) return
         console.log(`Dragged ${source?.id} over ${target?.id}`);
+        const targetId = String(target.id);
+        if (targetId.startsWith("SLOT_")) {
+            const [, targetSlotIndexStr] = targetId.split('_')
+            const targetSlotIndex = parseInt(targetSlotIndexStr)
+            dispatch({
+                type: 'REARRANGE_UNEXPOSED',
+                payload: {
+                    startIndex: source.data.tileIndex,
+                    endIndex: targetSlotIndex
+                }
+            })
+        }
     }
 
     const onDragEnd: DragEndEvent = ({ operation: { source, target, canceled } }) => {
         if (!target || !source || !isTurn || canceled) return
-
+        
         if (target.id === "DISCARD") {
             dispatch({
                 type: 'DISCARD_TILE', payload: {
@@ -66,9 +80,9 @@ export default function SortingContext({ children, dispatch, isTurn }: Props) {
             onDragEnd={onDragEnd}
         >
             {children}
-            {/* <DragOverlay>
-                {source => (<Tile tile={source.data as MahjongTile} />)}
-            </DragOverlay> */}
+            <DragOverlay>
+                {source => (<Tile tile={source.data.tile as MahjongTile} />)}
+            </DragOverlay>
         </DragDropProvider>
     )
 }

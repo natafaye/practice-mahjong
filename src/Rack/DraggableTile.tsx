@@ -1,6 +1,6 @@
 import Tile, { type TileProps } from "./Tile"
 import type { MahjongTile } from "../types"
-import { useSortable } from "@dnd-kit/react/sortable"
+import { useDraggable } from "@dnd-kit/react"
 
 type Props = TileProps & {
     index: number
@@ -9,10 +9,9 @@ type Props = TileProps & {
 }
 
 export default function DraggableTile({ tile, index, playerIndex, ...props }: Props) {
-    const { ref } = useSortable({
-        index,
+    const { ref, isDragging } = useDraggable({
         id: tile.id,
-        data: { 
+        data: {
             tile: tile,
             tileIndex: index,
             playerIndex
@@ -20,7 +19,13 @@ export default function DraggableTile({ tile, index, playerIndex, ...props }: Pr
     })
 
     return (
-        <div ref={ref}>
+        <div ref={ref} style={{
+            opacity: isDragging ? 0 : 1,
+            touchAction: 'none',
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
+            WebkitTouchCallout: 'none'
+        }}>
             <Tile tile={tile} {...props} />
         </div>
     )

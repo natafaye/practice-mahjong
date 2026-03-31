@@ -1,12 +1,11 @@
-import { GAP, type MahjongPlayer, type MahjongTile, type Size } from "../types"
-import { useTheme } from "../useTheme"
-import clsx from "clsx"
-import DraggableTile from "./DraggableTile"
-import ExposedRack from "./ExposedRack"
 import type { ActionDispatch } from "react"
-import type { MahjongAction } from "../useMahjongData/useMahjongData"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import clsx from "clsx"
+import ExposedRack from "./ExposedRack"
+import UnexposedRack from "./UnexposedRack"
+import type { MahjongAction } from "../useMahjongData/useMahjongData"
+import type { MahjongPlayer, MahjongTile, Size } from "../types"
 
 type Props = {
     player: MahjongPlayer
@@ -19,7 +18,6 @@ type Props = {
 }
 
 export default function Rack({ player, isTurn, melding, dispatch, size = "lg", className, concealed = false }: Props) {
-    const { rackLight, rackMid, rackDark } = useTheme()
 
     return (
         <div className={clsx(className, "relative")}>
@@ -38,26 +36,7 @@ export default function Rack({ player, isTurn, melding, dispatch, size = "lg", c
             <div className="overflow-x-auto vertical-shadow relative">
                 <div className="w-max min-w-full">
                     <ExposedRack player={player} melding={melding} dispatch={dispatch} size={size} />
-                    {!concealed && (
-                        <div className="relative -mt-4" style={{ backgroundColor: rackMid }}>
-                            <div className="h-2 m:h-3" style={{ backgroundColor: rackLight }}></div>
-                            <div className="flex justify-center mt-3 px-3">
-                                {player.unexposed.map((tile, index) => tile === GAP ?
-                                    <div key={tile} className="w-10"></div> :
-                                    <DraggableTile
-                                        key={tile.id}
-                                        index={index}
-                                        playerIndex={player.index}
-                                        tile={tile}
-                                        size={size}
-                                        tipped
-                                    />
-                                )}
-                            </div>
-                            <div className="h-2 m:h-3 -mt-2 m:-mt-3" style={{ backgroundColor: rackLight }}></div>
-                            <div className="h-2 m:h-3 relative" style={{ backgroundColor: rackDark }}></div>
-                        </div>
-                    )}
+                    {!concealed && <UnexposedRack player={player} size={size}/>}
                 </div>
             </div >
         </div>

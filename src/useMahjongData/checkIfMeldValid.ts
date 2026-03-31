@@ -1,5 +1,5 @@
 import type { MahjongTile } from "../types";
-import { DOTS, FLOWERS, JOKER_SUIT, SUITS, WIND_SUIT } from "./generateTiles";
+import { DOTS, FLOWER_SUIT, JOKER_SUIT, SUITS, WIND_SUIT } from "./generateTiles";
 import { POSSIBLE_MELDS } from "./MAHJONG_HANDS";
 import { sortTiles } from "./sortTiles";
 
@@ -16,7 +16,7 @@ export const checkIfMeldValid = (meld: MahjongTile[]) => {
         // Ignore jokers, we'll check for those later
         tile.suit !== JOKER_SUIT &&
         // Ignore flowers the "F" will handle suit checking
-        !FLOWERS.includes(tile.suit)
+        tile.suit !== FLOWER_SUIT
     )
     if(!allMatch(tilesToCheckForSuit, tile => tile.suit))
         return false

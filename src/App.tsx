@@ -1,8 +1,8 @@
 import Rack from "./Rack/Rack";
 import PlayArea from "./PlayArea/PlayArea";
-import SortingContext from "./SortingContext";
-import { useMahjongData } from "./useMahjongData/useMahjongData";
+import DraggingContext from "./DraggingContext";
 import { useTheme } from "./useTheme";
+import { useMahjongData } from "./useMahjongData/useMahjongData";
 import { THIS_PLAYER } from "./useMahjongData/generateInitialData";
 import useAIPlayer from "./useAIPlayers/useAIPlayer";
 import '@fontsource-variable/noto-sans-kr/wght.css';
@@ -12,10 +12,10 @@ export default function App() {
   const { players, currentPlayer, melding } = data
   const { table } = useTheme()
 
-  useAIPlayer(data, dispatch, 400)
+  useAIPlayer(data, dispatch, 200)
 
   return (
-    <SortingContext dispatch={dispatch} isTurn={currentPlayer === THIS_PLAYER}>
+    <DraggingContext dispatch={dispatch} isTurn={currentPlayer === THIS_PLAYER}>
       <div className="absolute top-0 left-0 right-0 bottom-0 h-screen w-screen flex flex-col select-none"
         style={{ background: table }}
       >
@@ -44,8 +44,7 @@ export default function App() {
           dispatch={dispatch}
           className="shrink-0"
         />
-        {/* <MenuBar dispatch={dispatch}/> */}
       </div>
-    </SortingContext>
+    </DraggingContext>
   )
 }

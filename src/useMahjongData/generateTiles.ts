@@ -6,7 +6,7 @@ export const CRAKS = "中"
 export const SUITS = [DOTS, BAMS, CRAKS]
 export const WIND_SUIT = "🍃"
 export const WINDS = ["N", "E", "W", "S"]
-export const FLOWERS = ["🌸", "💮", "🌷", "🪻", "🌼", "🌻", "🌹", "🏵️"]
+export const FLOWER_SUIT = "🌸" // ["🌸", "💮", "🌷", "🪻", "🌼", "🌻", "🌹", "🏵️"]
 export const JOKER_SUIT = "🦄"
 
 export const generateTiles = () => {
@@ -31,8 +31,8 @@ export const generateTiles = () => {
 	}
 
 	// Flowers
-	for (const flower of FLOWERS) {
-		tiles.push({ suit: flower, id: flower })
+	for (let i = 0; i < 8; i++) {
+		tiles.push({ suit: FLOWER_SUIT, id: FLOWER_SUIT + i })
 	}
 
 	// Jokers
