@@ -1,10 +1,10 @@
 import clsx from "clsx"
-import type { MahjongHandData } from "../types"
+import type { MahjongHand } from "../types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faThumbtack } from "@fortawesome/free-solid-svg-icons"
 
 type Props = {
-    hand: MahjongHandData
+    hand: MahjongHand
     expanded?: boolean
     pinned?: boolean
     onClick?: () => void

@@ -3,10 +3,10 @@ import type { ButtonHTMLAttributes } from "react"
 import type { Size } from "./types"
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
-    size: Size
+    size?: Size
 }
 
-export default function Button({ children, className, disabled, ...props }: Props) {
+export default function Button({ children, className, disabled, size = "md", ...props }: Props) {
     return (
         <button
             className={clsx(

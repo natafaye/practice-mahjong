@@ -1,5 +1,5 @@
 import type { MahjongHand, MahjongHandSet, MahjongTile } from "../types";
-import { FLOWERS, JOKER_SUIT } from "./generateTiles";
+import { FLOWER_SUIT, JOKER_SUIT } from "./generateTiles";
 
 // Types matching your dataset structure
 
@@ -36,7 +36,7 @@ export const checkHandMatch = (playerTiles: MahjongTile[], targetHand: MahjongHa
         let key = "";
         if (tile.suit === JOKER_SUIT) {
             key = "JOKER";
-        } else if (FLOWERS.includes(tile.suit)) {
+        } else if (tile.suit === FLOWER_SUIT) {
             key = "FLOWER";
         } else {
             key = `${tile.suit}_${tile.number}`;

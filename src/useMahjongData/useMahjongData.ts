@@ -39,8 +39,9 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
 
         // Draw a tile from the wall
         case 'DRAW_FROM_WALL': {
+            const { playerIndex } = action.payload
             // Can't draw if it's not your turn
-            if(action.payload.playerIndex !== state.currentPlayer) return state
+            if(playerIndex !== state.currentPlayer) return state
             // Can't draw if it's not the right time
             if(state.gameState !== DRAWING) return state
             // If the wall is empty, the game is over
@@ -53,7 +54,12 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
             // Draw a tile from the wall and add it to the player's tiles
             const drawnTile = state.wall.at(-1)!
             const newPlayers = clonePlayers()
-            newPlayers[action.payload.playerIndex].unexposed.unshift(drawnTile)
+            if(playerIndex === THIS_PLAYER) {
+                const replacementIndex = newPlayers[playerIndex].unexposed.indexOf(GAP)
+                newPlayers[playerIndex].unexposed[replacementIndex]
+            } else {
+                newPlayers[playerIndex].unexposed.unshift(drawnTile)
+            }
             return { 
                 ...state, 
                 wall: state.wall.slice(0, -1), 

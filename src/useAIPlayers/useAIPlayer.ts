@@ -41,7 +41,7 @@ export default function useAIPlayer(
       (async () => {
         thinking.current = true;
         // Check for any joker substitutions and do as many as you can
-        let jokerSwapInfo = lookForJokerSwap(players, currentPlayer);
+        const jokerSwapInfo = lookForJokerSwap(players, currentPlayer);
         if (jokerSwapInfo) {
           await new Promise((resolve) => setTimeout(resolve, thinkTime));
           dispatch({ type: "JOKER_SWAP", payload: jokerSwapInfo });
@@ -61,5 +61,5 @@ export default function useAIPlayer(
         thinking.current = false;
       })();
     }
-  }, [currentPlayer, gameState, players, dispatch]);
+  }, [currentPlayer, gameState, players, thinkTime, dispatch]);
 }

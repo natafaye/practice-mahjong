@@ -48,7 +48,7 @@ const convertTileToCharacter = (tile: MahjongTile) => {
 /**
  * Checks if all items in an array match or give matching results from a callback
  */
-const allMatch = <T>(array: T[], callback: (item: T) => any = (item) => item) => {
+const allMatch = <T, R>(array: T[], callback: (item: T) => R | T = (item) => item) => {
     if(array.length === 0 || array.length === 1) return true
     const first = callback(array[0])
     return array.every(item => callback(item) === first)
