@@ -3,8 +3,8 @@ import type { MahjongTile } from "../types"
 import { useDraggable } from "@dnd-kit/react"
 
 type Props = TileProps & {
-    index: number
-    playerIndex: number
+    index?: number
+    playerIndex: number | "DISCARD"
     tile: MahjongTile
 }
 

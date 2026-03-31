@@ -63,14 +63,10 @@ export default function Tile({ tile, size = "lg", selected = false, tipped = fal
         >
             {tile && (
                 <>
-                    <span
-                        className={clsx("absolute top-0 left-0 font-bold", numberClassName)}
-                    >
+                    <span className={clsx("absolute top-0 left-0 font-bold", numberClassName)}>
                         &nbsp;{tile.number}
                     </span>
-                    <div
-                        className={clsx("text-shadow pt-1", suitClassName)}
-                    >
+                    <div className={clsx("text-shadow pt-1", suitClassName)}>
                         {tile.suit}
                     </div>
                 </>

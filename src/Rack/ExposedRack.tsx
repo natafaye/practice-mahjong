@@ -10,6 +10,7 @@ import type { MahjongAction } from "../useMahjongData/useMahjongData"
 import { sortTiles } from "../useMahjongData/sortTiles"
 import { checkIfMeldValid } from "../useMahjongData/checkIfMeldValid"
 import { GAP, type MahjongPlayer, type MahjongTile, type Size } from "../types"
+import useIsDraggingDiscard from "../useMahjongData/useIsDraggingDiscard"
 
 type Props = {
     player: MahjongPlayer
@@ -20,9 +21,11 @@ type Props = {
 
 export default function ExposedRack({ player, melding, size, dispatch }: Props) {
     const { rackLight, rackDark } = useTheme()
+    const isDraggingDiscard = useIsDraggingDiscard()
     const { ref } = useDroppable({
         id: "EXPOSED_RACK",
-        data: { player }
+        data: { player },
+        disabled: isDraggingDiscard
     })
 
     const handleCancel = () => {

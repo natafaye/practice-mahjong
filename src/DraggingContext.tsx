@@ -35,9 +35,9 @@ export default function DraggingContext({ children, dispatch, isTurn }: Props) {
     }
 
     const onDragEnd: DragEndEvent = ({ operation: { source, target, canceled } }) => {
-        if (!target || !source || !isTurn || canceled) return
-        
-        if (target.id === "DISCARD") {
+        if (!target || !source || canceled) return
+
+        if (target.id === "DISCARD" && isTurn) {
             dispatch({
                 type: 'DISCARD_TILE', payload: {
                     playerIndex: source.data.playerIndex,
@@ -45,7 +45,15 @@ export default function DraggingContext({ children, dispatch, isTurn }: Props) {
                 }
             })
         }
-        else if (target.id === "EXPOSED_RACK") {
+        else if (target.id === "PICK_UP_DISCARD") {
+            dispatch({
+                type: 'PICK_UP_DISCARD',
+                payload: {
+                    playerIndex: THIS_PLAYER
+                }
+            })
+        }
+        else if (target.id === "EXPOSED_RACK" && isTurn) {
             const tile = source.data.tile as MahjongTile
 
             // Check for a joker swap

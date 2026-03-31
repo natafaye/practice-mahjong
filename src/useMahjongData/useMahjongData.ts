@@ -56,7 +56,7 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
             const newPlayers = clonePlayers()
             if(playerIndex === THIS_PLAYER) {
                 const replacementIndex = newPlayers[playerIndex].unexposed.indexOf(GAP)
-                newPlayers[playerIndex].unexposed[replacementIndex]
+                newPlayers[playerIndex].unexposed[replacementIndex] = drawnTile
             } else {
                 newPlayers[playerIndex].unexposed.unshift(drawnTile)
             }
@@ -131,20 +131,14 @@ export function mahjongReducer(state: MahjongData, action: MahjongAction): Mahjo
             const playerIndex = action.payload.playerIndex
             // Can't pick up from discard if it's empty
             if (state.discard.length === 0) return state
-            // Can't pick up from discard if it's not your turn
-            if (playerIndex !== state.currentPlayer) return state
-            // Can't pick up from discard if you've already picked up
-            const player = state.players[playerIndex]
-            if (player.unexposed.length + player.exposed.length === 14) return state
-            // Take the latest tile from the discard and add it to the player's hand
-            const newDiscard = [...state.discard]
-            const pickedTile = newDiscard.pop()!
-            const newPlayers = clonePlayers()
-            newPlayers[playerIndex].unexposed.push(pickedTile)
+            // Can't pick up from discard if it's not discard pick up time
+            if (state.gameState !== "DISCARD" && state.gameState !== "DISCARD_AI") return state
+            // Take the latest tile from the discard and add it to the melding tiles
+            const pickedTile = state.discard.at(-1)!
             return { 
                 ...state, 
-                discard: newDiscard, 
-                players: newPlayers,
+                discard: state.discard.slice(0, -1), 
+                melding: [pickedTile],
                 currentPlayer: playerIndex,
                 gameState: PLAYING
             }
