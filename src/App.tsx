@@ -1,49 +1,35 @@
-import Rack from "./Rack/Rack";
-import PlayArea from "./PlayArea/PlayArea";
-import DraggingContext from "./DraggingContext";
-import { useTheme } from "./useTheme";
-import { useMahjongData } from "./useMahjongData/useMahjongData";
-import { THIS_PLAYER } from "./useMahjongData/generateInitialData";
-import useAIPlayer from "./useAIPlayers/useAIPlayer";
 import '@fontsource-variable/noto-sans-kr/wght.css';
+import Rack from "./Rack";
+import PlayArea from "./PlayArea";
+import { useTheme } from "./useTheme";
+import useMahjongData from "./useMahjongData";
+import useAIPlayer from "./useAIPlayers";
+import { DraggingContext } from './drag-and-drop';
+import { THIS_PLAYER } from "./constants";
 
 export default function App() {
-  const [data, dispatch] = useMahjongData()
-  const { players, currentPlayer, melding } = data
+  const { players } = useMahjongData()
   const { table } = useTheme()
-
-  useAIPlayer(data, dispatch, 200)
+  useAIPlayer(200)
 
   return (
-    <DraggingContext dispatch={dispatch} isTurn={currentPlayer === THIS_PLAYER}>
+    <DraggingContext>
       <div className="absolute top-0 left-0 right-0 bottom-0 h-screen w-screen flex flex-col select-none"
         style={{ background: table }}
       >
         <div className="sm:flex gap-5">
-          {players.slice(1).map((player, index) => (
+          {players.map((player, index) => index !== THIS_PLAYER && (
             <Rack
               key={index}
               player={player}
-              isTurn={currentPlayer === player.index }
-              dispatch={dispatch}
               concealed
               size="md"
               className="grow"
             />
           ))}
         </div>
-        <PlayArea
-          data={data}
-          dispatch={dispatch}
-          className="grow min-h-0"
-        />
-        <Rack
-          player={players[THIS_PLAYER]}
-          isTurn={currentPlayer === THIS_PLAYER}
-          melding={melding}
-          dispatch={dispatch}
-          className="shrink-0"
-        />
+        <PlayArea className="grow min-h-0" />
+        <Rack player={players[THIS_PLAYER]} className="shrink-0" />
       </div>
     </DraggingContext>
   )

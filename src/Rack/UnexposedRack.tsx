@@ -1,7 +1,8 @@
-import { GAP, type MahjongPlayer, type Size } from "../types"
-import { useTheme } from "../useTheme"
-import DraggableTile from "./DraggableTile"
+import DraggableTile from "../Tile/DraggableTile"
 import RackSlot from "./RackSlot"
+import { useTheme } from "../useTheme"
+import { GAP } from "../constants"
+import type { MahjongPlayer, Size } from "../types"
 
 type Props = {
     player: MahjongPlayer

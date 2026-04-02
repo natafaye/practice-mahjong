@@ -1,5 +1,6 @@
-import { useDragDropMonitor, useDroppable } from "@dnd-kit/react"
-import { useState, type ReactNode } from "react"
+import type { ReactNode } from "react"
+import { useDroppable } from "@dnd-kit/react"
+import { useIsDragging } from "./useIsDragging"
 
 type Props = {
     dropId: string
@@ -9,15 +10,12 @@ type Props = {
     children: ReactNode
 }
 
-export default function DropOverlay({ dropId, show, backgroundColor, textShadowColor, children }: Props) {
-    const [isDragging, setIsDragging] = useState(false)
+export function DropOverlay({ dropId, show, backgroundColor, textShadowColor, children }: Props) {
+    const { isDragging } = useIsDragging()
     const { ref } = useDroppable({
         id: dropId
     })
-    useDragDropMonitor({
-        onDragStart: () => setIsDragging(true),
-        onDragEnd: () => setIsDragging(false)
-    })
+
     return (
         <div
             ref={ref}

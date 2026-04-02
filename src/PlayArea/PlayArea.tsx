@@ -1,24 +1,20 @@
 import clsx from "clsx"
-import Tile from "../Rack/Tile"
-import { DISCARD, PLAYING, type MahjongData } from "../types"
+import Tile from "../Tile/Tile"
 import ReferenceCard from "./ReferenceCard"
 import DiscardSpot from "./DiscardSpot"
 import DrawSpot from "./DrawSpot"
-import { type ActionDispatch } from "react"
-import type { MahjongAction } from "../useMahjongData/useMahjongData"
 import { useTheme } from "../useTheme"
-import { THIS_PLAYER } from "../useMahjongData/generateInitialData"
-import DropOverlay from "../DropOverlay"
+import useMahjongData from "../useMahjongData"
+import { DropOverlay, DISCARD_ID } from "../drag-and-drop"
+import { DISCARD, PLAYING, THIS_PLAYER } from "../constants"
 
 type Props = {
-    data: MahjongData
-    dispatch: ActionDispatch<[action: MahjongAction]>
     className?: string
 }
 
-export default function PlayArea({ data, dispatch, className }: Props) {
+export default function PlayArea({ className }: Props) {
     const { tableMid, tableDark } = useTheme()
-    const { discard, wall, gameState, currentPlayer } = data
+    const { discard, gameState, currentPlayer } = useMahjongData()
 
     return (
         <div className={clsx(className, "flex flex-col relative p-4 pb-0")}>
@@ -31,22 +27,13 @@ export default function PlayArea({ data, dispatch, className }: Props) {
             </div>
             <div className="flex flex-col md:flex-row md:items-end gap-6 min-h-0 shrink">
                 <div className="md:contents flex items-end gap-6">
-                    <DrawSpot className="w-25 grow md:grow-0 mb-4"
-                        gameState={gameState}
-                        currentPlayer={currentPlayer}
-                        dispatch={dispatch}
-                        wallNumber={wall.length}
-                    />
-                    <DiscardSpot className="shrink-0 md:order-last mb-4"
-                        tile={gameState === DISCARD ? discard.at(-1) : undefined}
-                        dispatch={dispatch}
-                        gameState={gameState}
-                    />
+                    <DrawSpot className="w-25 grow md:grow-0 mb-4" />
+                    <DiscardSpot className="shrink-0 md:order-last mb-4" />
                 </div>
                 <ReferenceCard className="min-h-0 min-w-150 grow shrink order-first md:order-1" />
             </div>
             <DropOverlay
-                dropId="DISCARD"
+                dropId={DISCARD_ID}
                 show={gameState === PLAYING && currentPlayer === THIS_PLAYER}
                 backgroundColor={tableMid}
                 textShadowColor={tableDark}

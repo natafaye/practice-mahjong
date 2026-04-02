@@ -1,5 +1,5 @@
-import clsx from "clsx"
 import type { ButtonHTMLAttributes } from "react"
+import clsx from "clsx"
 import type { Size } from "./types"
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {

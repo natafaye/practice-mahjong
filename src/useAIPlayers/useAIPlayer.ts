@@ -1,16 +1,11 @@
-import { useEffect, useRef, type ActionDispatch } from "react";
-import { DISCARD_AI, DRAWING, PLAYING, type MahjongData } from "../types";
-import type { MahjongAction } from "../useMahjongData/useMahjongData";
-import { THIS_PLAYER } from "../useMahjongData/generateInitialData";
+import { useEffect, useRef } from "react";
 import { pickDiscardIndex } from "./pickDiscardIndex";
 import { lookForJokerSwap } from "./lookForJokerSwaps";
+import useMahjongData from "../useMahjongData";
+import { DISCARD_AI, DRAWING, PLAYING, THIS_PLAYER } from "../constants";
 
-export default function useAIPlayer(
-  data: MahjongData,
-  dispatch: ActionDispatch<[action: MahjongAction]>,
-  thinkTime: number
-) {
-  const { gameState, currentPlayer, players } = data;
+export default function useAIPlayer(thinkTime: number) {
+  const { gameState, currentPlayer, players, dispatch } = useMahjongData();
   const thinking = useRef(false);
 
   useEffect(() => {

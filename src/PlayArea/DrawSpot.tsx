@@ -1,29 +1,24 @@
-import Tile from "../Rack/Tile"
-import Button from "../Button"
-import { DRAWING, type GameState } from "../types"
-import { THIS_PLAYER } from "../useMahjongData/generateInitialData"
-import { useTheme } from "../useTheme"
-import type { ActionDispatch } from "react"
-import type { MahjongAction } from "../useMahjongData/useMahjongData"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Tile from "../Tile/Tile"
+import Button from "../Button"
+import { useTheme } from "../useTheme"
+import { DRAWING, THIS_PLAYER } from "../constants"
+import useMahjongData from "../useMahjongData"
 
 type Props = {
-    dispatch: ActionDispatch<[action: MahjongAction]>
-    wallNumber: number
-    gameState: GameState
-    currentPlayer: number
     className?: string
 }
 
-export default function DrawSpot({ wallNumber, gameState, currentPlayer, dispatch, className }: Props) {
+export default function DrawSpot({ className }: Props) {
     const { tileLight, tileDark } = useTheme()
-    const tilesToShow = Math.min(20, wallNumber)
+    const { wall, gameState, currentPlayer, dispatch } = useMahjongData()
+    const tilesToShow = Math.min(20, wall.length)
     return (
         <div className={className}>
             <div className="flex justify-end pb-7">
                 {Array.from(Array(tilesToShow).keys()).map((index) => (
-                    <Tile key={index} message={wallNumber - (tilesToShow - index - 1)} />
+                    <Tile key={index} message={wall.length - (tilesToShow - index - 1)} />
                 ))}
             </div>
             <Button className="md:w-25 text-sm md:text-base text-white"

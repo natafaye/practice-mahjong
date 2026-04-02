@@ -1,21 +1,20 @@
-import { DISCARD, type GameState, type MahjongTile } from "../types"
-import { useTheme } from "../useTheme"
-import Button from "../Button"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons"
-import type { ActionDispatch } from "react"
-import type { MahjongAction } from "../useMahjongData/useMahjongData"
-import DraggableTile from "../Rack/DraggableTile"
+import DraggableTile from "../Tile/DraggableTile"
+import Button from "../Button"
+import { useTheme } from "../useTheme"
+import { DISCARD_ID } from "../drag-and-drop"
+import { DISCARD } from "../constants"
+import useMahjongData from "../useMahjongData"
 
 type Props = {
-    tile?: MahjongTile
-    gameState: GameState
     className?: string
-    dispatch: ActionDispatch<[action: MahjongAction]>
 }
 
-export default function DiscardSpot({ tile, gameState, dispatch, className }: Props) {
+export default function DiscardSpot({ className }: Props) {
     const { tableMid, tableDark, tableVeryDark } = useTheme()
+    const { discard, gameState, dispatch } = useMahjongData()
+    const tile = gameState === DISCARD ? discard.at(-1) : undefined
 
     return (
         <div className={className}>
@@ -23,7 +22,7 @@ export default function DiscardSpot({ tile, gameState, dispatch, className }: Pr
                 style={{ background: tableMid, borderColor: tableDark }}
             >
                 {tile ?
-                    <DraggableTile tile={tile} playerIndex="DISCARD" /> :
+                    <DraggableTile tile={tile} playerIndex={DISCARD_ID} /> :
                     <span className="text-sm ms-1 md:text-base" style={{ color: tableDark }}>Discard</span>
                 }
             </div>

@@ -1,22 +1,10 @@
 import type { MahjongHand } from "../types";
 
-export const MAHJONG_HAND_SECTIONS = [
-  "2025",
-  "2468",
-  "Any Like Numbers",
-  "Quints",
-  "Consecutive Run",
-  "13579",
-  "Winds-Dragons",
-  "369",
-  "Singles and Pairs",
-];
-
-export const MAHJONG_HANDS: MahjongHand[] = [
+export const HANDS_2025: MahjongHand[] = [
   // #region 2025
   {
     section: "2025",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       { numbers: ["2025"], suit: "G" },
       { numbers: ["222", "555"], suit: "R" },
@@ -28,7 +16,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2025",
-    sets: [
+    melds: [
       { numbers: ["222"], suit: "G" },
       { numbers: ["0000"], suit: "B" },
       { numbers: ["222"], suit: "R" },
@@ -40,7 +28,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2025",
-    sets: [
+    melds: [
       { numbers: ["2025"], suit: "G" },
       { numbers: ["222"], suit: "R" },
       { numbers: ["555"], suit: "R" },
@@ -52,7 +40,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2025",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["222"], suit: "G" },
       { numbers: ["000"], suit: "B" },
@@ -68,7 +56,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region 2468
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["222"], suit: "B" },
       { numbers: ["4444"], suit: "B" },
       { numbers: ["666"], suit: "B" },
@@ -80,7 +68,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["222"], suit: "G" },
       { numbers: ["4444"], suit: "G" },
       { numbers: ["666"], suit: "R" },
@@ -92,7 +80,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["2222"], suit: "G" },
       { numbers: ["4444"], suit: "R" },
@@ -104,7 +92,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["2222"], suit: "G" },
       { numbers: ["6666"], suit: "R" },
@@ -116,7 +104,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["22"], suit: "B" },
       { numbers: ["444"], suit: "B" },
       { numbers: ["66"], suit: "B" },
@@ -129,7 +117,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       { numbers: ["2468"], suit: "G" },
       { numbers: ["222", "444", "666", "888"], suit: "R" },
@@ -141,7 +129,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["22"], suit: "B" },
       { numbers: ["44"], suit: "B" },
@@ -154,7 +142,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["222"], suit: "G" },
       { numbers: ["4444"], suit: "G" },
       { numbers: ["666"], suit: "G" },
@@ -167,7 +155,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["2222", "4444", "6666", "8888"], suit: "G" },
       { numbers: ["DDDD"], suit: "R" },
@@ -179,7 +167,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "2468",
-    sets: [
+    melds: [
       { numbers: ["22"], suit: "G" },
       { numbers: ["44"], suit: "G" },
       { numbers: ["66"], suit: "G" },
@@ -196,7 +184,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region ANY LIKE NUMBERS
   {
     section: "Any Like Numbers",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       {
         numbers: [
@@ -239,7 +227,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Any Like Numbers",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       {
         numbers: ["11", "22", "33", "44", "55", "66", "77", "88", "99"],
@@ -284,7 +272,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Any Like Numbers",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       {
         numbers: [
@@ -339,7 +327,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region QUINTS
   {
     section: "Quints",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["111", "222", "333", "444", "555", "666", "777"], suit: "G" },
       {
@@ -365,7 +353,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Quints",
-    sets: [
+    melds: [
       {
         numbers: [
           "11111",
@@ -400,7 +388,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Quints",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       {
         numbers: [
@@ -444,7 +432,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region CONSECUTIVE RUN
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["11"], suit: "B" },
       { numbers: ["222"], suit: "B" },
       { numbers: ["3333"], suit: "B" },
@@ -457,7 +445,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["55"], suit: "B" },
       { numbers: ["666"], suit: "B" },
       { numbers: ["7777"], suit: "B" },
@@ -470,7 +458,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["111", "222", "333", "444", "555", "666"], suit: "G" },
       { numbers: ["2222", "3333", "4444", "5555", "6666", "7777"], suit: "G" },
       { numbers: ["333", "444", "555", "666", "777", "888"], suit: "G" },
@@ -482,7 +470,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["111", "222", "333", "444", "555", "666"], suit: "G" },
       { numbers: ["2222", "3333", "4444", "5555", "6666", "7777"], suit: "G" },
       { numbers: ["333", "444", "555", "666", "777", "888"], suit: "R" },
@@ -494,7 +482,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       {
         numbers: ["1111", "2222", "3333", "4444", "5555", "6666", "7777"],
@@ -512,7 +500,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       {
         numbers: ["1111", "2222", "3333", "4444", "5555", "6666", "7777"],
@@ -530,7 +518,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["123", "234", "345", "456", "567"], suit: "G" },
       { numbers: ["4444", "5555", "6666", "7777", "8888"], suit: "R" },
@@ -542,7 +530,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["11", "22", "33", "44", "55", "66", "77"], suit: "G" },
       { numbers: ["222", "333", "444", "555", "666", "777", "888"], suit: "G" },
@@ -558,7 +546,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["111", "222", "333", "444", "555", "666", "777"], suit: "G" },
       { numbers: ["222", "333", "444", "555", "666", "777", "888"], suit: "G" },
       {
@@ -574,7 +562,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       {
         numbers: [
           "112345", 
@@ -598,7 +586,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Consecutive Run",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["1", "2", "3", "4", "5", "6", "7"], suit: "G" },
       { numbers: ["22", "33", "44", "55", "66", "77", "88"], suit: "G" },
@@ -616,7 +604,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region 13579
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["11"], suit: "B" },
       { numbers: ["333"], suit: "B" },
       { numbers: ["5555"], suit: "B" },
@@ -629,7 +617,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["11"], suit: "G" },
       { numbers: ["333"], suit: "G" },
       { numbers: ["5555"], suit: "R" },
@@ -642,7 +630,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["111"], suit: "G" },
       { numbers: ["3333"], suit: "G" },
       { numbers: ["333"], suit: "R" },
@@ -654,7 +642,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["555"], suit: "G" },
       { numbers: ["7777"], suit: "G" },
       { numbers: ["777"], suit: "R" },
@@ -666,7 +654,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["1111"], suit: "B" },
       { numbers: ["333"], suit: "B" },
       { numbers: ["5555"], suit: "B" },
@@ -678,7 +666,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["5555"], suit: "B" },
       { numbers: ["777"], suit: "B" },
       { numbers: ["9999"], suit: "B" },
@@ -690,7 +678,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       { numbers: ["1111"], suit: "G" },
       { numbers: ["9999"], suit: "G" },
@@ -702,7 +690,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["135"], suit: "B" },
       { numbers: ["7777"], suit: "B" },
@@ -714,7 +702,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["135"], suit: "G" },
       { numbers: ["7777"], suit: "R" },
@@ -726,7 +714,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["111"], suit: "G" },
       { numbers: ["333"], suit: "G" },
       { numbers: ["5555"], suit: "G" },
@@ -739,7 +727,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["555"], suit: "G" },
       { numbers: ["777"], suit: "G" },
       { numbers: ["9999"], suit: "G" },
@@ -752,7 +740,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["11"], suit: "G" },
       { numbers: ["333"], suit: "G" },
       { numbers: ["NEWS"], suit: "B" },
@@ -765,7 +753,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["55"], suit: "G" },
       { numbers: ["777"], suit: "G" },
       { numbers: ["NEWS"], suit: "B" },
@@ -778,7 +766,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["1111"], suit: "G" },
       { numbers: ["33"], suit: "R" },
       { numbers: ["55"], suit: "R" },
@@ -791,7 +779,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["11"], suit: "G" },
       { numbers: ["33"], suit: "G" },
@@ -805,7 +793,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "13579",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["55"], suit: "G" },
       { numbers: ["77"], suit: "G" },
@@ -822,7 +810,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region WINDS-DRAGONS
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["NNNN"], suit: "B" },
       { numbers: ["EEE"], suit: "B" },
       { numbers: ["WWW"], suit: "B" },
@@ -834,7 +822,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["123", "234", "345", "456", "567", "678", "789"], suit: "G" },
       { numbers: ["DD"], suit: "G" },
@@ -847,7 +835,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["NN"], suit: "B" },
       { numbers: ["EE"], suit: "B" },
@@ -860,7 +848,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["FFFF"], suit: "B" },
       { numbers: ["DDD"], suit: "G" },
       { numbers: ["NEWS"], suit: "B" },
@@ -872,7 +860,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["NNNN"], suit: "B" },
       { numbers: ["1", "3", "5", "7", "9"], suit: "G" },
       { numbers: ["11", "33", "55", "77", "99"], suit: "R" },
@@ -885,7 +873,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["EEEE"], suit: "B" },
       { numbers: ["2", "4", "6", "8"], suit: "G" },
       { numbers: ["22", "44", "66", "88"], suit: "R" },
@@ -898,7 +886,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["NN"], suit: "B" },
       { numbers: ["EEE"], suit: "B" },
       { numbers: ["WWW"], suit: "B" },
@@ -911,7 +899,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["NNN"], suit: "B" },
       { numbers: ["EE"], suit: "B" },
       { numbers: ["WW"], suit: "B" },
@@ -924,7 +912,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Winds-Dragons",
-    sets: [
+    melds: [
       { numbers: ["NN"], suit: "B" },
       { numbers: ["EE"], suit: "B" },
       { numbers: ["WWW"], suit: "B" },
@@ -940,7 +928,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region 369
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["333"], suit: "G" },
       { numbers: ["6666"], suit: "G" },
       { numbers: ["666"], suit: "R" },
@@ -952,7 +940,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["333"], suit: "G" },
       { numbers: ["6666"], suit: "G" },
       { numbers: ["666"], suit: "R" },
@@ -964,7 +952,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["3333"], suit: "B" },
       { numbers: ["6666"], suit: "B" },
@@ -976,7 +964,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["3333"], suit: "G" },
       { numbers: ["6666"], suit: "R" },
@@ -988,7 +976,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["3333", "6666", "9999"], suit: "G" },
       { numbers: ["DDD"], suit: "G" },
       { numbers: ["3333", "6666", "9999"], suit: "R" },
@@ -1000,7 +988,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["FFF"], suit: "B" },
       { numbers: ["3333"], suit: "G" },
       { numbers: ["369"], suit: "R" },
@@ -1012,7 +1000,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["33"], suit: "G" },
       { numbers: ["66"], suit: "G" },
       { numbers: ["99"], suit: "G" },
@@ -1025,7 +1013,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "369",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["333"], suit: "G" },
       { numbers: ["D"], suit: "G" },
@@ -1043,7 +1031,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   // #region SINGLES AND PAIRS
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["NN"], suit: "B" },
       { numbers: ["EW"], suit: "B" },
       { numbers: ["SS"], suit: "B" },
@@ -1058,7 +1046,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["2468"], suit: "G" },
       { numbers: ["DD"], suit: "G" },
@@ -1071,7 +1059,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["33"], suit: "G" },
       { numbers: ["66"], suit: "G" },
       { numbers: ["99"], suit: "G" },
@@ -1086,7 +1074,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["11", "22", "33", "44", "55", "66", "77", "88"], suit: "G" },
       { numbers: ["22", "33", "44", "55", "66", "77", "88", "99"], suit: "G" },
@@ -1101,7 +1089,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["11"], suit: "G" },
       { numbers: ["33"], suit: "G" },
       { numbers: ["55"], suit: "G" },
@@ -1116,7 +1104,7 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   {
     section: "Singles and Pairs",
-    sets: [
+    melds: [
       { numbers: ["FF"], suit: "B" },
       { numbers: ["2025"], suit: "G" },
       { numbers: ["2025"], suit: "R" },
@@ -1128,12 +1116,3 @@ export const MAHJONG_HANDS: MahjongHand[] = [
   },
   // #endregion
 ];
-
-// Get all the possible melds
-export const POSSIBLE_MELDS = [
-  ...new Set(
-    MAHJONG_HANDS.flatMap((hand) => hand.sets.flatMap((set) => set.numbers)),
-  ),
-]
-// Account for soaps instead of dragons
-POSSIBLE_MELDS.push(...POSSIBLE_MELDS.filter(m => m.includes("D")).map(m => m.replaceAll("D", "0")))

@@ -1,7 +1,7 @@
+import { type ReactNode } from "react";
 import { useDroppable } from "@dnd-kit/react";
 import clsx from "clsx";
-import { type ReactNode } from "react";
-import useIsDraggingDiscard from "../useMahjongData/useIsDraggingDiscard";
+import { useIsDragging, SLOT_ID } from "../drag-and-drop";
 
 type Props = {
     index: number
@@ -10,9 +10,9 @@ type Props = {
 }
 
 export default function RackSlot({ index, children, isEmpty }: Props) {
-    const isDraggingDiscard = useIsDraggingDiscard()
+    const { isDraggingDiscard } = useIsDragging()
     const { ref, isDropTarget } = useDroppable({ 
-        id: "SLOT_" + index,
+        id: SLOT_ID + index,
         disabled: isDraggingDiscard
     });
 

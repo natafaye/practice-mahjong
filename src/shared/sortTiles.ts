@@ -1,8 +1,10 @@
-import type { GAP, MahjongTile } from "../types"
-import { FLOWER_SUIT, JOKER_SUIT, SUITS, WIND_SUIT, WINDS } from "./generateTiles"
+import type { MahjongTile } from "../types"
+import { FLOWER_SUIT, GAP, JOKER_SUIT, SUIT_ORDER, WIND_SUIT, WINDS } from "../constants"
 
-export const SUIT_ORDER = [FLOWER_SUIT, ...SUITS, JOKER_SUIT, WIND_SUIT]
-
+/**
+ * Sorts tiles based on the suit order (and the obvious number order)
+ * To be used with the built in .sort() method of an array
+ */
 export const sortTiles = (a: MahjongTile | typeof GAP, b: MahjongTile | typeof GAP) => {
     // Sort gaps to the end
     if(typeof a === "string") return 1

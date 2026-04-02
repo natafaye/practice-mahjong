@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { getJokerSwapIndex } from '../getJokerSwapIndex'
-import { GAP, type MahjongTileRow } from '../../types'
+import type { MahjongTileRow } from '../../types'
 import { createJoker, createTile } from './testUtilities'
-import { BAMS, DOTS } from '../generateTiles'
+import { BAMS, DOTS, GAP } from '../../constants'
 
 describe('getJokerSwapIndex', () => {
     it('should find the index of a Joker in a simple matching set', () => {

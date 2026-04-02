@@ -1,13 +1,5 @@
+import { SUITS, WINDS, WIND_SUIT, FLOWER_SUIT, JOKER_SUIT } from "../constants";
 import type { MahjongTile } from "../types";
-
-export const DOTS = "🔵"
-export const BAMS = "🎍"
-export const CRAKS = "中"
-export const SUITS = [DOTS, BAMS, CRAKS]
-export const WIND_SUIT = "🍃"
-export const WINDS = ["N", "E", "W", "S"]
-export const FLOWER_SUIT = "🌸" // ["🌸", "💮", "🌷", "🪻", "🌼", "🌻", "🌹", "🏵️"]
-export const JOKER_SUIT = "🦄"
 
 export const generateTiles = () => {
 	const tiles: MahjongTile[] = [];

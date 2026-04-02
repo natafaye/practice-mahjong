@@ -20,7 +20,7 @@ export default function ReferenceHand({ hand, onClick, expanded = false, pinned 
                 {(expanded || pinned) && (
                     <FontAwesomeIcon icon={faThumbtack} size="sm" className={pinned ? "black" : "text-gray-400"} />
                 )}
-                {hand.sets.map((set, index) => (
+                {hand.melds.map((set, index) => (
                     <span key={index} className={clsx("pe-1",
                         set.suit === "G" && "text-green-700",
                         set.suit === "R" && "text-red-700"

@@ -1,9 +1,9 @@
-import clsx from "clsx"
-import { MAHJONG_HANDS, MAHJONG_HAND_SECTIONS } from "../useMahjongData/MAHJONG_HANDS"
 import { useState } from "react"
 import { faAngleDown, faAngleUp, faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import clsx from "clsx"
 import ReferenceHand from "./ReferenceHand"
+import useMahjongData from "../useMahjongData"
 
 type Props = {
   className?: string
@@ -13,6 +13,8 @@ export default function ReferenceCard({ className }: Props) {
   const [pinnedIndexes, setPinnedIndexes] = useState<number[]>([])
   const [maximized, setMaximized] = useState(false)
   const [expanded, setExpanded] = useState(true)
+
+  const { handsData: { hands, sections } } = useMahjongData()
 
   const pin = (index: number) => {
     if (pinnedIndexes.includes(index)) return
@@ -34,7 +36,7 @@ export default function ReferenceCard({ className }: Props) {
           {pinnedIndexes.map(index => (
             <ReferenceHand
               key={index}
-              hand={MAHJONG_HANDS[index]}
+              hand={hands[index]}
               onClick={() => unpin(index)}
               expanded
               pinned
@@ -60,18 +62,18 @@ export default function ReferenceCard({ className }: Props) {
       {(expanded || maximized) && (
         <div className="overflow-y-auto flex-1 min-h-0 pt-3 pb-4 border-t-taupe-400 border-t-2">
           <div className={clsx(maximized ? "columns-[34rem]" : "columns-[14rem]")}>
-            {MAHJONG_HAND_SECTIONS.map(section => (
+            {sections.map(section => (
               <div key={section} className="mb-3">
                 <h3 className="font-bold">{section}</h3>
-                {MAHJONG_HANDS.filter(hand => hand.section === section).map((hand, index) => {
-                  const pinned = pinnedIndexes.includes(MAHJONG_HANDS.indexOf(hand))
+                {hands.filter(hand => hand.section === section).map((hand, index) => {
+                  const pinned = pinnedIndexes.includes(hands.indexOf(hand))
                   return (
                     <ReferenceHand
                       key={section + "_" + index}
                       hand={hand}
                       expanded={maximized}
                       pinned={pinned}
-                      onClick={() => pin(MAHJONG_HANDS.indexOf(hand))}
+                      onClick={() => pin(hands.indexOf(hand))}
                     />
                   )
                 })}
