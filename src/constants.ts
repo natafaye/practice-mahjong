@@ -1,5 +1,5 @@
 // Gap
-export const GAP = "" as const;
+export const GAP = " " as const;
 
 // Tiles
 export const DOTS = "🔵"

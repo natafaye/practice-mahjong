@@ -25,6 +25,7 @@ export function DraggingContext({ children }: Props) {
     const onDragOver: DragOverEvent = ({ operation: { source, target } }) => {
         if (!target || !source) return
         console.log(`Dragged ${source?.id} over ${target?.id}`);
+        console.log(source.data.tileIndex)
         const targetId = String(target.id);
         if (targetId.startsWith(SLOT_ID)) {
             const [, targetSlotIndexStr] = targetId.split('_')

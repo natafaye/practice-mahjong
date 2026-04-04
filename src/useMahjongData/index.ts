@@ -1,5 +1,4 @@
-import { useMahjongData, MahjongDataProvider } from "./mahjongContext";
-
+export { MahjongDataProvider } from "./MahjongDataProvider";
 export type { MahjongDispatch } from "./types"
-export { MahjongDataProvider }
+import { useMahjongData } from "./useMahjongData";
 export default useMahjongData;

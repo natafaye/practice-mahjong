@@ -22,7 +22,7 @@ export default function ExposedRack({ player, size }: Props) {
     const { ref } = useDroppable({
         id: EXPOSED_RACK_ID,
         data: { player },
-        disabled: player.index === THIS_PLAYER || melding.length === 0
+        disabled: melding.length === 0
     })
 
     const handleCancel = () => {

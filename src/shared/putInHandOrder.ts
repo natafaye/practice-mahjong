@@ -1,13 +1,13 @@
 import { matchTilesToHand } from "./matchTilesToHand";
 import { sortTiles } from "./sortTiles";
-import type { MahjongHand, MahjongTile, MahjongTileRow } from "../types";
+import type { MahjongHand, MahjongPlayer, MahjongTileRow } from "../types";
 import { GAP } from "../constants";
 
 /**
  * Takes a set of tiles and puts it in order to match a particular hand, with leftovers at the end
  */
-export const putInHandOrder = (tiles: MahjongTile[], hand: MahjongHand) => {
-  const { assignedMelds, leftoverTiles } = matchTilesToHand(tiles, hand);
+export const putInHandOrder = (player: MahjongPlayer, hand: MahjongHand) => {
+  const { assignedMelds, leftoverTiles } = matchTilesToHand(player.unexposed, player.unexposed, hand);
   const newRow: MahjongTileRow = [];
 
   const nonEmptyMelds = assignedMelds.filter((meld) => meld.length > 0);
