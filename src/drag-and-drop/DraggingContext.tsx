@@ -1,4 +1,4 @@
-import { useRef, type ReactNode } from "react"
+import { useRef, useState, type ReactNode } from "react"
 import { DragDropProvider, DragOverlay, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
 import Tile from "../Tile/Tile"
 import useMahjongData from "../useMahjongData"
@@ -18,12 +18,14 @@ type Props = {
 
 export function DraggingContext({ children }: Props) {
     const { dispatch } = useMahjongData()
+    const [activeTile, setActiveTile] = useState<MahjongTile | null>(null)
     const currentDragIndex = useRef<number | null>(null)
 
     const onDragStart: DragStartEvent = ({ operation: { source } }) => {
         console.log('Started dragging', source?.id);
-        if(source) {
+        if (source) {
             currentDragIndex.current = source.data.tileIndex;
+            setActiveTile(source.data.tile as MahjongTile);
         }
     }
 
@@ -46,10 +48,14 @@ export function DraggingContext({ children }: Props) {
     }
 
     const onDragEnd: DragEndEvent = ({ operation: { source, target, canceled } }) => {
-        if (!target || !source || canceled || currentDragIndex.current === null) return
+        // Clear the current drag index and active tile even if it isn't a valid drop target
         const finalIndex = currentDragIndex.current;
         currentDragIndex.current = null;
+        setActiveTile(null);
+
+        if (!target || !source || canceled || finalIndex === null) return
         console.log(`Dropped ${source.id} onto ${target.id}`);
+
         if (target.id === DISCARD_ID && !source.id.toString().startsWith(GAP_ID)) {
             dispatch({
                 type: 'DISCARD_TILE', payload: {
@@ -97,12 +103,11 @@ export function DraggingContext({ children }: Props) {
             onDragEnd={onDragEnd}
         >
             {children}
-            <DragOverlay>
-                {source => source.data.tile && (
-                    <Tile tile={source.data.tile as MahjongTile} />
-                )
-            }
-            </DragOverlay>
+            {activeTile && (
+                <DragOverlay dropAnimation={null}>
+                    <Tile tile={activeTile} />
+                </DragOverlay>
+            )}
         </DragDropProvider>
     )
 }

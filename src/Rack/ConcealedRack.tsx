@@ -20,6 +20,7 @@ export default function ConcealedRack({ player, size }: Props) {
                     <RackSlot
                         key={index}
                         index={index}
+                        size={size}
                         isEmpty={typeof tile === "string"}
                     >
                         {typeof tile !== "string" ? (
@@ -36,6 +37,7 @@ export default function ConcealedRack({ player, size }: Props) {
                                 key={tile}
                                 index={index}
                                 gap={tile}
+                                size={size}
                             />
                         )}
                     </RackSlot>

@@ -9,60 +9,65 @@ import { DropOverlay, EXPOSED_RACK_ID } from "../drag-and-drop"
 import { sortTiles, checkIfMeldValid } from "../shared"
 import type { MahjongPlayer, Size } from "../types"
 import { THIS_PLAYER } from "../constants"
+import { tileSizes } from "../Tile/tileSizes"
 
 type Props = {
-    player: MahjongPlayer
-    size: Size
+	player: MahjongPlayer
+	size: Size
 }
 
 export default function ExposedRack({ player, size }: Props) {
-    const { handsData, melding, dispatch } = useMahjongData()
-    const { rackLight, rackDark } = useTheme()
+	const { handsData, melding, dispatch } = useMahjongData()
+	const { rackLight, rackDark } = useTheme()
 
-    const handleCancel = () => dispatch({ type: "CANCEL_MELD" })
-    const handleConfirm = () => dispatch({ type: "CONFIRM_MELD" })
+	const handleCancel = () => dispatch({ type: "CANCEL_MELD" })
+	const handleConfirm = () => dispatch({ type: "CONFIRM_MELD" })
 
-    const meldIsValid = !!melding && checkIfMeldValid(melding, handsData.callableMelds)
+	const meldIsValid = !!melding && checkIfMeldValid(melding, handsData.callableMelds)
 
-    return (
-        <div className="relative" style={{ background: rackLight }}>
-            <div className="h-2 m:h-3" style={{ background: rackLight }}></div>
-            <div className="h-2 m:h-3 -mb-3" style={{ background: rackDark }}></div>
-            {player.index === THIS_PLAYER && (
-                <DropOverlay dropId={EXPOSED_RACK_ID} data={{ player }} show={melding.length > 0}
-                    background={rackLight} textShadowColor={rackDark}
-                >Add to Meld</DropOverlay>
-            )}
-            <div className={clsx("flex justify-center px-3",
-                { sm: "", md: "min-h-12 md:min-h-20", lg: "min-h-14 md:min-h-24" }[size]
-            )}>
-                {player.exposed.map((tile, index) => typeof tile === "string" ?
-                    <div key={index} className="w-10"></div> :
-                    <Tile key={tile.id} tile={tile} size={size} />
-                )}
-                {player.index === THIS_PLAYER && melding.length > 0 &&
-                    <>
-                        {melding.toSorted(sortTiles).map(tile => (
-                            <Tile key={tile.id} tile={tile} size={size} />
-                        ))}
-                        <div className="flex flex-col gap-1 ms-2 justify-end">
-                            <Button
-                                className="bg-emerald-400 border-emerald-500 text-emerald-900 active:bg-emerald-500"
-                                disabled={!meldIsValid}
-                                onClick={handleConfirm}
-                            >
-                                <FontAwesomeIcon icon={faCheck} />
-                            </Button>
-                            <Button className="bg-red-400 border-red-500 text-red-900 active:bg-red-500" onClick={handleCancel}>
-                                <FontAwesomeIcon icon={faXmark} />
-                            </Button>
-                        </div>
-                    </>
-                }
-            </div>
-            <div className="h-2 m:h-3 -mb-2 m:-mb-3 vertical-shadow"></div>
-            <div className="h-2 m:h-3 relative" style={{ background: rackLight }}></div>
-            <div className="h-2 m:h-3" style={{ background: rackDark }}></div>
-        </div>
-    )
+	return (
+		<div className="relative" style={{ background: rackLight }}>
+			<div className="h-2 m:h-3" style={{ background: rackLight }}></div>
+			<div className="h-2 m:h-3 -mb-3" style={{ background: rackDark }}></div>
+			{player.index === THIS_PLAYER && (
+				<DropOverlay dropId={EXPOSED_RACK_ID} data={{ player }} show={melding.length > 0}
+					background={rackLight} textShadowColor={rackDark}
+				>Add to Meld</DropOverlay>
+			)}
+			<div className={clsx("flex justify-center px-3", tileSizes[size].tileClassName)}>
+				{player.exposed.map((tile, index) => typeof tile === "string" ?
+					<div key={index} className="w-10"></div> :
+					<Tile key={tile.id} tile={tile} size={size} />
+				)}
+				{player.index === THIS_PLAYER && melding.length > 0 &&
+					<>
+						{melding.toSorted(sortTiles).map(tile => (
+							<Tile key={tile.id} tile={tile} size={size} />
+						))}
+						<div className="flex xl:flex-col gap-1 ms-2 justify-end items-center pt-2">
+							<Button
+								className="bg-red-400 border-red-500 text-red-900 active:bg-red-500"
+								onClick={handleCancel}
+							>
+								<FontAwesomeIcon icon={faXmark} />
+							</Button>
+							<Button
+								className={clsx(
+									"bg-emerald-400 border-emerald-500 text-emerald-900 active:bg-emerald-500",
+									"xl:order-first"
+								)}
+								disabled={!meldIsValid}
+								onClick={handleConfirm}
+							>
+								<FontAwesomeIcon icon={faCheck} />
+							</Button>
+						</div>
+					</>
+				}
+			</div>
+			<div className="h-2 m:h-3 -mb-2 m:-mb-3 vertical-shadow"></div>
+			<div className="h-2 m:h-3 relative" style={{ background: rackLight }}></div>
+			<div className="h-2 m:h-3" style={{ background: rackDark }}></div>
+		</div>
+	)
 }

@@ -10,7 +10,8 @@ export default function Button({ children, className, disabled, size = "md", ...
     return (
         <button
             className={clsx(
-                "border-4 border-t-0 border-s-0 shadow shadow-gray-600 rounded-lg p-2",
+                "border-3 border-t-0 border-s-0 lg:border-b-4 lg:border-e-4",
+                "shadow shadow-gray-600 rounded-lg p-2",
                 "disabled:bg-gray-400 disabled:border-gray-500 disabled:text-gray-500",
                 !disabled && "active:border-0 active:mt-1 active:shadow-transparent",
                 className
