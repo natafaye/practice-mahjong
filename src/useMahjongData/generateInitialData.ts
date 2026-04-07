@@ -14,17 +14,17 @@ export const generateInitialData = (numberOfPlayers: number = 4, hands: MahjongH
     for(let i = 0; i < numberOfPlayers; i++) {
         players.push({ 
             index: i,
-            unexposed: wall.splice(0, 13),
+            concealed: wall.splice(0, 13),
             exposed: [], 
         })
     }
 
     // Sort this player's hand and add gaps after each one
-    const unexposed = players[THIS_PLAYER].unexposed as MahjongTile[]
-    unexposed.sort(sortTiles)
+    const concealed = players[THIS_PLAYER].concealed as MahjongTile[]
+    concealed.sort(sortTiles)
     let gapIndex = 0
-    players[THIS_PLAYER].unexposed = SUIT_ORDER.flatMap(suit => [
-        GAPS[gapIndex++], ...unexposed.filter(t => t.suit === suit)
+    players[THIS_PLAYER].concealed = SUIT_ORDER.flatMap(suit => [
+        GAPS[gapIndex++], ...concealed.filter(t => t.suit === suit)
     ])
 
     return {

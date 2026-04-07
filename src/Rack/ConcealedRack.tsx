@@ -9,14 +9,14 @@ type Props = {
     size: Size
 }
 
-export default function UnexposedRack({ player, size }: Props) {
+export default function ConcealedRack({ player, size }: Props) {
     const { rackLight, rackMid, rackDark } = useTheme()
 
     return (
         <div className="relative -mt-4" style={{ background: rackMid }}>
             <div className="h-2 m:h-3" style={{ background: rackLight }}></div>
             <div className="flex justify-center mt-3 px-3">
-                {player.unexposed.map((tile, index) =>
+                {player.concealed.map((tile, index) =>
                     <RackSlot
                         key={index}
                         index={index}

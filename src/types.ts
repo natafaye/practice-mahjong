@@ -21,11 +21,11 @@ export type MahjongGap = (typeof GAPS)[number] | typeof EXPOSED_GAP
 // A row of tiles
 export type MahjongTileRow = Array<MahjongTile | MahjongGap>;
 
-// A player with exposed and unexposed tiles
+// A player with exposed and concealed tiles
 export type MahjongPlayer = {
   index: number;
   exposed: MahjongTileRow;
-  unexposed: MahjongTileRow;
+  concealed: MahjongTileRow;
 };
 
 // A size (used for racks and tiles and buttons)

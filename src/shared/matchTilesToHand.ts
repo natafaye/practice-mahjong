@@ -21,20 +21,20 @@ const SUIT_PERMUTATIONS = [
  * Figure out the best way to match these tiles to this hand
  */
 export const matchTilesToHand = (
-  unexposedTiles: MahjongTileRow,
+  concealedTiles: MahjongTileRow,
   exposedTiles: MahjongTileRow,
   hand: MahjongHand,
 ) => {
   // Fail immediately if the hand must be concealed but has exposed melds
   if (hand.concealed && exposedTiles.length > 0) {
-    return { matches: 0, assignedMelds: [], leftoverTiles: unexposedTiles };
+    return { matches: 0, assignedMelds: [], leftoverTiles: concealedTiles };
   }
 
   let bestMatches = -1;
   let bestAssignment: MahjongTile[][] = [];
   let bestLeftovers: MahjongTile[] = [];
   const meldStringCombos = getCombinations(hand.melds);
-  const concealedTiles = unexposedTiles.filter((t) => typeof t !== "string") as MahjongTile[];
+  const concealedOnlyTiles = concealedTiles.filter((t) => typeof t !== "string") as MahjongTile[];
   const exposedMelds = getExposedMelds(exposedTiles);
 
   // Check every combo of suits (G is BAMS or G is CRAKS, etc)
@@ -42,7 +42,7 @@ export const matchTilesToHand = (
     // Check every combo of melds (222 or 444 or 666 for an even meld of 3, etc)
     for (const combo of meldStringCombos) {
       let currentMatches = 0;
-      let availableTiles = [...concealedTiles];
+      let availableTiles = [...concealedOnlyTiles];
       let availableMelds = [...exposedMelds];
       let currentAssignment: MahjongTile[][] = hand.melds.map(() => []);
 

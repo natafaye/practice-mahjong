@@ -24,7 +24,7 @@ export function mahjongReducer(
     state.players.map((player) => ({
       ...player,
       exposed: [...player.exposed],
-      unexposed: [...player.unexposed],
+      concealed: [...player.concealed],
     }));
 
   switch (action.type) {
@@ -46,10 +46,10 @@ export function mahjongReducer(
       const drawnTile = state.wall.at(-1)!;
       const newPlayers = clonePlayers();
       if (playerIndex === THIS_PLAYER) {
-        const replacementIndex = newPlayers[playerIndex].unexposed.findIndex(tile => typeof tile === "string");
-        newPlayers[playerIndex].unexposed[replacementIndex] = drawnTile;
+        const replacementIndex = newPlayers[playerIndex].concealed.findIndex(tile => typeof tile === "string");
+        newPlayers[playerIndex].concealed[replacementIndex] = drawnTile;
       } else {
-        newPlayers[playerIndex].unexposed.unshift(drawnTile);
+        newPlayers[playerIndex].concealed.unshift(drawnTile);
       }
       return {
         ...state,
@@ -67,16 +67,16 @@ export function mahjongReducer(
         return state;
       // Get the discarded tile
       const player = state.players[playerIndex];
-      const discardedTile = player.unexposed[tileIndex];
+      const discardedTile = player.concealed[tileIndex];
       // You can't discard a Gap
       if (typeof discardedTile === "string") return state;
       // Remove the tile from the player's tiles
       const newPlayers = clonePlayers();
-      const unexposed = newPlayers[playerIndex].unexposed
-      unexposed.splice(tileIndex, 1);
+      const concealed = newPlayers[playerIndex].concealed
+      concealed.splice(tileIndex, 1);
       // If there's a gap missing (taken over by the drawn tile) then put it back in
-      const missingGap = GAPS.find(gap => !unexposed.includes(gap))
-      if(missingGap) unexposed.unshift(missingGap)
+      const missingGap = GAPS.find(gap => !concealed.includes(gap))
+      if(missingGap) concealed.unshift(missingGap)
       // Add the removed tile to the discard and go to the next turn
       return {
         ...state,
@@ -98,7 +98,7 @@ export function mahjongReducer(
       if (sourcePlayerIndex !== state.currentPlayer) return state;
       // Get the swapping tiles
       const swapTile =
-        state.players[sourcePlayerIndex].unexposed[sourceTileIndex];
+        state.players[sourcePlayerIndex].concealed[sourceTileIndex];
       const joker = state.players[targetPlayerIndex].exposed[targetTileIndex];
       // You can't swap a Gap
       if (typeof swapTile === "string" || typeof joker === "string")
@@ -107,7 +107,7 @@ export function mahjongReducer(
       if (joker.suit !== JOKER_SUIT) return state;
       // Swap the joker and the swapping tile
       const newPlayers = clonePlayers();
-      newPlayers[sourcePlayerIndex].unexposed.splice(sourceTileIndex, 1, joker);
+      newPlayers[sourcePlayerIndex].concealed.splice(sourceTileIndex, 1, joker);
       newPlayers[targetPlayerIndex].exposed.splice(
         targetTileIndex,
         1,
@@ -147,8 +147,8 @@ export function mahjongReducer(
       // if(false) {
       // 	const newPlayers = clonePlayers()
       // 	const player = newPlayers[action.payload.playerIndex]
-      // 	player.exposed = player.exposed.concat(player.unexposed) // putInHandOrder(player.exposed.concat(player.unexposed))
-      // 	player.unexposed = []
+      // 	player.exposed = player.exposed.concat(player.concealed) // putInHandOrder(player.exposed.concat(player.concealed))
+      // 	player.concealed = []
       // 	return {
       // 		...state,
       // 		discard: state.discard.slice(0, -1),
@@ -174,7 +174,7 @@ export function mahjongReducer(
         return state;
       // Remove the tile from this player's tiles and add to the melding tiles
       const newPlayers = clonePlayers();
-      const [meldingTile] = newPlayers[THIS_PLAYER].unexposed.splice(
+      const [meldingTile] = newPlayers[THIS_PLAYER].concealed.splice(
         action.payload.tileIndex,
         1
       );
@@ -191,7 +191,7 @@ export function mahjongReducer(
     case "CANCEL_MELD": {
       // Remove the tiles from the melding list and add them back to the player's tiles
       const newPlayers = clonePlayers();
-      newPlayers[THIS_PLAYER].unexposed.push(...state.melding.slice(1));
+      newPlayers[THIS_PLAYER].concealed.push(...state.melding.slice(1));
       return {
         ...state,
         discard: [...state.discard, state.melding[0]],
@@ -225,41 +225,41 @@ export function mahjongReducer(
 	    // If it didn't move, we're done
       if (startIndex === endIndex) return state;
       const newPlayers = clonePlayers();
-      const unexposed = newPlayers[THIS_PLAYER].unexposed;
-      const itemToMove = unexposed[startIndex];
+      const concealed = newPlayers[THIS_PLAYER].concealed;
+      const itemToMove = concealed[startIndex];
       // Put a placeholder gap in the starting spot
-      unexposed[startIndex] = EXPOSED_GAP;
+      concealed[startIndex] = EXPOSED_GAP;
       // Shift tiles to remove the original gap, to preserve spacing
       if (startIndex > endIndex) {
         // Dragged left: Shift everything in between to the right
         for (let i = startIndex; i > endIndex; i--) {
-          unexposed[i] = unexposed[i - 1];
+          concealed[i] = concealed[i - 1];
         }
       } else {
         // Dragged right: Shift everything in between to the left
         for (let i = startIndex; i < endIndex; i++) {
-          unexposed[i] = unexposed[i + 1];
+          concealed[i] = concealed[i + 1];
         }
       }
       // Insert the dragged tile into the now-cleared target slot
-      unexposed[endIndex] = itemToMove;
+      concealed[endIndex] = itemToMove;
       return { ...state, players: newPlayers };
     }
 
     case "EXPOSE_TILES": {
       const { playerIndex, tileIndices } = action.payload;
       const newPlayers = clonePlayers();
-      const unexposed = newPlayers[playerIndex].unexposed;
+      const concealed = newPlayers[playerIndex].concealed;
       const exposed = newPlayers[playerIndex].exposed;
 
       // Sort ascending to grab the tiles in the correct order for the meld
       const sortedIndicesAsc = [...tileIndices].sort((a, b) => a - b);
-      const tilesToExpose = sortedIndicesAsc.map((i) => unexposed[i]);
+      const tilesToExpose = sortedIndicesAsc.map((i) => concealed[i]);
 
       // Sort descending to safely splice them out of the array without shifting indices
       const sortedIndicesDesc = [...tileIndices].sort((a, b) => b - a);
       sortedIndicesDesc.forEach((index) => {
-        unexposed.splice(index, 1);
+        concealed.splice(index, 1);
       });
 
       // Push the new meld to exposed, followed by an EXPOSED_GAP to separate it from future melds

@@ -6,9 +6,9 @@ export const lookForJokerSwap = (
   currentPlayer: number,
 ) => {
   // Loop through each tile
-  const unexposed = players[currentPlayer].unexposed;
-  for (let tileIndex = 0; tileIndex < unexposed.length; tileIndex++) {
-    const tile = unexposed[tileIndex];
+  const concealed = players[currentPlayer].concealed;
+  for (let tileIndex = 0; tileIndex < concealed.length; tileIndex++) {
+    const tile = concealed[tileIndex];
     if (typeof tile === "string") continue;
     // Check each tile against each player's exposed tiles
     for (let playerIndex = 0; playerIndex < players.length; playerIndex++) {

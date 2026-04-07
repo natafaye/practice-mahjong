@@ -1,16 +1,20 @@
 import { useDragDropMonitor } from "@dnd-kit/react";
 import { useState } from "react";
-import { DISCARD_ID, GAP_ID } from "./DraggingContext";
+import { DISCARD_ID } from "./DraggingContext";
+import { JOKER_SUIT } from "../constants";
 
 export function useIsDragging() {
     const [isDragging, setIsDragging] = useState(false)
     const [isDraggingDiscard, setIsDraggingDiscard] = useState(false)
     const [isDraggingGap, setIsDraggingGap] = useState(false)
+    const [isDraggingJoker, setIsDraggingJoker] = useState(false)
     useDragDropMonitor({
         onDragStart: ({ operation }) => {
+            const tile = operation.source?.data.tile
             setIsDragging(true)
             setIsDraggingDiscard(operation.source?.data.playerIndex === DISCARD_ID)
-            setIsDraggingGap(!!operation.source?.id.toString().startsWith(GAP_ID))
+            setIsDraggingGap(typeof tile === "string")
+            setIsDraggingJoker(typeof tile !== "string" && tile.suit === JOKER_SUIT)
         },
         onDragEnd: () => {
             setIsDragging(false)
@@ -18,5 +22,5 @@ export function useIsDragging() {
             setIsDraggingGap(false)
         }
     })
-    return { isDragging, isDraggingDiscard, isDraggingGap }
+    return { isDragging, isDraggingDiscard, isDraggingGap, isDraggingJoker }
 }

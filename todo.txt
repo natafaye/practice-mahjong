@@ -1,11 +1,12 @@
 Fix resizing issues
 Only allow pinning 6 hands max
 Bottom bar (undo, restart, quit, etc)
+Use size in button
+Tile animates to top corner
+
+AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)
+
+Animations:
 Make the tiles wiggle if waiting on the user to interact with them
 After a joker swap make the switched tile bounce
-Allow dragging from deal
-Don't allow calling a joker
-Use size in button
-Undoing a discard pickup changes the current player when it shouldn't
-Tile animates to top corner
