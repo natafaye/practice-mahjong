@@ -1,15 +1,15 @@
 export const tileSizes = {
     sm: {
         shadowHeight: 4,
-        tileClassName: "h-10 md:h-16",
-        numberClassName: "text-xs md:text-base",
-        suitClassName: "text-md md:text-2xl"
+        tileClassName: "h-10 lg:h-14 xl:h-16",
+        numberClassName: "text-xs lg:text-sm xl:text-base",
+        suitClassName: "text-base lg:text-[1.4rem] xl:text-[1.6rem]"
     },
     md: {
         shadowHeight: 5,
-        tileClassName: "h-12 md:h-20",
-        numberClassName: "text-lg",
-        suitClassName: "text-3xl"
+        tileClassName: "h-12 lg:h-16 xl:h-21",
+        numberClassName: "text-sm lg:text-base xl:text-lg",
+        suitClassName: "text-xl lg:text-2xl xl:text-3xl"
     },
     lg: {
         shadowHeight: 6,

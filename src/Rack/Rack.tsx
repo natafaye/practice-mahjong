@@ -7,21 +7,23 @@ import { DropOverlay, PICK_UP_DISCARD_ID, useIsDragging } from "../drag-and-drop
 import { useTheme } from "../useTheme"
 import useMahjongData from "../useMahjongData"
 import type { MahjongPlayer, Size } from "../types"
+import type { CSSProperties } from "react"
 
 type Props = {
     player: MahjongPlayer
     size?: Size
     concealed?: boolean
     className?: string
+    style?: CSSProperties
 }
 
-export default function Rack({ player, size = "lg", className, concealed = false }: Props) {
+export default function Rack({ player, size = "lg", className, style, concealed = false }: Props) {
     const { rackLight, rackDark } = useTheme()
     const { currentPlayer } = useMahjongData()
     const { isDraggingDiscard, isDraggingJoker } = useIsDragging()
 
     return (
-        <div className={clsx(className, "relative")}>
+        <div className={clsx(className, "relative")} style={style}>
             {currentPlayer === player.index && (
                 <div className={clsx(
                     "absolute z-10",
@@ -34,7 +36,7 @@ export default function Rack({ player, size = "lg", className, concealed = false
                     </span>
                 </div>
             )}
-            <div className="overflow-x-auto vertical-shadow relative">
+            <div className="overflow-x-auto relative">
                 <div className="w-max min-w-full">
                     <ExposedRack player={player} size={size} />
                     {!concealed && player.concealed.length > 0 && <ConcealedRack player={player} size={size} />}

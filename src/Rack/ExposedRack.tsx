@@ -26,14 +26,14 @@ export default function ExposedRack({ player, size }: Props) {
 	const meldIsValid = !!melding && checkIfMeldValid(melding, handsData.callableMelds)
 
 	return (
-		<div className="relative" style={{ background: rackLight }}>
-			<div className="h-2 m:h-3" style={{ background: rackLight }}></div>
-			<div className="h-2 m:h-3 -mb-3" style={{ background: rackDark }}></div>
-			{player.index === THIS_PLAYER && (
+		<div className={clsx("relative")} style={{ background: rackLight }}>
+			{player.index === THIS_PLAYER && <>
+				<div className="h-2 m:h-3" style={{ background: rackLight }}></div>
+				<div className="h-2 m:h-3 -mb-3" style={{ background: rackDark }}></div>
 				<DropOverlay dropId={EXPOSED_RACK_ID} data={{ player }} show={melding.length > 0}
 					background={rackLight} textShadowColor={rackDark}
 				>Add to Meld</DropOverlay>
-			)}
+			</>}
 			<div className={clsx("flex justify-center px-3", tileSizes[size].tileClassName)}>
 				{player.exposed.map((tile, index) => typeof tile === "string" ?
 					<div key={index} className="w-10"></div> :

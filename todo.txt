@@ -1,6 +1,7 @@
-Fix resizing issues
 Only allow pinning 6 hands max
 Bottom bar (undo, restart, quit, etc)
+Handle winning the game
+Show percentage chance of getting the hand
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)

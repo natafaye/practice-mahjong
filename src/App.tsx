@@ -9,15 +9,15 @@ import { THIS_PLAYER } from "./constants";
 
 export default function App() {
   const { players } = useMahjongData()
-  const { table } = useTheme()
+  const { table, rackDark } = useTheme()
   useAIPlayer(200)
 
   return (
     <DraggingContext>
-      <div className="absolute top-0 left-0 right-0 bottom-0 h-screen w-screen flex flex-col select-none"
+      <div className="fixed inset-0 overflow-hidden flex flex-col select-none"
         style={{ background: table }}
       >
-        <div className="sm:flex gap-5">
+        <div className="sm:flex gap-2" style={{ background: rackDark }}>
           {players.map((player, index) => index !== THIS_PLAYER && (
             <Rack
               key={index}
@@ -29,7 +29,7 @@ export default function App() {
           ))}
         </div>
         <PlayArea className="grow min-h-0" />
-        <Rack player={players[THIS_PLAYER]} className="shrink-0" />
+        <Rack player={players[THIS_PLAYER]} className="shrink-0 vertical-shadow" />
       </div>
     </DraggingContext>
   )

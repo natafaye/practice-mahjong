@@ -31,7 +31,7 @@ export default function PlayArea({ className }: Props) {
                     <DrawSpot className="w-25 grow md:grow-0 mb-4" />
                     <DiscardSpot className="shrink-0 md:order-last mb-4" />
                 </div>
-                <ReferenceCard className="min-h-0 min-w-150 grow shrink order-first md:order-1" />
+                <ReferenceCard className="min-h-0 grow shrink order-first md:order-1" />
             </div>
             <DropOverlay
                 dropId={DISCARD_ID}

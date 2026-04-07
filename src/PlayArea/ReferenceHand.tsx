@@ -13,10 +13,10 @@ type Props = {
 export default function ReferenceHand({ hand, onClick, expanded = false, pinned = false }: Props) {
     return (
         <button
-            className="text text-left w-full flex justify-between gap-1 p-1 even:bg-gray-200 whitespace-nowrap"
+            className="text text-left w-full flex justify-between items-baseline gap-1 p-1 even:bg-gray-200 whitespace-nowrap"
             onClick={onClick}
         >
-            <span>
+            <span className="shrink-0">
                 {(expanded || pinned) && (
                     <FontAwesomeIcon icon={faThumbtack} size="sm" className={pinned ? "black" : "text-gray-400"} />
                 )}
@@ -27,8 +27,8 @@ export default function ReferenceHand({ hand, onClick, expanded = false, pinned 
                     )}>{set.numbers[0]}</span>
                 ))}
             </span>
-            <span className="text-taupe-600 text-sm me-1">
-                {expanded && <span className="me-2">({hand.text})</span>}
+            <span className="text-taupe-600 text-sm me-1 min-w-0 flex items-baseline justify-end w-full">
+                {expanded && <span className="me-2 truncate font-sans">({hand.text})</span>}
                 <span>
                     {hand.concealed ? "C" : expanded && "X"}
                     {expanded && hand.value}
