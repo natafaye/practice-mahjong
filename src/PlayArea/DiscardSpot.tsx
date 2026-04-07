@@ -29,7 +29,7 @@ export default function DiscardSpot({ className }: Props) {
             <Button
                 className="w-18 md:w-25 text-sm md:text-base text-nowrap"
                 style={{
-                    backgroundColor: tableMid,
+                    background: tableMid,
                     borderColor: tableDark,
                     color: tableVeryDark,
                     visibility: gameState === DISCARD ? "visible" : "hidden"

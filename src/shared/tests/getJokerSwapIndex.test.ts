@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { getJokerSwapIndex } from '../getJokerSwapIndex'
 import type { MahjongTileRow } from '../../types'
 import { createJoker, createTile } from './testUtilities'
-import { BAMS, DOTS, GAP } from '../../constants'
+import { BAMS, DOTS, EXPOSED_GAP } from '../../constants'
 
 describe('getJokerSwapIndex', () => {
     it('should find the index of a Joker in a simple matching set', () => {
@@ -18,9 +18,9 @@ describe('getJokerSwapIndex', () => {
     it('should find the index of a Joker when there are multiple sets separated by GAP', () => {
         const swapTile = createTile(DOTS, 8)
         const exposedTiles: MahjongTileRow = [
-            createTile(BAMS, 2), createTile(BAMS, 2), createTile(BAMS, 2), GAP,
-            createTile(DOTS, 8), createTile(DOTS, 8), createJoker(), GAP,
-            createTile(BAMS, 9), createTile(BAMS, 9), createTile(BAMS, 9)
+            createTile(BAMS, 2), createTile(BAMS, 2), createTile(BAMS, 2), EXPOSED_GAP,
+            createTile(DOTS, 8), createTile(DOTS, 8), createJoker(), EXPOSED_GAP,
+            createTile(BAMS, 9), createTile(BAMS, 9), createTile(BAMS, 9), EXPOSED_GAP
         ]
         expect(getJokerSwapIndex(swapTile, exposedTiles)).toBe(6)
     })
@@ -49,7 +49,7 @@ describe('getJokerSwapIndex', () => {
     it('should return -1 if the swap tile matches a different set than the one containing the Joker', () => {
         const swapTile = createTile(BAMS, 2)
         const exposedTiles: MahjongTileRow = [
-            createTile(BAMS, 2), createTile(BAMS, 2), createTile(BAMS, 2), GAP,
+            createTile(BAMS, 2), createTile(BAMS, 2), createTile(BAMS, 2), EXPOSED_GAP,
             createTile(DOTS, 8), createTile(DOTS, 8), createJoker()
         ]
         expect(getJokerSwapIndex(swapTile, exposedTiles)).toBe(-1)

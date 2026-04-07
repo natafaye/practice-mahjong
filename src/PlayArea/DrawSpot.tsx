@@ -24,7 +24,7 @@ export default function DrawSpot({ className }: Props) {
             <Button className="md:w-25 text-sm md:text-base text-white"
                 style={{ 
                     visibility: gameState === DRAWING && currentPlayer === THIS_PLAYER ? "visible" : "hidden",
-                    backgroundColor: tileLight, 
+                    background: tileLight, 
                     borderColor: tileDark 
                 }}
                 onClick={() => dispatch({ type: "DRAW_FROM_WALL", payload: { playerIndex: currentPlayer } })}

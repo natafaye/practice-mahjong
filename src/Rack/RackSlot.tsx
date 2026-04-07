@@ -20,8 +20,8 @@ export default function RackSlot({ index, children, isEmpty }: Props) {
         <div 
             ref={ref}
             className={clsx(
-                "flex items-center justify-center transition-all duration-200 ease-in-out",
-                isEmpty ? "w-8 md:w-12 mx-1" : "w-auto",
+                "flex items-center justify-center transition-[width] duration-200 ease-in-out rounded-lg bg-linear-to-t from-white/30 to-40%",
+                isEmpty ? "w-10 md:w-17 ps-1 md:ps-0" : "w-auto",
                 isDropTarget && "bg-white/30 rounded-lg"
             )}
         >

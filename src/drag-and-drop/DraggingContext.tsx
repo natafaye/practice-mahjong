@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import { useRef, type ReactNode } from "react"
 import { DragDropProvider, DragOverlay, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
 import Tile from "../Tile/Tile"
 import useMahjongData from "../useMahjongData"
@@ -6,6 +6,7 @@ import { getJokerSwapIndex } from "../shared"
 import type { MahjongTile } from "../types"
 import { THIS_PLAYER } from "../constants"
 
+export const GAP_ID = "GAP_"
 export const SLOT_ID = "SLOT_"
 export const DISCARD_ID = "DISCARD"
 export const EXPOSED_RACK_ID = "EXPOSED_RACK"
@@ -17,15 +18,18 @@ type Props = {
 
 export function DraggingContext({ children }: Props) {
     const { dispatch } = useMahjongData()
+    const currentDragIndex = useRef<number | null>(null)
 
     const onDragStart: DragStartEvent = ({ operation: { source } }) => {
         console.log('Started dragging', source?.id);
+        if(source) {
+            currentDragIndex.current = source.data.tileIndex;
+        }
     }
 
     const onDragOver: DragOverEvent = ({ operation: { source, target } }) => {
-        if (!target || !source) return
+        if (!target || !source || currentDragIndex.current === null) return
         console.log(`Dragged ${source?.id} over ${target?.id}`);
-        console.log(source.data.tileIndex)
         const targetId = String(target.id);
         if (targetId.startsWith(SLOT_ID)) {
             const [, targetSlotIndexStr] = targetId.split('_')
@@ -37,17 +41,20 @@ export function DraggingContext({ children }: Props) {
                     endIndex: targetSlotIndex
                 }
             })
+            currentDragIndex.current = targetSlotIndex
         }
     }
 
     const onDragEnd: DragEndEvent = ({ operation: { source, target, canceled } }) => {
-        if (!target || !source || canceled) return
+        if (!target || !source || canceled || currentDragIndex.current === null) return
+        const finalIndex = currentDragIndex.current;
+        currentDragIndex.current = null;
         console.log(`Dropped ${source.id} onto ${target.id}`);
-        if (target.id === DISCARD_ID) {
+        if (target.id === DISCARD_ID && !source.id.toString().startsWith(GAP_ID)) {
             dispatch({
                 type: 'DISCARD_TILE', payload: {
                     playerIndex: THIS_PLAYER,
-                    tileIndex: source.data.tileIndex
+                    tileIndex: finalIndex
                 }
             })
         }
@@ -60,15 +67,13 @@ export function DraggingContext({ children }: Props) {
             })
         }
         else if (target.id === EXPOSED_RACK_ID) {
-            const tile = source.data.tile as MahjongTile
-
             // Check for a joker swap
-            const jokerSwapIndex = getJokerSwapIndex(tile, target.data.player.exposed)
+            const jokerSwapIndex = getJokerSwapIndex(source.data.tile, target.data.player.exposed)
             if (jokerSwapIndex !== -1) {
                 dispatch({
                     type: "JOKER_SWAP", payload: {
                         sourcePlayerIndex: THIS_PLAYER,
-                        sourceTileIndex: source.data.tileIndex,
+                        sourceTileIndex: finalIndex,
                         targetPlayerIndex: target.data.player.index,
                         targetTileIndex: jokerSwapIndex
                     }
@@ -78,7 +83,7 @@ export function DraggingContext({ children }: Props) {
             else if (target.data.player.index === THIS_PLAYER) {
                 dispatch({
                     type: "ADD_TO_MELD", payload: {
-                        tileIndex: source.data.tileIndex
+                        tileIndex: finalIndex
                     }
                 })
             }
@@ -93,7 +98,10 @@ export function DraggingContext({ children }: Props) {
         >
             {children}
             <DragOverlay>
-                {source => (<Tile tile={source.data.tile as MahjongTile} />)}
+                {source => source.data.tile && (
+                    <Tile tile={source.data.tile as MahjongTile} />
+                )
+            }
             </DragOverlay>
         </DragDropProvider>
     )

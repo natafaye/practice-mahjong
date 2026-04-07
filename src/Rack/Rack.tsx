@@ -51,7 +51,7 @@ export default function Rack({ player, size = "lg", className, concealed = false
             <DropOverlay
                 dropId={PICK_UP_DISCARD_ID}
                 show={showDiscardPickUp}
-                backgroundColor={rackLight}
+                background={rackLight}
                 textShadowColor={rackDark}
             >
                 Pick Up Discard

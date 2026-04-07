@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { createMeld } from "./testUtilities";
 import { HANDS_2025 } from "../../useMahjongData/2025";
 import { matchTilesToHand } from "../matchTilesToHand";
-import { BAMS, CRAKS, DOTS, GAP } from "../../constants";
+import { BAMS, CRAKS, DOTS, EXPOSED_GAP } from "../../constants";
 
 
 describe("matchTilesToHand", () => {
@@ -347,7 +347,7 @@ describe("matchTilesToHand", () => {
       ];
       const exposedTilesRow = [
         ...createMeld(CRAKS, "4444"), // Exposed Kong of 4s
-        GAP
+        EXPOSED_GAP
       ];
       console.log(matchTilesToHand(rackTiles, exposedTilesRow, hand).assignedMelds)
       console.log(matchTilesToHand(rackTiles, exposedTilesRow, hand).leftoverTiles)
@@ -361,8 +361,7 @@ describe("matchTilesToHand", () => {
         ...createMeld(CRAKS, "8888"),
       ];
       const exposedTilesRow = [
-        ...createMeld(CRAKS, "4JJJ"), // Exposed Kong of 4s
-        GAP
+        ...createMeld(CRAKS, "4JJJ"), EXPOSED_GAP
       ];
       expect(matchTilesToHand(rackTiles, exposedTilesRow, hand).matches).toBe(14);
     });
@@ -373,10 +372,8 @@ describe("matchTilesToHand", () => {
         ...createMeld(CRAKS, "8888"),
       ];
       const exposedTilesRow = [
-        ...createMeld(CRAKS, "222"), // Exposed Pung of 2s
-        GAP,                         // GAP separator
-        ...createMeld(CRAKS, "4444"), // Exposed Kong of 4s
-        GAP
+        ...createMeld(CRAKS, "222"), EXPOSED_GAP,                         
+        ...createMeld(CRAKS, "4444"), EXPOSED_GAP
       ];
       expect(matchTilesToHand(rackTiles, exposedTilesRow, hand).matches).toBe(14);
     });
@@ -389,7 +386,7 @@ describe("matchTilesToHand", () => {
       ];
       const exposedTilesRow = [
         ...createMeld(CRAKS, "5555"), // Invalid Kong for a 2468 hand
-        GAP
+        EXPOSED_GAP
       ];
       expect(matchTilesToHand(rackTiles, exposedTilesRow, hand).matches).toBe(0);
     });

@@ -1,5 +1,6 @@
 // Gap
-export const GAP = " " as const;
+export const GAPS = ["gap_1", "gap_2", "gap_3", "gap_4", "gap_5", "gap_6"] as const
+export const EXPOSED_GAP = "" as const
 
 // Tiles
 export const DOTS = "🔵"

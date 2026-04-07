@@ -5,7 +5,7 @@ import DiscardSpot from "./DiscardSpot"
 import DrawSpot from "./DrawSpot"
 import { useTheme } from "../useTheme"
 import useMahjongData from "../useMahjongData"
-import { DropOverlay, DISCARD_ID } from "../drag-and-drop"
+import { DropOverlay, DISCARD_ID, useIsDragging } from "../drag-and-drop"
 import { DISCARD, PLAYING, THIS_PLAYER } from "../constants"
 
 type Props = {
@@ -15,6 +15,7 @@ type Props = {
 export default function PlayArea({ className }: Props) {
     const { tableMid, tableDark } = useTheme()
     const { discard, gameState, currentPlayer } = useMahjongData()
+    const { isDraggingGap } = useIsDragging()
 
     return (
         <div className={clsx(className, "flex flex-col relative p-4 pb-0")}>
@@ -34,8 +35,8 @@ export default function PlayArea({ className }: Props) {
             </div>
             <DropOverlay
                 dropId={DISCARD_ID}
-                show={gameState === PLAYING && currentPlayer === THIS_PLAYER}
-                backgroundColor={tableMid}
+                show={gameState === PLAYING && currentPlayer === THIS_PLAYER && !isDraggingGap}
+                background={tableMid}
                 textShadowColor={tableDark}
             >
                 Discard

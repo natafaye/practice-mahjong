@@ -4,11 +4,12 @@ import {
   DISCARD_AI,
   DRAWING,
   GAME_OVER,
-  GAP,
+  EXPOSED_GAP,
   MELDING,
   PLAYING,
   JOKER_SUIT,
   THIS_PLAYER,
+  GAPS
 } from "../constants";
 import type { MahjongGameData } from "../types";
 import type { MahjongAction } from "./types";
@@ -45,7 +46,7 @@ export function mahjongReducer(
       const drawnTile = state.wall.at(-1)!;
       const newPlayers = clonePlayers();
       if (playerIndex === THIS_PLAYER) {
-        const replacementIndex = newPlayers[playerIndex].unexposed.indexOf(GAP);
+        const replacementIndex = newPlayers[playerIndex].unexposed.findIndex(tile => typeof tile === "string");
         newPlayers[playerIndex].unexposed[replacementIndex] = drawnTile;
       } else {
         newPlayers[playerIndex].unexposed.unshift(drawnTile);
@@ -69,9 +70,14 @@ export function mahjongReducer(
       const discardedTile = player.unexposed[tileIndex];
       // You can't discard a Gap
       if (typeof discardedTile === "string") return state;
-      // Remove the tile from the player's tiles, add it to the discard, and move to next turn
+      // Remove the tile from the player's tiles
       const newPlayers = clonePlayers();
-      newPlayers[playerIndex].unexposed.splice(tileIndex, 1, GAP);
+      const unexposed = newPlayers[playerIndex].unexposed
+      unexposed.splice(tileIndex, 1);
+      // If there's a gap missing (taken over by the drawn tile) then put it back in
+      const missingGap = GAPS.find(gap => !unexposed.includes(gap))
+      if(missingGap) unexposed.unshift(missingGap)
+      // Add the removed tile to the discard and go to the next turn
       return {
         ...state,
         players: newPlayers,
@@ -130,7 +136,6 @@ export function mahjongReducer(
 
     // Pick up the latest tile in the discard
     case "PICK_UP_DISCARD": {
-      const playerIndex = action.payload.playerIndex;
       // Can't pick up from discard if it's empty
       if (state.discard.length === 0) return state;
       // Can't pick up from discard if it's a joker
@@ -159,22 +164,19 @@ export function mahjongReducer(
         ...state,
         discard: state.discard.slice(0, -1),
         melding: [pickedTile],
-        currentPlayer: playerIndex,
         gameState: MELDING,
       };
     }
 
     case "ADD_TO_MELD": {
-      // Can't meld on a turn that isn't yours
-      // (Other players don't add to meld, they reveal the meld all at once)
-      if (state.currentPlayer !== THIS_PLAYER || state.gameState !== MELDING)
+      // Can't add to meld if we're not currently melding
+      if (state.gameState !== MELDING)
         return state;
       // Remove the tile from this player's tiles and add to the melding tiles
       const newPlayers = clonePlayers();
       const [meldingTile] = newPlayers[THIS_PLAYER].unexposed.splice(
         action.payload.tileIndex,
-        1,
-        GAP,
+        1
       );
       // You can't meld a gap
       if (typeof meldingTile === "string") return state;
@@ -208,25 +210,25 @@ export function mahjongReducer(
       const newPlayers = clonePlayers();
       // Put the melded tiles in an order that matches a valid meld
       const sortedMeld = putInMeldOrder(state.melding, state.handsData.melds);
-      console.log(sortedMeld);
-      newPlayers[THIS_PLAYER].exposed.push(...sortedMeld, GAP);
+      newPlayers[THIS_PLAYER].exposed.push(...sortedMeld, EXPOSED_GAP);
       return {
         ...state,
         players: newPlayers,
         melding: [],
         gameState: PLAYING,
+        currentPlayer: THIS_PLAYER,
       };
     }
 
     case "REARRANGE_UNEXPOSED": {
       const { startIndex, endIndex } = action.payload;
-	  // If it didn't move, we're done
+	    // If it didn't move, we're done
       if (startIndex === endIndex) return state;
       const newPlayers = clonePlayers();
       const unexposed = newPlayers[THIS_PLAYER].unexposed;
       const itemToMove = unexposed[startIndex];
       // Put a placeholder gap in the starting spot
-      unexposed[startIndex] = GAP;
+      unexposed[startIndex] = EXPOSED_GAP;
       // Shift tiles to remove the original gap, to preserve spacing
       if (startIndex > endIndex) {
         // Dragged left: Shift everything in between to the right
@@ -260,8 +262,8 @@ export function mahjongReducer(
         unexposed.splice(index, 1);
       });
 
-      // Push the new meld to exposed, followed by a GAP to separate it from future melds
-      exposed.push(...tilesToExpose, GAP);
+      // Push the new meld to exposed, followed by an EXPOSED_GAP to separate it from future melds
+      exposed.push(...tilesToExpose, EXPOSED_GAP);
 
       return { ...state, players: newPlayers };
     }

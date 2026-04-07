@@ -1,4 +1,4 @@
-import type { GAME_STATES, GAP } from "./constants";
+import type { EXPOSED_GAP, GAME_STATES, GAPS } from "./constants";
 
 /**
  * TERMINOLOGY
@@ -16,8 +16,10 @@ export type MahjongTile = {
   id: string;
 };
 
+export type MahjongGap = (typeof GAPS)[number] | typeof EXPOSED_GAP
+
 // A row of tiles
-export type MahjongTileRow = Array<MahjongTile | typeof GAP>;
+export type MahjongTileRow = Array<MahjongTile | MahjongGap>;
 
 // A player with exposed and unexposed tiles
 export type MahjongPlayer = {

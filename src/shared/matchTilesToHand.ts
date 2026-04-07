@@ -1,4 +1,4 @@
-import { BAMS, CRAKS, DOTS, FLOWER_SUIT, GAP, JOKER_SUIT } from "../constants";
+import { BAMS, CRAKS, DOTS, FLOWER_SUIT, JOKER_SUIT } from "../constants";
 import type {
   MahjongHand,
   MahjongHandMeld,
@@ -34,7 +34,7 @@ export const matchTilesToHand = (
   let bestAssignment: MahjongTile[][] = [];
   let bestLeftovers: MahjongTile[] = [];
   const meldStringCombos = getCombinations(hand.melds);
-  const concealedTiles = unexposedTiles.filter((t) => t !== GAP) as MahjongTile[];
+  const concealedTiles = unexposedTiles.filter((t) => typeof t !== "string") as MahjongTile[];
   const exposedMelds = getExposedMelds(exposedTiles);
 
   // Check every combo of suits (G is BAMS or G is CRAKS, etc)
@@ -145,7 +145,7 @@ const getExposedMelds = (exposedTiles: MahjongTileRow) => {
   };
   const exposedMelds = [] as Array<typeof currentMeld>;
   exposedTiles.forEach((tile, index) => {
-    if (tile !== GAP) {
+    if (typeof tile !== "string") {
       let char = convertTileToCharacter(tile);
       if (char === "J") {
         char = currentMeld.character;

@@ -1,6 +1,8 @@
 import clsx from "clsx"
 import type { MahjongTile, Size } from "../types"
 import { useTheme } from "../useTheme"
+import { generateBoxShadow } from "./generateBoxShadow"
+import { tileSizes } from "./tileSizes"
 
 export type TileProps = {
     tile?: MahjongTile
@@ -10,42 +12,12 @@ export type TileProps = {
     message?: string | number
 }
 
-const sizes = {
-    sm: {
-        shadowHeight: 4,
-        tileClassName: "h-10 md:h-16",
-        numberClassName: "text-xs md:text-base",
-        suitClassName: "text-md md:text-2xl"
-    },
-    md: {
-        shadowHeight: 5,
-        tileClassName: "h-12 md:h-20",
-        numberClassName: "text-lg",
-        suitClassName: "text-3xl"
-    },
-    lg: {
-        shadowHeight: 6,
-        tileClassName: "h-14 md:h-24",
-        numberClassName: "text-sm md:text-[1.4rem]",
-        suitClassName: "text-2xl md:text-4xl"
-    },
-}
-
-const generateBoxShadow = (height: number, tipped: boolean, topColor: string, bottomColor: string) => {
-    let shadow = ""
-    for (let i = 0; i < height; i++) {
-        shadow += `${i}px ${i * (tipped ? -1 : 1)}px 0 ${i >= height / 2.5 ? topColor : bottomColor}, `
-    }
-    shadow += `${height * 0.9}px ${height * 0.9}px 8px rgba(0, 0, 0, 0.5)`
-    return shadow
-}
-
 export default function Tile({ tile, size = "lg", selected = false, tipped = false, message = "" }: TileProps) {
     const { tileLight, tileDark } = useTheme()
-    const { shadowHeight, tileClassName, numberClassName, suitClassName } = sizes[size]
+    const { shadowHeight, tileClassName, numberClassName, suitClassName } = tileSizes[size]
 
     const tileStyle = !tile ? {
-        backgroundColor: tileLight,
+        background: tileLight,
         borderColor: tileDark,
         boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark)
     } : {

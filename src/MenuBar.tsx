@@ -10,10 +10,10 @@ export default function MenuBar() {
     const { gameState, currentPlayer, dispatch } = useMahjongData()
     const drawDisabled = gameState !== DRAWING || currentPlayer !== THIS_PLAYER
     return (
-        <div className="relative p-2 -mt-2 flex justify-between" style={{ backgroundColor: rackDark }}>
+        <div className="relative p-2 -mt-2 flex justify-between" style={{ background: rackDark }}>
             <Button className="text-white md:text-lg"
                 disabled={drawDisabled}
-                style={!drawDisabled ? { backgroundColor: tileLight, borderColor: tileDark } : {}}
+                style={!drawDisabled ? { background: tileLight, borderColor: tileDark } : {}}
                 onClick={() => dispatch({ type: "DRAW_FROM_WALL", payload: { playerIndex: currentPlayer }})}
             >
                 <FontAwesomeIcon icon={faUpRightFromSquare} flip="vertical" className="me-1"/>
@@ -22,7 +22,7 @@ export default function MenuBar() {
 
             <Button className="text-white md:text-lg text-nowrap"
                 disabled={gameState !== DISCARD}
-                style={gameState === DISCARD ? { backgroundColor: tableMid, borderColor: tableDark } : {}}
+                style={gameState === DISCARD ? { background: tableMid, borderColor: tableDark } : {}}
                 onClick={() => dispatch({ type: "SKIP_DISCARD" })}
             >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className="me-1" rotation={90}/>

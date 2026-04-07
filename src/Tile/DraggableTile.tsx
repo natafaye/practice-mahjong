@@ -20,11 +20,7 @@ export default function DraggableTile({ tile, index, playerIndex, ...props }: Pr
 
     return (
         <div ref={ref} style={{
-            opacity: isDragging ? 0 : 1,
-            touchAction: 'none',
-            userSelect: 'none',
-            WebkitUserSelect: 'none',
-            WebkitTouchCallout: 'none'
+            opacity: isDragging ? 0 : 1
         }}>
             <Tile tile={tile} {...props} />
         </div>
