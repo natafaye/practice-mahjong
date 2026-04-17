@@ -1,11 +1,10 @@
 Only allow pinning 6 hands max
 Handle winning the game
 Show percentage chance of getting the hand
-Allow rearrange of exposed melds (or auto order them?)
+Allow rearrange of exposed melds
 Undo/Redo
 Quit/Restart
-Charleston
-Pick card & number of players on card start
+Charleston (remove from pass, rearrange pass, bug with charleston pass tiles not draggable)
 Fix shifting issue with buttons
 
 AI:
@@ -15,4 +14,4 @@ Call tiles when it makes sense
 
 Animations:
 Make the tiles wiggle if waiting on the user to interact with them
-After a joker swap make the switched tile bounce
+After a joker swap make the switched tile bounce (only bounce once, fix overflow hidden)

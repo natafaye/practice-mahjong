@@ -34,8 +34,9 @@ import wind_west from "./basic/winds_west.svg";
 import wind_south from "./basic/winds_south.svg";
 import flower from "./basic/flower.svg";
 import joker from "./basic/joker.svg";
+import type { TileColors, TileImages } from "./types";
 
-export const basicTileColors = {
+export const basicTileColors: TileColors = {
   [BAMS]: "#004900",
   [CRAKS]: "#b93c3c",
   [DOTS]: "#000037",
@@ -44,7 +45,7 @@ export const basicTileColors = {
   [FLOWER_SUIT]: "transparent"
 }
 
-export const basicTileImages = {
+export const basicTileImages: TileImages = {
   [BAMS]: {
     1: bam_1,
     2: bam_2,
@@ -79,7 +80,7 @@ export const basicTileImages = {
     7: dot_7,
     8: dot_8,
     9: dot_9,
-    D: "",
+    D: null,
   },
   [WIND_SUIT]: {
     N: wind_north,

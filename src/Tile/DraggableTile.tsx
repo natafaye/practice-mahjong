@@ -4,7 +4,7 @@ import { useDraggable } from "@dnd-kit/react"
 
 type Props = TileProps & {
     index?: number
-    playerIndex: number | "DISCARD"
+    playerIndex: number | "DISCARD" | "PASSING"
     tile: MahjongTile
 }
 

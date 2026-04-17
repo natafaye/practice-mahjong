@@ -7,3 +7,31 @@ body {
 .vertical-shadow {
     box-shadow: 0px -3px 15px rgba(0, 0, 0, 0.5);
 }
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes triple-bounce {
+    0%, 3%, 6% { transform: translateY(0); }
+    1.5% { transform: translateY(-12px); }
+    
+    /* 5 second mark (33% of 15s) */
+    33%, 36%, 39% { transform: translateY(0); }
+    34.5% { transform: translateY(-12px); }
+    
+    /* 10 second mark (66% of 15s) */
+    66%, 69%, 72% { transform: translateY(0); }
+    67.5% { transform: translateY(-12px); }
+
+    100% { transform: translateY(0); }
+}
+
+.animate-triple-bounce {
+    animation: triple-bounce 15s ease-in-out;
+}

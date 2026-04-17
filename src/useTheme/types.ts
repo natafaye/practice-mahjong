@@ -3,7 +3,7 @@ export type TileColors = {
 };
 
 export type TileImages = {
-  [property: string]: string | { [property: string | number]: string };
+  [property: string]: string | { [property: string | number]: string | null };
 };
 
 export type Theme = {

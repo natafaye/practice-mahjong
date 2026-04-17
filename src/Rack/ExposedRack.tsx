@@ -14,9 +14,10 @@ import { tileSizes } from "../Tile/tileSizes"
 type Props = {
 	player: MahjongPlayer
 	size: Size
+	bouncingTileId?: string | null
 }
 
-export default function ExposedRack({ player, size }: Props) {
+export default function ExposedRack({ player, size, bouncingTileId = null }: Props) {
 	const { handsData, melding, dispatch } = useMahjongData()
 	const { rackLight, rackDark } = useTheme()
 
@@ -37,7 +38,12 @@ export default function ExposedRack({ player, size }: Props) {
 			<div className={clsx("flex justify-center px-3", tileSizes[size].tileClassName)}>
 				{player.exposed.map((tile, index) => typeof tile === "string" ?
 					<div key={index} className="w-10"></div> :
-					<Tile key={tile.id} tile={tile} size={size} />
+					<Tile
+						key={tile.id}
+						tile={tile}
+						size={size}
+						className={clsx(bouncingTileId === tile.id && "animate-triple-bounce")}
+					/>
 				)}
 				{player.index === THIS_PLAYER && melding.length > 0 &&
 					<>

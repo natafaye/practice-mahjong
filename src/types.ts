@@ -1,4 +1,4 @@
-import type { EXPOSED_GAP, GAME_STATES, GAPS } from "./constants";
+import type { EXPOSED_GAP, GAME_STATES, GAPS, PASSING_GAPS } from "./constants";
 
 /**
  * TERMINOLOGY
@@ -16,7 +16,7 @@ export type MahjongTile = {
   id: string;
 };
 
-export type MahjongGap = (typeof GAPS)[number] | typeof EXPOSED_GAP
+export type MahjongGap = (typeof GAPS)[number] | (typeof PASSING_GAPS)[number] | typeof EXPOSED_GAP
 
 // A row of tiles
 export type MahjongTileRow = Array<MahjongTile | MahjongGap>;
@@ -70,6 +70,8 @@ export type MahjongGameData = {
   wall: MahjongTile[];
   discard: MahjongTile[];
   melding: MahjongTile[];
+  passing: MahjongTile[][];
+  readyToPass: boolean[];
   gameState: GameState;
   handsData: MahjongHandsData;
 };

@@ -5,8 +5,10 @@ import DiscardSpot from "./DiscardSpot"
 import DrawSpot from "./DrawSpot"
 import { useTheme } from "../useTheme/useTheme"
 import useMahjongData from "../useMahjongData"
-import { DropOverlay, DISCARD_ID, useIsDragging } from "../drag-and-drop"
-import { DISCARD, PLAYING, THIS_PLAYER } from "../constants"
+import { DropOverlay, useIsDragging } from "../drag-and-drop"
+import { CHARLESTONS, DISCARD, PLAYING, THIS_PLAYER } from "../constants"
+import PassingSpot from "./PassingSpot"
+import { PLAY_AREA_ID } from "../drag-and-drop/DraggingContext"
 
 type Props = {
     className?: string
@@ -14,8 +16,9 @@ type Props = {
 
 export default function PlayArea({ className }: Props) {
     const { tableMid, tableDark } = useTheme()
-    const { discard, gameState, currentPlayer } = useMahjongData()
-    const { isDraggingGap } = useIsDragging()
+    const { discard, gameState, currentPlayer, passing } = useMahjongData()
+    const isCharleston = CHARLESTONS.includes(gameState)
+    const { isDraggingGap, isDraggingJoker } = useIsDragging()
 
     return (
         <div className={clsx(className, "flex flex-col relative p-4 pb-0")}>
@@ -29,17 +32,24 @@ export default function PlayArea({ className }: Props) {
             <div className="flex flex-col md:flex-row md:items-end gap-6 min-h-0 shrink">
                 <div className="md:contents flex items-end gap-6">
                     <DrawSpot className="w-25 grow md:grow-0 mb-4" />
-                    <DiscardSpot className="shrink-0 md:order-last mb-4" />
+                    {
+                        isCharleston ?
+                            <PassingSpot className="shrink-0 md:order-last mb-4" /> :
+                            <DiscardSpot className="shrink-0 md:order-last mb-4" />
+                    }
                 </div>
                 <ReferenceCard className="min-h-0 grow shrink order-first md:order-1" />
             </div>
             <DropOverlay
-                dropId={DISCARD_ID}
-                show={gameState === PLAYING && currentPlayer === THIS_PLAYER && !isDraggingGap}
+                dropId={PLAY_AREA_ID}
+                show={!isDraggingGap && (
+                    isCharleston && passing[THIS_PLAYER].length < 3 && !isDraggingJoker ||
+                    gameState === PLAYING && currentPlayer === THIS_PLAYER
+                )}
                 background={tableMid}
                 textShadowColor={tableDark}
             >
-                Discard
+                {isCharleston ? "Add to Pass" : "Discard"}
             </DropOverlay>
         </div>
     )

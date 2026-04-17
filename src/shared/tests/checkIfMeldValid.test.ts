@@ -2,10 +2,10 @@ import { describe, it, expect } from "vitest";
 import { checkIfMeldValid } from "../checkIfMeldValid";
 import { createFlower, createJoker, createTile } from "./testUtilities";
 import { generateHandsData } from "../../useMahjongData/generateHandsData";
-import { HANDS_2025 } from "../../useMahjongData/CARD_2025";
+import { CARD_2025 } from "../../useMahjongData/CARD_2025";
 import { BAMS, CRAKS, DOTS, WIND_SUIT } from "../../constants";
 
-const { melds } = generateHandsData(HANDS_2025)
+const { melds } = generateHandsData(CARD_2025)
 
 describe("checkIfMeldValid", () => {
   describe("Edge Cases, Limits, and Basic Standard Suits", () => {

@@ -4,20 +4,22 @@ import Tile from "../Tile/Tile"
 import useMahjongData from "../useMahjongData"
 import { getJokerSwapIndex } from "../shared"
 import type { MahjongTile } from "../types"
-import { THIS_PLAYER } from "../constants"
+import { CHARLESTONS, THIS_PLAYER } from "../constants"
 
 export const GAP_ID = "GAP_"
 export const SLOT_ID = "SLOT_"
 export const DISCARD_ID = "DISCARD"
+export const PASSING_ID = "PASSING"
+export const PLAY_AREA_ID = "PLAY_AREA"
 export const EXPOSED_RACK_ID = "EXPOSED_RACK"
-export const PICK_UP_DISCARD_ID = "PICK_UP_DISCARD"
+export const WHOLE_RACK_ID = "WHOLE_RACK"
 
 type Props = {
     children: ReactNode
 }
 
 export function DraggingContext({ children }: Props) {
-    const { dispatch } = useMahjongData()
+    const { dispatch, gameState } = useMahjongData()
     const [activeTile, setActiveTile] = useState<MahjongTile | null>(null)
     const currentDragIndex = useRef<number | null>(null)
 
@@ -56,21 +58,43 @@ export function DraggingContext({ children }: Props) {
         if (!target || !source || canceled || finalIndex === null) return
         console.log(`Dropped ${source.id} onto ${target.id}`);
 
-        if (target.id === DISCARD_ID && !source.id.toString().startsWith(GAP_ID)) {
-            dispatch({
-                type: 'DISCARD_TILE', payload: {
-                    playerIndex: THIS_PLAYER,
-                    tileIndex: finalIndex
-                }
-            })
+        if (target.id === PLAY_AREA_ID && !source.id.toString().startsWith(GAP_ID)) {
+            if(CHARLESTONS.includes(gameState)) {
+                // Add to Charleston Pass
+                dispatch({
+                    type: 'ADD_TO_PASS', payload: {
+                        playerIndex: THIS_PLAYER,
+                        tileIndexes: [finalIndex]
+                    }
+                })
+            } else {
+                // Discard
+                dispatch({
+                    type: 'DISCARD_TILE', payload: {
+                        playerIndex: THIS_PLAYER,
+                        tileIndex: finalIndex
+                    }
+                })
+            }
         }
-        else if (target.id === PICK_UP_DISCARD_ID) {
-            dispatch({
-                type: 'PICK_UP_DISCARD',
-                payload: {
-                    playerIndex: THIS_PLAYER
-                }
-            })
+        else if (target.id === WHOLE_RACK_ID) {
+            if (source.data.playerIndex === PASSING_ID) {
+                dispatch({
+                    type: 'REMOVE_FROM_PASS',
+                    payload: {
+                        playerIndex: THIS_PLAYER,
+                        passingTileIndex: finalIndex
+                    }
+                })
+            } else {
+                // Pick up discard
+                dispatch({
+                    type: 'PICK_UP_DISCARD',
+                    payload: {
+                        playerIndex: THIS_PLAYER
+                    }
+                })
+            }
         }
         else if (target.id === EXPOSED_RACK_ID) {
             // Check for a joker swap

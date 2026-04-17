@@ -2,7 +2,8 @@ import { generateTiles } from "./generateTiles"
 import { generateHandsData } from "./generateHandsData"
 import { sortTiles } from "../shared"
 import type { MahjongCard, MahjongGameData, MahjongPlayer, MahjongTile } from "../types"
-import { DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../constants"
+import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../constants"
+import { shuffleArray } from "./shuffleArray"
 
 export const generateInitialData = (numberOfPlayers: number = 4, card: MahjongCard): MahjongGameData => {
     // Generate and shuffle the wall
@@ -33,21 +34,9 @@ export const generateInitialData = (numberOfPlayers: number = 4, card: MahjongCa
         wall,
         discard: [],
         melding: [],
-        gameState: DRAWING,
+        passing: players.map(() => []),
+        readyToPass: players.map(() => false),
+        gameState: numberOfPlayers !== 2 ? CHARLESTONS[0] : DRAWING,
         handsData: generateHandsData(card)
     }
-}
-
-/**
- * Shuffles an array of any type
- */
-const shuffleArray = <T>(array: Array<T>) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    // Pick a random index from 0 to i
-    const j = Math.floor(Math.random() * (i + 1));
-
-    // Swap elements at i and j
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
 }

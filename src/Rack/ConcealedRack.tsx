@@ -3,13 +3,15 @@ import RackSlot from "./RackSlot"
 import { useTheme } from "../useTheme/useTheme"
 import type { MahjongPlayer, Size } from "../types"
 import DraggableGap from "../Tile/DraggableGap"
+import clsx from "clsx"
 
 type Props = {
     player: MahjongPlayer
     size: Size
+    isIdle?: boolean
 }
 
-export default function ConcealedRack({ player, size }: Props) {
+export default function ConcealedRack({ player, size, isIdle = false }: Props) {
     const { rackLight, rackMid, rackDark } = useTheme()
 
     return (
@@ -22,6 +24,8 @@ export default function ConcealedRack({ player, size }: Props) {
                         index={index}
                         size={size}
                         isEmpty={typeof tile === "string"}
+                        className={clsx(isIdle && typeof tile !== "string" && "animate-wave")}
+                        style={isIdle && typeof tile !== "string" ? { animationDelay: `${index * 0.05}s` } : undefined}
                     >
                         {typeof tile !== "string" ? (
                             <DraggableTile

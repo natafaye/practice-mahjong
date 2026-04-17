@@ -9,32 +9,100 @@ import {
   PLAYING,
   JOKER_SUIT,
   THIS_PLAYER,
-  GAPS
+  GAPS,
+  CHARLESTONS,
+  PASSING_GAPS,
+  NORMAL_PASS
 } from "../constants";
 import type { MahjongGameData } from "../types";
 import type { MahjongAction } from "./types";
 import { CARDS } from "./CARDS";
 import { generateInitialData } from "./generateInitialData";
+import { doCharlestonPass } from "./doCharlestonPass/doCharlestonPass";
+import { clonePlayers } from "./clonePlayers";
 
 export function mahjongReducer(
   state: MahjongGameData,
   action: MahjongAction,
 ): MahjongGameData {
   console.log(state, action);
-  // Helper to deeply clone player hands so we don't mutate state directly
-  const clonePlayers = () =>
-    state.players.map((player) => ({
-      ...player,
-      exposed: [...player.exposed],
-      concealed: [...player.concealed],
-    }));
 
   switch (action.type) {
-    
-    // Restart the game with a certain card and number of players
+    // Start a new fresh game
     case "RESTART": {
-      const card = CARDS.find(card => card.name === action.payload.cardName)!
-      return generateInitialData(action.payload.numberOfPlayers, card)
+      const card = CARDS.find((card) => card.name === action.payload.cardName)!;
+      return generateInitialData(action.payload.numberOfPlayers, card);
+    }
+
+    case "ADD_TO_PASS": {
+      const { playerIndex, tileIndexes } = action.payload;
+      const tilesToAdd = tileIndexes.map(index => state.players[playerIndex].concealed[index])
+      // You can't add to passing tiles if there's already 3
+      if(state.passing[playerIndex].length === 3) return state
+      // You can't add a gap to passing tiles
+      if(!tilesToAdd.every(tile => typeof tile !== "string")) return state
+      // Add the tiles to passing
+      const passing = state.passing.map((tiles, index) =>
+        index !== playerIndex ? tiles : [...tiles, ...tilesToAdd],
+      );
+      // Remove the tiles from the player's tiles and replace with gaps
+      const players = clonePlayers(state)
+      let nextGapIndex = state.passing[playerIndex].length
+      tileIndexes.toSorted((a, b) => b - a).forEach(tileIndex => {
+        players[playerIndex].concealed.splice(tileIndex, 1)
+        players[playerIndex].concealed.push(PASSING_GAPS[nextGapIndex++])
+      })
+      return {
+        ...state,
+        players,
+        passing,
+      }
+    }
+
+    case "REMOVE_FROM_PASS": {
+      const { playerIndex, passingTileIndex } = action.payload;
+      const tileToRemove = state.passing[playerIndex][passingTileIndex];
+      // Can't remove if it's not there
+      if (!tileToRemove) return state;
+      // Remove the tile from passing
+      const passing = state.passing.map((tiles, index) =>
+        index !== playerIndex ? tiles : tiles.filter((_, i) => i !== passingTileIndex)
+      );
+      // Put the tile back in the hand, replacing the last added gap
+      const players = clonePlayers(state)
+      const concealed = players[playerIndex].concealed
+      const gapIndex = concealed.indexOf(PASSING_GAPS[state.passing[playerIndex].length - 1])
+      concealed[gapIndex] = tileToRemove
+      return {
+        ...state,
+        players,
+        passing,
+      }
+    }
+
+    case "MARK_READY_TO_PASS": {
+      // Can't pass the charleston if we're not doing that right now
+      if (!CHARLESTONS.includes(state.gameState)) 
+        return state;
+      const { playerIndex } = action.payload
+      const [, type] = state.gameState.split("_")
+      // Can't mark yourself as ready to pass if you don't have enough tiles picked
+      if(type === NORMAL_PASS && state.passing[playerIndex].length < 3)
+        return state;
+      const readyToPass = state.readyToPass.map((ready, index) => index === playerIndex ? true : ready)
+      // If not everyone is ready, just update the readyToPass array
+      if(!readyToPass.every(ready => ready)) 
+        return { ...state, readyToPass }
+      // Else make the pass
+      const { newPlayers, newWall } = doCharlestonPass(state)
+      return {
+        ...state,
+        players: newPlayers,
+        wall: newWall,
+        passing: state.players.map(() => []),
+        readyToPass: state.players.map(() => false),
+        gameState: CHARLESTONS[CHARLESTONS.indexOf(state.gameState) + 1] || DRAWING,
+      }
     }
 
     // Draw a tile from the wall
@@ -53,9 +121,11 @@ export function mahjongReducer(
       }
       // Draw a tile from the wall and add it to the player's tiles
       const drawnTile = state.wall.at(-1)!;
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       if (playerIndex === THIS_PLAYER) {
-        const replacementIndex = newPlayers[playerIndex].concealed.findIndex(tile => typeof tile === "string");
+        const replacementIndex = newPlayers[playerIndex].concealed.findIndex(
+          (tile) => typeof tile === "string",
+        );
         newPlayers[playerIndex].concealed[replacementIndex] = drawnTile;
       } else {
         newPlayers[playerIndex].concealed.unshift(drawnTile);
@@ -80,12 +150,12 @@ export function mahjongReducer(
       // You can't discard a Gap
       if (typeof discardedTile === "string") return state;
       // Remove the tile from the player's tiles
-      const newPlayers = clonePlayers();
-      const concealed = newPlayers[playerIndex].concealed
+      const newPlayers = clonePlayers(state);
+      const concealed = newPlayers[playerIndex].concealed;
       concealed.splice(tileIndex, 1);
       // If there's a gap missing (taken over by the drawn tile) then put it back in
-      const missingGap = GAPS.find(gap => !concealed.includes(gap))
-      if(missingGap) concealed.unshift(missingGap)
+      const missingGap = GAPS.find((gap) => !concealed.includes(gap));
+      if (missingGap) concealed.unshift(missingGap);
       // Add the removed tile to the discard and go to the next turn
       return {
         ...state,
@@ -106,22 +176,16 @@ export function mahjongReducer(
       // You can only swap on your own turn
       if (sourcePlayerIndex !== state.currentPlayer) return state;
       // Get the swapping tiles
-      const swapTile =
-        state.players[sourcePlayerIndex].concealed[sourceTileIndex];
+      const swapTile = state.players[sourcePlayerIndex].concealed[sourceTileIndex];
       const joker = state.players[targetPlayerIndex].exposed[targetTileIndex];
       // You can't swap a Gap
-      if (typeof swapTile === "string" || typeof joker === "string")
-        return state;
+      if (typeof swapTile === "string" || typeof joker === "string") return state;
       // If it's not a joker, we can't make the swap
       if (joker.suit !== JOKER_SUIT) return state;
       // Swap the joker and the swapping tile
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       newPlayers[sourcePlayerIndex].concealed.splice(sourceTileIndex, 1, joker);
-      newPlayers[targetPlayerIndex].exposed.splice(
-        targetTileIndex,
-        1,
-        swapTile,
-      );
+      newPlayers[targetPlayerIndex].exposed.splice(targetTileIndex, 1, swapTile);
       return {
         ...state,
         players: newPlayers,
@@ -179,13 +243,12 @@ export function mahjongReducer(
 
     case "ADD_TO_MELD": {
       // Can't add to meld if we're not currently melding
-      if (state.gameState !== MELDING)
-        return state;
+      if (state.gameState !== MELDING) return state;
       // Remove the tile from this player's tiles and add to the melding tiles
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       const [meldingTile] = newPlayers[THIS_PLAYER].concealed.splice(
         action.payload.tileIndex,
-        1
+        1,
       );
       // You can't meld a gap
       if (typeof meldingTile === "string") return state;
@@ -199,7 +262,7 @@ export function mahjongReducer(
     // Add tiles to a potential meld
     case "CANCEL_MELD": {
       // Remove the tiles from the melding list and add them back to the player's tiles
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       newPlayers[THIS_PLAYER].concealed.push(...state.melding.slice(1));
       return {
         ...state,
@@ -216,7 +279,7 @@ export function mahjongReducer(
       if (!checkIfMeldValid(state.melding, state.handsData.callableMelds))
         return state;
       // Remove the tiles from the melding list and add them back to the player's exposed tiles
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       // Put the melded tiles in an order that matches a valid meld
       const sortedMeld = putInMeldOrder(state.melding, state.handsData.melds);
       newPlayers[THIS_PLAYER].exposed.push(...sortedMeld, EXPOSED_GAP);
@@ -231,9 +294,9 @@ export function mahjongReducer(
 
     case "REARRANGE_UNEXPOSED": {
       const { startIndex, endIndex } = action.payload;
-	    // If it didn't move, we're done
+      // If it didn't move, we're done
       if (startIndex === endIndex) return state;
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       const concealed = newPlayers[THIS_PLAYER].concealed;
       const itemToMove = concealed[startIndex];
       // Put a placeholder gap in the starting spot
@@ -257,7 +320,7 @@ export function mahjongReducer(
 
     case "EXPOSE_TILES": {
       const { playerIndex, tileIndices } = action.payload;
-      const newPlayers = clonePlayers();
+      const newPlayers = clonePlayers(state);
       const concealed = newPlayers[playerIndex].concealed;
       const exposed = newPlayers[playerIndex].exposed;
 

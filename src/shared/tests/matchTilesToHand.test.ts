@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createMeld } from "./testUtilities";
-import { HANDS_2025 } from "../../useMahjongData/CARD_2025";
+import { CARD_2025 } from "../../useMahjongData/CARD_2025";
 import { matchTilesToHand } from "../matchTilesToHand";
 import { BAMS, CRAKS, DOTS, EXPOSED_GAP } from "../../constants";
 
@@ -9,7 +9,7 @@ describe("matchTilesToHand", () => {
   describe("2025", () => {
     // FFFF 2025 222 555
     // Any 3 Suits, Like Pungs 2s or 5s in Opp. Suits
-    const hand = HANDS_2025.find((h) => h.section === "2025")!; 
+    const hand = CARD_2025.hands.find((h) => h.section === "2025")!; 
 
     it("should return 14 for a matching hand", () => {
       
@@ -45,7 +45,7 @@ describe("matchTilesToHand", () => {
 
   describe("2468", () => {
     // 222, 4444, 666, 8888 in 1 suit
-    const hand = HANDS_2025.find((h) => h.section === "2468")!; 
+    const hand = CARD_2025.hands.find((h) => h.section === "2468")!; 
 
     it("should return 14 for a matching hand", () => {
       const tiles = [
@@ -70,7 +70,7 @@ describe("matchTilesToHand", () => {
 
   describe("Any Like Numbers", () => {
     // FF (B), 1111 (G), D (G), 1111 (R), D (R), 11 (B)
-    const hand = HANDS_2025.find((h) => h.section === "Any Like Numbers")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "Any Like Numbers")!;
 
     it("should return 14 for a valid hand", () => {
       const tiles = [
@@ -99,7 +99,7 @@ describe("matchTilesToHand", () => {
 
   describe("Quints", () => {
     // FF (B), 111 (G), 2222 (R), 33333 (B)
-    const hand = HANDS_2025.find((h) => h.section === "Quints")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "Quints")!;
 
     it("should return 14 for a valid quint hand", () => {
       const tiles = [
@@ -124,7 +124,7 @@ describe("matchTilesToHand", () => {
 
   describe("Consecutive Run", () => {
     // 11, 222, 3333, 444, 55 in 1 suit
-    const hand = HANDS_2025.find((h) => h.section === "Consecutive Run")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "Consecutive Run")!;
 
     it("should return 14 for a matching consecutive run", () => {
       const tiles = [
@@ -151,7 +151,7 @@ describe("matchTilesToHand", () => {
 
   describe("Complex Consecutive Run: Any 5 Consec. Nos., Pair Any No. in Run, Kongs Match Pair", () => {
     // 112345 1111 1111
-    const hand = HANDS_2025.find((h) => h.text === "Any 5 Consec. Nos., Pair Any No. in Run, Kongs Match Pair")!;
+    const hand = CARD_2025.hands.find((h) => h.text === "Any 5 Consec. Nos., Pair Any No. in Run, Kongs Match Pair")!;
 
     it("should return 14 for a base matching hand (1-5, paired 1s)", () => {
       const tiles = [
@@ -192,7 +192,7 @@ describe("matchTilesToHand", () => {
 
   describe("13579", () => {
     // 11, 333, 5555, 777, 99 in 1 suit
-    const hand = HANDS_2025.find((h) => h.section === "13579")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "13579")!;
 
     it("should return 14 for a matching odds hand", () => {
       const tiles = [
@@ -219,7 +219,7 @@ describe("matchTilesToHand", () => {
 
   describe("Winds-Dragons", () => {
     // NNNN EEE WWW SSSS
-    const hand = HANDS_2025.find((h) => h.section === "Winds-Dragons")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "Winds-Dragons")!;
 
     it("should return 14 for a valid winds hand", () => {
       const tiles = [
@@ -242,7 +242,7 @@ describe("matchTilesToHand", () => {
     });
 
     // FF 456 DD DDD DDDD
-    const hand2 = HANDS_2025.filter((h) => h.section === "Winds-Dragons")[1]!;
+    const hand2 = CARD_2025.hands.filter((h) => h.section === "Winds-Dragons")[1]!;
 
     it("should return 14 for a valid dragons hand with jokers", () => {
       const tiles = [
@@ -281,7 +281,7 @@ describe("matchTilesToHand", () => {
 
   describe("369", () => {
     // 333 (G), 6666 (G), 666 (R), 9999 (R)
-    const hand = HANDS_2025.find((h) => h.section === "369")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "369")!;
 
     it("should return 14 for a valid 369 hand", () => {
       const tiles = [
@@ -306,7 +306,7 @@ describe("matchTilesToHand", () => {
 
   describe("Singles and Pairs", () => {
     // NN, EW, SS, 11, 22, 33, 44
-    const hand = HANDS_2025.find((h) => h.section === "Singles and Pairs")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "Singles and Pairs")!;
 
     it("should return 14 for a valid singles and pairs hand", () => {
       const tiles = [
@@ -337,7 +337,7 @@ describe("matchTilesToHand", () => {
 
   describe("Exposed Melds", () => {
     // 222 (G), 4444 (G), 666 (G), 8888 (G)
-    const hand = HANDS_2025.find((h) => h.section === "2468")!;
+    const hand = CARD_2025.hands.find((h) => h.section === "2468")!;
 
     it("should match when exposed meld perfectly fits a requirement", () => {
       const rackTiles = [
@@ -349,8 +349,6 @@ describe("matchTilesToHand", () => {
         ...createMeld(CRAKS, "4444"), // Exposed Kong of 4s
         EXPOSED_GAP
       ];
-      console.log(matchTilesToHand(rackTiles, exposedTilesRow, hand).assignedMelds)
-      console.log(matchTilesToHand(rackTiles, exposedTilesRow, hand).leftoverTiles)
       expect(matchTilesToHand(rackTiles, exposedTilesRow, hand).matches).toBe(14);
     });
 
@@ -392,7 +390,7 @@ describe("matchTilesToHand", () => {
     });
 
     it("should return 0 matches if hand is concealed and exposed melds are provided", () => {
-      const concealedHand = HANDS_2025.find((h) => h.concealed)!; 
+      const concealedHand = CARD_2025.hands.find((h) => h.concealed)!; 
       
       const rackTiles = createMeld(CRAKS, "11111111111");
       const exposedTilesRow = [...createMeld(CRAKS, "222")];

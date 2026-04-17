@@ -28,7 +28,7 @@ export const checkIfMeldValid = (meld: MahjongTile[], meldsToCheck: string[], ha
             return false
         // Replace the jokers
         const nonJokerCharacter = meldCharacters.find(c => c !== "J")!
-        meldCharacters = meldCharacters.map(_ => nonJokerCharacter)
+        meldCharacters = meldCharacters.map(() => nonJokerCharacter)
     }
     // Check against all the possible melds (if specified, sort to handle permutations like 2025)
     const possibleMelds = handlePermutations ? meldsToCheck.map(meld => meld.split("").sort().join("")) : meldsToCheck

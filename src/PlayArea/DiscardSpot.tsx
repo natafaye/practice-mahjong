@@ -17,7 +17,7 @@ export default function DiscardSpot({ className }: Props) {
     const { discard, gameState, dispatch } = useMahjongData()
     const tile = gameState === DISCARD ? discard.at(-1) : undefined
 
-    const widthClasses = "w-18 md:20 lg:w-21 xl:w-25"
+    const widthClasses = "w-18 md:w-20 lg:w-21 xl:w-25"
 
     return (
         <div className={className}>

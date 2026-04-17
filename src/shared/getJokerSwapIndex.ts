@@ -6,7 +6,8 @@ export const getJokerSwapIndex = (swapTile: MahjongTile, exposedTiles: MahjongTi
     if(swapTile.suit === JOKER_SUIT) return -1
     // Break the row into melds
     const allMelds = exposedTiles.reduce((meld, tile) => {
-        (typeof tile === "string") ? meld.push([]) : meld.at(-1)!.push(tile)
+        if(typeof tile === "string") meld.push([])
+        else meld.at(-1)!.push(tile)
         return meld
     }, [[]] as MahjongTile[][])
     // Find a set with a joker and matching tile to the swapTile (meaning the joker is representing that tile)

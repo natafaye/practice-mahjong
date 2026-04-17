@@ -10,9 +10,10 @@ export type TileProps = {
     size?: Size
     tipped?: boolean
     message?: string | number
+    className?: string
 }
 
-export default function Tile({ tile, size = "lg", tipped = false, message = "" }: TileProps) {
+export default function Tile({ tile, className, size = "lg", tipped = false, message = "" }: TileProps) {
     const { tileLight, tileDark, tileImages, tileColors, showJokerText } = useTheme()
     const { shadowHeight, tileClassName, numberClassName } = tileSizes[size]
 
@@ -29,8 +30,9 @@ export default function Tile({ tile, size = "lg", tipped = false, message = "" }
     return (
         <div
             className={clsx(
+                className,
+                tileClassName,
                 "relative flex justify-center aspect-[2.1/3] rounded-lg bg-taupe-50 border border-taupe-200",
-                tileClassName
             )}
             style={tileStyle}
         >

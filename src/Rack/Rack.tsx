@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import ExposedRack from "./ExposedRack"
 import ConcealedRack from "./ConcealedRack"
-import { DropOverlay, PICK_UP_DISCARD_ID, useIsDragging } from "../drag-and-drop"
+import { DropOverlay, WHOLE_RACK_ID, useIsDragging } from "../drag-and-drop"
 import { useTheme } from "../useTheme/useTheme"
 import type { MahjongPlayer, Size } from "../types"
 import type { CSSProperties } from "react"
@@ -13,13 +13,15 @@ type Props = {
     size?: Size
     concealed?: boolean
     isCurrentPlayer?: boolean
+    isIdle?: boolean
+    bouncingTileId?: string | null
     className?: string
     style?: CSSProperties
 }
 
-export default function Rack({ player, size = "lg", className, style, concealed = false, isCurrentPlayer = false }: Props) {
+export default function Rack({ player, size = "lg", className, style, concealed = false, isCurrentPlayer = false, isIdle = false, bouncingTileId = null }: Props) {
     const { rackLight, rackDark } = useTheme()
-    const { isDraggingDiscard, isDraggingJoker } = useIsDragging()
+    const { isDraggingDiscard, isDraggingPass, isDraggingJoker } = useIsDragging()
 
     return (
         <div className={clsx(className, "relative")} style={style}>
@@ -37,17 +39,17 @@ export default function Rack({ player, size = "lg", className, style, concealed 
             )}
             <div className="overflow-x-auto relative">
                 <div className="w-max min-w-full">
-                    <ExposedRack player={player} size={size} />
-                    {!concealed && player.concealed.length > 0 && <ConcealedRack player={player} size={size} />}
+                    <ExposedRack player={player} size={size} bouncingTileId={bouncingTileId} />
+                    {!concealed && player.concealed.length > 0 && <ConcealedRack player={player} size={size} isIdle={isIdle} />}
                 </div>
             </div >
             <DropOverlay
-                dropId={PICK_UP_DISCARD_ID}
-                show={!concealed && isDraggingDiscard && !isDraggingJoker}
+                dropId={WHOLE_RACK_ID}
+                show={!concealed && (isDraggingDiscard || isDraggingPass) && !isDraggingJoker}
                 background={rackLight}
                 textShadowColor={rackDark}
             >
-                Pick Up Discard
+                {isDraggingPass ? "Remove from Pass" : "Pick Up Discard"}
             </DropOverlay>
         </div>
     )
