@@ -46,8 +46,14 @@ export type MahjongHand = {
   concealed: boolean;
 };
 
+export type MahjongCard = {
+  name: string;
+  hands: MahjongHand[];
+}
+
 // All the hands and calculated data from those hands
 export type MahjongHandsData = {
+  name: string;
   hands: MahjongHand[];
   sections: string[];
   melds: string[];

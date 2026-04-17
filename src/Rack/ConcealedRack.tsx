@@ -1,6 +1,6 @@
 import DraggableTile from "../Tile/DraggableTile"
 import RackSlot from "./RackSlot"
-import { useTheme } from "../useTheme"
+import { useTheme } from "../useTheme/useTheme"
 import type { MahjongPlayer, Size } from "../types"
 import DraggableGap from "../Tile/DraggableGap"
 

@@ -1,13 +1,14 @@
-import type { MahjongHand, MahjongHandsData } from "../types";
+import type { MahjongCard, MahjongHandsData } from "../types";
 
 /**
  * Gets two arrays of strings
+ * name: The name of this card (2025, 2026, etc)
  * hands: All the passed in hands (passes right through from parameter)
  * sections: All the sections listed in hands
  * melds: All the possible melds (for example, "234" and "2025" and "FFF")
  * callableMelds: Only the callable melds (only sets of 3, 4, and 5)
  */
-export const generateHandsData = (hands: MahjongHand[]): MahjongHandsData => {
+export const generateHandsData = ({ name, hands }: MahjongCard): MahjongHandsData => {
   // Sections
   const sections = [ ...new Set(hands.map((hand) => hand.section)) ];
 
@@ -22,6 +23,7 @@ export const generateHandsData = (hands: MahjongHand[]): MahjongHandsData => {
   );
 
   return {
+    name, 
     hands,
     sections,
     melds,

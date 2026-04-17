@@ -4,8 +4,7 @@ import clsx from "clsx"
 import ExposedRack from "./ExposedRack"
 import ConcealedRack from "./ConcealedRack"
 import { DropOverlay, PICK_UP_DISCARD_ID, useIsDragging } from "../drag-and-drop"
-import { useTheme } from "../useTheme"
-import useMahjongData from "../useMahjongData"
+import { useTheme } from "../useTheme/useTheme"
 import type { MahjongPlayer, Size } from "../types"
 import type { CSSProperties } from "react"
 
@@ -13,18 +12,18 @@ type Props = {
     player: MahjongPlayer
     size?: Size
     concealed?: boolean
+    isCurrentPlayer?: boolean
     className?: string
     style?: CSSProperties
 }
 
-export default function Rack({ player, size = "lg", className, style, concealed = false }: Props) {
+export default function Rack({ player, size = "lg", className, style, concealed = false, isCurrentPlayer = false }: Props) {
     const { rackLight, rackDark } = useTheme()
-    const { currentPlayer } = useMahjongData()
     const { isDraggingDiscard, isDraggingJoker } = useIsDragging()
 
     return (
         <div className={clsx(className, "relative")} style={style}>
-            {currentPlayer === player.index && (
+            {isCurrentPlayer && (
                 <div className={clsx(
                     "absolute z-10",
                     { lg: "text-5xl right-10", md: "text-4xl right-5", sm: "text-3xl" }[size],

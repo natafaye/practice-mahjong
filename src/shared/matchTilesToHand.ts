@@ -42,9 +42,9 @@ export const matchTilesToHand = (
     // Check every combo of melds (222 or 444 or 666 for an even meld of 3, etc)
     for (const combo of meldStringCombos) {
       let currentMatches = 0;
-      let availableTiles = [...concealedOnlyTiles];
-      let availableMelds = [...exposedMelds];
-      let currentAssignment: MahjongTile[][] = hand.melds.map(() => []);
+      const availableTiles = [...concealedOnlyTiles];
+      const availableMelds = [...exposedMelds];
+      const currentAssignment: MahjongTile[][] = hand.melds.map(() => []);
 
       // Check every meld in the hand ("FFFF" then "1111" then "22" then "3333", etc)
       for (let i = 0; i < hand.melds.length; i++) {

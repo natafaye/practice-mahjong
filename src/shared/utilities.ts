@@ -24,15 +24,15 @@ export const allMatch = <T, R>(array: T[], callback: (item: T) => R | T = (item)
  * Gets all permutations of an array in all possible orders
  */
 export const getAllPermutations = <T>(fullArray: T[]) => {
-  let result: T[][] = [];
+  const result: T[][] = [];
 
   const permute = (arr: T[], m: T[] = []) => {
     if (arr.length === 0) {
       result.push(m);
     } else {
       for (let i = 0; i < arr.length; i++) {
-        let curr = arr.slice();
-        let next = curr.splice(i, 1);
+        const curr = arr.slice();
+        const next = curr.splice(i, 1);
         permute(curr.slice(), m.concat(next));
       }
     }

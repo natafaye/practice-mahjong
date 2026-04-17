@@ -1,6 +1,7 @@
 import type { ActionDispatch } from "react";
 
 export type MahjongAction =
+    | { type: 'RESTART'; payload: { cardName: string, numberOfPlayers: number } }
     | { type: 'DRAW_FROM_WALL'; payload: { playerIndex: number } }
     | { type: 'JOKER_SWAP'; payload: {
         sourcePlayerIndex: number,

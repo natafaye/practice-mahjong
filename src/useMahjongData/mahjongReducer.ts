@@ -13,6 +13,8 @@ import {
 } from "../constants";
 import type { MahjongGameData } from "../types";
 import type { MahjongAction } from "./types";
+import { CARDS } from "./CARDS";
+import { generateInitialData } from "./generateInitialData";
 
 export function mahjongReducer(
   state: MahjongGameData,
@@ -28,6 +30,13 @@ export function mahjongReducer(
     }));
 
   switch (action.type) {
+    
+    // Restart the game with a certain card and number of players
+    case "RESTART": {
+      const card = CARDS.find(card => card.name === action.payload.cardName)!
+      return generateInitialData(action.payload.numberOfPlayers, card)
+    }
+
     // Draw a tile from the wall
     case "DRAW_FROM_WALL": {
       const { playerIndex } = action.payload;

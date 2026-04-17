@@ -1,10 +1,17 @@
 Only allow pinning 6 hands max
-Bottom bar (undo, restart, quit, etc)
 Handle winning the game
 Show percentage chance of getting the hand
+Allow rearrange of exposed melds (or auto order them?)
+Undo/Redo
+Quit/Restart
+Charleston
+Pick card & number of players on card start
+Fix shifting issue with buttons
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)
+Pick tile to discard intelligently
+Call tiles when it makes sense
 
 Animations:
 Make the tiles wiggle if waiting on the user to interact with them

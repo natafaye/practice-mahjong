@@ -2,7 +2,7 @@ import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Tile from "../Tile/Tile"
 import Button from "../Button"
-import { useTheme } from "../useTheme"
+import { useTheme } from "../useTheme/useTheme"
 import { DRAWING, THIS_PLAYER } from "../constants"
 import useMahjongData from "../useMahjongData"
 
