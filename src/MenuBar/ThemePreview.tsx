@@ -25,7 +25,7 @@ export default function ThemePreview({ theme, className }: Props) {
     return (
         <div className={clsx(className, "rounded-xl overflow-hidden mt-4 border-2")}>
             <ThemeContext.Provider value={{ ...theme, setTheme: () => { } }}>
-                <div className="pt-8" style={{ background: theme.table }}>
+                <div className="pt-8" style={{ background: theme.tableLight }}>
                     <Rack player={examplePlayer} size="lg" />
                 </div>
             </ThemeContext.Provider >

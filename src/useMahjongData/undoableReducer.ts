@@ -18,9 +18,9 @@ export function undoableReducer(state: UndoableState, action: MahjongAction): Un
       // Can't undo if we're at the beginning of this game
       if (past.length === 0) return state;
       // Do the undo
-      let newPast = [...past];
+      const newPast = [...past];
       let newPresent = newPast.pop()!;
-      let newFuture = [...future, present];
+      const newFuture = [...future, present];
       // Keep undoing until we get to a human player's decision
       while (newPast.length > 0 && newPresent.currentPlayer !== THIS_PLAYER) {
         newFuture.push(newPresent)
@@ -38,9 +38,9 @@ export function undoableReducer(state: UndoableState, action: MahjongAction): Un
       // Can't redo if we're up to date
       if (future.length === 0) return state;
       // Do the redo
-      let newFuture = [...future];
+      const newFuture = [...future];
       let newPresent = newFuture.shift()!;
-      let newPast = [...past, present];
+      const newPast = [...past, present];
       // Keep redoing until we get to a human player's decision
       while (newFuture.length > 0 && newPresent.currentPlayer !== THIS_PLAYER) {
         newPast.push(newPresent);

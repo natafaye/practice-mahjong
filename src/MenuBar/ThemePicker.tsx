@@ -19,7 +19,7 @@ export default function ThemePicker({ value, onChange }: Props) {
                 >
                     <div className="w-18">
                         <div className="h-4 rounded-t-lg" style={{ background: theme.tileLight }}></div>
-                        <div className="py-1 text-xs text-center" style={{ background: theme.table, color: theme.tableVeryDark }}>
+                        <div className="py-1 text-xs text-center" style={{ background: theme.tableLight, color: theme.tableVeryDark }}>
                             {theme.themeName}
                         </div>
                         <div className="h-4 rounded-b-lg" style={{ background: theme.rackLight }}></div>
