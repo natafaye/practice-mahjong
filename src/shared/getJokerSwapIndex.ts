@@ -1,6 +1,9 @@
 import type { MahjongTile, MahjongTileRow } from "../types"
 import { JOKER_SUIT } from "../constants"
 
+/**
+ * The index of where to swap with a joker, or -1 if there is no swap
+ */
 export const getJokerSwapIndex = (swapTile: MahjongTile, exposedTiles: MahjongTileRow) => {
     // Can't do a joker swap with a joker
     if(swapTile.suit === JOKER_SUIT) return -1

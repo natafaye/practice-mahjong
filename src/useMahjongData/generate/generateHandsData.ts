@@ -1,4 +1,4 @@
-import type { MahjongCard, MahjongHandsData } from "../types";
+import type { MahjongCard, MahjongHandsData } from "../../types";
 
 /**
  * Gets two arrays of strings

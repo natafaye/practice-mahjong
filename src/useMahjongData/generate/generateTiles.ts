@@ -1,5 +1,5 @@
-import { SUITS, WINDS, WIND_SUIT, FLOWER_SUIT, JOKER_SUIT } from "../constants";
-import type { MahjongTile } from "../types";
+import { SUITS, WINDS, WIND_SUIT, FLOWER_SUIT, JOKER_SUIT } from "../../constants";
+import type { MahjongTile } from "../../types";
 
 export const generateTiles = () => {
 	const tiles: MahjongTile[] = [];

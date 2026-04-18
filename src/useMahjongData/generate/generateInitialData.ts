@@ -1,8 +1,8 @@
 import { generateTiles } from "./generateTiles"
 import { generateHandsData } from "./generateHandsData"
-import { sortTiles } from "../shared"
-import type { MahjongCard, MahjongGameData, MahjongPlayer, MahjongTile } from "../types"
-import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../constants"
+import { sortTiles } from "../../shared"
+import type { MahjongCard, MahjongGameData, MahjongPlayer, MahjongTile } from "../../types"
+import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../../constants"
 import { shuffleArray } from "./shuffleArray"
 
 export const generateInitialData = (numberOfPlayers: number = 4, card: MahjongCard): MahjongGameData => {

@@ -10,6 +10,7 @@ import type { MahjongGameData, MahjongPlayer } from "../types"
 export const handleGameWin = (state: MahjongGameData, newPlayers: MahjongPlayer[]) => {
     const currentPlayer = newPlayers[state.currentPlayer]
     const bestHand = findBestHand(currentPlayer, state.handsData.hands)
+    console.log(bestHand)
     if(bestHand.matches === 14) {
         currentPlayer.exposed = putInHandOrder(currentPlayer, bestHand.hand)
         currentPlayer.concealed = []

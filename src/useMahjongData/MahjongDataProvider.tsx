@@ -1,16 +1,20 @@
-import { createContext, useReducer, type ReactNode } from "react";
-import { mahjongReducer } from "./mahjongReducer";
-import { generateInitialData } from "./generateInitialData";
-import { CARD_2025 } from "./CARD_2025";
-import type { MahjongDispatch } from "./types";
-import type { MahjongGameData } from "../types";
-
-export const MahjongDataContext = createContext<MahjongGameData & { dispatch: MahjongDispatch} | undefined>(undefined);
+import { useReducer, type ReactNode } from "react";
+import { undoableReducer } from "./undoableReducer";
+import { generateInitialData } from "./generate";
+import { MahjongDataContext } from "./MahjongDataContext";
+import { defaultCard } from "./CARDS";
 
 export const MahjongDataProvider = ({ children }: { children: ReactNode }) => {
-  const [data, dispatch] = useReducer(mahjongReducer, generateInitialData(4, CARD_2025));
+  const [state, dispatch] = useReducer(undoableReducer, {
+    past: [],
+    present: generateInitialData(4, defaultCard),
+    future: []
+  });
+  const canUndo = state.past.length > 0
+  const canRedo = state.future.length > 0
+
   return (
-    <MahjongDataContext.Provider value={{ ...data, dispatch }}>
+    <MahjongDataContext.Provider value={{ ...state.present, canUndo, canRedo, dispatch }}>
       {children}
     </MahjongDataContext.Provider>
   );

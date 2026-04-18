@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { checkIfMeldValid } from "../checkIfMeldValid";
 import { createFlower, createJoker, createTile } from "./testUtilities";
-import { generateHandsData } from "../../useMahjongData/generateHandsData";
-import { CARD_2025 } from "../../useMahjongData/CARD_2025";
+import { generateHandsData } from "../../useMahjongData/generate";
+import { CARD_2025 } from "../../useMahjongData/CARDS/CARD_2025";
 import { BAMS, CRAKS, DOTS, WIND_SUIT } from "../../constants";
 
 const { melds } = generateHandsData(CARD_2025)

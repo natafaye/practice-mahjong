@@ -1,7 +1,7 @@
 import { BLIND_PASS, COURTESY_PASS, PASSING_GAPS } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { clonePlayers } from "../clonePlayers";
-import { shuffleArray } from "../shuffleArray";
+import { shuffleArray } from "../generate/shuffleArray";
 import { addWallPass } from "./addWallPass";
 import { balanceBlindPass } from "./balanceBlindPass";
 import { balanceCourtesyPass } from "./balanceCourtesyPass";

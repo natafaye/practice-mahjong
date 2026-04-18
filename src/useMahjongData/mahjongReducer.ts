@@ -15,10 +15,10 @@ import {
   NORMAL_PASS
 } from "../constants";
 import type { MahjongGameData } from "../types";
-import type { MahjongAction } from "./types";
+import type { MahjongAction } from "./MahjongAction";
 import { CARDS } from "./CARDS";
-import { generateInitialData } from "./generateInitialData";
-import { doCharlestonPass } from "./doCharlestonPass/doCharlestonPass";
+import { generateInitialData } from "./generate";
+import { doCharlestonPass } from "./doCharlestonPass";
 import { clonePlayers } from "./clonePlayers";
 import { handleGameWin } from "./handleGameWin";
 
@@ -33,18 +33,6 @@ export function mahjongReducer(
     case "RESTART": {
       const card = CARDS.find((card) => card.name === action.payload.cardName)!;
       return generateInitialData(action.payload.numberOfPlayers, card);
-    }
-
-    case "UNDO": {
-      return {
-        ...state
-      }
-    }
-
-    case "REDO": {
-      return {
-        ...state
-      }
     }
 
     case "ADD_TO_PASS": {
@@ -231,21 +219,6 @@ export function mahjongReducer(
       // Can't pick up from discard if it's not discard pick up time
       if (state.gameState !== "DISCARD" && state.gameState !== "DISCARD_AI")
         return state;
-      // If that's the last tile needed for mahjong, end the game
-      // if(false) {
-      // 	const newPlayers = clonePlayers()
-      // 	const player = newPlayers[action.payload.playerIndex]
-      // 	player.exposed = player.exposed.concat(player.concealed) // putInHandOrder(player.exposed.concat(player.concealed))
-      // 	player.concealed = []
-      // 	return {
-      // 		...state,
-      // 		discard: state.discard.slice(0, -1),
-      // 		players: newPlayers,
-      // 		currentPlayer: playerIndex,
-      // 		gameState: GAME_OVER
-      // 	}
-      // }
-
       // Take the latest tile from the discard and add it to the melding tiles
       const pickedTile = state.discard.at(-1)!;
       return {
@@ -304,7 +277,7 @@ export function mahjongReducer(
         melding: [],
         gameState: PLAYING,
         currentPlayer: THIS_PLAYER,
-        ...handleGameWin(state, newPlayers)
+        ...handleGameWin({...state, currentPlayer: THIS_PLAYER}, newPlayers)
       };
     }
 

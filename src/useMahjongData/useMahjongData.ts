@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MahjongDataContext } from "./MahjongDataProvider";
+import { MahjongDataContext } from "./MahjongDataContext";
 
 export const useMahjongData = () => {
   const context = useContext(MahjongDataContext);

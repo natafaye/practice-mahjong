@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createMeld } from "./testUtilities";
-import { CARD_2025 } from "../../useMahjongData/CARD_2025";
+import { CARD_2025 } from "../../useMahjongData/CARDS/CARD_2025";
 import { matchTilesToHand } from "../matchTilesToHand";
 import { BAMS, CRAKS, DOTS, EXPOSED_GAP } from "../../constants";
 

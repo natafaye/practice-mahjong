@@ -60,6 +60,13 @@ export type MahjongHandsData = {
   callableMelds: string[];
 };
 
+// Information about how well a hand matches a player's tiles
+export type MatchData = {
+  matches: number, 
+  assignedMelds: MahjongTile[][], 
+  leftoverTiles: MahjongTileRow 
+}
+
 // A particular state of the game (like PLAYING or MELDING)
 export type GameState = (typeof GAME_STATES)[number];
 

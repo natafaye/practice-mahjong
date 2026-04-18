@@ -7,6 +7,7 @@ Allow rearrange of exposed melds
 Track how many wins with each hand
 Update handsData to be calculated by cache?
 2 player Mahjong
+Streamline useIsDraggin
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)

@@ -11,29 +11,24 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 export default function Button({ children, className, disabled, colors, style, ...props }: Props) {
+    // Styling from https://www.creative-tim.com/twcomponents/component/3d-button-2
     return (
         <button
             className={clsx(
-                "p-2 px-3 rounded-lg cursor-pointer select-none text-nowrap border-t border-(--light) bg-(--mid) text-(--text)",
-                "transition-all duration-100 [box-shadow:0_8px_0_0_var(--dark),0_12px_0_0_var(--shadow)]",
-                "lg:[box-shadow:0_10px_0_0_var(--dark),0_15px_0_0_var(--shadow)]",
-                !disabled && "active:translate-y-2 active:border-b-0 active:[box-shadow:0_0px_0_0_var(--dark),0_0px_0_0_var(--shadow)]",
-                // "border-[3px] border-t-0 border-s-0 lg:border-b-4 lg:border-e-4",
-                // "text-xs md:text-sm lg:text-base",
-                // "shadow shadow-gray-600 rounded-lg text-nowrap p-2 bg-clip-padding",
-                // !disabled && "active:border-transparent! active:translate-x-px active:translate-y-px",
-                // "lg:active:translate-x-0.5 lg:active:translate-y-0.5 active:shadow-none!",
+                "bg-(--mid) text-(--text) border-t border-(--light) rounded-lg cursor-pointer select-none text-nowrap p-2 px-3",
+                "[box-shadow:0_6px_0_0_var(--dark),0_9px_0_0_var(--shadow)] transition-all duration-100",
+                "lg:[box-shadow:0_8px_0_0_var(--dark),0_12px_0_0_var(--shadow)]",
+                !disabled && "active:[box-shadow:0_0px_0_0_var(--dark),0_0px_0_0_var(--shadow)] active:translate-y-2 active:border-b-0",
+                "disabled:opacity-25",
                 className
             )}
             style={{
                 ...style,
-                "--light": disabled ? "var(--color-gray-200)" : colors?.light,
-                "--mid": disabled ? "var(--color-gray-300)" : colors?.mid,
-                "--dark": disabled ? "var(--color-gray-400)" : colors?.dark,
-                "--text": disabled ? "var(--color-gray-400" : colors?.text || "white",
-                "--shadow": disabled ? 
-                    "color-mix(in srgb, var(--color-gray-500) 20%, transparent)" : 
-                    `color-mix(in srgb, ${colors?.dark} 20%, transparent)`
+                "--light": colors?.light,
+                "--mid": colors?.mid,
+                "--dark": colors?.dark,
+                "--text": colors?.text || "white",
+                "--shadow": `color-mix(in srgb, ${colors?.dark} 20%, transparent)`
             } as CSSProperties}
             disabled={disabled}
             {...props}
@@ -42,9 +37,3 @@ export default function Button({ children, className, disabled, colors, style, .
         </button>
     )
 }
-
-// button w-40 h-16 bg-blue-500 rounded-lg cursor-pointer select-none
-//     active:translate-y-2  active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
-//     active:border-b-[0px]
-//     transition-all duration-150 [box-shadow:0_10px_0_0_#1b6ff8,0_15px_0_0_#1b70f841]
-//     border-b-[1px] border-blue-400

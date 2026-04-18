@@ -4,6 +4,7 @@ import type {
   MahjongHandMeld,
   MahjongTile,
   MahjongTileRow,
+  MatchData,
 } from "../types";
 import { convertTileToCharacter } from "./utilities";
 
@@ -24,11 +25,7 @@ export const matchTilesToHand = (
   concealedTiles: MahjongTileRow,
   exposedTiles: MahjongTileRow,
   hand: MahjongHand,
-): { 
-  matches: number, 
-  assignedMelds: MahjongTile[][], 
-  leftoverTiles: MahjongTileRow 
-} => {
+): MatchData => {
   // Fail immediately if the hand must be concealed but has exposed melds
   if (hand.concealed && exposedTiles.length > 0) {
     return { matches: 0, assignedMelds: [], leftoverTiles: concealedTiles };
