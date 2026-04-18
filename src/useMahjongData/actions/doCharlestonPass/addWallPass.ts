@@ -1,5 +1,5 @@
-import { JOKER_SUIT } from "../../constants";
-import type { MahjongTile } from "../../types";
+import { JOKER_SUIT } from "../../../constants";
+import type { MahjongTile } from "../../../types";
 
 /**
  * Add 3 tiles from the wall to the passing array

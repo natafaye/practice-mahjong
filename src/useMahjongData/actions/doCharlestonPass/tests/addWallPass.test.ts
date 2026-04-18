@@ -1,8 +1,8 @@
 import { expect, describe, it } from 'vitest'
 import { addWallPass } from '../addWallPass'
-import { createTile, createJoker } from '../../../shared/tests/testUtilities'
-import { DOTS } from '../../../constants'
-import type { MahjongTile } from '../../../types'
+import { createTile, createJoker } from '../../../../_shared/tests/testUtilities'
+import { DOTS } from '../../../../constants'
+import type { MahjongTile } from '../../../../types'
 
 describe('addWallPass', () => {
     it('should take 3 tiles from the wall when no jokers are present', () => {

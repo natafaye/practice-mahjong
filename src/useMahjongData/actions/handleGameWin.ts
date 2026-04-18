@@ -1,6 +1,6 @@
 import { GAME_OVER } from "../../constants";
-import { putInHandOrder } from "../../shared";
-import { findBestHand } from "../../shared/findBestHand";
+import { putInHandOrder } from "../../_shared";
+import { findBestHand } from "../../_shared/findBestHand";
 import type { MahjongGameData, MahjongPlayer } from "../../types";
 
 /**

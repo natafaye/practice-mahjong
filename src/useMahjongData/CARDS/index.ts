@@ -1,1 +1,0 @@
-export { CARDS, defaultCard } from "./CARDS"

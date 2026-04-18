@@ -1,5 +1,5 @@
 import type { MahjongPlayer } from "../../types";
-import { getJokerSwapIndex } from "../../shared";
+import { getJokerSwapIndex } from "../../_shared";
 
 export const lookForJokerSwap = (
   players: MahjongPlayer[],

@@ -1,7 +1,7 @@
 import { type CSSProperties, type ReactNode } from "react";
 import { useDroppable } from "@dnd-kit/react";
 import clsx from "clsx";
-import { useIsDragging, SLOT_ID } from "../drag-and-drop";
+import { useIsDragging, SLOT_ID } from "../DraggingContext";
 import { tileSizes } from "../Tile/tileSizes";
 import type { Size } from "../types";
 

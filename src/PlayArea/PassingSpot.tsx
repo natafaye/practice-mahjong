@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft, faCircleRight, faCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { LEFT, NORMAL_PASS, OVER, RIGHT, THIS_PLAYER } from "../constants";
 import DraggableTile from "../Tile/DraggableTile";
-import { PASSING_ID } from "../drag-and-drop/DraggingContext";
+import { PASSING_ID } from "../DraggingContext/DraggingContext";
 
 type Props = {
     className?: string

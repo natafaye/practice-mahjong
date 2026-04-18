@@ -3,7 +3,7 @@ import Rack from "./Rack";
 import PlayArea from "./PlayArea";
 import { useTheme } from "./useTheme/useTheme";
 import useMahjongData from "./useMahjongData";
-import { DraggingContext } from './drag-and-drop';
+import { DraggingContext } from './DraggingContext';
 import { THIS_PLAYER, CHARLESTONS } from "./constants";
 import MenuBar from './MenuBar';
 

@@ -2,7 +2,7 @@ import { useRef, useState, type ReactNode } from "react"
 import { DragDropProvider, DragOverlay, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
 import Tile from "../Tile/Tile"
 import useMahjongData from "../useMahjongData"
-import { getJokerSwapIndex } from "../shared"
+import { getJokerSwapIndex } from "../_shared"
 import type { MahjongTile } from "../types"
 import { CHARLESTONS, THIS_PLAYER } from "../constants"
 

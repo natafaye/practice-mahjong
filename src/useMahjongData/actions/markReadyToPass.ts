@@ -1,6 +1,6 @@
 import { CHARLESTONS, DRAWING, NORMAL_PASS } from "../../constants";
 import type { MahjongGameData } from "../../types";
-import { doCharlestonPass } from "../doCharlestonPass";
+import { doCharlestonPass } from "./doCharlestonPass";
 
 type Payload = { 
   playerIndex: number 

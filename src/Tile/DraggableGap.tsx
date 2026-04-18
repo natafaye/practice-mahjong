@@ -1,7 +1,7 @@
 import { useDraggable } from "@dnd-kit/react"
 import { THIS_PLAYER } from "../constants"
 import Gap from "./Gap"
-import { GAP_ID } from "../drag-and-drop/DraggingContext"
+import { GAP_ID } from "../DraggingContext/DraggingContext"
 import type { MahjongGap, Size } from "../types"
 
 type Props = {

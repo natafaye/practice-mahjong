@@ -6,7 +6,6 @@ Track how many wins with each hand
 Update handsData to be calculated by cache?
 2 player Mahjong
 Streamline useIsDragging
-Undo/Redo (store history of old states)
 Rearrange PlayArea
 Button to quickly meld matches (click to add matching tile - keep clicking for jokers)
 Make sure melding only shows this player's melds
@@ -17,5 +16,4 @@ Pick tile to discard intelligently
 Call tiles when it makes sense
 
 Animations:
-Fix idle animation so it doesn't set state inside useEffect
 Fix joker swap and melding animation

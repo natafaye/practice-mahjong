@@ -1,5 +1,5 @@
-import { OVER } from "../../constants"
-import type { MahjongTile } from "../../types"
+import { OVER } from "../../../constants"
+import type { MahjongTile } from "../../../types"
 import { getGiveToIndex } from "./getGiveToIndex"
 
 /**

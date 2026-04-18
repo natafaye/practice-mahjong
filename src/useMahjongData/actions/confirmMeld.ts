@@ -1,5 +1,5 @@
 import { EXPOSED_GAP, PLAYING } from "../../constants";
-import { checkIfMeldValid, putInMeldOrder } from "../../shared";
+import { checkIfMeldValid, putInMeldOrder } from "../../_shared";
 import type { MahjongGameData } from "../../types";
 import { clonePlayers } from "./clonePlayers";
 import { handleGameWin } from "./handleGameWin";

@@ -1,4 +1,4 @@
-import { CARDS } from "../CARDS";
+import { CARDS } from "../../_data/CARDS";
 import { generateInitialData } from "../generate";
 
 type Payload = {

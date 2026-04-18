@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Modal, ModalHeader } from "../Modal"
 import Button from "../Button"
 import RadioInput from "../RadioInput/RadioInput"
-import useMahjongData, { CARDS } from "../useMahjongData"
+import useMahjongData from "../useMahjongData"
+import { CARDS } from "../_data/CARDS"
 
 type Props = {
     show: boolean

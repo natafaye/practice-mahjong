@@ -1,4 +1,4 @@
-import type { MahjongCard } from "../../types";
+import type { MahjongCard } from "../types";
 
 export const CARD_2025: MahjongCard = {
   name: "2025",

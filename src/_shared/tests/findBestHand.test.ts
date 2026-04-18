@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { findBestHand } from "../findBestHand";
-import { CARD_2025 } from "../../useMahjongData/CARDS/CARD_2025";
+import { CARD_2025 } from "../../_data/CARD_2025";
 import { createMeld, createTile } from "./testUtilities";
 import { BAMS, CRAKS, DOTS, EXPOSED_GAP } from "../../constants";
 import type { MahjongPlayer } from "../../types";

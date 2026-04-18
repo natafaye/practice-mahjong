@@ -5,10 +5,10 @@ import DiscardSpot from "./DiscardSpot"
 import DrawSpot from "./DrawSpot"
 import { useTheme } from "../useTheme/useTheme"
 import useMahjongData from "../useMahjongData"
-import { DropOverlay, useIsDragging } from "../drag-and-drop"
+import { DropOverlay, useIsDragging } from "../DraggingContext"
 import { CHARLESTONS, DISCARD, PLAYING, THIS_PLAYER } from "../constants"
 import PassingSpot from "./PassingSpot"
-import { PLAY_AREA_ID } from "../drag-and-drop/DraggingContext"
+import { PLAY_AREA_ID } from "../DraggingContext/DraggingContext"
 
 type Props = {
     className?: string

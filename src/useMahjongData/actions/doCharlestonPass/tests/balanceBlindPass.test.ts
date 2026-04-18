@@ -1,8 +1,8 @@
 import { expect, describe, it } from 'vitest'
 import { balanceBlindPass } from '../balanceBlindPass'
-import { createTile } from '../../../shared/tests/testUtilities'
-import { DOTS } from '../../../constants'
-import type { MahjongTile } from '../../../types'
+import { createTile } from '../../../../_shared/tests/testUtilities'
+import { DOTS } from '../../../../constants'
+import type { MahjongTile } from '../../../../types'
 
 describe('balanceBlindPass', () => {
     const createPassing = (counts: number[]) => {

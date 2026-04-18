@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons"
-import { checkIfMeldValid, sortTiles } from "../shared"
+import { checkIfMeldValid, sortTiles } from "../_shared"
 import useMahjongData from "../useMahjongData"
 import Tile from "../Tile/Tile"
 import type { Size } from "../types"

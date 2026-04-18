@@ -2,7 +2,7 @@ import { useReducer, type ReactNode } from "react";
 import { undoableReducer } from "./undoableReducer";
 import { generateInitialData } from "./generate";
 import { MahjongDataContext } from "./MahjongDataContext";
-import { defaultCard } from "./CARDS";
+import { defaultCard } from "../_data/CARDS";
 
 export const MahjongDataProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(undoableReducer, {
