@@ -1,11 +1,11 @@
 Only allow pinning 6 hands max
-Handle winning the game
 Show percentage chance of getting the hand
-Allow rearrange of exposed melds
-Undo/Redo
-Quit/Restart
-Charleston (remove from pass, rearrange pass, bug with charleston pass tiles not draggable)
+Undo/Redo (make undo of each action, store list of actions)
+Stop Charleston after first set
 Fix shifting issue with buttons
+Fixing drag and drop not always working (after charleston issues?)
+Allow rearrange of exposed melds
+Track how many wins with each hand
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)
@@ -13,5 +13,4 @@ Pick tile to discard intelligently
 Call tiles when it makes sense
 
 Animations:
-Make the tiles wiggle if waiting on the user to interact with them
-After a joker swap make the switched tile bounce (only bounce once, fix overflow hidden)
+Fix idle animation so it doesn't set state inside useEffect

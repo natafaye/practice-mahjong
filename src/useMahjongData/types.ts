@@ -1,6 +1,8 @@
 import type { ActionDispatch } from "react";
 
 export type MahjongAction =
+    | { type: 'UNDO' }
+    | { type: 'REDO' }
     | { type: 'ADD_TO_PASS'; payload: { playerIndex: number, tileIndexes: number[] } }
     | { type: 'REMOVE_FROM_PASS'; payload: { playerIndex: number, passingTileIndex: number } }
     | { type: 'MARK_READY_TO_PASS'; payload: { playerIndex: number } }

@@ -18,20 +18,12 @@ body {
 }
 
 @keyframes triple-bounce {
-    0%, 3%, 6% { transform: translateY(0); }
-    1.5% { transform: translateY(-12px); }
-    
-    /* 5 second mark (33% of 15s) */
-    33%, 36%, 39% { transform: translateY(0); }
-    34.5% { transform: translateY(-12px); }
-    
-    /* 10 second mark (66% of 15s) */
-    66%, 69%, 72% { transform: translateY(0); }
-    67.5% { transform: translateY(-12px); }
-
+    0%, 15%, 30% { transform: translateY(0); }
+    7.5% { transform: translateY(-12px); }
+    22.5% { transform: translateY(-12px); }
     100% { transform: translateY(0); }
 }
 
 .animate-triple-bounce {
-    animation: triple-bounce 15s ease-in-out;
+    animation: triple-bounce 1s ease-in-out;
 }

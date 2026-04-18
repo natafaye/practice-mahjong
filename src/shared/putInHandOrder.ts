@@ -7,7 +7,7 @@ import { EXPOSED_GAP } from "../constants";
  * Takes a set of tiles and puts it in order to match a particular hand, with leftovers at the end
  */
 export const putInHandOrder = (player: MahjongPlayer, hand: MahjongHand) => {
-  const { assignedMelds, leftoverTiles } = matchTilesToHand(player.concealed, player.concealed, hand);
+  const { assignedMelds, leftoverTiles } = matchTilesToHand(player.concealed, player.exposed, hand);
   const newRow: MahjongTileRow = [];
 
   const nonEmptyMelds = assignedMelds.filter((meld) => meld.length > 0);

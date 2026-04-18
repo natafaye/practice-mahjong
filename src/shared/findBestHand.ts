@@ -1,7 +1,7 @@
 import type { MahjongHand, MahjongPlayer } from "../types";
 import { matchTilesToHand } from "./matchTilesToHand";
 
-export const findBestHands = (player: MahjongPlayer, hands: MahjongHand[]) => {
+export const findBestHand = (player: MahjongPlayer, hands: MahjongHand[]) => {
     let bestHand = undefined
     let bestMatchData = undefined
     // Loop through all the hands and get the best match
@@ -16,5 +16,5 @@ export const findBestHands = (player: MahjongPlayer, hands: MahjongHand[]) => {
         }
     }
     // There should always be something in bestMatchData and bestHand if there's at least one hand
-    return { ...bestMatchData, hand: bestHand }
+    return { ...bestMatchData!, hand: bestHand! }
 }

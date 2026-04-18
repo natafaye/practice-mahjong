@@ -6,7 +6,7 @@ import { useTheme } from "./useTheme/useTheme";
 import useMahjongData from "./useMahjongData";
 import useAIPlayer from "./useAIPlayers";
 import { DraggingContext } from './drag-and-drop';
-import { THIS_PLAYER, GAME_OVER } from "./constants";
+import { THIS_PLAYER, GAME_OVER, CHARLESTONS } from "./constants";
 import MenuBar from './MenuBar';
 
 export default function App() {
@@ -46,7 +46,7 @@ export default function App() {
               key={index}
               player={player}
               concealed
-              isCurrentPlayer={currentPlayer === index}
+              isCurrentPlayer={currentPlayer === index && !CHARLESTONS.includes(gameState)}
               size="md"
               className="grow"
               bouncingTileId={bouncingTileId}
@@ -57,7 +57,7 @@ export default function App() {
         <Rack
           className="shrink-0 vertical-shadow"
           player={players[THIS_PLAYER]}
-          isCurrentPlayer={currentPlayer === THIS_PLAYER}
+          isCurrentPlayer={currentPlayer === THIS_PLAYER && !CHARLESTONS.includes(gameState)}
           isIdle={isIdle}
           bouncingTileId={bouncingTileId}
         />

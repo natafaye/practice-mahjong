@@ -35,7 +35,7 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 					background={rackLight} textShadowColor={rackDark}
 				>Add to Meld</DropOverlay>
 			</>}
-			<div className={clsx("flex justify-center px-3", tileSizes[size].tileClassName)}>
+			<div className={clsx("flex justify-center px-3 pt-2 box-content", tileSizes[size].tileClassName)}>
 				{player.exposed.map((tile, index) => typeof tile === "string" ?
 					<div key={index} className="w-10"></div> :
 					<Tile
@@ -52,14 +52,14 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 						))}
 						<div className="flex xl:flex-col gap-1 ms-2 justify-end items-center pt-2">
 							<Button
-								className="bg-red-400 border-red-500 text-red-900 active:bg-red-500"
+								className="bg-red-400 border-red-500 text-red-900"
 								onClick={handleCancel}
 							>
 								<FontAwesomeIcon icon={faXmark} />
 							</Button>
 							<Button
 								className={clsx(
-									"bg-emerald-400 border-emerald-500 text-emerald-900 active:bg-emerald-500",
+									"bg-emerald-400 border-emerald-500 text-emerald-900",
 									"xl:order-first"
 								)}
 								disabled={!meldIsValid}

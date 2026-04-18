@@ -20,6 +20,7 @@ import { CARDS } from "./CARDS";
 import { generateInitialData } from "./generateInitialData";
 import { doCharlestonPass } from "./doCharlestonPass/doCharlestonPass";
 import { clonePlayers } from "./clonePlayers";
+import { handleGameWin } from "./handleGameWin";
 
 export function mahjongReducer(
   state: MahjongGameData,
@@ -32,6 +33,18 @@ export function mahjongReducer(
     case "RESTART": {
       const card = CARDS.find((card) => card.name === action.payload.cardName)!;
       return generateInitialData(action.payload.numberOfPlayers, card);
+    }
+
+    case "UNDO": {
+      return {
+        ...state
+      }
+    }
+
+    case "REDO": {
+      return {
+        ...state
+      }
     }
 
     case "ADD_TO_PASS": {
@@ -129,12 +142,13 @@ export function mahjongReducer(
         newPlayers[playerIndex].concealed[replacementIndex] = drawnTile;
       } else {
         newPlayers[playerIndex].concealed.unshift(drawnTile);
-      }
+      } 
       return {
         ...state,
         wall: state.wall.slice(0, -1),
         players: newPlayers,
         gameState: PLAYING,
+        ...handleGameWin(state, newPlayers)
       };
     }
 
@@ -189,6 +203,7 @@ export function mahjongReducer(
       return {
         ...state,
         players: newPlayers,
+        ...handleGameWin(state, newPlayers)
       };
     }
 
@@ -289,6 +304,7 @@ export function mahjongReducer(
         melding: [],
         gameState: PLAYING,
         currentPlayer: THIS_PLAYER,
+        ...handleGameWin(state, newPlayers)
       };
     }
 
