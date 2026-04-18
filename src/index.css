@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html, body {
+  overscroll-behavior-y: none;
+}
+
 body {
     font-family: 'Noto Sans KR Variable', sans-serif;
 }
@@ -17,13 +21,11 @@ body {
     }
 }
 
-@keyframes triple-bounce {
-    0%, 15%, 30% { transform: translateY(0); }
-    7.5% { transform: translateY(-12px); }
-    22.5% { transform: translateY(-12px); }
-    100% { transform: translateY(0); }
+@keyframes double-bounce {
+    0%, 15%, 30%, 100% { transform: translateY(0); }
+    7.5%, 22.5% { transform: translateY(-12px); }
 }
 
-.animate-triple-bounce {
-    animation: triple-bounce 1s ease-in-out;
+.animate-double-bounce {
+    animation: double-bounce 1s ease-in-out;
 }

@@ -8,7 +8,7 @@ type Props = {
 
 export default function ThemePicker({ value, onChange }: Props) {
     return (
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-around gap-3">
             {THEMES.map(theme => (
                 <RadioInput key={theme.themeName}
                     name="theme"

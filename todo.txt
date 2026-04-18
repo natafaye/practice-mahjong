@@ -1,11 +1,12 @@
 Only allow pinning 6 hands max
 Show percentage chance of getting the hand
-Undo/Redo (make undo of each action, store list of actions)
+Undo/Redo (store history of old states)
 Stop Charleston after first set
-Fix shifting issue with buttons
 Fixing drag and drop not always working (after charleston issues?)
 Allow rearrange of exposed melds
 Track how many wins with each hand
+Update handsData to be calculated by cache?
+2 player Mahjong
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)

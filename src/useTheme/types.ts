@@ -12,11 +12,12 @@ export type Theme = {
   rackLight: string;
   rackMid: string;
   rackDark: string;
+  rackVeryDark: string;
 
   tileLight: string;
   tileDark: string;
 
-  table: string;
+  tableLight: string;
   tableMid: string;
   tableDark: string;
   tableVeryDark: string;

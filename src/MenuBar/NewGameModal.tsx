@@ -62,7 +62,11 @@ export default function NewGameModal({ show, setShow }: Props) {
                 </div>
                 <div className="text-end mt-6">
                     <Button
-                        className="bg-amber-700 text-white border-amber-800"
+                        colors={{ 
+                            light: "var(--color-amber-600)",
+                            mid: "var(--color-amber-700)",
+                            dark: "var(--color-amber-800)"
+                        }}
                         onClick={handleStart}
                     >
                         <FontAwesomeIcon icon={faPlay} /> Start Game

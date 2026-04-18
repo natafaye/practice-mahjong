@@ -15,9 +15,10 @@ type Props = {
 export default function ThemeModal({ show, setShow }: Props) {
     const { themeName, setTheme } = useTheme()
     const [themeValue, setThemeValue] = useState(themeName)
+    const selectedTheme = THEMES.find(theme => theme.themeName === themeValue)!
 
     const handleSave = () => {
-        setTheme(THEMES.find(theme => theme.themeName === themeValue)!)
+        setTheme(selectedTheme)
         setShow(false)
     }
 
@@ -27,10 +28,18 @@ export default function ThemeModal({ show, setShow }: Props) {
             <div className="mb-6 -mt-2">
                 <ThemePicker value={themeValue} onChange={setThemeValue} />
             </div>
-            <ThemePreview theme={THEMES.find(theme => theme.themeName === themeValue)!} />
+            <ThemePreview theme={selectedTheme} />
             <div className="flex justify-end gap-3 mt-6">
-                <Button className="bg-gray-100 border-gray-300" onClick={handleSave}>
-                    <FontAwesomeIcon icon={faCheckCircle} className="text-green-800"/> Save
+                <Button
+                    colors={{
+                        light: "var(--color-gray-50)",
+                        mid: "var(--color-gray-200)",
+                        dark: "var(--color-gray-400)",
+                        text: "var(--color-gray-900)"
+                    }}
+                    onClick={handleSave}
+                >
+                    <FontAwesomeIcon icon={faCheckCircle} className="text-green-800" /> Save
                 </Button>
             </div>
         </Modal>

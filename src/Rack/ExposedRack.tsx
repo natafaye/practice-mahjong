@@ -47,7 +47,7 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 						key={tile.id}
 						tile={tile}
 						size={size}
-						className={clsx(bouncingTileId === tile.id && "animate-triple-bounce")}
+						className={clsx(bouncingTileId === tile.id && "animate-double-bounce")}
 					/>
 				)}
 				{player.index === THIS_PLAYER && melding.length > 0 &&
@@ -57,16 +57,24 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 						))}
 						<div className="flex xl:flex-col gap-1 ms-2 justify-end items-center pt-2">
 							<Button
-								className="bg-red-400 border-red-500 text-red-900"
+								colors={{ 
+									light: "var(--color-red-300)", 
+									mid: "var(--color-red-400)", 
+									dark: "var(--color-red-500)",
+									text: "var(color-red-900)"
+								}}
 								onClick={handleCancel}
 							>
 								<FontAwesomeIcon icon={faXmark} />
 							</Button>
 							<Button
-								className={clsx(
-									"bg-emerald-400 border-emerald-500 text-emerald-900",
-									"xl:order-first"
-								)}
+								className="xl:order-first"
+								colors={{ 
+									light: "var(--color-emerald-300)", 
+									mid: "var(--color-emerald-400)", 
+									dark: "var(--color-emerald-500)",
+									text: "var(color-emerald-900)"
+								}}
 								disabled={!meldIsValid}
 								onClick={handleConfirm}
 							>

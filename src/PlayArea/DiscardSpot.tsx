@@ -33,13 +33,13 @@ export default function DiscardSpot({ className }: Props) {
                 }
             </div>
             <Button
-                className={clsx(widthClasses, "text-sm lg:text-base text-nowrap")}
-                style={{
-                    background: tableMid,
-                    borderColor: tableDark,
-                    color: tableVeryDark,
-                    visibility: gameState === DISCARD ? "visible" : "hidden"
+                className={widthClasses}
+                colors={{
+                    light: tableMid,
+                    mid: tableDark,
+                    dark: tableVeryDark
                 }}
+                disabled={gameState !== DISCARD}
                 onClick={() => dispatch({ type: "SKIP_DISCARD" })}
             >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className="me-1" rotation={90} />

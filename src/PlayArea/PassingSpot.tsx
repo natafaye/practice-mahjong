@@ -35,11 +35,11 @@ export default function PassingSpot({ className }: Props) {
                 )}
             </div>
             <Button
-                className={clsx(widthClasses, "text-sm lg:text-base text-nowrap flex items-center justify-center")}
-                style={passingDisabled ? {} : {
-                    background: tableMid,
-                    borderColor: tableDark,
-                    color: tableVeryDark,
+                className={clsx(widthClasses, "flex items-center justify-center")}
+                colors={{
+                    light: tableMid,
+                    mid: tableDark,
+                    dark: tableVeryDark,
                 }}
                 disabled={passingDisabled}
                 onClick={() => dispatch({ type: "MARK_READY_TO_PASS", payload: { playerIndex: THIS_PLAYER } })}

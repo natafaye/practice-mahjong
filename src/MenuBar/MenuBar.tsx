@@ -12,20 +12,21 @@ export default function MenuBar() {
     const [showThemeModal, setShowThemeModal] = useState(false)
     const [showNewGameModal, setShowNewGameModal] = useState(false)
     const { dispatch } = useMahjongData()
-    const { rackDark, rackLight, rackMid } = useTheme()
+    const { rackLight, rackMid, rackDark, rackVeryDark } = useTheme()
+    const buttonColors = { light: rackLight, mid: rackMid, dark: rackVeryDark }
 
     return (
         <div className="relative p-2 -mt-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
             <div className="flex flex-nowrap">
                 <Button
                     onClick={() => dispatch({ type: "UNDO" })}
-                    style={{ background: rackLight, borderColor: rackMid }}
+                    colors={buttonColors}
                 >
                     <FontAwesomeIcon icon={faUndo} /> Undo
                 </Button>
                 <Button
                     onClick={() => dispatch({ type: "REDO" })}
-                    style={{ background: rackLight, borderColor: rackMid }}
+                    colors={buttonColors}
                 >
                     <FontAwesomeIcon icon={faRedo} /> Redo
                 </Button>
@@ -34,13 +35,13 @@ export default function MenuBar() {
             <div className="flex flex-nowrap">
                 <Button
                     onClick={() => setShowNewGameModal(true)}
-                    style={{ background: rackLight, borderColor: rackMid }}
+                    colors={buttonColors}
                 >
                     <FontAwesomeIcon icon={faPlus} /> New Game
                 </Button>
                 <Button
                     onClick={() => setShowThemeModal(true)}
-                    style={{ background: rackLight, borderColor: rackMid }}
+                    colors={buttonColors}
                 >
                     <FontAwesomeIcon icon={faPalette} /> Themes
                 </Button>

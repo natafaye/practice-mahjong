@@ -11,7 +11,7 @@ import MenuBar from './MenuBar';
 
 export default function App() {
   const { players, currentPlayer, gameState } = useMahjongData()
-  const { table, rackDark } = useTheme()
+  const { tableLight, rackDark } = useTheme()
   const [isIdle, setIsIdle] = useState(false)
   const [bouncingTileId, setBouncingTileId] = useState<string | null>(null)
 
@@ -38,7 +38,7 @@ export default function App() {
   return (
     <DraggingContext>
       <div className="fixed inset-0 overflow-hidden flex flex-col select-none"
-        style={{ background: table }}
+        style={{ background: tableLight }}
       >
         <div className="sm:flex gap-1.5" style={{ background: rackDark }}>
           {players.map((player, index) => index !== THIS_PLAYER && (
