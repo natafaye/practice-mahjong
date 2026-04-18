@@ -31,9 +31,14 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 			{player.index === THIS_PLAYER && <>
 				<div className="h-2 m:h-3" style={{ background: rackLight }}></div>
 				<div className="h-2 m:h-3 -mb-3" style={{ background: rackDark }}></div>
-				<DropOverlay dropId={EXPOSED_RACK_ID} data={{ player }} show={melding.length > 0}
+				<DropOverlay
+					dropId={EXPOSED_RACK_ID}
+					data={{ player }}
+					show={melding.length > 0}
 					background={rackLight} textShadowColor={rackDark}
-				>Add to Meld</DropOverlay>
+				>
+					Add to Meld
+				</DropOverlay>
 			</>}
 			<div className={clsx("flex justify-center px-3 pt-2 box-content", tileSizes[size].tileClassName)}>
 				{player.exposed.map((tile, index) => typeof tile === "string" ?
@@ -71,9 +76,9 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 					</>
 				}
 			</div>
-			<div className="h-2 m:h-3 -mb-2 m:-mb-3 vertical-shadow"></div>
-			<div className="h-2 m:h-3 relative" style={{ background: rackLight }}></div>
-			<div className="h-2 m:h-3" style={{ background: rackDark }}></div>
+			<div className="h-1.5 m:h-3 -mb-1.5 m:-mb-3 vertical-shadow"></div>
+			<div className="h-1.5 m:h-3 relative" style={{ background: rackLight }}></div>
+			<div className="h-1.5 m:h-3" style={{ background: rackDark }}></div>
 		</div>
 	)
 }

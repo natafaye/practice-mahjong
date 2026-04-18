@@ -31,7 +31,7 @@ export default function MenuBar() {
                 </Button>
             </div>
             <HintText />
-            <div>
+            <div className="flex flex-nowrap">
                 <Button
                     onClick={() => setShowNewGameModal(true)}
                     style={{ background: rackLight, borderColor: rackMid }}

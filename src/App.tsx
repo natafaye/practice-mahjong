@@ -40,14 +40,14 @@ export default function App() {
       <div className="fixed inset-0 overflow-hidden flex flex-col select-none"
         style={{ background: table }}
       >
-        <div className="sm:flex gap-2" style={{ background: rackDark }}>
+        <div className="sm:flex gap-1.5" style={{ background: rackDark }}>
           {players.map((player, index) => index !== THIS_PLAYER && (
             <Rack
               key={index}
               player={player}
               concealed
               isCurrentPlayer={currentPlayer === index && !CHARLESTONS.includes(gameState)}
-              size="md"
+              size="sm"
               className="grow"
               bouncingTileId={bouncingTileId}
             />
