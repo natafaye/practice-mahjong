@@ -4,14 +4,14 @@ export const PASSING_GAPS = ["gap_7", "gap_8", "gap_9"]
 export const EXPOSED_GAP = "" as const
 
 // Tiles
-export const DOTS = "🔵"
-export const BAMS = "🎍"
-export const CRAKS = "中"
+export const DOTS = "DOT"
+export const BAMS = "BAM"
+export const CRAKS = "CRAK"
 export const SUITS = [DOTS, BAMS, CRAKS]
-export const WIND_SUIT = "🍃"
+export const WIND_SUIT = "WIND"
 export const WINDS = ["N", "E", "W", "S"]
-export const FLOWER_SUIT = "🌸" // ["🌸", "💮", "🌷", "🪻", "🌼", "🌻", "🌹", "🏵️"]
-export const JOKER_SUIT = "🦄"
+export const FLOWER_SUIT = "FLOWER"
+export const JOKER_SUIT = "JOKER"
 export const SUIT_ORDER = [FLOWER_SUIT, ...SUITS, JOKER_SUIT, WIND_SUIT]
 
 // Players
@@ -23,9 +23,8 @@ export const DRAWING = "DRAWING" as const;
 export const MELDING = "MELDING" as const;
 export const PLAYING = "PLAYING" as const;
 export const DISCARD = "DISCARD" as const;
-export const DISCARD_AI = "DISCARD_AI" as const;
 export const GAME_OVER = "GAME_OVER" as const;
-export const GAME_STATES = [...CHARLESTONS, DRAWING, MELDING, PLAYING, DISCARD, DISCARD_AI, GAME_OVER] as const
+export const GAME_STATES = [...CHARLESTONS, DRAWING, MELDING, PLAYING, DISCARD, GAME_OVER] as const
 
 // Charleston State Legend
 export const RIGHT = "RIGHT"

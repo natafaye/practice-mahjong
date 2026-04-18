@@ -1,4 +1,3 @@
-import { THIS_PLAYER } from "../constants";
 import type { MahjongGameData } from "../types";
 import { mahjongReducer } from "./mahjongReducer";
 import type { MahjongAction } from "./MahjongAction";
@@ -19,13 +18,8 @@ export function undoableReducer(state: UndoableState, action: MahjongAction): Un
       if (past.length === 0) return state;
       // Do the undo
       const newPast = [...past];
-      let newPresent = newPast.pop()!;
+      const newPresent = newPast.pop()!;
       const newFuture = [...future, present];
-      // Keep undoing until we get to a human player's decision
-      while (newPast.length > 0 && newPresent.currentPlayer !== THIS_PLAYER) {
-        newFuture.push(newPresent)
-        newPresent = newPast.pop()!;
-      }
       return {
         past: newPast,
         present: newPresent,
@@ -39,13 +33,8 @@ export function undoableReducer(state: UndoableState, action: MahjongAction): Un
       if (future.length === 0) return state;
       // Do the redo
       const newFuture = [...future];
-      let newPresent = newFuture.shift()!;
+      const newPresent = newFuture.shift()!;
       const newPast = [...past, present];
-      // Keep redoing until we get to a human player's decision
-      while (newFuture.length > 0 && newPresent.currentPlayer !== THIS_PLAYER) {
-        newPast.push(newPresent);
-        newPresent = newFuture.pop()!;
-      }
       return {
         past: newPast,
         present: newPresent,

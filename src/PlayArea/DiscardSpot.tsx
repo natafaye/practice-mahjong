@@ -4,7 +4,7 @@ import DraggableTile from "../Tile/DraggableTile"
 import Button from "../Button"
 import { useTheme } from "../useTheme/useTheme"
 import { DISCARD_ID } from "../drag-and-drop"
-import { DISCARD } from "../constants"
+import { DISCARD, THIS_PLAYER } from "../constants"
 import useMahjongData from "../useMahjongData"
 import clsx from "clsx"
 
@@ -40,7 +40,7 @@ export default function DiscardSpot({ className }: Props) {
                     dark: tableVeryDark
                 }}
                 disabled={gameState !== DISCARD}
-                onClick={() => dispatch({ type: "SKIP_DISCARD" })}
+                onClick={() => dispatch({ type: "SKIP_DISCARD", payload: { playerIndex: THIS_PLAYER } })}
             >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className="me-1" rotation={90} />
                 Skip

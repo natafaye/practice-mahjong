@@ -1,13 +1,15 @@
 Only allow pinning 6 hands max
 Show percentage chance of getting the hand
-Undo/Redo (store history of old states)
 Stop Charleston after first set
-Fixing drag and drop not always working (after charleston issues?)
 Allow rearrange of exposed melds
 Track how many wins with each hand
 Update handsData to be calculated by cache?
 2 player Mahjong
-Streamline useIsDraggin
+Streamline useIsDragging
+Undo/Redo (store history of old states)
+Rearrange PlayArea
+Button to quickly meld matches (click to add matching tile - keep clicking for jokers)
+Make sure melding only shows this player's melds
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)
@@ -16,3 +18,4 @@ Call tiles when it makes sense
 
 Animations:
 Fix idle animation so it doesn't set state inside useEffect
+Fix joker swap and melding animation

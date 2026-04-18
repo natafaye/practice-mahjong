@@ -113,7 +113,8 @@ export function DraggingContext({ children }: Props) {
             else if (target.data.player.index === THIS_PLAYER) {
                 dispatch({
                     type: "ADD_TO_MELD", payload: {
-                        tileIndex: finalIndex
+                        playerIndex: THIS_PLAYER,
+                        tileIndexes: [finalIndex]
                     }
                 })
             }

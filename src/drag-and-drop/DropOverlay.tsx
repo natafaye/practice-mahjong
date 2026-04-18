@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { useDroppable } from "@dnd-kit/react"
 import { useIsDragging } from "./useIsDragging"
 
@@ -15,16 +15,17 @@ export function DropOverlay({ dropId, show, data, background, textShadowColor, c
     const { isDragging } = useIsDragging()
     const { ref } = useDroppable({
         id: dropId,
-        data
+        data,
+        disabled: !show
     })
 
     return (
         <div
             ref={ref}
-            className="absolute top-0 left-0 right-0 bottom-0 justify-center items-center z-10"
+            className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center z-10 transition-opacity"
             style={{ 
-                display: isDragging && show ? "flex" : "none",
-                // opacity: isDropTarget ? 1 : 0
+                opacity: isDragging && show ? 1 : 0,
+                pointerEvents: isDragging && show ? "all" : "none",
             }}
         >
             <div
@@ -35,7 +36,7 @@ export function DropOverlay({ dropId, show, data, background, textShadowColor, c
                 className="relative text-4xl font-bold p-1 rounded-lg text-white text-shadow-md"
                 style={{
                     "--tw-text-shadow-color": `color-mix(in oklab, var(${textShadowColor}) var(--tw-text-shadow-alpha), transparent)`
-                } as any}
+                } as CSSProperties}
             >
                 {children}
             </p>

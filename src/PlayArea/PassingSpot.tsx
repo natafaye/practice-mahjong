@@ -28,7 +28,7 @@ export default function PassingSpot({ className }: Props) {
             >
                 {!readyToPass[THIS_PLAYER] ? (
                     passing[THIS_PLAYER].map((tile, index) => (
-                        <DraggableTile tile={tile} playerIndex={PASSING_ID} index={index} />
+                        <DraggableTile key={tile.id} tile={tile} playerIndex={PASSING_ID} index={index} />
                     ))
                 ) : (
                     <span className="text-sm lg:text-base ms-1" style={{ color: tableDark }}>Waiting...</span>

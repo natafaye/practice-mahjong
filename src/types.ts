@@ -77,8 +77,10 @@ export type MahjongGameData = {
   wall: MahjongTile[];
   discard: MahjongTile[];
   melding: MahjongTile[];
+  callingPlayer?: number;
   passing: MahjongTile[][];
   readyToPass: boolean[];
   gameState: GameState;
+  winningPlayer?: number;
   handsData: MahjongHandsData;
 };

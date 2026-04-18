@@ -1,4 +1,4 @@
-import { CHARLESTONS, DISCARD, DRAWING, GAME_OVER, MELDING, PLAYING, THIS_PLAYER } from "../constants"
+import { DISCARD, DRAWING, GAME_OVER, MELDING, PLAYING, THIS_PLAYER } from "../constants"
 import type { GameState } from "../types"
 import useMahjongData from "../useMahjongData"
 
@@ -18,14 +18,10 @@ const gameStateText: Record<GameState, string> = {
 }
 
 export default function HintText() {
-    const { gameState, currentPlayer } = useMahjongData()
-    const isAITurn = !CHARLESTONS.includes(gameState)
-        && gameState !== DISCARD
-        && gameState !== MELDING
-        && currentPlayer !== THIS_PLAYER
+    const { gameState, winningPlayer } = useMahjongData()
     return (
         <p className="shrink font-sans min-w-0 opacity-80 truncate px-3 text-sm md:text-lg">
-            {isAITurn ? gameState === GAME_OVER ? "You lost." : "Waiting for other players..." : gameStateText[gameState]}
+            {gameState === GAME_OVER && winningPlayer !== THIS_PLAYER ? "You lost." : gameStateText[gameState]}
         </p>
     )
 }
