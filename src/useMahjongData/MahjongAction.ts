@@ -19,6 +19,7 @@ export type MahjongAction =
     | { type: 'PICK_UP_DISCARD'; payload: { playerIndex: number } }
     | { type: 'ADD_TO_MELD'; payload: { playerIndex: number, tileIndexes: number[] } }
     | { type: 'CANCEL_MELD' }
+    | { type: 'CANCEL_CHARLESTON' }
     | { type: 'CONFIRM_MELD'; payload: { playerIndex: number } }
     | { type: 'REARRANGE_UNEXPOSED'; payload: { startIndex: number; endIndex: number } }
 

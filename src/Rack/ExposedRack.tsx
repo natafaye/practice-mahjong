@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function ExposedRack({ player, size, bouncingTileId = null }: Props) {
-	const { melding, currentPlayer } = useMahjongData()
+	const { melding, currentPlayer, callingPlayer } = useMahjongData()
 	const { rackLight, rackDark } = useTheme()
 	const { draggingTile } = useIsDragging()
 
@@ -46,7 +46,7 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
 						className={clsx(bouncingTileId === tile.id && "animate-double-bounce")}
 					/>
 				)}
-				{player.index === THIS_PLAYER && melding.length > 0 && (
+				{player.index === THIS_PLAYER && callingPlayer === THIS_PLAYER && melding.length > 0 &&  (
 					<MeldingSpot size={size} />
 				)}
 			</div>

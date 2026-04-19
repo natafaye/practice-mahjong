@@ -11,6 +11,7 @@ import { removeFromPass } from "./actions/removeFromPass";
 import { skipDiscard } from "./actions/skipDiscard";
 import { addToMeld } from "./actions/addToMeld";
 import { cancelMeld } from "./actions/cancelMeld";
+import { cancelCharleston } from "./actions/cancelCharleston";
 import { confirmMeld } from "./actions/confirmMeld";
 import { rearrangeUnexposed } from "./actions/rearrangeUnexposed";
 import { doAIPasses } from "./aiPlayer/doAIPasses";
@@ -67,6 +68,9 @@ export function mahjongReducer(state: MahjongGameData, action: MahjongAction): M
 
     case "CANCEL_MELD":
       return cancelMeld(nextState);
+
+    case "CANCEL_CHARLESTON":
+      return cancelCharleston(nextState);
 
     default:
       return state;

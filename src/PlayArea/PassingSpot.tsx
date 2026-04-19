@@ -3,7 +3,7 @@ import { useTheme } from "../useTheme";
 import Button from "../Button";
 import useMahjongData from "../useMahjongData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleLeft, faCircleRight, faCircleUp } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faCircleLeft, faCircleRight, faCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { LEFT, NORMAL_PASS, OVER, RIGHT, THIS_PLAYER } from "../constants";
 import DraggableTile from "../Tile/DraggableTile";
 import { PASSING_ID } from "../DraggingContext/DraggingContext";
@@ -18,8 +18,24 @@ export default function PassingSpot({ className }: Props) {
     const [direction, type] = gameState.split("_")
     const widthClasses = "w-39 lg:w-46 xl:w-55"
     const passingDisabled = readyToPass[THIS_PLAYER] || type === NORMAL_PASS && passing[THIS_PLAYER].length < 3
+    const canStopCharleston = gameState === "LEFT_B_1"
+
     return (
-        <div className={className}>
+        <div className={clsx(className, "flex flex-col items-center")}>
+            {canStopCharleston && (
+                <Button
+                    className={clsx(widthClasses, "mb-5")}
+                    colors={{
+                      light: tableMid,
+                      mid: tableDark,
+                      dark: tableVeryDark,
+                    }}
+                    onClick={() => dispatch({ type: "CANCEL_CHARLESTON" })}
+                >
+                    <FontAwesomeIcon icon={faCancel} className="text-lg me-2" />
+                    Stop Passing
+                </Button>
+            )}
             <div className={clsx(
                 widthClasses,
                 "aspect-[5.36/3] flex justify-center items-center border-2 border-dashed rounded-lg p-4 ps-3 pt-3 mb-2"

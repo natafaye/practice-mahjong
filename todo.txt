@@ -1,19 +1,24 @@
-Only allow pinning 6 hands max
-Show percentage chance of getting the hand
-Stop Charleston after first set
-Allow rearrange of exposed melds
-Track how many wins with each hand
+---- HIGH PRIORITY ----
 Update handsData to be calculated by cache?
-2 player Mahjong
-Streamline useIsDragging
 Rearrange PlayArea
-Button to quickly meld matches (click to add matching tile - keep clicking for jokers)
-Make sure melding only shows this player's melds
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)
-Pick tile to discard intelligently
+Pick tiles to discard intelligently
 Call tiles when it makes sense
 
-Animations:
+Show percentage chance of getting the hand
+Track how many wins with each hand
+
+---- LOW PRIORITY ----
+Change tile edge to only top? and just general rack overhaul?
+Allow removing from pass and meld and rearrange drop back into tiles
+Streamline useIsDragging
+Allow rearrange of exposed melds
+Only allow pinning 6 hands max
 Fix joker swap and melding animation
+2 player Mahjong?
+Order of meld went a little wonky with two jokers added between other tiles?
+AI players can be first player?
+First player gets a 14th tile during Charleston?
+Little messages like ("AI cancelled charleston" or "AI swapped a joker")
