@@ -1,5 +1,4 @@
-import { CARDS } from "../../_data/CARDS";
-import { generateInitialData } from "../generate";
+import { generateInitialData } from "../generate/generateInitialData";
 
 type Payload = {
     cardName: string;
@@ -7,6 +6,5 @@ type Payload = {
 }
 
 export const restartGame = ({ cardName, numberOfPlayers }: Payload) => {
-    const card = CARDS.find((card) => card.name === cardName)!;
-    return generateInitialData(numberOfPlayers, card);
+    return generateInitialData(numberOfPlayers, cardName);
 }

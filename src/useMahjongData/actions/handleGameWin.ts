@@ -1,5 +1,5 @@
 import { GAME_OVER } from "../../constants";
-import { putInHandOrder } from "../../_shared";
+import { getHandsData, putInHandOrder } from "../../_shared";
 import { findBestHand } from "../../_shared/findBestHand";
 import type { MahjongGameData, MahjongPlayer } from "../../types";
 
@@ -8,8 +8,9 @@ import type { MahjongGameData, MahjongPlayer } from "../../types";
  * Designed to be spread at the end of a state update to overwrite anything affected by game win
  */
 export const handleGameWin = (state: MahjongGameData, newPlayers: MahjongPlayer[]) => {
+  const handsData = getHandsData(state.cardName);
   const currentPlayer = newPlayers[state.currentPlayer];
-  const bestHand = findBestHand(currentPlayer, state.handsData.hands);
+  const bestHand = findBestHand(currentPlayer, handsData.hands);
   console.log(bestHand);
   if (bestHand.matches === 14) {
     currentPlayer.exposed = putInHandOrder(currentPlayer, bestHand.hand);

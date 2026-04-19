@@ -1,13 +1,13 @@
 import { useReducer, type ReactNode } from "react";
 import { undoableReducer } from "./undoableReducer";
-import { generateInitialData } from "./generate";
+import { generateInitialData } from "./generate/generateInitialData";
 import { MahjongDataContext } from "./MahjongDataContext";
 import { defaultCard } from "../_data/CARDS";
 
 export const MahjongDataProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(undoableReducer, {
     past: [],
-    present: generateInitialData(4, defaultCard),
+    present: generateInitialData(4, defaultCard.name),
     future: []
   });
   const canUndo = state.past.length > 0

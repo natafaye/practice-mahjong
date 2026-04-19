@@ -1,11 +1,10 @@
 import { generateTiles } from "./generateTiles"
-import { generateHandsData } from "./generateHandsData"
 import { sortTiles } from "../../_shared"
-import type { MahjongCard, MahjongGameData, MahjongPlayer, MahjongTile } from "../../types"
+import type { MahjongGameData, MahjongPlayer, MahjongTile } from "../../types"
 import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../../constants"
 import { shuffleArray } from "./shuffleArray"
 
-export const generateInitialData = (numberOfPlayers: number = 4, card: MahjongCard): MahjongGameData => {
+export const generateInitialData = (numberOfPlayers: number = 4, cardName: string): MahjongGameData => {
     // Generate and shuffle the wall
     const wall = generateTiles()
     shuffleArray(wall)
@@ -37,6 +36,6 @@ export const generateInitialData = (numberOfPlayers: number = 4, card: MahjongCa
         passing: players.map(() => []),
         readyToPass: players.map(() => false),
         gameState: numberOfPlayers !== 2 ? CHARLESTONS[0] : DRAWING,
-        handsData: generateHandsData(card)
+        cardName
     }
 }

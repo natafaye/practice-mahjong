@@ -13,8 +13,8 @@ type Props = {
 }
 
 export default function NewGameModal({ show, setShow }: Props) {
-    const { handsData, dispatch } = useMahjongData()
-    const [cardValue, setCardValue] = useState(handsData.name)
+    const { cardName, dispatch } = useMahjongData()
+    const [cardValue, setCardValue] = useState(cardName)
     const [numberValue, setNumberValue] = useState(4)
 
     const handleStart = () => {

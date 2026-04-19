@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import ReferenceHand from "./ReferenceHand"
 import useMahjongData from "../useMahjongData"
+import { getHandsData } from "../_shared"
 
 type Props = {
   className?: string
@@ -14,7 +15,8 @@ export default function ReferenceCard({ className }: Props) {
   const [maximized, setMaximized] = useState(false)
   const [expanded, setExpanded] = useState(true)
 
-  const { handsData: { hands, sections } } = useMahjongData()
+  const { cardName } = useMahjongData()
+  const { hands, sections } = getHandsData(cardName)
 
   const pin = (index: number) => {
     if (pinnedIndexes.includes(index)) return

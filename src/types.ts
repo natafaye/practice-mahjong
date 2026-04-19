@@ -53,7 +53,6 @@ export type MahjongCard = {
 
 // All the hands and calculated data from those hands
 export type MahjongHandsData = {
-  name: string;
   hands: MahjongHand[];
   sections: string[];
   melds: string[];
@@ -82,5 +81,5 @@ export type MahjongGameData = {
   readyToPass: boolean[];
   gameState: GameState;
   winningPlayer?: number;
-  handsData: MahjongHandsData;
+  cardName: string;
 };

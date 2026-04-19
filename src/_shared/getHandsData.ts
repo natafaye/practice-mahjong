@@ -1,4 +1,8 @@
-import type { MahjongCard, MahjongHandsData } from "../../types";
+import { CARDS } from "../_data/CARDS";
+import type { MahjongHandsData } from "../types";
+
+// A cache so we only calculate the MahjongHandsData once
+const cache = new Map<string, MahjongHandsData>();
 
 /**
  * Gets two arrays of strings
@@ -8,7 +12,15 @@ import type { MahjongCard, MahjongHandsData } from "../../types";
  * melds: All the possible melds (for example, "234" and "2025" and "FFF")
  * callableMelds: Only the callable melds (only sets of 3, 4, and 5)
  */
-export const generateHandsData = ({ name, hands }: MahjongCard): MahjongHandsData => {
+export const getHandsData = (name: string): MahjongHandsData => {
+  // If it's already been calculated, just return the cached value
+  if (cache.has(name)) {
+    return cache.get(name)!;
+  }
+
+  // We should never have a name that doesn't match a card
+  const { hands } = CARDS.find(card => card.name === name)!
+
   // Sections
   const sections = [ ...new Set(hands.map((hand) => hand.section)) ];
 
@@ -22,11 +34,15 @@ export const generateHandsData = ({ name, hands }: MahjongCard): MahjongHandsDat
     (meld) => meld.length > 2 && meld.match(/^(.)\1*$/),
   );
 
-  return {
+  const result = {
     name, 
     hands,
     sections,
     melds,
     callableMelds
-  }
+  };
+
+  // Save to cache and return
+  cache.set(name, result);
+  return result;
 }

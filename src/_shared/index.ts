@@ -4,3 +4,4 @@ export { putInMeldOrder } from "./putInMeldOrder";
 export { putInHandOrder } from "./putInHandOrder";
 export { checkIfMeldValid } from "./checkIfMeldValid";
 export { findBestHand } from "./findBestHand";
+export { getHandsData } from "./getHandsData";

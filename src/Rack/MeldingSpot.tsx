@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
-import { checkIfMeldValid, sortTiles } from "../_shared"
+import { checkIfMeldValid, getHandsData, sortTiles } from "../_shared"
 import useMahjongData from "../useMahjongData"
 import Tile from "../Tile/Tile"
 import type { Size } from "../types"
@@ -12,7 +12,8 @@ type Props = {
 }
 
 export default function MeldingSpot({ size }: Props) {
-  const { handsData, melding, dispatch, players } = useMahjongData()
+  const { cardName, melding, dispatch, players } = useMahjongData()
+  const handsData = getHandsData(cardName)
   const meldIsValid = checkIfMeldValid(melding, handsData.callableMelds)
 
   // Get index of the tile to add if the quick add button is clicked (to see if button should be enabled)
