@@ -51,7 +51,7 @@ export default function Tile({ tile, className, size = "lg", tipped = false, mes
                     )}
                     <div className="border-3 rounded-lg flex justify-center items-center m-1 grow" style={{ borderColor: tileColors[tile.suit] }}>
                         <img src={getTileImage(tile, tileImages)} className={clsx(
-                            "relative",
+                            "relative no-text-callout",
                             showNumber && "mt-2",
                             tile.suit === FLOWER_SUIT ? "w-[95%]" : "w-[80%]",
                             tile.suit === JOKER_SUIT && showJokerText && "mt-3"
