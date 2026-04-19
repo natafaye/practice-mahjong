@@ -15,7 +15,8 @@ export default function Button({ children, className, disabled, colors, style, .
     return (
         <button
             className={clsx(
-                "bg-(--mid) text-(--text) border-t border-(--light) rounded-lg cursor-pointer select-none text-nowrap p-2 px-3",
+                "bg-(--mid) border-t border-(--light) rounded-lg cursor-pointer p-2 px-3",
+                "text-(--text) text-sm lg:text-base select-none text-nowrap",
                 "[box-shadow:0_6px_0_0_var(--dark),0_9px_0_0_var(--shadow)] transition-all duration-100",
                 "lg:[box-shadow:0_8px_0_0_var(--dark),0_12px_0_0_var(--shadow)]",
                 !disabled && "active:[box-shadow:0_0px_0_0_var(--dark),0_0px_0_0_var(--shadow)] active:translate-y-2 active:border-b-0",

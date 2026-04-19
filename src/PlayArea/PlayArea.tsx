@@ -15,27 +15,33 @@ type Props = {
 }
 
 export default function PlayArea({ className }: Props) {
-  const { tableMid, tableDark } = useTheme()
+  const { tableMid, tableDark, tableLight } = useTheme()
   const { gameState, currentPlayer, passing } = useMahjongData()
   const isCharleston = CHARLESTONS.includes(gameState)
   const { isDraggingGap, isDraggingJoker } = useIsDragging()
 
   return (
     <div className={clsx(className, "flex flex-col relative p-3 pt-0")}>
-      <ReferenceCard className="min-h-0 grow shrink" />
-      <div className="flex-row gap-6 shrink-0 mt-4">
-        <div className="flex items-end gap-4">
-          <DrawSpot className="w-20 lg:w-26 grow-0 mb-2" />
-          {
-            isCharleston ?
-              <PassingSpot className="shrink-0 mb-2" /> :
-              <DiscardSpot className="shrink-0 mb-2" />
-          }
-          <div className="grow self-stretch relative mb-2">
-            <div className="absolute inset-0 overflow-y-auto p-1">
-            <DiscardHistory className="flex flex-wrap pt-3"/>
-            </div>
+      <ReferenceCard className="min-h-0" />
+      <div className="shrink-0 mt-auto pt-4 flex items-end gap-4">
+        <DrawSpot className="w-20 lg:w-24 grow-0 mb-2" />
+        {
+          isCharleston ?
+            <PassingSpot className="shrink-0 mb-2" /> :
+            <DiscardSpot className="shrink-0 mb-2" />
+        }
+        <div className="grow self-stretch relative mb-2">
+          <div className="absolute inset-0 overflow-y-auto p-1 flex flex-col-reverse">
+            <DiscardHistory className="flex flex-wrap" />
           </div>
+          <div
+            className="absolute top-0 inset-x-0 h-1 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to bottom, ${tableLight}, transparent)` }}
+          />
+          <div
+            className="absolute bottom-0 inset-x-0 h-1 z-10 pointer-events-none"
+            style={{ background: `linear-gradient(to bottom, transparent, ${tableLight})` }}
+          />
         </div>
       </div>
       <DropOverlay

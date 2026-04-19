@@ -24,7 +24,7 @@ export const addToPass = (state: MahjongGameData, { playerIndex, tileIndexes }: 
     let nextGapIndex = state.passing[playerIndex].length
     tileIndexes.toSorted((a, b) => b - a).forEach(tileIndex => {
         players[playerIndex].concealed.splice(tileIndex, 1)
-        players[playerIndex].concealed.push(PASSING_GAPS[nextGapIndex++])
+        players[playerIndex].concealed.unshift(PASSING_GAPS[nextGapIndex++])
     })
     return {
         ...state,

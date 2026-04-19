@@ -30,14 +30,15 @@ export default function ReferenceCard({ className }: Props) {
   return (
     <div className={clsx(
       "flex flex-col align-top bg-white p-4 pt-0 rounded-lg rounded-t-none min-h-0",
-      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "",
+      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full z-20" : "",
+      (expanded || maximized) ? "grow shrink" : "shrink-0",
       className
     )}>
       {(expanded || maximized) && (
         <div className="overflow-y-auto flex-1 min-h-0 pb-3 pt-4 border-b-taupe-400 border-b-2">
-          <div className={clsx("break-inside-avoid-column", maximized ? "columns-[34rem]" : "columns-[14rem]")}>
+          <div className={clsx(maximized ? "columns-[34rem]" : "columns-[14rem]")}>
             {sections.map(section => (
-              <div key={section} className="mb-3">
+              <div key={section} className="mb-3 break-inside-avoid-column">
                 <h3 className="font-bold">{section}</h3>
                 {hands.filter(hand => hand.section === section).map((hand, index) => {
                   const pinned = pinnedIndexes.includes(hands.indexOf(hand))
@@ -81,7 +82,7 @@ export default function ReferenceCard({ className }: Props) {
             className="text-taupe-600 md:text-2xl ms-auto ps-3"
             onClick={() => setExpanded(!expanded)}
           >
-            <FontAwesomeIcon icon={expanded ? faAngleDown : faAngleUp} />
+            <FontAwesomeIcon icon={expanded ? faAngleUp : faAngleDown} />
           </button>}
         </div>
       </div>

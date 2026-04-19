@@ -17,23 +17,21 @@ export default function DiscardSpot({ className }: Props) {
     const { discard, gameState, dispatch } = useMahjongData()
     const tile = gameState === DISCARD ? discard.at(-1) : undefined
 
-    const widthClasses = "w-14 md:w-14 lg:w-18 xl:w-22"
-
     return (
         <div className={className}>
             <div className={clsx(
                 "aspect-[2.3/3] flex justify-center items-center border-2 border-dashed rounded-lg p-2 ps-1 pt-1 mb-2",
-                widthClasses
+                "w-14 lg:w-18 xl:w-22"
             )}
                 style={{ background: tableMid, borderColor: tableDark }}
             >
                 {tile ?
                     <DraggableTile tile={tile} playerIndex={DISCARD_ID} /> :
-                    <span className="text-sm lg:text-base ms-1" style={{ color: tableDark }}>Discard</span>
+                    <span className="text-xs md:text-sm lg:text-base ms-1" style={{ color: tableDark }}>Discard</span>
                 }
             </div>
             <Button
-                className={widthClasses}
+                className={"min-w-14 lg:min-w-18 xl:w-22"}
                 colors={{
                     light: tableMid,
                     mid: tableDark,

@@ -14,7 +14,7 @@ type Props = {
 export default function DrawSpot({ className }: Props) {
     const { tileLight, tileDark } = useTheme()
     const { wall, gameState, currentPlayer, dispatch } = useMahjongData()
-    const tilesToShow = Math.min(10, wall.length)
+    const tilesToShow = Math.min(4, wall.length)
     return (
         <div className={clsx(className, "flex flex-col items-end")}>
             <div className="flex justify-end pb-4">
