@@ -1,5 +1,4 @@
 ---- HIGH PRIORITY ----
-Update handsData to be calculated by cache? (getHandsData(cardName))
 Rearrange PlayArea
 
 AI:

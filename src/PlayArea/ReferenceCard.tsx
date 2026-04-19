@@ -29,11 +29,35 @@ export default function ReferenceCard({ className }: Props) {
 
   return (
     <div className={clsx(
-      "flex flex-col align-top bg-white p-4 md:pb-0 rounded-lg md:rounded-b-none",
-      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "md:max-h-full",
+      "flex flex-col align-top bg-white p-4 pt-0 rounded-lg rounded-t-none min-h-0",
+      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full" : "",
       className
     )}>
-      <div className="pb-2 flex">
+      {(expanded || maximized) && (
+        <div className="overflow-y-auto flex-1 min-h-0 pb-3 pt-4 border-b-taupe-400 border-b-2">
+          <div className={clsx("break-inside-avoid-column", maximized ? "columns-[34rem]" : "columns-[14rem]")}>
+            {sections.map(section => (
+              <div key={section} className="mb-3">
+                <h3 className="font-bold">{section}</h3>
+                {hands.filter(hand => hand.section === section).map((hand, index) => {
+                  const pinned = pinnedIndexes.includes(hands.indexOf(hand))
+                  return (
+                    <ReferenceHand
+                      key={section + "_" + index}
+                      hand={hand}
+                      expanded={maximized}
+                      pinned={pinned}
+                      onClick={() => pin(hands.indexOf(hand))}
+                    />
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="pt-2 flex">
         <div className="grow shrink min-w-0 columns-1 2xl:columns-2">
           {pinnedIndexes.map(index => (
             <ReferenceHand
@@ -61,29 +85,6 @@ export default function ReferenceCard({ className }: Props) {
           </button>}
         </div>
       </div>
-      {(expanded || maximized) && (
-        <div className="overflow-y-auto flex-1 min-h-0 pt-3 pb-4 border-t-taupe-400 border-t-2">
-          <div className={clsx(maximized ? "columns-[34rem]" : "columns-[14rem]")}>
-            {sections.map(section => (
-              <div key={section} className="mb-3">
-                <h3 className="font-bold">{section}</h3>
-                {hands.filter(hand => hand.section === section).map((hand, index) => {
-                  const pinned = pinnedIndexes.includes(hands.indexOf(hand))
-                  return (
-                    <ReferenceHand
-                      key={section + "_" + index}
-                      hand={hand}
-                      expanded={maximized}
-                      pinned={pinned}
-                      onClick={() => pin(hands.indexOf(hand))}
-                    />
-                  )
-                })}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }

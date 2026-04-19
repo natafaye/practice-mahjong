@@ -5,6 +5,7 @@ import Button from "../Button"
 import { useTheme } from "../useTheme/useTheme"
 import { DRAWING, THIS_PLAYER } from "../constants"
 import useMahjongData from "../useMahjongData"
+import clsx from "clsx"
 
 type Props = {
     className?: string
@@ -13,16 +14,16 @@ type Props = {
 export default function DrawSpot({ className }: Props) {
     const { tileLight, tileDark } = useTheme()
     const { wall, gameState, currentPlayer, dispatch } = useMahjongData()
-    const tilesToShow = Math.min(20, wall.length)
+    const tilesToShow = Math.min(10, wall.length)
     return (
-        <div className={className}>
-            <div className="flex justify-end pb-5">
+        <div className={clsx(className, "flex flex-col items-end")}>
+            <div className="flex justify-end pb-4">
                 {Array.from(Array(tilesToShow).keys()).map((index) => (
                     <Tile key={index} message={wall.length - (tilesToShow - index - 1)} />
                 ))}
             </div>
             <Button
-                className="w-25 mb-2"
+                className="-me-1"
                 disabled={gameState !== DRAWING || currentPlayer !== THIS_PLAYER}
                 colors={{ 
                     light: tileLight, 

@@ -24,7 +24,7 @@ export default function PassingSpot({ className }: Props) {
         <div className={clsx(className, "flex flex-col items-center")}>
             {canStopCharleston && (
                 <Button
-                    className={clsx(widthClasses, "mb-5")}
+                    className={clsx(widthClasses, "mb-4")}
                     colors={{
                       light: tableMid,
                       mid: tableDark,

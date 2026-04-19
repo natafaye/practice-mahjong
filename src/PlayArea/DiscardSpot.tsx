@@ -17,12 +17,12 @@ export default function DiscardSpot({ className }: Props) {
     const { discard, gameState, dispatch } = useMahjongData()
     const tile = gameState === DISCARD ? discard.at(-1) : undefined
 
-    const widthClasses = "w-18 md:w-20 lg:w-21 xl:w-25"
+    const widthClasses = "w-14 md:w-14 lg:w-18 xl:w-22"
 
     return (
         <div className={className}>
             <div className={clsx(
-                "aspect-[2.3/3] flex justify-center items-center border-2 border-dashed rounded-lg p-4 ps-3 pt-3 mb-2",
+                "aspect-[2.3/3] flex justify-center items-center border-2 border-dashed rounded-lg p-2 ps-1 pt-1 mb-2",
                 widthClasses
             )}
                 style={{ background: tableMid, borderColor: tableDark }}
