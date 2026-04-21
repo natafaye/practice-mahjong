@@ -1,0 +1,30 @@
+1. Probability Summation Error (Non-Disjoint Events)
+The function sums the probabilities of all possible joker combinations (drawingChance += jokerComboChance). However, these
+combinations are not mutually exclusive. For example, if you need a 1-Dot and have one Joker available in the wall:
+  * Combo A: Draw the 1-Dot naturally.
+  * Combo B: Draw the Joker to substitute for the 1-Dot.
+
+Drawing both the 1-Dot and the Joker satisfies both combinations. Summing their probabilities double-counts these overlapping        
+outcomes, which overestimates the chance and can lead to a drawingChance greater than 1.
+
+2. Conservative "Exactly" Logic
+The multivariate hypergeometric formula implementation calculates the probability of drawing exactly the number of tiles specified in
+a combo and zero extra of any tiles listed in totalAvailable.
+
+  1 jokerComboChance *= nCr(totalUnseenTiles - totalAvailable, thisPlayerTurnsLeft - totalNeeded);
+In Mahjong, drawing more than the required number of a needed tile is still a win. By excluding outcomes where extra winning tiles   
+are drawn, the function significantly underestimates the probability of each individual combination.
+
+4. nCr Precision and Overflow
+The nCr function is susceptible to precision loss:
+  * Precision: Intermediate products (like res * (n - i + 1)) can easily exceed Number.MAX_SAFE_INTEGER ($2^{53} - 1$), causing the   
+    result to become a floating-point approximation.
+  * Performance: The division jokerComboChance /= nCr(totalUnseenTiles, thisPlayerTurnsLeft) is performed inside the loop. Dividing by
+    a massive number ($7.23 \times 10^{26}$ for $133C25$) repeatedly can lead to underflow errors or unnecessary precision loss.      
+
+Recommendations
+  * Use Complementary Probability: Calculate the probability of not winning (failing all combos) and subtract from 1, though this is  
+    complex with overlapping requirements.
+  * Simplify the Estimate: For a "reasonable estimate," consider using a simpler model that calculates the probability of drawing at  
+    least the required number of tiles for the "best" combination, rather than summing all combinations.
+  * Move Huge Divisions: Calculate the denominator nCr(totalUnseenTiles, thisPlayerTurnsLeft) once outside the loop.

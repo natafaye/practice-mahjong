@@ -33,7 +33,7 @@ export function undoableReducer(state: UndoableState, action: MahjongAction): Un
       if (future.length === 0) return state;
       // Do the redo
       const newFuture = [...future];
-      const newPresent = newFuture.shift()!;
+      const newPresent = newFuture.pop()!;
       const newPast = [...past, present];
       return {
         past: newPast,

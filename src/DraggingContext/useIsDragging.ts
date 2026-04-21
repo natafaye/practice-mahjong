@@ -1,25 +1,10 @@
-import { useDragDropMonitor } from "@dnd-kit/react";
-import { useState } from "react";
-import { DISCARD_ID, PASSING_ID } from "./DraggingContext";
+import { useContext } from "react";
+import { DISCARD_ID, DraggingStateContext, PASSING_ID } from "./DraggingContext";
 import { JOKER_SUIT } from "../constants";
-import type { MahjongTile } from "../types";
-
-type DraggingData = { 
-    tile?: MahjongTile, 
-    tileIndex?: number
-    playerIndex: number | typeof DISCARD_ID | typeof PASSING_ID
-}
 
 export function useIsDragging() {
-    const [draggingData, setDraggingData] = useState<DraggingData | undefined>(undefined)
-    useDragDropMonitor({
-        onDragStart: ({ operation }) => {
-            setDraggingData(operation.source?.data as DraggingData)
-        },
-        onDragEnd: () => {
-            setDraggingData(undefined)
-        }
-    })
+    const { draggingData } = useContext(DraggingStateContext)
+    
     return { 
         draggingTile: draggingData?.tile, 
         isDragging: draggingData !== undefined, 

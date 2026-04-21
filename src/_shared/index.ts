@@ -5,3 +5,4 @@ export { putInHandOrder } from "./putInHandOrder";
 export { checkIfMeldValid } from "./checkIfMeldValid";
 export { findBestHand } from "./findBestHand";
 export { getHandsData } from "./getHandsData";
+export { getWinWithHandChance } from "./getWinWithHandChance/getWinWithHandChance";

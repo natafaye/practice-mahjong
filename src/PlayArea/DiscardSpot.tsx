@@ -26,7 +26,7 @@ export default function DiscardSpot({ className }: Props) {
                 style={{ background: tableMid, borderColor: tableDark }}
             >
                 {tile ?
-                    <DraggableTile tile={tile} playerIndex={DISCARD_ID} /> :
+                    <DraggableTile key={tile.id} tile={tile} playerIndex={DISCARD_ID} /> :
                     <span className="text-xs md:text-sm lg:text-base ms-1" style={{ color: tableDark }}>Discard</span>
                 }
             </div>

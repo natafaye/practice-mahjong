@@ -1,3 +1,4 @@
+import { DOTS, FLOWER_SUIT, WIND_SUIT } from "./constants";
 import type { EXPOSED_GAP, GAME_STATES, GAPS, PASSING_GAPS } from "./constants";
 
 /**
@@ -34,7 +35,7 @@ export type Size = "sm" | "md" | "lg";
 // A specific meld
 export type MahjongHandMeld = {
   numbers: string[];
-  suit: "G" | "R" | "B";
+  suit: "G" | "R" | "B" | typeof FLOWER_SUIT | typeof WIND_SUIT | typeof DOTS;
 };
 
 // A winning hand made up of melds

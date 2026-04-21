@@ -1,3 +1,4 @@
+import { DOTS, FLOWER_SUIT, WIND_SUIT } from "../constants";
 import type { MahjongCard } from "../types";
 
 export const CARD_2025: MahjongCard = {
@@ -7,7 +8,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2025",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         { numbers: ["2025"], suit: "G" },
         { numbers: ["222", "555"], suit: "R" },
         { numbers: ["222", "555"], suit: "B" },
@@ -20,7 +21,7 @@ export const CARD_2025: MahjongCard = {
       section: "2025",
       melds: [
         { numbers: ["222"], suit: "G" },
-        { numbers: ["0000"], suit: "B" },
+        { numbers: ["0000"], suit: DOTS },
         { numbers: ["222"], suit: "R" },
         { numbers: ["5555"], suit: "R" },
       ],
@@ -43,9 +44,9 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2025",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["222"], suit: "G" },
-        { numbers: ["000"], suit: "B" },
+        { numbers: ["000"], suit: DOTS },
         { numbers: ["222"], suit: "R" },
         { numbers: ["555"], suit: "R" },
       ],
@@ -83,7 +84,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2468",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["2222"], suit: "G" },
         { numbers: ["4444"], suit: "R" },
         { numbers: ["6666"], suit: "B" },
@@ -95,7 +96,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2468",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["2222"], suit: "G" },
         { numbers: ["6666"], suit: "R" },
         { numbers: ["8888"], suit: "B" },
@@ -120,7 +121,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2468",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         { numbers: ["2468"], suit: "G" },
         { numbers: ["222", "444", "666", "888"], suit: "R" },
         { numbers: ["222", "444", "666", "888"], suit: "R" },
@@ -132,7 +133,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2468",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
         { numbers: ["22"], suit: "B" },
         { numbers: ["44"], suit: "B" },
         { numbers: ["666"], suit: "B" },
@@ -158,7 +159,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "2468",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["2222", "4444", "6666", "8888"], suit: "G" },
         { numbers: ["DDDD"], suit: "R" },
         { numbers: ["2222", "4444", "6666", "8888"], suit: "B" },
@@ -187,7 +188,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Any Like Numbers",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: [
             "1111",
@@ -230,10 +231,10 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Any Like Numbers",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         {
           numbers: ["11", "22", "33", "44", "55", "66", "77", "88", "99"],
-          suit: "G",
+          suit: "R",
         },
         {
           numbers: [
@@ -265,7 +266,7 @@ export const CARD_2025: MahjongCard = {
         },
         {
           numbers: ["11", "22", "33", "44", "55", "66", "77", "88", "99"],
-          suit: "B",
+          suit: "R",
         },
       ],
       text: "Any 3 Suits, Pairs Must Be Same Suit",
@@ -275,7 +276,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Any Like Numbers",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: [
             "111",
@@ -330,7 +331,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Quints",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: ["111", "222", "333", "444", "555", "666", "777"],
           suit: "G",
@@ -372,7 +373,7 @@ export const CARD_2025: MahjongCard = {
           ],
           suit: "B",
         },
-        { numbers: ["NNNN", "EEEE", "WWWW", "SSSS"], suit: "B" },
+        { numbers: ["NNNN", "EEEE", "WWWW", "SSSS"], suit: WIND_SUIT },
         {
           numbers: [
             "22222",
@@ -394,7 +395,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Quints",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: [
             "11111",
@@ -500,7 +501,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Consecutive Run",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         {
           numbers: ["1111", "2222", "3333", "4444", "5555", "6666", "7777"],
           suit: "G",
@@ -518,7 +519,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Consecutive Run",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         {
           numbers: ["1111", "2222", "3333", "4444", "5555", "6666", "7777"],
           suit: "G",
@@ -536,7 +537,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Consecutive Run",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
         { numbers: ["123", "234", "345", "456", "567"], suit: "G" },
         { numbers: ["4444", "5555", "6666", "7777", "8888"], suit: "R" },
         { numbers: ["5555", "6666", "7777", "8888", "9999"], suit: "R" },
@@ -548,7 +549,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Consecutive Run",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["11", "22", "33", "44", "55", "66", "77"], suit: "G" },
         {
           numbers: ["222", "333", "444", "555", "666", "777", "888"],
@@ -687,7 +688,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Consecutive Run",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["1", "2", "3", "4", "5", "6", "7"], suit: "G" },
         { numbers: ["22", "33", "44", "55", "66", "77", "88"], suit: "G" },
         {
@@ -785,7 +786,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "13579",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         { numbers: ["1111"], suit: "G" },
         { numbers: ["9999"], suit: "G" },
         { numbers: ["10"], suit: "R" },
@@ -797,7 +798,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "13579",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
         { numbers: ["135"], suit: "B" },
         { numbers: ["7777"], suit: "B" },
         { numbers: ["9999"], suit: "B" },
@@ -809,7 +810,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "13579",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
         { numbers: ["135"], suit: "G" },
         { numbers: ["7777"], suit: "R" },
         { numbers: ["9999"], suit: "B" },
@@ -849,7 +850,7 @@ export const CARD_2025: MahjongCard = {
       melds: [
         { numbers: ["11"], suit: "G" },
         { numbers: ["333"], suit: "G" },
-        { numbers: ["NEWS"], suit: "B" },
+        { numbers: ["NEWS"], suit: WIND_SUIT },
         { numbers: ["333"], suit: "R" },
         { numbers: ["55"], suit: "R" },
       ],
@@ -862,7 +863,7 @@ export const CARD_2025: MahjongCard = {
       melds: [
         { numbers: ["55"], suit: "G" },
         { numbers: ["777"], suit: "G" },
-        { numbers: ["NEWS"], suit: "B" },
+        { numbers: ["NEWS"], suit: WIND_SUIT },
         { numbers: ["777"], suit: "R" },
         { numbers: ["99"], suit: "R" },
       ],
@@ -886,7 +887,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "13579",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["11"], suit: "G" },
         { numbers: ["33"], suit: "G" },
         { numbers: ["111"], suit: "R" },
@@ -900,7 +901,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "13579",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["55"], suit: "G" },
         { numbers: ["77"], suit: "G" },
         { numbers: ["555"], suit: "R" },
@@ -917,10 +918,10 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["NNNN"], suit: "B" },
-        { numbers: ["EEE"], suit: "B" },
-        { numbers: ["WWW"], suit: "B" },
-        { numbers: ["SSSS"], suit: "B" },
+        { numbers: ["NNNN"], suit: WIND_SUIT },
+        { numbers: ["EEE"], suit: WIND_SUIT },
+        { numbers: ["WWW"], suit: WIND_SUIT },
+        { numbers: ["SSSS"], suit: WIND_SUIT },
       ],
       text: "",
       value: 25,
@@ -929,7 +930,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: ["123", "234", "345", "456", "567", "678", "789"],
           suit: "G",
@@ -945,11 +946,11 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
-        { numbers: ["NN"], suit: "B" },
-        { numbers: ["EE"], suit: "B" },
-        { numbers: ["WWW"], suit: "B" },
-        { numbers: ["SSSS"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
+        { numbers: ["NN"], suit: WIND_SUIT },
+        { numbers: ["EE"], suit: WIND_SUIT },
+        { numbers: ["WWW"], suit: WIND_SUIT },
+        { numbers: ["SSSS"], suit: WIND_SUIT },
       ],
       text: "",
       value: 25,
@@ -958,9 +959,9 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["FFFF"], suit: "B" },
+        { numbers: ["FFFF"], suit: FLOWER_SUIT },
         { numbers: ["DDD"], suit: "G" },
-        { numbers: ["NEWS"], suit: "B" },
+        { numbers: ["NEWS"], suit: WIND_SUIT },
         { numbers: ["DDD"], suit: "R" },
       ],
       text: "Dragons Any 2 Suits",
@@ -970,11 +971,11 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["NNNN"], suit: "B" },
+        { numbers: ["NNNN"], suit: WIND_SUIT },
         { numbers: ["1", "3", "5", "7", "9"], suit: "G" },
         { numbers: ["11", "33", "55", "77", "99"], suit: "R" },
         { numbers: ["111", "333", "555", "777", "999"], suit: "B" },
-        { numbers: ["SSSS"], suit: "B" },
+        { numbers: ["SSSS"], suit: WIND_SUIT },
       ],
       text: "Any Like Odd Nos. in 3 Suits",
       value: 25,
@@ -983,11 +984,11 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["EEEE"], suit: "B" },
+        { numbers: ["EEEE"], suit: WIND_SUIT },
         { numbers: ["2", "4", "6", "8"], suit: "G" },
         { numbers: ["22", "44", "66", "88"], suit: "R" },
         { numbers: ["222", "444", "666", "888"], suit: "B" },
-        { numbers: ["WWWW"], suit: "B" },
+        { numbers: ["WWWW"], suit: WIND_SUIT },
       ],
       text: "Any Like Even Nos. in 3 Suits",
       value: 25,
@@ -996,10 +997,10 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["NN"], suit: "B" },
-        { numbers: ["EEE"], suit: "B" },
-        { numbers: ["WWW"], suit: "B" },
-        { numbers: ["SS"], suit: "B" },
+        { numbers: ["NN"], suit: WIND_SUIT },
+        { numbers: ["EEE"], suit: WIND_SUIT },
+        { numbers: ["WWW"], suit: WIND_SUIT },
+        { numbers: ["SS"], suit: WIND_SUIT },
         { numbers: ["2025"], suit: "G" },
       ],
       text: "2025 Any 1 Suit",
@@ -1009,10 +1010,10 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["NNN"], suit: "B" },
-        { numbers: ["EE"], suit: "B" },
-        { numbers: ["WW"], suit: "B" },
-        { numbers: ["SSS"], suit: "B" },
+        { numbers: ["NNN"], suit: WIND_SUIT },
+        { numbers: ["EE"], suit: WIND_SUIT },
+        { numbers: ["WW"], suit: WIND_SUIT },
+        { numbers: ["SSS"], suit: WIND_SUIT },
         { numbers: ["2025"], suit: "G" },
       ],
       text: "Any 1 Suit",
@@ -1022,10 +1023,10 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Winds-Dragons",
       melds: [
-        { numbers: ["NN"], suit: "B" },
-        { numbers: ["EE"], suit: "B" },
-        { numbers: ["WWW"], suit: "B" },
-        { numbers: ["SSS"], suit: "B" },
+        { numbers: ["NN"], suit: WIND_SUIT },
+        { numbers: ["EE"], suit: WIND_SUIT },
+        { numbers: ["WWW"], suit: WIND_SUIT },
+        { numbers: ["SSS"], suit: WIND_SUIT },
         { numbers: ["DDDD"], suit: "B" },
       ],
       text: "Kong Any Dragon",
@@ -1062,7 +1063,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "369",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["3333"], suit: "B" },
         { numbers: ["6666"], suit: "B" },
         { numbers: ["9999"], suit: "B" },
@@ -1074,7 +1075,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "369",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["3333"], suit: "G" },
         { numbers: ["6666"], suit: "R" },
         { numbers: ["9999"], suit: "B" },
@@ -1098,7 +1099,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "369",
       melds: [
-        { numbers: ["FFF"], suit: "B" },
+        { numbers: ["FFF"], suit: FLOWER_SUIT },
         { numbers: ["3333"], suit: "G" },
         { numbers: ["369"], suit: "R" },
         { numbers: ["9999"], suit: "G" },
@@ -1123,7 +1124,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "369",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["333"], suit: "G" },
         { numbers: ["D"], suit: "G" },
         { numbers: ["666"], suit: "R" },
@@ -1141,9 +1142,9 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Singles and Pairs",
       melds: [
-        { numbers: ["NN"], suit: "B" },
-        { numbers: ["EW"], suit: "B" },
-        { numbers: ["SS"], suit: "B" },
+        { numbers: ["NN"], suit: WIND_SUIT },
+        { numbers: ["EW"], suit: WIND_SUIT },
+        { numbers: ["SS"], suit: WIND_SUIT },
         { numbers: ["11", "22", "33", "44", "55", "66"], suit: "B" },
         { numbers: ["22", "33", "44", "55", "66", "77"], suit: "B" },
         { numbers: ["33", "44", "55", "66", "77", "88"], suit: "B" },
@@ -1156,7 +1157,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Singles and Pairs",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["2468"], suit: "G" },
         { numbers: ["DD"], suit: "G" },
         { numbers: ["2468"], suit: "R" },
@@ -1184,7 +1185,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Singles and Pairs",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         {
           numbers: ["11", "22", "33", "44", "55", "66", "77", "88"],
           suit: "G",
@@ -1232,7 +1233,7 @@ export const CARD_2025: MahjongCard = {
     {
       section: "Singles and Pairs",
       melds: [
-        { numbers: ["FF"], suit: "B" },
+        { numbers: ["FF"], suit: FLOWER_SUIT },
         { numbers: ["2025"], suit: "G" },
         { numbers: ["2025"], suit: "R" },
         { numbers: ["2025"], suit: "B" },

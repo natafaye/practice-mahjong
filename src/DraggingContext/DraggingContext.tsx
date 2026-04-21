@@ -1,4 +1,4 @@
-import { useRef, useState, type ReactNode } from "react"
+import { createContext, useRef, useState, type ReactNode } from "react"
 import { DragDropProvider, DragOverlay, type DragEndEvent, type DragOverEvent, type DragStartEvent } from "@dnd-kit/react"
 import Tile from "../Tile/Tile"
 import useMahjongData from "../useMahjongData"
@@ -14,6 +14,20 @@ export const PLAY_AREA_ID = "PLAY_AREA"
 export const EXPOSED_RACK_ID = "EXPOSED_RACK"
 export const WHOLE_RACK_ID = "WHOLE_RACK"
 
+type DraggingData = {
+    tile?: MahjongTile,
+    tileIndex?: number
+    playerIndex: number | typeof DISCARD_ID | typeof PASSING_ID
+}
+
+type DraggingContextType = {
+    draggingData: DraggingData | undefined
+}
+
+export const DraggingStateContext = createContext<DraggingContextType>({
+    draggingData: undefined
+})
+
 type Props = {
     children: ReactNode
 }
@@ -21,13 +35,16 @@ type Props = {
 export function DraggingContext({ children }: Props) {
     const { dispatch, gameState } = useMahjongData()
     const [activeTile, setActiveTile] = useState<MahjongTile | null>(null)
+    const [draggingData, setDraggingData] = useState<DraggingData | undefined>(undefined)
     const currentDragIndex = useRef<number | null>(null)
 
     const onDragStart: DragStartEvent = ({ operation: { source } }) => {
         console.log('Started dragging', source?.id);
         if (source) {
             currentDragIndex.current = source.data.tileIndex;
-            setActiveTile(source.data.tile as MahjongTile);
+            const tile = source.data.tile as MahjongTile;
+            setActiveTile(tile);
+            setDraggingData(source.data as DraggingData);
         }
     }
 
@@ -54,6 +71,7 @@ export function DraggingContext({ children }: Props) {
         const finalIndex = currentDragIndex.current;
         currentDragIndex.current = null;
         setActiveTile(null);
+        setDraggingData(undefined);
 
         if (!target || !source || canceled || finalIndex === null) return
         console.log(`Dropped ${source.id} onto ${target.id}`);
@@ -122,17 +140,19 @@ export function DraggingContext({ children }: Props) {
     }
 
     return (
-        <DragDropProvider
-            onDragStart={onDragStart}
-            onDragOver={onDragOver}
-            onDragEnd={onDragEnd}
-        >
-            {children}
-            {activeTile && (
-                <DragOverlay dropAnimation={null}>
-                    <Tile tile={activeTile} />
-                </DragOverlay>
-            )}
-        </DragDropProvider>
+        <DraggingStateContext.Provider value={{ draggingData }}>
+            <DragDropProvider
+                onDragStart={onDragStart}
+                onDragOver={onDragOver}
+                onDragEnd={onDragEnd}
+            >
+                {children}
+                {activeTile && (
+                    <DragOverlay dropAnimation={null}>
+                        <Tile tile={activeTile} />
+                    </DragOverlay>
+                )}
+            </DragDropProvider>
+        </DraggingStateContext.Provider>
     )
 }
