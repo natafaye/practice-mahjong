@@ -1,8 +1,9 @@
-export const getCallingChanceForMeld = (
+export const getCallingChance = (
   suit: string,
   number: string | number,
   amountNeeded: number
 ) => {
+  console.log(suit, number, amountNeeded)
   // const chanceOfGettingToCallableByEnd = getDrawingChance(1 less than needed for this meld, everything else is miss)
   // const chanceAccessibleAtAll = numberOfWallTilesLeft / totalUnseenTiles
   // const callingChance = 0

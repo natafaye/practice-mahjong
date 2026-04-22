@@ -53,7 +53,6 @@ describe("generateCombosForDrawingJokers", () => {
     
     // 1 joker (used on DOTS_2)
     expect(result).toContainEqual([
-      { tileKey: "DOTS_2", totalNeeded: 0, nonCallable: 0, callable: 0 },
       { tileKey: "CRAKS_4", totalNeeded: 1, nonCallable: 0, callable: 1 },
       { tileKey: JOKER_SUIT + "_", totalNeeded: 1, nonCallable: 1, callable: 0 }
     ]);
@@ -61,14 +60,11 @@ describe("generateCombosForDrawingJokers", () => {
     // 1 joker (used on CRAKS_4)
     expect(result).toContainEqual([
       { tileKey: "DOTS_2", totalNeeded: 1, nonCallable: 0, callable: 1 },
-      { tileKey: "CRAKS_4", totalNeeded: 0, nonCallable: 0, callable: 0 },
       { tileKey: JOKER_SUIT + "_", totalNeeded: 1, nonCallable: 1, callable: 0 }
     ]);
     
     // 2 jokers (used on both)
     expect(result).toContainEqual([
-      { tileKey: "DOTS_2", totalNeeded: 0, nonCallable: 0, callable: 0 },
-      { tileKey: "CRAKS_4", totalNeeded: 0, nonCallable: 0, callable: 0 },
       { tileKey: JOKER_SUIT + "_", totalNeeded: 2, nonCallable: 2, callable: 0 }
     ]);
   });
@@ -86,7 +82,6 @@ describe("generateCombosForDrawingJokers", () => {
     expect(result).toHaveLength(2);
     expect(result).toContainEqual(neededTiles);
     expect(result).toContainEqual([
-      { tileKey: "DOTS_2", totalNeeded: 0, nonCallable: 0, callable: 0 },
       { tileKey: JOKER_SUIT + "_", totalNeeded: 1, nonCallable: 1, callable: 0 }
     ]);
   });

@@ -3,11 +3,11 @@ import type { ExactMeld } from "../getExactMeldCombinations";
 import { getExposedMelds } from "../getExposedMelds";
 import { meldCharacterToKey, tileToKey } from "./getUnseenTileCounts";
 
-type NeededData = {
+export type NeededData = {
   tileKey: string;
   totalNeeded: number;
-  nonCallable: number;
   callable: number;
+  nonCallable: number;
 };
 
 /**
@@ -41,14 +41,14 @@ export const generateNeededTiles = (
         record = {
           tileKey: neededKey,
           totalNeeded: 0,
-          nonCallable: 0,
           callable: 0,
+          nonCallable: 0,
         };
         neededTiles.set(neededKey, record);
       }
       // Increment non-callable count if this tile is non-callable
       const isCallable = numbers.split("").every((c) => c === numbers[0]) && numbers.length >= 3;
-      if (isCallable) record.callable++;
+      if (isCallable) record.callable++; else record.nonCallable++;
       // Increment total amount needed of this tile (including non-callable)
       record.totalNeeded++;
     }
@@ -63,9 +63,10 @@ export const generateNeededTiles = (
     const neededData = neededTiles.get(tileKey);
     // If this tile isn't needed, move on to the next one
     if (!neededData) continue;
+    neededData.totalNeeded--;
     // Cover non callable first since they're harder to get
     if (neededData.nonCallable) neededData.nonCallable--;
-    neededData.totalNeeded--;
+    else neededData.callable--;
     // If that was all we needed of this tile then delete this data
     if (neededData.totalNeeded === 0) neededTiles.delete(tileKey);
   }

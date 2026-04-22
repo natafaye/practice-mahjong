@@ -63,7 +63,6 @@ describe("generateCombosForPlayerJokers", () => {
     // 3. 0 on DOTS_2, 2 on CRAKS_4
     expect(result).toHaveLength(3);
     expect(result).toContainEqual([
-      { tileKey: "DOTS_2", totalNeeded: 0, nonCallable: 0, callable: 0 },
       { tileKey: "CRAKS_4", totalNeeded: 2, nonCallable: 0, callable: 2 }
     ]);
     expect(result).toContainEqual([
@@ -71,8 +70,7 @@ describe("generateCombosForPlayerJokers", () => {
       { tileKey: "CRAKS_4", totalNeeded: 1, nonCallable: 0, callable: 1 }
     ]);
     expect(result).toContainEqual([
-      { tileKey: "DOTS_2", totalNeeded: 2, nonCallable: 0, callable: 2 },
-      { tileKey: "CRAKS_4", totalNeeded: 0, nonCallable: 0, callable: 0 }
+      { tileKey: "DOTS_2", totalNeeded: 2, nonCallable: 0, callable: 2 }
     ]);
   });
 
@@ -84,9 +82,7 @@ describe("generateCombosForPlayerJokers", () => {
     const result = generateCombosForPlayerJokers(neededTiles, playerJokerCount);
     
     expect(result).toHaveLength(1);
-    expect(result[0]).toEqual([
-      { tileKey: "DOTS_2", totalNeeded: 0, nonCallable: 0, callable: 0 }
-    ]);
+    expect(result[0]).toEqual([]);
   });
 
   it("should correctly handle mixed callable and non-callable tiles", () => {
