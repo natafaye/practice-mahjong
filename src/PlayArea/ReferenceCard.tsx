@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectCardName } from '../store/selectors';
+import { selectCardName } from '../_store/selectors';
 import { useState } from "react"
 import { faAngleDown, faAngleUp, faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"

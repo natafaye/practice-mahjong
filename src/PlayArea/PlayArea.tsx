@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectGameState, selectCurrentPlayer, selectPassing } from '../store/selectors';
+import { selectGameState, selectCurrentPlayer, selectPassing } from '../_store/selectors';
 import clsx from "clsx"
 import ReferenceCard from "./ReferenceCard"
 import DiscardSpot from "./DiscardSpot"

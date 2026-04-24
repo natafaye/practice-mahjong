@@ -1,5 +1,5 @@
 import { ActionCreators } from 'redux-undo';
-import { restart } from '../store/gameSlice';
+import { restart } from '../_store/gameSlice';
 import { useState } from "react"
 import { faNoteSticky, faPlay, faUser, faUserGroup, faUsers } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -8,7 +8,7 @@ import Button from "../Button"
 import RadioInput from "../RadioInput/RadioInput"
 import { CARDS } from "../_data/CARDS"
 import { useDispatch, useSelector } from "react-redux"
-import { selectCardName } from "../store/selectors"
+import { selectCardName } from "../_store/selectors"
 
 type Props = {
   show: boolean

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCardName, selectMelding, selectPlayers } from '../store/selectors';
-import { addToMeld, confirmMeld, cancelMeld } from '../store/gameSlice';
+import { selectCardName, selectMelding, selectPlayers } from '../_store/selectors';
+import { addToMeld, confirmMeld, cancelMeld } from '../_store/gameSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"

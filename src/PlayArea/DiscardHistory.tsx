@@ -2,7 +2,7 @@ import clsx from "clsx"
 import { DISCARD } from "../constants"
 import Tile from "../Tile/Tile"
 import { useSelector } from "react-redux"
-import { selectDiscard, selectGameState } from "../store/selectors"
+import { selectDiscard, selectGameState } from "../_store/selectors"
 
 type Props = {
   className?: string

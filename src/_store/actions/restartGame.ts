@@ -1,4 +1,4 @@
-import { generateInitialData } from "../../store/generate/generateInitialData";
+import { generateInitialData } from "../generate/generateInitialData";
 
 type Payload = {
     cardName: string;

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectWall, selectGameState, selectCurrentPlayer } from '../store/selectors';
-import { drawFromWall } from '../store/gameSlice';
+import { selectWall, selectGameState, selectCurrentPlayer } from '../_store/selectors';
+import { drawFromWall } from '../_store/gameSlice';
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Tile from "../Tile/Tile"

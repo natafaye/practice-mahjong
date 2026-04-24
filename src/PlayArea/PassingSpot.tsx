@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectGameState, selectPassing, selectReadyToPass } from '../store/selectors';
-import { markReadyToPass, cancelCharleston } from '../store/gameSlice';
+import { selectGameState, selectPassing, selectReadyToPass } from '../_store/selectors';
+import { markReadyToPass, cancelCharleston } from '../_store/gameSlice';
 import clsx from "clsx";
 import { useTheme } from "../useTheme";
 import Button from "../Button";

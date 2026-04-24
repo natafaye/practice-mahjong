@@ -1,4 +1,4 @@
-import type { RootState } from ".";
+import type { RootState } from "./store";
 
 export const selectGameState = (state: RootState) => state.game.present.gameState;
 export const selectWinningPlayer = (state: RootState) => state.game.present.winningPlayer;

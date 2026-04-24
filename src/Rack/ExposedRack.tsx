@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectMelding, selectCurrentPlayer, selectCallingPlayer } from '../store/selectors';
+import { selectMelding, selectCurrentPlayer, selectCallingPlayer } from '../_store/selectors';
 import clsx from "clsx"
 import Tile from "../Tile/Tile"
 import { useTheme } from "../useTheme/useTheme"

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectDiscard, selectGameState } from '../store/selectors';
-import { skipDiscard } from '../store/gameSlice';
+import { selectDiscard, selectGameState } from '../_store/selectors';
+import { skipDiscard } from '../_store/gameSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons"
 import DraggableTile from "../Tile/DraggableTile"

@@ -8,7 +8,7 @@ import { useTheme } from "../useTheme"
 import NewGameModal from "./NewGameModal"
 import HintText from "./HintText"
 import { useDispatch, useSelector } from "react-redux"
-import { selectCanRedo, selectCanUndo } from "../store/selectors"
+import { selectCanRedo, selectCanUndo } from "../_store/selectors"
 
 export default function MenuBar() {
     const [showThemeModal, setShowThemeModal] = useState(false)

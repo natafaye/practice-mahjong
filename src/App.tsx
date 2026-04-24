@@ -1,6 +1,6 @@
 import '@fontsource-variable/noto-sans-kr/wght.css';
 import { useSelector } from 'react-redux';
-import { selectPlayers, selectCurrentPlayer, selectGameState } from './store/selectors';
+import { selectPlayers, selectCurrentPlayer, selectGameState } from './_store/selectors';
 import Rack from "./Rack";
 import PlayArea from "./PlayArea";
 import { useTheme } from "./useTheme/useTheme";

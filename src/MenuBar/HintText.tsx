@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { DISCARD, DRAWING, GAME_OVER, MELDING, PLAYING, THIS_PLAYER } from "../constants"
 import type { GameState } from "../types"
-import { selectGameState, selectWinningPlayer } from "../store/selectors"
+import { selectGameState, selectWinningPlayer } from "../_store/selectors"
 
 const gameStateText: Record<GameState, string> = {
     ["RIGHT_N_1"]: "Pick 3 tiles for first Right Pass",
