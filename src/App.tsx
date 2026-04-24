@@ -1,14 +1,17 @@
 import '@fontsource-variable/noto-sans-kr/wght.css';
+import { useSelector } from 'react-redux';
+import { selectPlayers, selectCurrentPlayer, selectGameState } from './store/selectors';
 import Rack from "./Rack";
 import PlayArea from "./PlayArea";
 import { useTheme } from "./useTheme/useTheme";
-import useMahjongData from "./useMahjongData";
 import { DraggingContext } from './DraggingContext';
 import { THIS_PLAYER, CHARLESTONS } from "./constants";
 import MenuBar from './MenuBar';
 
 export default function App() {
-  const { players, currentPlayer, gameState } = useMahjongData()
+  const players = useSelector(selectPlayers)
+  const currentPlayer = useSelector(selectCurrentPlayer)
+  const gameState = useSelector(selectGameState)
   const { tableLight, rackDark } = useTheme()
   // const [isIdle, setIsIdle] = useState(false)
   // const [bouncingTileId, setBouncingTileId] = useState<string | null>(null)

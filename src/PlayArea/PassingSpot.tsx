@@ -1,7 +1,9 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { selectGameState, selectPassing, selectReadyToPass } from '../store/selectors';
+import { markReadyToPass, cancelCharleston } from '../store/gameSlice';
 import clsx from "clsx";
 import { useTheme } from "../useTheme";
 import Button from "../Button";
-import useMahjongData from "../useMahjongData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCancel, faCircleLeft, faCircleRight, faCircleUp } from "@fortawesome/free-solid-svg-icons";
 import { LEFT, NORMAL_PASS, OVER, RIGHT, THIS_PLAYER } from "../constants";
@@ -13,8 +15,11 @@ type Props = {
 }
 
 export default function PassingSpot({ className }: Props) {
+  const dispatch = useDispatch()
   const { tableMid, tableDark, tableVeryDark } = useTheme()
-  const { gameState, passing, readyToPass, dispatch } = useMahjongData()
+  const gameState = useSelector(selectGameState)
+  const passing = useSelector(selectPassing)
+  const readyToPass = useSelector(selectReadyToPass)
   const [direction, type] = gameState.split("_")
   const widthClasses = "w-34 lg:w-42 xl:w-53"
   const passingDisabled = readyToPass[THIS_PLAYER] || type === NORMAL_PASS && passing[THIS_PLAYER].length < 3
@@ -42,7 +47,7 @@ export default function PassingSpot({ className }: Props) {
           className={clsx(widthClasses, "flex items-center justify-center")}
           colors={buttonColors}
           disabled={passingDisabled}
-          onClick={() => dispatch({ type: "MARK_READY_TO_PASS", payload: { playerIndex: THIS_PLAYER } })}
+          onClick={() => dispatch(markReadyToPass({ playerIndex: THIS_PLAYER }))}
         >
           <FontAwesomeIcon
             icon={{ [LEFT]: faCircleLeft, [RIGHT]: faCircleRight, [OVER]: faCircleUp }[direction]!}
@@ -55,7 +60,7 @@ export default function PassingSpot({ className }: Props) {
         <div className="mb-2 -ms-2">
           <Button
             colors={buttonColors}
-            onClick={() => dispatch({ type: "CANCEL_CHARLESTON" })}
+            onClick={() => dispatch(cancelCharleston())}
           >
             <FontAwesomeIcon icon={faCancel} className="text-lg me-2" />
             Stop Passing

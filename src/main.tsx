@@ -3,14 +3,15 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { ThemeProvider } from './useTheme'
-import { MahjongDataProvider } from './useMahjongData'
+import { Provider } from 'react-redux'
+import store from './store/index.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <MahjongDataProvider>
+      <Provider store={store}>
         <App />
-      </MahjongDataProvider>
+      </Provider>
     </ThemeProvider>
   </StrictMode>,
 )

@@ -241,8 +241,8 @@ export const CARD_2026: MahjongCard = {
     {
       section: "Quints",
       melds: [
-        { numbers: ["11111", "22222", "33333", "44444", "55555", "66666", "77777", "88888", "99999"], suit: "G" },
-        { numbers: ["11111", "22222", "33333", "44444", "55555", "66666", "77777", "88888", "99999"], suit: "G" },
+        { numbers: Array.from({ length: 9 }, (_, i) => (i + 1).toString().repeat(4)), suit: "G" },
+        { numbers: Array.from({ length: 9 }, () => Array.from({ length: 9 }, (_, i) => (i + 1).toString().repeat(4))).flatMap(i => i), suit: "G" },
         { numbers: ["DDDD"], suit: "R" },
       ],
       text: "Any 2 Nos. in Any 1 Suit w Opp. Dragon",
@@ -635,7 +635,7 @@ export const CARD_2026: MahjongCard = {
         { numbers: ["WWW"], suit: WIND_SUIT },
         { numbers: ["SSSS"], suit: WIND_SUIT },
       ],
-      text: "Any 1 Suit, Any 3 Dragons",
+      text: "",
       value: 25,
       concealed: false,
     },
@@ -647,7 +647,7 @@ export const CARD_2026: MahjongCard = {
         { numbers: ["WWWW"], suit: WIND_SUIT },
         { numbers: ["SSS"], suit: WIND_SUIT },
       ],
-      text: "Any 1 Suit, Any 3 Dragons",
+      text: "",
       value: 25,
       concealed: false,
     },

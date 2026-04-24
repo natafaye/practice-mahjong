@@ -1,6 +1,6 @@
 import { BLIND_PASS, COURTESY_PASS, PASSING_GAPS } from "../../../constants";
 import type { MahjongGameData } from "../../../types";
-import { clonePlayers } from "../../actions/clonePlayers";
+import { clonePlayers } from "../clonePlayers";
 import { shuffleArray } from "../../generate/shuffleArray";
 import { addWallPass } from "./addWallPass";
 import { balanceBlindPass } from "./balanceBlindPass";
@@ -12,7 +12,7 @@ import { getGiveToIndex } from "./getGiveToIndex";
  * (The passing array needs to be pre-filled with everyone's passes)
  */
 export const doCharlestonPass = (state: MahjongGameData) => {
-  const passing = [...state.passing]
+  const passing = state.passing.map(p => [...p])
   const newPlayers = clonePlayers(state);
   const newWall = [...state.wall];
   const [direction, type] = state.gameState.split("_");

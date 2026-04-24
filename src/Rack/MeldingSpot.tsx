@@ -1,8 +1,10 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCardName, selectMelding, selectPlayers } from '../store/selectors';
+import { addToMeld, confirmMeld, cancelMeld } from '../store/gameSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Button from "../Button"
 import { faCheck, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { checkIfMeldValid, getHandsData, sortTiles } from "../_shared"
-import useMahjongData from "../useMahjongData"
 import Tile from "../Tile/Tile"
 import type { Size } from "../types"
 import { THIS_PLAYER, JOKER_SUIT } from "../constants"
@@ -12,7 +14,10 @@ type Props = {
 }
 
 export default function MeldingSpot({ size }: Props) {
-  const { cardName, melding, dispatch, players } = useMahjongData()
+  const dispatch = useDispatch()
+  const cardName = useSelector(selectCardName)
+  const melding = useSelector(selectMelding)
+  const players = useSelector(selectPlayers)
   const handsData = getHandsData(cardName)
   const meldIsValid = checkIfMeldValid(melding, handsData.callableMelds)
 
@@ -29,11 +34,11 @@ export default function MeldingSpot({ size }: Props) {
   // Handle button events
   const handleQuickAdd = () => {
     if (quickAddIndex !== -1) {
-      dispatch({ type: "ADD_TO_MELD", payload: { playerIndex: THIS_PLAYER, tileIndexes: [quickAddIndex] } })
+      dispatch(addToMeld({ playerIndex: THIS_PLAYER, tileIndexes: [quickAddIndex] }))
     }
   }
-  const handleCancel = () => dispatch({ type: "CANCEL_MELD" })
-  const handleConfirm = () => dispatch({ type: "CONFIRM_MELD", payload: { playerIndex: THIS_PLAYER } })
+  const handleCancel = () => dispatch(cancelMeld())
+  const handleConfirm = () => dispatch(confirmMeld({ playerIndex: THIS_PLAYER }))
 
   return (
     <>

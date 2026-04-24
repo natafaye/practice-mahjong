@@ -1,6 +1,6 @@
 import { DOTS, FLOWER_SUIT, WIND_SUIT, WINDS } from "../../constants";
 import type { MahjongPlayer, MahjongTile, MahjongTileRow } from "../../types";
-import { generateTiles } from "../../useMahjongData/generate/generateTiles";
+import { generateTiles } from "../../store/generate/generateTiles";
 
 /**
  * Convert a tile into a shorthand string key

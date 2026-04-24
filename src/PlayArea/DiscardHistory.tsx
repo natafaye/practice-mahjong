@@ -1,14 +1,16 @@
 import clsx from "clsx"
 import { DISCARD } from "../constants"
 import Tile from "../Tile/Tile"
-import useMahjongData from "../useMahjongData"
+import { useSelector } from "react-redux"
+import { selectDiscard, selectGameState } from "../store/selectors"
 
 type Props = {
   className?: string
 }
 
 export default function DiscardHistory({ className }: Props) {
-  const { discard, gameState } = useMahjongData()
+  const discard = useSelector(selectDiscard)
+  const gameState = useSelector(selectGameState)
   return (
     <div className={clsx(className)}>
       {discard.slice(0, gameState === DISCARD ? -1 : discard.length).map((tile, index) => (

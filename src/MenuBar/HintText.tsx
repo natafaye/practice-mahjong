@@ -1,6 +1,7 @@
+import { useSelector } from "react-redux"
 import { DISCARD, DRAWING, GAME_OVER, MELDING, PLAYING, THIS_PLAYER } from "../constants"
 import type { GameState } from "../types"
-import useMahjongData from "../useMahjongData"
+import { selectGameState, selectWinningPlayer } from "../store/selectors"
 
 const gameStateText: Record<GameState, string> = {
     ["RIGHT_N_1"]: "Pick 3 tiles for first Right Pass",
@@ -18,7 +19,8 @@ const gameStateText: Record<GameState, string> = {
 }
 
 export default function HintText() {
-    const { gameState, winningPlayer } = useMahjongData()
+    const gameState = useSelector(selectGameState)
+    const winningPlayer = useSelector(selectWinningPlayer)
     return (
         <p className="shrink font-sans min-w-0 opacity-80 truncate px-3 text-sm md:text-lg">
             {gameState === GAME_OVER && winningPlayer !== THIS_PLAYER ? "You lost." : gameStateText[gameState]}

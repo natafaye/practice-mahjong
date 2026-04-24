@@ -1,9 +1,10 @@
+import { useSelector } from 'react-redux';
+import { selectCardName } from '../store/selectors';
 import { useState } from "react"
 import { faAngleDown, faAngleUp, faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 import ReferenceHand from "./ReferenceHand"
-import useMahjongData from "../useMahjongData"
 import { getHandsData } from "../_shared"
 
 type Props = {
@@ -15,7 +16,7 @@ export default function ReferenceCard({ className }: Props) {
   const [maximized, setMaximized] = useState(false)
   const [expanded, setExpanded] = useState(true)
 
-  const { cardName } = useMahjongData()
+  const cardName = useSelector(selectCardName)
   const { hands, sections } = getHandsData(cardName)
 
   const pin = (index: number) => {

@@ -1,3 +1,4 @@
+import { ActionCreators } from 'redux-undo';
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPalette, faPlus, faRedo, faUndo } from "@fortawesome/free-solid-svg-icons"
@@ -6,12 +7,15 @@ import Button from "../Button"
 import { useTheme } from "../useTheme"
 import NewGameModal from "./NewGameModal"
 import HintText from "./HintText"
-import useMahjongData from "../useMahjongData"
+import { useDispatch, useSelector } from "react-redux"
+import { selectCanRedo, selectCanUndo } from "../store/selectors"
 
 export default function MenuBar() {
     const [showThemeModal, setShowThemeModal] = useState(false)
     const [showNewGameModal, setShowNewGameModal] = useState(false)
-    const { canUndo, canRedo, dispatch } = useMahjongData()
+    const canUndo = useSelector(selectCanUndo)
+    const canRedo = useSelector(selectCanRedo)
+    const dispatch = useDispatch()
     const { rackLight, rackMid, rackDark, rackVeryDark } = useTheme()
     const buttonColors = { light: rackLight, mid: rackMid, dark: rackVeryDark }
 
@@ -19,14 +23,14 @@ export default function MenuBar() {
         <div className="relative p-2 pb-3 -mt-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
             <div className="flex flex-nowrap gap-1">
                 <Button
-                    onClick={() => dispatch({ type: "UNDO" })}
+                    onClick={() => dispatch(ActionCreators.undo())}
                     colors={buttonColors}
                     disabled={!canUndo}
                 >
                     <FontAwesomeIcon icon={faUndo} /> Undo
                 </Button>
                 <Button
-                    onClick={() => dispatch({ type: "REDO" })}
+                    onClick={() => dispatch(ActionCreators.redo())}
                     colors={buttonColors}
                     disabled={!canRedo}
                 >

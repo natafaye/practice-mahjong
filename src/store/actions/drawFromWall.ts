@@ -1,6 +1,6 @@
 import { DRAWING, GAME_OVER, PLAYING, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
-import { clonePlayers } from "./clonePlayers";
+import { clonePlayers } from "../../store/actions/clonePlayers";
 import { handleGameWin } from "./handleGameWin";
 
 export const drawFromWall = (state: MahjongGameData, { playerIndex } : { playerIndex: number }) => {

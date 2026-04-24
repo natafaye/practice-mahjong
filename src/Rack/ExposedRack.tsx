@@ -1,7 +1,8 @@
+import { useSelector } from 'react-redux';
+import { selectMelding, selectCurrentPlayer, selectCallingPlayer } from '../store/selectors';
 import clsx from "clsx"
 import Tile from "../Tile/Tile"
 import { useTheme } from "../useTheme/useTheme"
-import useMahjongData from "../useMahjongData"
 import { DropOverlay, EXPOSED_RACK_ID, useIsDragging } from "../DraggingContext"
 import { getJokerSwapIndex } from "../_shared"
 import type { MahjongPlayer, Size } from "../types"
@@ -16,7 +17,9 @@ type Props = {
 }
 
 export default function ExposedRack({ player, size, bouncingTileId = null }: Props) {
-	const { melding, currentPlayer, callingPlayer } = useMahjongData()
+	const melding = useSelector(selectMelding)
+	const currentPlayer = useSelector(selectCurrentPlayer)
+	const callingPlayer = useSelector(selectCallingPlayer)
 	const { rackLight, rackDark } = useTheme()
 	const { draggingTile } = useIsDragging()
 

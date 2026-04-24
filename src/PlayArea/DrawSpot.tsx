@@ -1,10 +1,12 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { selectWall, selectGameState, selectCurrentPlayer } from '../store/selectors';
+import { drawFromWall } from '../store/gameSlice';
 import { faUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Tile from "../Tile/Tile"
 import Button from "../Button"
 import { useTheme } from "../useTheme/useTheme"
 import { DRAWING, THIS_PLAYER } from "../constants"
-import useMahjongData from "../useMahjongData"
 import clsx from "clsx"
 
 type Props = {
@@ -12,8 +14,11 @@ type Props = {
 }
 
 export default function DrawSpot({ className }: Props) {
+    const dispatch = useDispatch()
     const { tileLight, tileDark } = useTheme()
-    const { wall, gameState, currentPlayer, dispatch } = useMahjongData()
+    const wall = useSelector(selectWall)
+    const gameState = useSelector(selectGameState)
+    const currentPlayer = useSelector(selectCurrentPlayer)
     const tilesToShow = Math.min(4, wall.length)
     return (
         <div className={clsx(className, "flex flex-col items-end")}>
@@ -30,7 +35,7 @@ export default function DrawSpot({ className }: Props) {
                     mid: tileLight, 
                     dark: tileDark 
                 }}
-                onClick={() => dispatch({ type: "DRAW_FROM_WALL", payload: { playerIndex: currentPlayer } })}
+                onClick={() => dispatch(drawFromWall({ playerIndex: currentPlayer }))}
             >
                 <FontAwesomeIcon icon={faUpRightFromSquare} flip="vertical" className="me-1" />
                 Draw

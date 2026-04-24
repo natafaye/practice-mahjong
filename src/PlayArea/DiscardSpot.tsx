@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { selectDiscard, selectGameState } from '../store/selectors';
+import { skipDiscard } from '../store/gameSlice';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons"
 import DraggableTile from "../Tile/DraggableTile"
@@ -5,7 +8,6 @@ import Button from "../Button"
 import { useTheme } from "../useTheme/useTheme"
 import { DISCARD_ID } from "../DraggingContext"
 import { DISCARD, THIS_PLAYER } from "../constants"
-import useMahjongData from "../useMahjongData"
 import clsx from "clsx"
 
 type Props = {
@@ -13,8 +15,10 @@ type Props = {
 }
 
 export default function DiscardSpot({ className }: Props) {
+    const dispatch = useDispatch()
     const { tableMid, tableDark, tableVeryDark } = useTheme()
-    const { discard, gameState, dispatch } = useMahjongData()
+    const discard = useSelector(selectDiscard)
+    const gameState = useSelector(selectGameState)
     const tile = gameState === DISCARD ? discard.at(-1) : undefined
 
     return (
@@ -38,7 +42,7 @@ export default function DiscardSpot({ className }: Props) {
                     dark: tableVeryDark
                 }}
                 disabled={gameState !== DISCARD}
-                onClick={() => dispatch({ type: "SKIP_DISCARD", payload: { playerIndex: THIS_PLAYER } })}
+                onClick={() => dispatch(skipDiscard({ playerIndex: THIS_PLAYER }))}
             >
                 <FontAwesomeIcon icon={faArrowUpFromBracket} className="me-1" rotation={90} />
                 Skip

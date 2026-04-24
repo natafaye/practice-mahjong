@@ -1,9 +1,10 @@
+import { useSelector } from 'react-redux';
+import { selectGameState, selectCurrentPlayer, selectPassing } from '../store/selectors';
 import clsx from "clsx"
 import ReferenceCard from "./ReferenceCard"
 import DiscardSpot from "./DiscardSpot"
 import DrawSpot from "./DrawSpot"
 import { useTheme } from "../useTheme/useTheme"
-import useMahjongData from "../useMahjongData"
 import { DropOverlay, useIsDragging } from "../DraggingContext"
 import { CHARLESTONS, PLAYING, THIS_PLAYER } from "../constants"
 import PassingSpot from "./PassingSpot"
@@ -16,7 +17,9 @@ type Props = {
 
 export default function PlayArea({ className }: Props) {
   const { tableMid, tableDark, tableLight } = useTheme()
-  const { gameState, currentPlayer, passing } = useMahjongData()
+  const gameState = useSelector(selectGameState)
+  const currentPlayer = useSelector(selectCurrentPlayer)
+  const passing = useSelector(selectPassing)
   const isCharleston = CHARLESTONS.includes(gameState)
   const { isDraggingGap, isDraggingJoker } = useIsDragging()
 

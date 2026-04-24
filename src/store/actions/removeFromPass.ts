@@ -1,6 +1,6 @@
 import { PASSING_GAPS } from "../../constants";
 import type { MahjongGameData } from "../../types";
-import { clonePlayers } from "./clonePlayers";
+import { clonePlayers } from "../../store/actions/clonePlayers";
 
 type Payload = {
     playerIndex: number;
