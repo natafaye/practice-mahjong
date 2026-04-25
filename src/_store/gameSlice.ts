@@ -16,7 +16,6 @@ import { confirmMeld as confirmMeldLogic } from './actions/confirmMeld';
 import { rearrangeUnexposed as rearrangeUnexposedLogic } from './actions/rearrangeUnexposed';
 import { doAICalls } from './aiPlayer/doAICalls';
 import { doAIPasses } from './aiPlayer/doAIPasses';
-
 import { defaultCard } from '../_data/CARDS';
 
 const initialState: MahjongGameData = generateInitialData(4, defaultCard.name);
@@ -25,8 +24,8 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    restart: (_state, action: PayloadAction<{ cardName: string, numberOfPlayers: number }>) => {
-      return generateInitialData(action.payload.numberOfPlayers, action.payload.cardName);
+    newGame: (_state, action: PayloadAction<{ cardName: string, numberOfPlayers: number, seed?: string }>) => {
+      return generateInitialData(action.payload.numberOfPlayers, action.payload.cardName, action.payload.seed);
     },
     addToPass: (state, action: PayloadAction<{ playerIndex: number, tileIndexes: number[] }>) => {
       return addToPassLogic(state, action.payload);
@@ -82,7 +81,7 @@ const gameSlice = createSlice({
 });
 
 export const {
-  restart,
+  newGame,
   addToPass,
   removeFromPass,
   markReadyToPass,

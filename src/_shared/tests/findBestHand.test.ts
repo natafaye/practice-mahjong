@@ -74,11 +74,7 @@ describe("findBestHand", () => {
 
     const player: MahjongPlayer = {
       index: 0,
-      concealed: [
-        ...createMeld(DOTS, "222"),
-        ...createMeld(DOTS, "666"),
-        ...createMeld(DOTS, "8888"),
-      ],
+      concealed: [...createMeld(DOTS, "222"), ...createMeld(DOTS, "666"), ...createMeld(DOTS, "8888")],
       exposed: [...createMeld(DOTS, "4444"), EXPOSED_GAP],
     };
 
@@ -88,9 +84,7 @@ describe("findBestHand", () => {
 
   it("should find the best match across different sections", () => {
     // 11, 333, 5555, 777, 99 in 1 suit
-    const hand13579 = allHands.find(
-      (h) => h.section === "13579" && h.melds.length === 5,
-    )!;
+    const hand13579 = allHands.find((h) => h.section === "13579" && h.melds.length === 5)!;
     // 333 (G), 6666 (G), 666 (R), 9999 (R)
     const hand369 = allHands.find((h) => h.section === "369")!;
 
@@ -136,9 +130,7 @@ describe("findBestHand", () => {
 
   it("should correctly identify a Singles and Pairs hand", () => {
     // NN, EW, SS, 11, 22, 33, 44 in 1 suit
-    const singlesPairsHand = allHands.find(
-      (h) => h.section === "Singles and Pairs",
-    )!;
+    const singlesPairsHand = allHands.find((h) => h.section === "Singles and Pairs")!;
 
     const tiles = [
       ...createMeld(CRAKS, "NNE"),
@@ -183,9 +175,7 @@ describe("findBestHand", () => {
 
   it("should correctly identify a Consecutive Run hand", () => {
     // 11, 222, 3333, 444, 55 in 1 suit
-    const consecutiveRunHand = allHands.find(
-      (h) => h.section === "Consecutive Run",
-    )!;
+    const consecutiveRunHand = allHands.find((h) => h.section === "Consecutive Run")!;
 
     const tiles = [
       ...createMeld(BAMS, "11"),
@@ -208,9 +198,7 @@ describe("findBestHand", () => {
 
   it("should correctly identify Any Like Numbers hand", () => {
     // FF (B), 1111 (G), D (G), 1111 (R), D (R), 11 (B)
-    const likeNumbersHand = allHands.find(
-      (h) => h.section === "Any Like Numbers",
-    )!;
+    const likeNumbersHand = allHands.find((h) => h.section === "Any Like Numbers")!;
 
     const tiles = [
       ...createMeld(CRAKS, "FF"),
@@ -233,9 +221,7 @@ describe("findBestHand", () => {
   });
 
   it("should correctly match: FF (B), 11 (G), 222 (G), 3333 (G), DDD (G)", () => {
-    const hand = allHands.find(
-      (h) => h.section === "Consecutive Run" && h.text === "Any 1 Suit, Any 3 Consec. Nos.",
-    )!;
+    const hand = allHands.find((h) => h.section === "Consecutive Run" && h.text === "Any 1 Suit, Any 3 Consec. Nos.")!;
 
     const player: MahjongPlayer = {
       index: 0,
@@ -244,12 +230,9 @@ describe("findBestHand", () => {
         ...createMeld(CRAKS, "3"),
         ...createMeld(CRAKS, "DJ"),
         createTile(CRAKS, "7"),
-        ...createMeld(CRAKS, "11")
+        ...createMeld(CRAKS, "11"),
       ],
-      exposed: [ 
-        ...createMeld(CRAKS, "444"), EXPOSED_GAP,
-        ...createMeld(CRAKS, "555J"), EXPOSED_GAP,
-      ],
+      exposed: [...createMeld(CRAKS, "444"), EXPOSED_GAP, ...createMeld(CRAKS, "555J"), EXPOSED_GAP],
     };
 
     const result = findBestHand(player, allHands);
@@ -258,9 +241,7 @@ describe("findBestHand", () => {
   });
 
   it("should correctly match: FF (B), 11 (G), 222 (G), 3333 (G), DDD (G)", () => {
-    const hand = allHands.find(
-      (h) => h.section === "Consecutive Run" && h.text === "Any 1 Suit, Any 3 Consec. Nos.",
-    )!;
+    const hand = allHands.find((h) => h.section === "Consecutive Run" && h.text === "Any 1 Suit, Any 3 Consec. Nos.")!;
 
     const player: MahjongPlayer = {
       index: 0,
@@ -270,9 +251,7 @@ describe("findBestHand", () => {
         ...createMeld(CRAKS, "6J"),
         ...createMeld(CRAKS, "777J"),
       ],
-      exposed: [ 
-        ...createMeld(CRAKS, "DJJ"), EXPOSED_GAP,
-      ],
+      exposed: [...createMeld(CRAKS, "DJJ"), EXPOSED_GAP],
     };
 
     const result = findBestHand(player, allHands);

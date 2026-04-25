@@ -6,6 +6,7 @@ export const CARD_2025: MahjongCard = {
   hands: [
     // #region 2025
     {
+      id: "2025_0",
       section: "2025",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -18,6 +19,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_1",
       section: "2025",
       melds: [
         { numbers: ["222"], suit: "G" },
@@ -30,6 +32,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_2",
       section: "2025",
       melds: [
         { numbers: ["2025"], suit: "G" },
@@ -42,6 +45,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_3",
       section: "2025",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -58,6 +62,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region 2468
     {
+      id: "2025_4",
       section: "2468",
       melds: [
         { numbers: ["222"], suit: "B" },
@@ -70,6 +75,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_5",
       section: "2468",
       melds: [
         { numbers: ["222"], suit: "G" },
@@ -82,6 +88,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_6",
       section: "2468",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -94,6 +101,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_7",
       section: "2468",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -106,6 +114,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_8",
       section: "2468",
       melds: [
         { numbers: ["22"], suit: "B" },
@@ -119,6 +128,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_9",
       section: "2468",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -131,6 +141,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_10",
       section: "2468",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -144,6 +155,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_11",
       section: "2468",
       melds: [
         { numbers: ["222"], suit: "G" },
@@ -157,6 +169,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_12",
       section: "2468",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -169,6 +182,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_13",
       section: "2468",
       melds: [
         { numbers: ["22"], suit: "G" },
@@ -186,6 +200,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region ANY LIKE NUMBERS
     {
+      id: "2025_14",
       section: "Any Like Numbers",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -229,6 +244,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_15",
       section: "Any Like Numbers",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -274,6 +290,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_16",
       section: "Any Like Numbers",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -329,6 +346,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region QUINTS
     {
+      id: "2025_17",
       section: "Quints",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -358,6 +376,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_18",
       section: "Quints",
       melds: [
         {
@@ -393,6 +412,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_19",
       section: "Quints",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -437,6 +457,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region CONSECUTIVE RUN
     {
+      id: "2025_20",
       section: "Consecutive Run",
       melds: [
         { numbers: ["11"], suit: "B" },
@@ -450,6 +471,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_21",
       section: "Consecutive Run",
       melds: [
         { numbers: ["55"], suit: "B" },
@@ -463,6 +485,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_22",
       section: "Consecutive Run",
       melds: [
         { numbers: ["111", "222", "333", "444", "555", "666"], suit: "G" },
@@ -481,6 +504,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_23",
       section: "Consecutive Run",
       melds: [
         { numbers: ["111", "222", "333", "444", "555", "666"], suit: "G" },
@@ -499,6 +523,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_24",
       section: "Consecutive Run",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -517,6 +542,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_25",
       section: "Consecutive Run",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -535,6 +561,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_26",
       section: "Consecutive Run",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -547,6 +574,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_27",
       section: "Consecutive Run",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -566,6 +594,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_28",
       section: "Consecutive Run",
       melds: [
         {
@@ -588,6 +617,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_29",
       section: "Consecutive Run",
       melds: [
         {
@@ -686,6 +716,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_30",
       section: "Consecutive Run",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -710,6 +741,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region 13579
     {
+      id: "2025_31",
       section: "13579",
       melds: [
         { numbers: ["11"], suit: "B" },
@@ -723,6 +755,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_32",
       section: "13579",
       melds: [
         { numbers: ["11"], suit: "G" },
@@ -736,6 +769,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_33",
       section: "13579",
       melds: [
         { numbers: ["111"], suit: "G" },
@@ -748,6 +782,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_34",
       section: "13579",
       melds: [
         { numbers: ["555"], suit: "G" },
@@ -760,6 +795,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_35",
       section: "13579",
       melds: [
         { numbers: ["1111"], suit: "B" },
@@ -772,6 +808,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_36",
       section: "13579",
       melds: [
         { numbers: ["5555"], suit: "B" },
@@ -784,6 +821,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_37",
       section: "13579",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -796,6 +834,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_38",
       section: "13579",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -808,6 +847,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_39",
       section: "13579",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -820,6 +860,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_40",
       section: "13579",
       melds: [
         { numbers: ["111"], suit: "G" },
@@ -833,6 +874,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_41",
       section: "13579",
       melds: [
         { numbers: ["555"], suit: "G" },
@@ -846,6 +888,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_42",
       section: "13579",
       melds: [
         { numbers: ["11"], suit: "G" },
@@ -859,6 +902,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_43",
       section: "13579",
       melds: [
         { numbers: ["55"], suit: "G" },
@@ -872,6 +916,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_44",
       section: "13579",
       melds: [
         { numbers: ["1111"], suit: "G" },
@@ -885,6 +930,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_45",
       section: "13579",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -899,6 +945,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_46",
       section: "13579",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -916,6 +963,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region WINDS-DRAGONS
     {
+      id: "2025_47",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["NNNN"], suit: WIND_SUIT },
@@ -928,6 +976,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_48",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -944,6 +993,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_49",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -957,6 +1007,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_50",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["FFFF"], suit: FLOWER_SUIT },
@@ -969,6 +1020,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_51",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["NNNN"], suit: WIND_SUIT },
@@ -982,6 +1034,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_52",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["EEEE"], suit: WIND_SUIT },
@@ -995,6 +1048,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_53",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["NN"], suit: WIND_SUIT },
@@ -1008,6 +1062,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_54",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["NNN"], suit: WIND_SUIT },
@@ -1021,6 +1076,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_55",
       section: "Winds-Dragons",
       melds: [
         { numbers: ["NN"], suit: WIND_SUIT },
@@ -1037,6 +1093,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region 369
     {
+      id: "2025_56",
       section: "369",
       melds: [
         { numbers: ["333"], suit: "G" },
@@ -1049,6 +1106,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_57",
       section: "369",
       melds: [
         { numbers: ["333"], suit: "G" },
@@ -1061,6 +1119,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_58",
       section: "369",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -1073,6 +1132,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_59",
       section: "369",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -1085,6 +1145,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_60",
       section: "369",
       melds: [
         { numbers: ["3333", "6666", "9999"], suit: "G" },
@@ -1097,6 +1158,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_61",
       section: "369",
       melds: [
         { numbers: ["FFF"], suit: FLOWER_SUIT },
@@ -1109,6 +1171,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_62",
       section: "369",
       melds: [
         { numbers: ["33"], suit: "G" },
@@ -1122,6 +1185,7 @@ export const CARD_2025: MahjongCard = {
       concealed: false,
     },
     {
+      id: "2025_63",
       section: "369",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -1140,6 +1204,7 @@ export const CARD_2025: MahjongCard = {
 
     // #region SINGLES AND PAIRS
     {
+      id: "2025_64",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["NN"], suit: WIND_SUIT },
@@ -1155,6 +1220,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_65",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -1168,6 +1234,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_66",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["33"], suit: "G" },
@@ -1183,6 +1250,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_67",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },
@@ -1216,6 +1284,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_68",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["11"], suit: "G" },
@@ -1231,6 +1300,7 @@ export const CARD_2025: MahjongCard = {
       concealed: true,
     },
     {
+      id: "2025_69",
       section: "Singles and Pairs",
       melds: [
         { numbers: ["FF"], suit: FLOWER_SUIT },

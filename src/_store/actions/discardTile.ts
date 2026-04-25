@@ -1,4 +1,4 @@
-import { DISCARD, GAPS, PLAYING } from "../../constants";
+import { DISCARD, GAPS, PLAYING, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { clonePlayers } from "./clonePlayers";
 
@@ -20,8 +20,10 @@ export const discardTile = (state: MahjongGameData, { playerIndex, tileIndex }: 
   const concealed = newPlayers[playerIndex].concealed;
   concealed.splice(tileIndex, 1);
   // If there's a gap missing (taken over by the drawn tile) then put it back in
-  const missingGap = GAPS.find((gap) => !concealed.includes(gap));
-  if (missingGap) concealed.unshift(missingGap);
+  if (playerIndex === THIS_PLAYER) {
+    const missingGap = GAPS.find((gap) => !concealed.includes(gap));
+    if (missingGap) concealed.unshift(missingGap);
+  }
   // Add the removed tile to the discard and go to the next turn
   return {
     ...state,

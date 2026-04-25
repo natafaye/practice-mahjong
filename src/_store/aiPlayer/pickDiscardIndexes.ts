@@ -1,4 +1,6 @@
+import { Chance } from "chance";
 import type { MahjongGameData, MahjongPlayer } from "../../types";
+import { shuffleArray } from "../generate/shuffleArray";
 
 export const pickDiscardIndexes = (
   player: MahjongPlayer,
@@ -7,5 +9,11 @@ export const pickDiscardIndexes = (
   isAmountVariable: boolean = false,
 ) => {
   console.log(player, state, isAmountVariable);
-  return Array.from({ length: amount }, (_, i) => i);
+  const indexes = shuffleArray(
+    player.concealed
+      .map((tile, i) => (typeof tile === "string" ? -1 : i))
+      .filter((i) => i !== -1),
+    new Chance(state.seed).d100().toString(),
+  );
+  return indexes.slice(0, amount);
 };

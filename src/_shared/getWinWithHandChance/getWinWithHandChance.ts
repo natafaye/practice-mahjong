@@ -1,5 +1,5 @@
 import { getDrawingChance } from "./getDrawingChance";
-import { generateNeededTiles } from "./generateNeededTiles";
+import { getNeededTiles } from "./getNeededTiles";
 import { getUnseenTileCounts } from "./getUnseenTileCounts";
 import type { MahjongGameData, MahjongHand } from "../../types";
 import { JOKER_SUIT } from "../../constants";
@@ -38,7 +38,7 @@ export const getWinWithHandChance = (hand: MahjongHand, gameData: MahjongGameDat
   let bestExactHand = exactHandCombos[0];
   for (const exactHand of exactHandCombos) {
     // Get the tiles still needed to complete this combination (no jokers used yet)
-    const neededTilesBeforeJokers = generateNeededTiles(exactHand, player);
+    const neededTilesBeforeJokers = getNeededTiles(exactHand, player);
 
     // If there are exposed melds that don't match this exact hand, move on to next one
     if (!neededTilesBeforeJokers) continue;

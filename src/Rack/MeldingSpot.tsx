@@ -8,12 +8,14 @@ import { checkIfMeldValid, getHandsData, sortTiles } from "../_shared"
 import Tile from "../Tile/Tile"
 import type { Size } from "../types"
 import { THIS_PLAYER, JOKER_SUIT } from "../constants"
+import clsx from 'clsx';
 
 type Props = {
   size: Size
+  className: string
 }
 
-export default function MeldingSpot({ size }: Props) {
+export default function MeldingSpot({ size, className }: Props) {
   const dispatch = useDispatch()
   const cardName = useSelector(selectCardName)
   const melding = useSelector(selectMelding)
@@ -41,11 +43,19 @@ export default function MeldingSpot({ size }: Props) {
   const handleConfirm = () => dispatch(confirmMeld({ playerIndex: THIS_PLAYER }))
 
   return (
-    <>
-      {melding.toSorted(sortTiles).map(tile => (
-        <Tile key={tile.id} tile={tile} size={size} />
-      ))}
-      <div className="flex xl:flex-col gap-1 ms-2 justify-end items-center pb-2">
+    <div className={clsx(className, "flex")}>
+      <div className="flex gap-1 me-2 justify-center items-center pb-2">
+        <Button
+          colors={{
+            light: "var(--color-red-300)",
+            mid: "var(--color-red-400)",
+            dark: "var(--color-red-500)",
+            text: "var(--color-red-900)"
+          }}
+          onClick={handleCancel}
+        >
+          <FontAwesomeIcon icon={faXmark} />
+        </Button>
         <Button
           colors={{
             light: "var(--color-taupe-50)",
@@ -60,18 +70,6 @@ export default function MeldingSpot({ size }: Props) {
         </Button>
         <Button
           colors={{
-            light: "var(--color-red-300)",
-            mid: "var(--color-red-400)",
-            dark: "var(--color-red-500)",
-            text: "var(--color-red-900)"
-          }}
-          onClick={handleCancel}
-        >
-          <FontAwesomeIcon icon={faXmark} />
-        </Button>
-        <Button
-          className="xl:order-first"
-          colors={{
             light: "var(--color-emerald-300)",
             mid: "var(--color-emerald-400)",
             dark: "var(--color-emerald-500)",
@@ -83,6 +81,9 @@ export default function MeldingSpot({ size }: Props) {
           <FontAwesomeIcon icon={faCheck} />
         </Button>
       </div>
-    </>
+      {melding.toSorted(sortTiles).map(tile => (
+        <Tile key={tile.id} tile={tile} size={size} />
+      ))}
+    </div>
   )
 }

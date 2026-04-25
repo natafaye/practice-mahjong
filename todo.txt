@@ -1,19 +1,14 @@
 ---- HIGH PRIORITY ----
-Allow calling anything to win the game (check on drop?)
 Quick add to pass button?
 Allow removing from pass and meld and rearrange drop back into tiles
 Call button?
-Won the game with random extra tile at the beginning? Perhaps duplicate of tile that was just drawn? Keeps adding dead tile to beginning of exposed
-Keep track of wins with each hand (localstorage) and show win window at end
 Show percentage chance of getting the hand
 On mobile the image doesn't switch for a second on Discard
 Update percentages as tiles are added to passing spot
 Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
-"Any 2 Nos. in Any 1 Suit w Opp. Dragon" doesn't work
-Make easy add plus button not move
-Checkmark on top of other 3 buttons inaccessible during meld on large screens
-Filter add and removing from pass from undo history
+Filter add and removing from pass from undo history (and rearranges)
 Restarting game removes pinned hands
+Make sure you can't pass more than 3
 
 AI:
 Don't do a joker substitution if you can't use the joker (if you're worse off after)

@@ -1,13 +1,9 @@
-/**
- * Shuffles an array of any type
- */
-export const shuffleArray = <T>(array: Array<T>) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    // Pick a random index from 0 to i
-    const j = Math.floor(Math.random() * (i + 1));
+import Chance from "chance"
 
-    // Swap elements at i and j
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+/**
+ * Shuffles an array of any type and returns the result
+ * (does not mutate the original array)
+ */
+export const shuffleArray = <T>(array: Array<T>, seed: string) => {
+  return new Chance(seed).shuffle(array)
 }

@@ -1,13 +1,16 @@
 import type { ReactNode } from "react"
 import { createPortal } from "react-dom"
+import type { Size } from "../types"
+import clsx from "clsx"
 
 type Props = {
     show: boolean
     setShow: (show: boolean) => void
-    children: ReactNode
+    children?: ReactNode
+    size?: Size
 }
 
-export default function Modal({ show, setShow, children }: Props) {
+export default function Modal({ show, setShow, size = "md", children }: Props) {
     if (!show) return ""
 
     return createPortal(
@@ -16,7 +19,10 @@ export default function Modal({ show, setShow, children }: Props) {
             onClick={() => setShow(false)}
         >
             <div
-                className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto p-5"
+                className={clsx(
+                  "bg-white rounded-lg shadow-xl w-full max-h-[90vh] p-5 flex flex-col",
+                  { sm: "max-w-sm", md: "max-w-md", lg: "max-w-3xl" }[size]
+                )}
                 onClick={(e) => e.stopPropagation()}
             >
                 {children}

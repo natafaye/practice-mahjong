@@ -14,7 +14,7 @@ import { getGiveToIndex } from "./getGiveToIndex";
 export const doCharlestonPass = (state: MahjongGameData) => {
   const passing = state.passing.map(p => [...p])
   const newPlayers = clonePlayers(state);
-  const newWall = [...state.wall];
+  let newWall = [...state.wall];
   const [direction, type] = state.gameState.split("_");
   // For 3-player or 1-player, have the wall stand in as a player
   if (passing.length === 3 || passing.length === 1) addWallPass(passing, newWall)
@@ -29,7 +29,7 @@ export const doCharlestonPass = (state: MahjongGameData) => {
     if (giveToIndex === newPlayers.length) {
       // Give the wall its tiles and shuffle
       newWall.push(...passing[takeFromIndex]);
-      shuffleArray(newWall);
+      newWall = shuffleArray(newWall, state.seed);
     } else {
       // Put the passed tiles into the passing gaps left
       passing[takeFromIndex].forEach((tile, index) => {

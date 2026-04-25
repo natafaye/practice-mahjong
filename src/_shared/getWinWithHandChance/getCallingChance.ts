@@ -1,9 +1,9 @@
+import type { ExactMeld } from "../getExactMeldCombinations"
+
 export const getCallingChance = (
-  suit: string,
-  number: string | number,
-  amountNeeded: number
+  exactMelds: ExactMeld[]
 ) => {
-  console.log(suit, number, amountNeeded)
+  console.log(exactMelds)
   // const chanceOfGettingToCallableByEnd = getDrawingChance(1 less than needed for this meld, everything else is miss)
   // const chanceAccessibleAtAll = numberOfWallTilesLeft / totalUnseenTiles
   // const callingChance = 0

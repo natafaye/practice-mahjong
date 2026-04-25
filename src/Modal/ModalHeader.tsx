@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
 
 type Props = {
-    children: ReactNode
+    children?: ReactNode
     setShow: (show: boolean) => void
     className?: string
 }

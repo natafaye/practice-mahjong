@@ -9,6 +9,7 @@ describe("getWinWithHandChance", () => {
   const allHands = CARD_2025.hands;
 
   const createBaseGameData = (playerTiles: any[]): MahjongGameData => ({
+    seed: "test",
     currentPlayer: 0,
     players: [
       { index: 0, concealed: playerTiles, exposed: [] },

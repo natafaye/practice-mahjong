@@ -40,6 +40,7 @@ export type MahjongHandMeld = {
 
 // A winning hand made up of melds
 export type MahjongHand = {
+  id: string;
   section: string;
   melds: MahjongHandMeld[];
   text: string;
@@ -72,6 +73,7 @@ export type GameState = (typeof GAME_STATES)[number];
 
 // All the data for the game
 export type MahjongGameData = {
+  seed: string;
   currentPlayer: number;
   players: MahjongPlayer[];
   wall: MahjongTile[];
@@ -82,5 +84,6 @@ export type MahjongGameData = {
   readyToPass: boolean[];
   gameState: GameState;
   winningPlayer?: number;
+  winningHand?: string;
   cardName: string;
 };

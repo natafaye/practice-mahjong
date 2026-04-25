@@ -15,7 +15,7 @@ export type NeededData = {
  * Minus any tiles in the player's exposed melds or concealed tiles
  * If there are leftover melds then this exact meld combo is no good, and false is returned
  */
-export const generateNeededTiles = (
+export const getNeededTiles = (
   exactMelds: ExactMeld[],
   player: MahjongPlayer,
 ) => {

@@ -21,6 +21,8 @@
     "@react-hook/window-size": "^3.1.1",
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.2",
+    "@types/chance": "^1.1.7",
+    "chance": "^1.1.13",
     "clsx": "^2.1.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
