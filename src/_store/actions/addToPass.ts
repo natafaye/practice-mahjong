@@ -12,6 +12,8 @@ export const addToPass = (state: MahjongGameData, { playerIndex, tileIndexes }: 
     if(
         // You can't add to passing tiles if there's already 3
         state.passing[playerIndex].length === 3
+        // Or if the number you're adding would take it past 3
+        || state.passing[playerIndex].length + tileIndexes.length > 3
         // You can't add a gap to passing tiles
         || !tilesToAdd.every(tile => typeof tile !== "string")
     ) return state

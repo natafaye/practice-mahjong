@@ -1,21 +1,13 @@
 ---- HIGH PRIORITY ----
 Show percentage chance of getting the hand (update as tiles are added to passing spots)
 Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
-Make sure you can't pass more than 3
-
-AI:
-Don't do a joker substitution if you can't use the joker (if you're worse off after)
-Pick tiles to discard intelligently
-Call tiles when it makes sense
+Intelligent AI (passing, discard, calling, only joker substitute when it makes sense)
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and just general rack overhaul?
 Allow rearrange of exposed melds
 Fix joker swap and melding animation
-2 player Mahjong?
-Order of meld went a little wonky with two jokers added between other tiles?
-AI players can be first player?
-First player gets a 14th tile during Charleston?
 Little messages like ("AI cancelled charleston" or "AI swapped a joker")
 Allow removing from pass and rearrange drop back into tiles
 Quick add to pass/discard button? Call button?
+2 player Mahjong?
