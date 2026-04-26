@@ -29,7 +29,7 @@ export const generateCombosForPlayerJokers = (neededTiles: NeededData[], playerJ
         totalNeeded: tile.totalNeeded - j,
         callable: tile.callable - j,
       };
-      let nextCombo = [...currentCombo]
+      const nextCombo = [...currentCombo]
       // If we don't need this tile at all anymore, don't include it in this combo of neededTiles
       if(updatedTile.totalNeeded !== 0) nextCombo.push(updatedTile)
 

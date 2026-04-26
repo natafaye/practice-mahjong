@@ -21,10 +21,10 @@ export default function PassingSpot({ className }: Props) {
   const passing = useSelector(selectPassing)
   const readyToPass = useSelector(selectReadyToPass)
   const [direction, type] = gameState.split("_")
-  const widthClasses = "w-34 lg:w-42 xl:w-53"
   const passingDisabled = readyToPass[THIS_PLAYER] || type === NORMAL_PASS && passing[THIS_PLAYER].length < 3
-  const canStopCharleston = gameState === "LEFT_B_1"
+  const canStopCharleston = gameState === "LEFT_N_2"
   const buttonColors = { light: tableMid, mid: tableDark, dark: tableVeryDark }
+  const widthClasses = "w-34 lg:w-42 xl:w-53"
 
   return (
     <>

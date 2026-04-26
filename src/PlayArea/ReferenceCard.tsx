@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
-import { selectCardName, selectSeed } from '../_store/selectors';
-import { useEffect, useState } from "react"
+import { selectCardName } from '../_store/selectors';
+import { useState } from "react"
 import { faAngleDown, faAngleUp, faMaximize, faMinimize } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import clsx from "clsx"
@@ -14,17 +14,12 @@ type Props = {
 }
 
 export default function ReferenceCard({ className }: Props) {
-  const seed = useSelector(selectSeed)
   const [pinnedIndexes, setPinnedIndexes] = useState<number[]>([])
   const [maximized, setMaximized] = useState(false)
   const [expanded, setExpanded] = useState(true)
 
   const cardName = useSelector(selectCardName)
   const { hands, sections } = getHandsData(cardName)
-
-  useEffect(function clearPinnedOnNewGame() {
-    setPinnedIndexes([])
-  }, [seed])
 
   const pin = (index: number) => {
     if (pinnedIndexes.includes(index)) return

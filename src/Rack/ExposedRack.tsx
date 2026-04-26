@@ -22,7 +22,6 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
   const callingPlayer = useSelector(selectCallingPlayer)
   const { rackLight, rackDark } = useTheme()
   const { draggingTile } = useIsDragging()
-
   const hasJokerSwap = !!draggingTile && getJokerSwapIndex(draggingTile, player.exposed) !== -1
 
   return (
@@ -39,14 +38,14 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
       >
         {melding.length > 0 ? "Add to Meld" : "Joker Swap"}
       </DropOverlay>
-      <div className={clsx("flex justify-between px-3 pt-2 box-content", tileSizes[size].tileClassName)}>
-        <div className="min-w-[20%]">
+      <div className={clsx("flex px-3 pt-2 box-content", tileSizes[size].tileClassName)}>
+        <div className="me-auto">
           {player.index === THIS_PLAYER && callingPlayer === THIS_PLAYER && melding.length > 0 && (
-            <MeldingSpot size={size} className="" />
+            <MeldingSpot size={size} className="me-10" />
           )}
         </div>
-        <div className="flex">
-          {player.exposed.map((tile, index) => typeof tile === "string" ?
+        <div className="flex grow justify-center">
+          {player.exposed.slice(0, -1).map((tile, index) => typeof tile === "string" ?
             <div key={index} className="w-10"></div> :
             <Tile
               key={tile.id}
@@ -56,7 +55,6 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
             />
           )}
         </div>
-        <div className="w-[20%]"></div>
       </div>
       <div className="h-1.5 m:h-3 -mb-1.5 m:-mb-3 vertical-shadow"></div>
       <div className="h-1.5 m:h-3 relative" style={{ background: rackLight }}></div>

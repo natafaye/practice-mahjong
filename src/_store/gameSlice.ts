@@ -30,7 +30,11 @@ const gameSlice = createSlice({
       _state,
       action: PayloadAction<{ cardName: string; numberOfPlayers: number; seed?: string; dealer?: number }>,
     ) => {
-      return generateInitialData(action.payload);
+      let nextState = generateInitialData(action.payload);
+      // If it's now an AI's turn, do their turn
+      if(nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
+        nextState = doAITurn(nextState, false)
+      return nextState
     },
     addToPass: (state, action: PayloadAction<{ playerIndex: number; tileIndexes: number[] }>) => {
       return addToPassLogic(state, action.payload);

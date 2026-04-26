@@ -1,7 +1,7 @@
 import { generateTiles } from "./generateTiles";
 import { sortTiles } from "../../_shared";
 import type { MahjongGameData, MahjongPlayer, MahjongTile } from "../../types";
-import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../../constants";
+import { CHARLESTONS, GAPS, PLAYING, SUIT_ORDER, THIS_PLAYER } from "../../constants";
 import { shuffleArray } from "./shuffleArray";
 import { Chance } from "chance";
 
@@ -51,7 +51,7 @@ export const generateInitialData = ({ cardName, numberOfPlayers, seed, dealer }:
     melding: [],
     passing: players.map(() => []),
     readyToPass: players.map(() => false),
-    gameState: numberOfPlayers !== 2 ? CHARLESTONS[0] : DRAWING,
+    gameState: numberOfPlayers !== 2 ? CHARLESTONS[0] : PLAYING,
     cardName,
   };
 };

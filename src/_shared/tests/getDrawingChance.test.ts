@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getDrawingChance } from "../getWinWithHandChance/getDrawingChance";
+import { getDrawingChance, type NeededData } from "../getWinWithHandChance/getDrawingChance";
 
 describe("getDrawingChance", () => {
   it("should return 0 if more tiles are needed than turns left", () => {
@@ -25,7 +25,7 @@ describe("getDrawingChance", () => {
   });
 
   it("should return 1.0 if 0 tiles are needed", () => {
-    const neededTiles: any[] = [];
+    const neededTiles: NeededData[] = [];
     const unseenTileCounts = new Map();
     const totalUnseenTiles = 100;
     const thisPlayerTurnsLeft = 10;

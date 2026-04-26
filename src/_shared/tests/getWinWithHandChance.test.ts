@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import { CARD_2025 } from "../../_data/CARD_2025";
 import { createMeld, createTile, createFlower, createJoker } from "./testUtilities";
 import { BAMS, CRAKS, DOTS, PLAYING } from "../../constants";
-import type { MahjongGameData } from "../../types";
+import type { MahjongGameData, MahjongTile } from "../../types";
 import { getWinWithHandChance } from "../getWinWithHandChance/getWinWithHandChance";
 
 describe("getWinWithHandChance", () => {
   const allHands = CARD_2025.hands;
 
-  const createBaseGameData = (playerTiles: any[]): MahjongGameData => ({
+  const createBaseGameData = (playerTiles: MahjongTile[]): MahjongGameData => ({
     seed: "test",
     currentPlayer: 0,
     players: [

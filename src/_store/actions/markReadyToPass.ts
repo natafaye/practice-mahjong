@@ -25,6 +25,5 @@ export const markReadyToPass = (state: MahjongGameData, { playerIndex } : Payloa
   if (!readyToPass.every((ready) => ready)) 
     return { ...state, readyToPass };
   // Else make the pass
-  let nextState = doCharlestonPass(state);
-  return nextState
+  return doCharlestonPass(state);
 };

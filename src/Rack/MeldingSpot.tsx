@@ -33,7 +33,7 @@ export default function MeldingSpot({ size, className }: Props) {
   )
   const quickAddIndex = matchingTileIndex !== -1 ? matchingTileIndex : jokerIndex
 
-  // Handle button events
+  // Handle add / cancel / confirm
   const handleQuickAdd = () => {
     if (quickAddIndex !== -1) {
       dispatch(addToMeld({ playerIndex: THIS_PLAYER, tileIndexes: [quickAddIndex] }))

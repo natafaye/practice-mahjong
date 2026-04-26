@@ -35,7 +35,7 @@ export const getDrawingChance = (
 
   // Calculate the numerator by adding all the possibilities together
   // For all possible substitutions of drawing jokers
-  let unseenJokerCount = unseenTileCounts.get("JOKER_") || 0;
+  const unseenJokerCount = unseenTileCounts.get("JOKER_") || 0;
   const drawingJokerCombos = generateCombosForDrawingJokers(neededTiles, unseenJokerCount);
   for (const neededTilesJokerCombo of drawingJokerCombos) {
     let jokerComboNumerator = 0;
