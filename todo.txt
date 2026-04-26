@@ -1,9 +1,5 @@
 ---- HIGH PRIORITY ----
-Quick add to pass button?
-Call button?
-Allow removing from pass and meld and rearrange drop back into tiles
 Show percentage chance of getting the hand (update as tiles are added to passing spots)
-On mobile the image doesn't switch for a second on Discard
 Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
 Make sure you can't pass more than 3
 
@@ -21,3 +17,5 @@ Order of meld went a little wonky with two jokers added between other tiles?
 AI players can be first player?
 First player gets a 14th tile during Charleston?
 Little messages like ("AI cancelled charleston" or "AI swapped a joker")
+Allow removing from pass and rearrange drop back into tiles
+Quick add to pass/discard button? Call button?

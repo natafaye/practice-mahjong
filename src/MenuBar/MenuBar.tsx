@@ -39,14 +39,14 @@ export default function MenuBar() {
           colors={buttonColors}
           disabled={!canUndo}
         >
-          <FontAwesomeIcon icon={faUndo} /> Undo
+          <FontAwesomeIcon icon={faUndo} />
         </Button>
         <Button
           onClick={() => dispatch(ActionCreators.redo())}
           colors={buttonColors}
           disabled={!canRedo}
         >
-          <FontAwesomeIcon icon={faRedo} /> Redo
+          <FontAwesomeIcon icon={faRedo} />
         </Button>
       </div>
       <HintText />
@@ -55,19 +55,19 @@ export default function MenuBar() {
           onClick={() => setShowNewGameModal(true)}
           colors={buttonColors}
         >
-          <FontAwesomeIcon icon={faPlus} /> New Game
+          <FontAwesomeIcon icon={faPlus} /> New
         </Button>
         <Button
           onClick={() => setShowStatsModal(true)}
           colors={buttonColors}
         >
-          <FontAwesomeIcon icon={faChartBar} /> Stats
+          <FontAwesomeIcon icon={faChartBar} />
         </Button>
         <Button
           onClick={() => setShowThemeModal(true)}
           colors={buttonColors}
         >
-          <FontAwesomeIcon icon={faPalette} /> Themes
+          <FontAwesomeIcon icon={faPalette} />
         </Button>
       </div>
       <ThemeModal show={showThemeModal} setShow={setShowThemeModal} />
