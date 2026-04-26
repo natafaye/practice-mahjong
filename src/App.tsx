@@ -7,6 +7,7 @@ import { useTheme } from "./useTheme/useTheme";
 import { DraggingContext } from './DraggingContext';
 import { THIS_PLAYER } from "./constants";
 import MenuBar from './MenuBar';
+import clsx from 'clsx';
 
 export default function App() {
   const players = useSelector(selectPlayers)
@@ -49,7 +50,7 @@ export default function App() {
               concealed
               isCurrentPlayer={currentPlayer === index}
               size="sm"
-              className="grow"
+              className={clsx("grow sm:mt-0", index !== 1 && "-mt-4")}
               // bouncingTileId={bouncingTileId}
             />
           ))}

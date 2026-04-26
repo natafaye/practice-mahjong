@@ -44,7 +44,7 @@ export default function MeldingSpot({ size, className }: Props) {
 
   return (
     <div className={clsx(className, "flex")}>
-      <div className="flex gap-1 me-2 justify-center items-center pb-2">
+      <div className="flex gap-1 me-2 justify-center items-start pb-2">
         <Button
           colors={{
             light: "var(--color-red-300)",

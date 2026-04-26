@@ -26,16 +26,16 @@ export default function PlayArea({ className }: Props) {
 
   return (
     <div className={clsx(className, "flex flex-col relative p-3 pt-0")}>
-      <div className="flex flex-col lg:flex-row grow gap-4 min-h-0">
-        <div className="flex flex-col shrink-0 order-2 lg:order-1 lg:grow lg:basis-0 min-h-0">
+      <div className="flex flex-col md:flex-row grow gap-4 min-h-0">
+        <div className="flex flex-col shrink-0 order-2 md:order-1 md:grow md:basis-0 min-h-0">
           <div className="pt-4 flex items-end gap-4 grow">
-            <DrawSpot className="w-20 lg:w-24 grow-0 mb-2" />
+            <DrawSpot className="w-20 md:w-24 grow-0 mb-2" />
             {
               isCharleston ?
                 <PassingSpot className="shrink-0 mb-2" /> :
                 <DiscardSpot className="shrink-0 mb-2" />
             }
-            <div className="grow self-stretch relative mb-2 h-28 lg:h-auto">
+            <div className="grow self-stretch relative mb-2 h-28 md:h-auto">
               <div className="absolute inset-0 overflow-y-auto p-1 flex flex-col-reverse">
                 <DiscardHistory className="flex flex-wrap" />
               </div>
@@ -50,7 +50,7 @@ export default function PlayArea({ className }: Props) {
             </div>
           </div>
         </div>
-        <ReferenceCard key={seed} className="grow min-h-0 order-1 lg:order-2 lg:min-w-152 lg:shrink-0 lg:grow-0" />
+        <ReferenceCard key={seed} className="grow min-h-0 order-1 md:order-2 md:min-w-152 md:shrink-0 md:grow-0" />
       </div>
       <DropOverlay
         dropId={PLAY_AREA_ID}

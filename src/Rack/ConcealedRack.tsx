@@ -15,7 +15,7 @@ export default function ConcealedRack({ player, size, isIdle = false }: Props) {
     const { rackLight, rackMid, rackDark } = useTheme()
 
     return (
-        <div className="relative -mt-4" style={{ background: rackMid }}>
+        <div className="relative -mt-8 vertical-shadow" style={{ background: rackMid }}>
             <div className="h-2 m:h-3" style={{ background: rackLight }}></div>
             <div className="flex justify-center mt-0 px-3">
                 {player.concealed.map((tile, index) =>

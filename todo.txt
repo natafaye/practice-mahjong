@@ -8,7 +8,6 @@ Compact mode for skinny
 Landscape resize
 Game end isn't quite synced. One extra draw
 Show all people's hands on losing of the game
-On wide have card take up half the page
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and just general rack overhaul?
