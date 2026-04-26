@@ -4,6 +4,7 @@ export const getCallingChance = (
   exactMelds: ExactMeld[]
 ) => {
   console.log(exactMelds)
+  // Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
   // const chanceOfGettingToCallableByEnd = getDrawingChance(1 less than needed for this meld, everything else is miss)
   // const chanceAccessibleAtAll = numberOfWallTilesLeft / totalUnseenTiles
   // const callingChance = 0

@@ -15,7 +15,8 @@ export default function DraggableGap({ index, size, gap }: Props) {
         id: GAP_ID + gap,
         data: { 
             tileIndex: index,
-            playerIndex: THIS_PLAYER
+            playerIndex: THIS_PLAYER,
+            isGap: true
         }
     })
 

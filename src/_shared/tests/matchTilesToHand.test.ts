@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { createMeld } from "./testUtilities";
 import { CARD_2025 } from "../../_data/CARD_2025";
 import { matchTilesToHand } from "../matchTilesToHand";
-import { BAMS, CRAKS, DOTS, EXPOSED_GAP } from "../../constants";
+import { BAMS, CRAKS, DOTS, EXPOSED_GAP, FLOWER_SUIT } from "../../constants";
+import { CARD_2026 } from "../../_data/CARD_2026";
 
 
 describe("matchTilesToHand", () => {
@@ -147,6 +148,21 @@ describe("matchTilesToHand", () => {
       ];
       expect(matchTilesToHand(tiles, [], hand).matches).toBe(13); 
     });
+
+    it("should handle Dot Dragons correctly with non-zero melds", () => {
+      const hand = CARD_2026.hands.find(h => h.id === "2026_26")!
+      const player = {
+        concealed: [
+          ...createMeld(DOTS, "22344J3"),
+        ],
+        exposed: [
+          ...createMeld(DOTS, "DDDJ"), EXPOSED_GAP,
+          ...createMeld(FLOWER_SUIT, "FFF"), EXPOSED_GAP
+        ]
+      }
+      const result = matchTilesToHand(player.concealed, player.exposed, hand)
+      expect(result.matches).toBe(14)
+    })
   });
 
   describe("Complex Consecutive Run: Any 5 Consec. Nos., Pair Any No. in Run, Kongs Match Pair", () => {

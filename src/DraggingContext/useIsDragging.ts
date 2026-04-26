@@ -10,7 +10,7 @@ export function useIsDragging() {
         isDragging: draggingData !== undefined, 
         isDraggingDiscard: !!draggingData && draggingData.playerIndex === DISCARD_ID, 
         isDraggingPass: !!draggingData && draggingData.playerIndex === PASSING_ID, 
-        isDraggingGap: typeof draggingData?.tile === "string", 
+        isDraggingGap: !!draggingData?.isGap, 
         isDraggingJoker: !!draggingData?.tile && typeof draggingData.tile !== "string" && draggingData.tile.suit === JOKER_SUIT
     }
 }

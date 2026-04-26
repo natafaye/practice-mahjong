@@ -1,4 +1,4 @@
-import { CHARLESTONS, DRAWING, NORMAL_PASS } from "../../constants";
+import { CHARLESTONS, NORMAL_PASS } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { doCharlestonPass } from "./doCharlestonPass/doCharlestonPass";
 
@@ -6,6 +6,11 @@ type Payload = {
   playerIndex: number 
 }
 
+/**
+ * Marks this player as ready to pass
+ * If that was the last player marked as ready, make the pass
+ * If it's now the AI player's turn, do their turn
+ */
 export const markReadyToPass = (state: MahjongGameData, { playerIndex } : Payload) => {
   // Can't pass the charleston if we're not doing that right now
   if (!CHARLESTONS.includes(state.gameState)) return state;
@@ -17,15 +22,9 @@ export const markReadyToPass = (state: MahjongGameData, { playerIndex } : Payloa
     index === playerIndex ? true : ready,
   );
   // If not everyone is ready, just update the readyToPass array
-  if (!readyToPass.every((ready) => ready)) return { ...state, readyToPass };
+  if (!readyToPass.every((ready) => ready)) 
+    return { ...state, readyToPass };
   // Else make the pass
-  const { newPlayers, newWall } = doCharlestonPass(state);
-  return {
-    ...state,
-    players: newPlayers,
-    wall: newWall,
-    passing: state.players.map(() => []),
-    readyToPass: state.players.map(() => false),
-    gameState: CHARLESTONS[CHARLESTONS.indexOf(state.gameState) + 1] || DRAWING,
-  };
+  let nextState = doCharlestonPass(state);
+  return nextState
 };

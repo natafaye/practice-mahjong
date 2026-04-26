@@ -1,4 +1,4 @@
-import { DRAWING } from "../../constants";
+import { PLAYING } from "../../constants";
 import type { MahjongGameData } from "../../types";
 
 export const cancelCharleston = (state: MahjongGameData): MahjongGameData => {
@@ -6,6 +6,6 @@ export const cancelCharleston = (state: MahjongGameData): MahjongGameData => {
     ...state,
     passing: state.players.map(() => []),
     readyToPass: state.players.map(() => false),
-    gameState: DRAWING,
+    gameState: PLAYING,
   };
 };

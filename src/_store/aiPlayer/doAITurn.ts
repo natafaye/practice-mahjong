@@ -14,13 +14,14 @@ import { pickDiscardIndexes } from "./pickDiscardIndexes";
  * while AI players take their turns and call on each other's turns and the human player
  * doesn't get a chance to do anything for a little while, but it shouldn't be endless
  */
-export const doAITurn = (state: MahjongGameData) => {
+export const doAITurn = (state: MahjongGameData, shouldDraw: boolean = true): MahjongGameData => {
   let nextState = state;
   const { currentPlayer, gameState } = state;
   // If the game's over, we're done here
   if (gameState === GAME_OVER) return state;
-  // Draw a tile
-  nextState = drawFromWall(nextState, { playerIndex: currentPlayer });
+  // Draw a tile if we should
+  if(shouldDraw)
+    nextState = drawFromWall(nextState, { playerIndex: currentPlayer });
   // Look for any joker swaps
   let jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
   while (jokerSwapInfo) {

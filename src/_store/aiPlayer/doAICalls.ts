@@ -27,7 +27,8 @@ export const doAICalls = (state: MahjongGameData) => {
         tileIndexes: meldPlan.tileIndexes,
       });
       nextState = confirmMeld(nextState, { playerIndex: nextState.callingPlayer! });
-      return doAITurn(nextState);
+      // Do their turn, but without the draw at the beginning
+      return doAITurn(nextState, false);
     }
     // Else skip and let the next player decide whether or not to call
     nextState = skipDiscard(nextState, { playerIndex: nextState.callingPlayer });

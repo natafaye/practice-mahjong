@@ -1,14 +1,14 @@
 ---- HIGH PRIORITY ----
-Show percentage chance of getting the hand (update as tiles are added to passing spots)
-Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
+Show percentage chance of winning with the hand (update as tiles are added to passing spots)
 Intelligent AI (passing, discard, calling, only joker substitute when it makes sense)
+Make concealed marker more prominent in pinned hands
+Fix joker/all sm tiles at small screen sizes
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and just general rack overhaul?
+Quick add to pass/discard button? Call button?
 Allow rearrange of exposed melds
 Fix joker swap and melding animation
 Little messages like ("AI cancelled charleston" or "AI swapped a joker")
 Allow removing from pass and rearrange drop back into tiles
-Quick add to pass/discard button? Call button?
 2 player Mahjong?
-Setting for always being the dealer? Or always not being the dealer?

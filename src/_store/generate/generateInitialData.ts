@@ -5,17 +5,20 @@ import { CHARLESTONS, DRAWING, GAPS, SUIT_ORDER, THIS_PLAYER } from "../../const
 import { shuffleArray } from "./shuffleArray";
 import { Chance } from "chance";
 
-export const generateInitialData = (
-  numberOfPlayers: number = 4,
-  cardName: string,
-  gameSeed?: string,
-): MahjongGameData => {
+type Payload = {
+  cardName: string;
+  numberOfPlayers: number;
+  seed?: string;
+  dealer?: number;
+};
+
+export const generateInitialData = ({ cardName, numberOfPlayers, seed, dealer }: Payload): MahjongGameData => {
   // Use the provided seed or generate one
-  const seed = gameSeed || crypto.randomUUID();
+  seed = seed || crypto.randomUUID();
   // Generate and shuffle the wall
   const wall = shuffleArray(generateTiles(), seed);
-  // Pick the starting player (dealer) randomly
-  const startingPlayer = new Chance(seed).integer({ min: 0, max: numberOfPlayers - 1 })
+  // Pick the starting player (dealer) randomly if there isn't a provided dealer
+  const startingPlayer = dealer !== undefined ? dealer : new Chance(seed).integer({ min: 0, max: numberOfPlayers - 1 });
 
   // Deal out the hands
   const players: MahjongPlayer[] = [];
@@ -28,7 +31,7 @@ export const generateInitialData = (
   }
 
   // Give the starting player (dealer) one more tile
-  players[startingPlayer].concealed.push(wall.pop()!)
+  players[startingPlayer].concealed.push(wall.pop()!);
 
   // Sort this player's hand and add gaps after each one
   const concealed = players[THIS_PLAYER].concealed as MahjongTile[];

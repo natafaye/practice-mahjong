@@ -19,11 +19,13 @@ export default function WonGameStats({ playerIndex }: Props) {
   console.log(winningPlayer)
   return (
     <div>
-      <div className="flex justify-center p-3" style={{ background: rackMid }}>
-        {winningPlayer && winningPlayer.exposed.slice(0, -1).map((tile, index) => (
-          typeof tile === "string" ? <div key={index} className="w-5"></div> :
-            <Tile key={tile.id} tile={tile} size="sm" />
-        ))}
+      <div className="flex overflow-x-auto p-3" style={{ background: rackMid }}>
+        <div className="flex mx-auto">
+          {winningPlayer && winningPlayer.exposed.slice(0, -1).map((tile, index) => (
+            typeof tile === "string" ? <div key={index} className="w-2 md:w-3"></div> :
+              <Tile key={tile.id} tile={tile} size="sm" />
+          ))}
+        </div>
       </div>
       <CardSectionStats
         section={winningHand.section}

@@ -32,7 +32,11 @@ export const matchTilesToHand = (
 
     // Check every meld in the hand ("FFFF" then "1111" then "22" then "3333", etc)
     for (let i = 0; i < exactMelds.length; i++) {
-      const { suit, numbers } = exactMelds[i];
+      let { suit, numbers } = exactMelds[i];
+      // Convert Dot Dragons into 0's so they match availableMelds
+      if (suit === DOTS && /^D+$/.test(numbers)) {
+        numbers = numbers.replaceAll(/D/g, "0");
+      }
       // Check for already exposed tiles first and take those if you find it
       const meldMatch = availableMelds.find((meld) => meld.suit === suit && meld.numbers === numbers);
       if (meldMatch) {

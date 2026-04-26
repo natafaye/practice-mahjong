@@ -1,17 +1,16 @@
 import '@fontsource-variable/noto-sans-kr/wght.css';
 import { useSelector } from 'react-redux';
-import { selectPlayers, selectCurrentPlayer, selectGameState } from './_store/selectors';
+import { selectPlayers, selectCurrentPlayer } from './_store/selectors';
 import Rack from "./Rack";
 import PlayArea from "./PlayArea";
 import { useTheme } from "./useTheme/useTheme";
 import { DraggingContext } from './DraggingContext';
-import { THIS_PLAYER, CHARLESTONS } from "./constants";
+import { THIS_PLAYER } from "./constants";
 import MenuBar from './MenuBar';
 
 export default function App() {
   const players = useSelector(selectPlayers)
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const gameState = useSelector(selectGameState)
   const { tableLight, rackDark } = useTheme()
 
   // const [isIdle, setIsIdle] = useState(false)
@@ -59,7 +58,7 @@ export default function App() {
         <Rack
           className="shrink-0 vertical-shadow"
           player={players[THIS_PLAYER]}
-          isCurrentPlayer={currentPlayer === THIS_PLAYER && !CHARLESTONS.includes(gameState)}
+          isCurrentPlayer={currentPlayer === THIS_PLAYER}
           // isIdle={isIdle}
           // bouncingTileId={bouncingTileId}
         />

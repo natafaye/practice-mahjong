@@ -18,7 +18,8 @@ export const WHOLE_RACK_ID = "WHOLE_RACK"
 
 type DraggingData = {
   tile?: MahjongTile,
-  tileIndex?: number
+  tileIndex?: number,
+  isGap?: boolean,
   playerIndex: number | typeof DISCARD_ID | typeof PASSING_ID
 }
 

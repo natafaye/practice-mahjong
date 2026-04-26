@@ -6,5 +6,5 @@ type Payload = {
 }
 
 export const restartGame = ({ cardName, numberOfPlayers }: Payload) => {
-    return generateInitialData(numberOfPlayers, cardName);
+    return generateInitialData({ numberOfPlayers, cardName });
 }

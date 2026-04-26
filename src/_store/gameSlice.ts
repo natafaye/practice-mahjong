@@ -1,52 +1,63 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { MahjongGameData } from '../types';
-import { generateInitialData } from './generate/generateInitialData';
-import { discardTile as discardTileLogic } from './actions/discardTile';
-import { drawFromWall as drawFromWallLogic } from './actions/drawFromWall';
-import { swapJoker as swapJokerLogic } from './actions/swapJoker';
-import { pickUpDiscard as pickUpDiscardLogic } from './actions/pickUpDiscard';
-import { addToPass as addToPassLogic } from './actions/addToPass';
-import { removeFromPass as removeFromPassLogic } from './actions/removeFromPass';
-import { markReadyToPass as markReadyToPassLogic } from './actions/markReadyToPass';
-import { skipDiscard as skipDiscardLogic } from './actions/skipDiscard';
-import { addToMeld as addToMeldLogic } from './actions/addToMeld';
-import { cancelMeld as cancelMeldLogic } from './actions/cancelMeld';
-import { cancelCharleston as cancelCharlestonLogic } from './actions/cancelCharleston';
-import { confirmMeld as confirmMeldLogic } from './actions/confirmMeld';
-import { rearrangeUnexposed as rearrangeUnexposedLogic } from './actions/rearrangeUnexposed';
-import { doAICalls } from './aiPlayer/doAICalls';
-import { doAIPasses } from './aiPlayer/doAIPasses';
-import { defaultCard } from '../_data/CARDS';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { MahjongGameData } from "../types";
+import { generateInitialData } from "./generate/generateInitialData";
+import { discardTile as discardTileLogic } from "./actions/discardTile";
+import { drawFromWall as drawFromWallLogic } from "./actions/drawFromWall";
+import { swapJoker as swapJokerLogic } from "./actions/swapJoker";
+import { pickUpDiscard as pickUpDiscardLogic } from "./actions/pickUpDiscard";
+import { addToPass as addToPassLogic } from "./actions/addToPass";
+import { removeFromPass as removeFromPassLogic } from "./actions/removeFromPass";
+import { markReadyToPass as markReadyToPassLogic } from "./actions/markReadyToPass";
+import { skipDiscard as skipDiscardLogic } from "./actions/skipDiscard";
+import { addToMeld as addToMeldLogic } from "./actions/addToMeld";
+import { cancelMeld as cancelMeldLogic } from "./actions/cancelMeld";
+import { cancelCharleston as cancelCharlestonLogic } from "./actions/cancelCharleston";
+import { confirmMeld as confirmMeldLogic } from "./actions/confirmMeld";
+import { rearrangeUnexposed as rearrangeUnexposedLogic } from "./actions/rearrangeUnexposed";
+import { doAICalls } from "./aiPlayer/doAICalls";
+import { doAIPasses } from "./aiPlayer/doAIPasses";
+import { defaultCard } from "../_data/CARDS";
+import { doAITurn } from "./aiPlayer/doAITurn";
+import { PLAYING, THIS_PLAYER } from "../constants";
 
-const initialState: MahjongGameData = generateInitialData(4, defaultCard.name);
+const initialState: MahjongGameData = generateInitialData({ numberOfPlayers: 4, cardName: defaultCard.name });
 
 const gameSlice = createSlice({
-  name: 'game',
+  name: "game",
   initialState,
   reducers: {
-    newGame: (_state, action: PayloadAction<{ cardName: string, numberOfPlayers: number, seed?: string }>) => {
-      return generateInitialData(action.payload.numberOfPlayers, action.payload.cardName, action.payload.seed);
+    newGame: (
+      _state,
+      action: PayloadAction<{ cardName: string; numberOfPlayers: number; seed?: string; dealer?: number }>,
+    ) => {
+      return generateInitialData(action.payload);
     },
-    addToPass: (state, action: PayloadAction<{ playerIndex: number, tileIndexes: number[] }>) => {
+    addToPass: (state, action: PayloadAction<{ playerIndex: number; tileIndexes: number[] }>) => {
       return addToPassLogic(state, action.payload);
     },
-    removeFromPass: (state, action: PayloadAction<{ playerIndex: number, passingTileIndex: number }>) => {
+    removeFromPass: (state, action: PayloadAction<{ playerIndex: number; passingTileIndex: number }>) => {
       return removeFromPassLogic(state, action.payload);
     },
     markReadyToPass: (state, action: PayloadAction<{ playerIndex: number }>) => {
       let nextState = markReadyToPassLogic(state, action.payload);
       nextState = doAIPasses(nextState);
+      // If it's now an AI's turn, do their turn
+      if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
+        nextState = doAITurn(nextState, false);
       return nextState;
     },
     drawFromWall: (state, action: PayloadAction<{ playerIndex: number }>) => {
       return drawFromWallLogic(state, action.payload);
     },
-    swapJoker: (state, action: PayloadAction<{
-      sourcePlayerIndex: number,
-      sourceTileIndex: number,
-      targetPlayerIndex: number,
-      targetTileIndex: number
-    }>) => {
+    swapJoker: (
+      state,
+      action: PayloadAction<{
+        sourcePlayerIndex: number;
+        sourceTileIndex: number;
+        targetPlayerIndex: number;
+        targetTileIndex: number;
+      }>,
+    ) => {
       return swapJokerLogic(state, action.payload);
     },
     discardTile: (state, action: PayloadAction<{ playerIndex: number; tileIndex: number }>) => {
@@ -62,7 +73,7 @@ const gameSlice = createSlice({
     pickUpDiscard: (state, action: PayloadAction<{ playerIndex: number }>) => {
       return pickUpDiscardLogic(state, action.payload);
     },
-    addToMeld: (state, action: PayloadAction<{ playerIndex: number, tileIndexes: number[] }>) => {
+    addToMeld: (state, action: PayloadAction<{ playerIndex: number; tileIndexes: number[] }>) => {
       return addToMeldLogic(state, action.payload);
     },
     confirmMeld: (state, action: PayloadAction<{ playerIndex: number }>) => {
@@ -75,7 +86,11 @@ const gameSlice = createSlice({
       return cancelMeldLogic(state);
     },
     cancelCharleston: (state) => {
-      return cancelCharlestonLogic(state);
+      let nextState = cancelCharlestonLogic(state);
+      // If it's now an AI's turn, do their turn
+      if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
+        nextState = doAITurn(nextState, false);
+      return nextState;
     },
   },
 });
