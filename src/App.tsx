@@ -13,6 +13,7 @@ export default function App() {
   const currentPlayer = useSelector(selectCurrentPlayer)
   const gameState = useSelector(selectGameState)
   const { tableLight, rackDark } = useTheme()
+
   // const [isIdle, setIsIdle] = useState(false)
   // const [bouncingTileId, setBouncingTileId] = useState<string | null>(null)
 
@@ -47,7 +48,7 @@ export default function App() {
               key={index}
               player={player}
               concealed
-              isCurrentPlayer={currentPlayer === index && !CHARLESTONS.includes(gameState)}
+              isCurrentPlayer={currentPlayer === index}
               size="sm"
               className="grow"
               // bouncingTileId={bouncingTileId}

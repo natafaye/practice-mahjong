@@ -49,8 +49,8 @@ export default function CardSectionStats({ cardName, section, highlightedHandID,
               hand.id === highlightedHandID ? "font-bold bg-amber-100" : "odd:bg-gray-100"
             )}>
               <td className="p-1 px-2"><HandDisplayText hand={hand} /></td>
-              <td className="p-1 px-2 text-taupe-600 text-sm min-w-0 flex items-baseline w-full">
-                <span className="me-2 truncate font-sans">({hand.text})</span>
+              <td className="p-1 px-2 text-taupe-600 text-sm min-w-0 w-full max-w-0 items-baseline me-2 truncate font-sans">
+                ({hand.text})
               </td>
               <td className="p-1 px-2 text-end">
                 {stats[hand.id] || 0}

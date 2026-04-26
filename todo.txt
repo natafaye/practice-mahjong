@@ -11,3 +11,4 @@ Little messages like ("AI cancelled charleston" or "AI swapped a joker")
 Allow removing from pass and rearrange drop back into tiles
 Quick add to pass/discard button? Call button?
 2 player Mahjong?
+Setting for always being the dealer? Or always not being the dealer?
