@@ -5,7 +5,6 @@ Allow removing from pass and meld and rearrange drop back into tiles
 Show percentage chance of getting the hand (update as tiles are added to passing spots)
 On mobile the image doesn't switch for a second on Discard
 Handle probability of calling this hand: FFF 2468 FFF 2222 (with two callable sets of flowers)
-Filter add and removing from pass from undo history (and rearranges)
 Make sure you can't pass more than 3
 
 AI:
