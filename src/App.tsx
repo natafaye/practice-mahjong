@@ -14,28 +14,12 @@ export default function App() {
   const currentPlayer = useSelector(selectCurrentPlayer)
   const { tableLight, rackDark } = useTheme()
 
-  // const [isIdle, setIsIdle] = useState(false)
   // const [bouncingTileId, setBouncingTileId] = useState<string | null>(null)
 
   // useAIPlayer(200, (tileId) => {
   //   setBouncingTileId(tileId)
   //   setTimeout(() => setBouncingTileId(null), 15000)
   // })
-
-  // useEffect(() => {
-  //   setIsIdle(false)
-  //   if (currentPlayer !== THIS_PLAYER || gameState === GAME_OVER) return
-
-  //   const interval = setInterval(() => {
-  //     setIsIdle(true)
-  //     setTimeout(() => setIsIdle(false), 5000)
-  //   }, 30000)
-
-  //   return () => {
-  //     clearInterval(interval)
-  //     setIsIdle(false)
-  //   }
-  // }, [players, currentPlayer, gameState])
 
   return (
     <DraggingContext>

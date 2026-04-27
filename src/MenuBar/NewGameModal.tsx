@@ -8,7 +8,7 @@ import RadioInput from "../RadioInput/RadioInput"
 import { CARDS } from "../_data/CARDS"
 import { useDispatch, useSelector } from "react-redux"
 import { selectCardName } from "../_store/selectors"
-import { newGame } from '../_store/gameSlice';
+import { dealHands, newGame } from '../_store/gameSlice';
 import { THIS_PLAYER } from '../constants';
 
 type Props = {
@@ -36,6 +36,8 @@ export default function NewGameModal({ show, setShow }: Props) {
     setShow(false)
     setAdvancedExpanded(false)
     setSeedValue("")
+    // Wait a second to deal out the hands to get a nice animation
+    setTimeout(() => dispatch(dealHands()), 1000)
   }
 
   return (

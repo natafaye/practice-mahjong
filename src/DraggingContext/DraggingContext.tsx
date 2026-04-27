@@ -136,7 +136,7 @@ export function DraggingContext({ children }: Props) {
         {children}
         {activeTile && (
           <DragOverlay dropAnimation={null}>
-            <Tile tile={activeTile} />
+            <Tile tile={activeTile} layoutId={activeTile.id} />
           </DragOverlay>
         )}
       </DragDropProvider>

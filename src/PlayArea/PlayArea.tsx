@@ -50,7 +50,7 @@ export default function PlayArea({ className }: Props) {
             </div>
           </div>
         </div>
-        <ReferenceCard key={seed} className="grow min-h-0 order-1 md:order-2 md:min-w-152 md:shrink-0 md:grow-0" />
+        <ReferenceCard key={seed} className="grow min-h-0 order-1 md:order-2 md:min-w-[50%] md:shrink-0 md:grow-0" />
       </div>
       <DropOverlay
         dropId={PLAY_AREA_ID}

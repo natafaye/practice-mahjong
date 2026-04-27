@@ -19,18 +19,19 @@ import { doAIPasses } from "./aiPlayer/doAIPasses";
 import { defaultCard } from "../_data/CARDS";
 import { doAITurn } from "./aiPlayer/doAITurn";
 import { PLAYING, THIS_PLAYER } from "../constants";
+import { dealHands as dealHandsLogic } from "./generate/dealHands";
 
-const initialState: MahjongGameData = generateInitialData({ numberOfPlayers: 4, cardName: defaultCard.name });
+const initialState: MahjongGameData = dealHandsLogic(generateInitialData({ numberOfPlayers: 4, cardName: defaultCard.name }));
 
 const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    newGame: (
-      _state,
-      action: PayloadAction<{ cardName: string; numberOfPlayers: number; seed?: string; dealer?: number }>,
-    ) => {
-      let nextState = generateInitialData(action.payload);
+    newGame: (_state, action: PayloadAction<{ cardName: string; numberOfPlayers: number; seed?: string; dealer?: number }>) => {
+      return generateInitialData(action.payload);
+    },
+    dealHands: (state) => {
+      let nextState = dealHandsLogic(state);
       // If it's now an AI's turn, do their turn
       if(nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
         nextState = doAITurn(nextState, false)
@@ -101,6 +102,7 @@ const gameSlice = createSlice({
 
 export const {
   newGame,
+  dealHands,
   addToPass,
   removeFromPass,
   markReadyToPass,
