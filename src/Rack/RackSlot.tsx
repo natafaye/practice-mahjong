@@ -26,7 +26,7 @@ export default function RackSlot({ index, size, children, isEmpty, className, st
             ref={ref}
             className={clsx(
                 "flex items-center justify-center rounded-lg bg-linear-to-t from-white/30 to-40%",
-                isEmpty ? tileSizes[size].tileClassName + " aspect-[2.1/3] ps-1 md:ps-0" : "w-auto",
+                isEmpty ? tileSizes[size].tileClassName + " aspect-2/3 ps-1 md:ps-0" : "w-auto",
                 isDropTarget && "bg-white/30 rounded-lg",
                 className
             )}

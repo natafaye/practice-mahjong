@@ -22,7 +22,7 @@ export default function DraggableTile({ tile, index, playerIndex, ...props }: Pr
         <div ref={ref} style={{
             opacity: isDragging ? 0 : 1
         }}>
-            <Tile tile={tile} {...props} />
+            <Tile tile={tile} layoutId={tile.id} {...props} />
         </div>
     )
 }

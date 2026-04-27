@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChartBar, faPalette, faPlus, faRedo, faUndo } from "@fortawesome/free-solid-svg-icons"
 import ThemeModal from "./ThemeModal"
-import GameOverModal from './GameOverModal';
+import GameOverModal from './GameOverModal/GameOverModal';
 import NewGameModal from "./NewGameModal"
 import HintText from "./HintText"
 import Button from "../Button"
@@ -32,7 +32,7 @@ export default function MenuBar() {
   }, [gameState])
 
   return (
-    <div className="relative p-2 pb-3 -mt-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
+    <div className="relative p-1 pb-2 -mt-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
       <div className="flex flex-nowrap gap-1">
         <Button
           onClick={() => dispatch(ActionCreators.undo())}

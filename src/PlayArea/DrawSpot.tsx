@@ -24,7 +24,7 @@ export default function DrawSpot({ className }: Props) {
         <div className={clsx(className, "flex flex-col items-end")}>
             <div className="flex justify-end pb-4">
                 {Array.from(Array(tilesToShow).keys()).map((index) => (
-                    <Tile key={index} message={wall.length - (tilesToShow - index - 1)} />
+                    <Tile key={index} layoutId={wall[index].id} message={wall.length - (tilesToShow - index - 1)} />
                 ))}
             </div>
             <Button

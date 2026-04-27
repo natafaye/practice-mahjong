@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { ActionCreators } from "redux-undo"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faRefresh } from "@fortawesome/free-solid-svg-icons"
-import { selectWinningPlayer } from "../_store/selectors"
-import { Modal, ModalBody, ModalFooter, ModalHeader } from "../Modal"
-import Button from "../Button"
-import { THIS_PLAYER } from "../constants"
+import { selectWinningPlayer } from "../../_store/selectors"
+import { Modal, ModalBody, ModalFooter, ModalHeader } from "../../Modal"
+import Button from "../../Button"
+import { THIS_PLAYER } from "../../constants"
 import WonGameStats from "./WonGameStats"
+import LostGameDisplay from "./LostGameDisplay"
 
 type Props = {
   show: boolean
@@ -22,9 +23,7 @@ export default function GameOverModal({ show, setShow, startNewGame }: Props) {
     <Modal show={show} setShow={setShow} size="lg">
       <ModalHeader setShow={setShow}>{isWinner ? "You Won!" : "You Lost"}</ModalHeader>
       <ModalBody>
-        {isWinner && (
-          <WonGameStats playerIndex={winningPlayerIndex} />
-        )}
+        {isWinner ? <WonGameStats playerIndex={winningPlayerIndex} /> : <LostGameDisplay/>}
       </ModalBody>
       <ModalFooter>
         <Button

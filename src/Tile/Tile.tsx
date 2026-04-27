@@ -4,6 +4,7 @@ import { generateBoxShadow } from "./generateBoxShadow";
 import { tileSizes } from "./tileSizes";
 import { getTileImage, useTheme } from "../useTheme";
 import { FLOWER_SUIT, JOKER_SUIT, WIND_SUIT } from "../constants";
+import { motion } from "framer-motion"
 
 export type TileProps = {
   tile?: MahjongTile;
@@ -11,9 +12,10 @@ export type TileProps = {
   tipped?: boolean;
   message?: string | number;
   className?: string;
+  layoutId?: string
 };
 
-export default function Tile({ tile, className, size = "lg", tipped = false, message = "" }: TileProps) {
+export default function Tile({ tile, className, size = "lg", tipped = false, message = "", layoutId }: TileProps) {
   const { tileLight, tileDark, tileImages, tileColors, showJokerText } = useTheme();
   const { shadowHeight, tileClassName, numberClassName } = tileSizes[size];
 
@@ -28,11 +30,12 @@ export default function Tile({ tile, className, size = "lg", tipped = false, mes
   };
 
   return (
-    <div
+    <motion.div
+      layoutId={layoutId}
       className={clsx(
         className,
         tileClassName,
-        "relative flex justify-center aspect-[2.1/3] rounded-lg bg-taupe-50 border border-taupe-200",
+        "relative flex justify-center aspect-2/3 rounded-lg bg-taupe-50 border border-taupe-200",
       )}
       style={tileStyle}
     >
@@ -48,7 +51,10 @@ export default function Tile({ tile, className, size = "lg", tipped = false, mes
           )}
           {tile.suit === JOKER_SUIT && showJokerText && (
             <span
-              className={clsx("absolute top-1 left-0 right-0 font-bold scale-65 text-center text-xs lg:text-sm xl:text-base")}
+              className={clsx(
+                "absolute top-1 left-0 right-0 font-bold scale-65 text-center",
+                { sm: "text-[0.5rem] mt-0.5 lg:text-xs lg:mt-1", md: "text-xs mt-1", lg: "text-xs lg:text-sm xl:text-base" }[size]
+              )}
               style={{ color: tileDark }}
             >
               JOKER
@@ -75,6 +81,6 @@ export default function Tile({ tile, className, size = "lg", tipped = false, mes
           {message}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

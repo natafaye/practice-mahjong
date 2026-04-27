@@ -12,7 +12,7 @@ export const WIND_SUIT = "WIND"
 export const WINDS = ["N", "E", "W", "S"]
 export const FLOWER_SUIT = "FLOWER"
 export const JOKER_SUIT = "JOKER"
-export const SUIT_ORDER = [FLOWER_SUIT, ...SUITS, JOKER_SUIT, WIND_SUIT]
+export const SUIT_ORDER = [FLOWER_SUIT, ...SUITS, WIND_SUIT, JOKER_SUIT]
 
 // Players
 export const THIS_PLAYER = 0

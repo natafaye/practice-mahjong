@@ -26,7 +26,7 @@ export default function ThemeModal({ show, setShow }: Props) {
     <Modal show={show} setShow={setShow}>
       <ModalHeader setShow={setShow}>Theme</ModalHeader>
       <ModalBody>
-        <div className="mb-6 -mt-2">
+        <div className="mb-6">
           <ThemePicker value={themeValue} onChange={setThemeValue} />
         </div>
         <ThemePreview theme={selectedTheme} />

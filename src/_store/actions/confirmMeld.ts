@@ -17,7 +17,7 @@ export const confirmMeld = (state: MahjongGameData, { playerIndex }: Payload) =>
   const newPlayers = clonePlayers(state);
   // Put the melded tiles in an order that matches a valid meld
   const sortedMeld = putInMeldOrder(state.melding, handsData.melds);
-  newPlayers[playerIndex].exposed.push(...sortedMeld, EXPOSED_GAP);
+  newPlayers[playerIndex].exposed.unshift(...sortedMeld, EXPOSED_GAP);
   return {
     ...state,
     players: newPlayers,

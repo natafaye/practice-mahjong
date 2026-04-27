@@ -23,47 +23,47 @@ export const unicornTheme: Theme = {
 }
 
 
-export const lavenderTheme: Theme = {
-  themeName: "lavender",
+// export const lavenderTheme: Theme = {
+//   themeName: "lavender",
 
-  rackLight: "#ccabd8",
-  rackMid: "#a890bc",
-  rackDark: "#8474a1",
-  rackVeryDark: "#6a5d81",
+//   rackLight: "#ccabd8",
+//   rackMid: "#a890bc",
+//   rackDark: "#8474a1",
+//   rackVeryDark: "#6a5d81",
 
-  tileLight: "#08979d",
-  tileDark: "#06797c",
+//   tileLight: "#08979d",
+//   tileDark: "#06797c",
 
-  tableLight: "#ccabd8",
-  tableMid: "#8474a1",
-  tableDark: "#8474a1",
-  tableVeryDark: "#564b69",
+//   tableLight: "#ccabd8",
+//   tableMid: "#8474a1",
+//   tableDark: "#8474a1",
+//   tableVeryDark: "#564b69",
 
-  tileImages: basicTileImages,
-  tileColors: basicTileColors,
-  showJokerText: true
-}
+//   tileImages: basicTileImages,
+//   tileColors: basicTileColors,
+//   showJokerText: true
+// }
 
-export const puceTheme: Theme = {
-  themeName: "puce",
+// export const puceTheme: Theme = {
+//   themeName: "puce",
 
-  rackLight: "#8e9c97",
-  rackMid: "#79908a",
-  rackDark: "#677d7d",
-  rackVeryDark: "#586a6a",
+//   rackLight: "#8e9c97",
+//   rackMid: "#79908a",
+//   rackDark: "#677d7d",
+//   rackVeryDark: "#586a6a",
 
-  tileLight: "#b37f95",
-  tileDark: "#b37f95",
+//   tileLight: "#b37f95",
+//   tileDark: "#b37f95",
 
-  tableLight: "#d0b4ab",
-  tableMid: "#ccaca1",
-  tableDark: "#a38d89",
-  tableVeryDark: "#000000",
+//   tableLight: "#d0b4ab",
+//   tableMid: "#ccaca1",
+//   tableDark: "#a38d89",
+//   tableVeryDark: "#000000",
 
-  tileImages: basicTileImages,
-  tileColors: basicTileColors,
-  showJokerText: true
-}
+//   tileImages: basicTileImages,
+//   tileColors: basicTileColors,
+//   showJokerText: true
+// }
 
 
 export const peachTheme: Theme = {
@@ -87,7 +87,7 @@ export const peachTheme: Theme = {
   showJokerText: true,
 }
 
-// Theme 1: Derived from Palette 1 (Soft Blues & Greens)
+
 export const serenityTheme: Theme = {
     themeName: "serenity",
 
@@ -109,29 +109,29 @@ export const serenityTheme: Theme = {
     showJokerText: true,
 }
 
-// Theme 2: Derived from Palette 2 (Pink & Red Tones)
-export const blossomTheme: Theme = {
-    themeName: "blossom",
 
-    rackLight: "color-mix(in srgb, #DBC0C0, white 8%)",
-    rackMid: "#DBC0C0",
-    rackDark: "color-mix(in srgb, #DBC0C0, black 10%)",
-    rackVeryDark: "color-mix(in srgb, #DBC0C0, black 20%)",
+// export const blossomTheme: Theme = {
+//     themeName: "blossom",
 
-    tileLight: "#5A4B4B",
-    tileDark: "color-mix(in srgb, #5A4B4B, black 15%)",
+//     rackLight: "color-mix(in srgb, #DBC0C0, white 8%)",
+//     rackMid: "#DBC0C0",
+//     rackDark: "color-mix(in srgb, #DBC0C0, black 10%)",
+//     rackVeryDark: "color-mix(in srgb, #DBC0C0, black 20%)",
 
-    tableLight: "color-mix(in srgb, #F2DED3, white 20%)",
-    tableMid: "#F2DED3",
-    tableDark: "color-mix(in srgb, #F2DED3, black 20%)",
-    tableVeryDark: "color-mix(in srgb, #F2DED3, black 40%)",
+//     tileLight: "#5A4B4B",
+//     tileDark: "color-mix(in srgb, #5A4B4B, black 15%)",
 
-    tileImages: basicTileImages,
-    tileColors: basicTileColors,
-    showJokerText: true,
-}
+//     tableLight: "color-mix(in srgb, #F2DED3, white 20%)",
+//     tableMid: "#F2DED3",
+//     tableDark: "color-mix(in srgb, #F2DED3, black 20%)",
+//     tableVeryDark: "color-mix(in srgb, #F2DED3, black 40%)",
 
-// Theme 3: Derived from Palette 3 (Blues, Oranges, & Yellows)
+//     tileImages: basicTileImages,
+//     tileColors: basicTileColors,
+//     showJokerText: true,
+// }
+
+
 export const coastTheme: Theme = {
     themeName: "coast",
 
@@ -153,7 +153,7 @@ export const coastTheme: Theme = {
     showJokerText: true,
 }
 
-// Theme 4: Derived from Palette 4 (Dark Greens & Earthy Browns)
+
 export const natureTheme: Theme = {
     themeName: "nature",
 
@@ -175,7 +175,7 @@ export const natureTheme: Theme = {
     showJokerText: true,
 }
 
-// Theme 5: Derived from Palette 5 (Purples, Creams, & Greens)
+
 export const springTheme: Theme = {
     themeName: "spring",
 
@@ -197,4 +197,4 @@ export const springTheme: Theme = {
     showJokerText: true,
 }
 
-export const THEMES = [unicornTheme, lavenderTheme, puceTheme, peachTheme, natureTheme, coastTheme, springTheme, blossomTheme, serenityTheme]
+export const THEMES = [unicornTheme, peachTheme, natureTheme, coastTheme, springTheme, serenityTheme]

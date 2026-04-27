@@ -24,6 +24,7 @@
     "@types/chance": "^1.1.7",
     "chance": "^1.1.13",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.38.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",

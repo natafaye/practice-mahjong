@@ -51,6 +51,7 @@ export default function ExposedRack({ player, size, bouncingTileId = null }: Pro
               key={tile.id}
               tile={tile}
               size={size}
+              layoutId={tile.id}
               className={clsx(bouncingTileId === tile.id && "animate-double-bounce")}
             />
           )}

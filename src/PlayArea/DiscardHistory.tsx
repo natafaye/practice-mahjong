@@ -14,7 +14,7 @@ export default function DiscardHistory({ className }: Props) {
   return (
     <div className={clsx(className)}>
       {discard.slice(0, gameState === DISCARD ? -1 : discard.length).map((tile, index) => (
-        <Tile key={index} tile={tile} size="sm" />
+        <Tile key={index} tile={tile} layoutId={tile.id} size="sm" />
       ))}
     </div>
   )

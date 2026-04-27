@@ -82,7 +82,7 @@ export default function MeldingSpot({ size, className }: Props) {
         </Button>
       </div>
       {melding.toSorted(sortTiles).map(tile => (
-        <Tile key={tile.id} tile={tile} size={size} />
+        <Tile key={tile.id} tile={tile} size={size} layoutId={tile.id} />
       ))}
     </div>
   )
