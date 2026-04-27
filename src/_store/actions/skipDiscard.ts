@@ -1,4 +1,4 @@
-import { DRAWING } from "../../constants";
+import { DRAWING, GAME_OVER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 
 type Payload = {
@@ -15,6 +15,9 @@ export const skipDiscard = (state: MahjongGameData, { playerIndex }: Payload) =>
             ...state,
             callingPlayer: nextCallingPlayer
         };
+    // If every has had a chance to call and we're out of tiles then the game is over
+    if(state.wall.length === 0) 
+      return { ...state, gameState: GAME_OVER }
     // Else we're done with calling and it's time for the next player to draw
     return {
         ...state,

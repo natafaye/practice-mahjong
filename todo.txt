@@ -2,12 +2,11 @@
 Show percentage chance of winning with the hand (update as tiles are added to passing spots)
 Intelligent AI (passing, discard, calling, only joker substitute when it makes sense)
 Make concealed marker more prominent in pinned hands and in stats
+Show all people's hands on losing of the game
 Fix joker/all sm tiles at small screen sizes
 Switch to sprites
 Compact mode for skinny
 Landscape resize
-Game end isn't quite synced. One extra draw
-Show all people's hands on losing of the game
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and just general rack overhaul?

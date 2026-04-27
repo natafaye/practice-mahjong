@@ -1,4 +1,4 @@
-import { THIS_PLAYER } from "../../constants";
+import { DISCARD, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { addToMeld } from "../actions/addToMeld";
 import { confirmMeld } from "../actions/confirmMeld";
@@ -17,7 +17,7 @@ import { wantDiscard } from "./wantDiscard";
 export const doAICalls = (state: MahjongGameData) => {
   let nextState = state;
   // While we're on an AI player calling, check if they want to call the discard
-  while (nextState.callingPlayer !== undefined && nextState.callingPlayer !== THIS_PLAYER) {
+  while (nextState.gameState === DISCARD && nextState.callingPlayer !== undefined && nextState.callingPlayer !== THIS_PLAYER) {
     // If they want the discard, call it, meld it as planned, and do that AI's turn
     const meldPlan = wantDiscard(nextState.players[nextState.callingPlayer], nextState);
     if (meldPlan) {
