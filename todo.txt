@@ -1,22 +1,17 @@
 ---- HIGH PRIORITY ----
 Show percentage chance of winning with the hand (update as tiles are added to passing spots)
 Intelligent AI (passing, discard, calling, only joker substitute when it makes sense)
-Animation (Remove layoutid prop on Tile? animating from behind? fix animate from draw? fix drag reordering, don't animate on new game)
+Animation (animating from behind?)
 Make concealed marker more prominent in pinned hands and in stats
-Show all people's hands on losing of the game
 Fix joker/all sm tiles at small screen sizes
 Switch to sprites
 Landscape resize
-Fix add to meld drop spot with overlap
-There's a small moment in shrinking the window where all the top racks have vertical scrollbars
-Remove drag to add to meld
 Fix action creators named the same as logic
+Why some random tiles animate during a new game and not all of them?
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and just general rack overhaul?
 Quick add to pass/discard button? Call button?
-Allow rearrange of exposed melds
-Fix joker swap and melding animation
 Little messages like ("AI cancelled charleston" or "AI swapped a joker")
 Allow removing from pass and rearrange drop back into tiles
 2 player Mahjong?

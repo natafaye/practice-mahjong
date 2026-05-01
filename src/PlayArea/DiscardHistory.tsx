@@ -12,7 +12,7 @@ export default function DiscardHistory({ className }: Props) {
   const discard = useSelector(selectDiscard)
   const gameState = useSelector(selectGameState)
   return (
-    <div className={clsx(className)}>
+    <div className={clsx(className, "relative z-10")}>
       {discard.slice(0, gameState === DISCARD ? -1 : discard.length).map((tile, index) => (
         <Tile key={index} tile={tile} layoutId={tile.id} size="sm" />
       ))}

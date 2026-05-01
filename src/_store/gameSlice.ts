@@ -28,10 +28,8 @@ const gameSlice = createSlice({
   initialState,
   reducers: {
     newGame: (_state, action: PayloadAction<{ cardName: string; numberOfPlayers: number; seed?: string; dealer?: number }>) => {
-      return generateInitialData(action.payload);
-    },
-    dealHands: (state) => {
-      let nextState = dealHandsLogic(state);
+      let nextState = generateInitialData(action.payload);
+      nextState = dealHandsLogic(nextState);
       // If it's now an AI's turn, do their turn
       if(nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
         nextState = doAITurn(nextState, false)
@@ -102,7 +100,6 @@ const gameSlice = createSlice({
 
 export const {
   newGame,
-  dealHands,
   addToPass,
   removeFromPass,
   markReadyToPass,

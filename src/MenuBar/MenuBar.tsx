@@ -32,7 +32,7 @@ export default function MenuBar() {
   }, [gameState])
 
   return (
-    <div className="relative p-1 pb-2 -mt-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
+    <div className="relative p-1 pb-2 flex justify-between items-center text-white" style={{ background: rackDark }}>
       <div className="flex flex-nowrap gap-1">
         <Button
           onClick={() => dispatch(ActionCreators.undo())}

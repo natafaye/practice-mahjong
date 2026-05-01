@@ -7,26 +7,18 @@ import { useTheme } from "./useTheme/useTheme";
 import { DraggingContext } from './DraggingContext';
 import { THIS_PLAYER } from "./constants";
 import MenuBar from './MenuBar';
-import clsx from 'clsx';
 
 export default function App() {
   const players = useSelector(selectPlayers)
   const currentPlayer = useSelector(selectCurrentPlayer)
-  const { tableLight, rackDark } = useTheme()
-
-  // const [bouncingTileId, setBouncingTileId] = useState<string | null>(null)
-
-  // useAIPlayer(200, (tileId) => {
-  //   setBouncingTileId(tileId)
-  //   setTimeout(() => setBouncingTileId(null), 15000)
-  // })
+  const { tableLight, rackDark, rackLight } = useTheme()
 
   return (
     <DraggingContext>
       <div className="fixed inset-0 overflow-hidden flex flex-col select-none"
         style={{ background: tableLight }}
       >
-        <div className="sm:flex gap-1.5" style={{ background: rackDark }}>
+        <div className="sm:flex">
           {players.map((player, index) => index !== THIS_PLAYER && (
             <Rack
               key={index}
@@ -34,18 +26,19 @@ export default function App() {
               concealed
               isCurrentPlayer={currentPlayer === index}
               size="sm"
-              className={clsx("grow sm:mt-0", index !== 1 && "-mt-4")}
-              // bouncingTileId={bouncingTileId}
+              className={"grow sm:mt-0"}
             />
           ))}
+        </div>
+        <div>
+          <div className="h-1.5 lg:h-2 relative vertical-shadow" style={{ background: rackLight }}></div>
+          <div className="h-1.5 lg:h-2" style={{ background: rackDark }}></div>
         </div>
         <PlayArea className="grow min-h-0" />
         <Rack
           className="shrink-0 vertical-shadow"
           player={players[THIS_PLAYER]}
           isCurrentPlayer={currentPlayer === THIS_PLAYER}
-          // isIdle={isIdle}
-          // bouncingTileId={bouncingTileId}
         />
         <MenuBar />
       </div>

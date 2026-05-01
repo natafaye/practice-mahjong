@@ -9,7 +9,7 @@ body {
 }
 
 .vertical-shadow {
-    box-shadow: 0px -3px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.6);
 }
 
 .no-text-callout {
@@ -25,11 +25,11 @@ body {
     }
 }
 
-@keyframes double-bounce {
+/* @keyframes double-bounce {
     0%, 15%, 30%, 100% { transform: translateY(0); }
     7.5%, 22.5% { transform: translateY(-12px); }
 }
 
 .animate-double-bounce {
     animation: double-bounce 1s ease-in-out;
-}
+} */

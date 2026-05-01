@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function PlayArea({ className }: Props) {
-  const { tableMid, tableDark, tableLight } = useTheme()
+  const { tableMid, tableDark } = useTheme()
   const seed = useSelector(selectSeed)
   const gameState = useSelector(selectGameState)
   const currentPlayer = useSelector(selectCurrentPlayer)
@@ -39,14 +39,6 @@ export default function PlayArea({ className }: Props) {
               <div className="absolute inset-0 overflow-y-auto p-1 flex flex-col-reverse">
                 <DiscardHistory className="flex flex-wrap" />
               </div>
-              <div
-                className="absolute top-0 inset-x-0 h-1 z-1 pointer-events-none"
-                style={{ background: `linear-gradient(to bottom, ${tableLight}, transparent)` }}
-              />
-              <div
-                className="absolute bottom-0 inset-x-0 h-1 z-1 pointer-events-none"
-                style={{ background: `linear-gradient(to bottom, transparent, ${tableLight})` }}
-              />
             </div>
           </div>
         </div>

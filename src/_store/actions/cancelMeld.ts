@@ -6,7 +6,7 @@ export const cancelMeld = (state: MahjongGameData) => {
   // Remove the tiles from the melding list and add them back to the player's tiles
   // (Only the human player can cancel a meld)
   const newPlayers = clonePlayers(state);
-  newPlayers[THIS_PLAYER].concealed.push(...state.melding.slice(1));
+  newPlayers[THIS_PLAYER].concealed.unshift(...state.melding.slice(1));
   return {
     ...state,
     discard: [...state.discard, state.melding[0]],

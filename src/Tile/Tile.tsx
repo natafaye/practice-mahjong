@@ -4,34 +4,47 @@ import { generateBoxShadow } from "./generateBoxShadow";
 import { tileSizes } from "./tileSizes";
 import { getTileImage, useTheme } from "../useTheme";
 import { FLOWER_SUIT, JOKER_SUIT, WIND_SUIT } from "../constants";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export type TileProps = {
   tile?: MahjongTile;
   size?: Size;
   tipped?: boolean;
   message?: string | number;
+  animateIn?: boolean;
   className?: string;
-  layoutId?: string
+  layoutId?: string;
 };
 
-export default function Tile({ tile, className, size = "lg", tipped = false, message = "", layoutId }: TileProps) {
+export default function Tile({
+  tile,
+  className,
+  size = "lg",
+  tipped = false,
+  message = "",
+  layoutId,
+  animateIn = false,
+}: TileProps) {
   const { tileLight, tileDark, tileImages, tileColors, showJokerText } = useTheme();
   const { shadowHeight, tileClassName, numberClassName } = tileSizes[size];
 
   const showNumber = tile && (typeof tile.number === "number" || tile.suit === WIND_SUIT);
 
-  const tileStyle = !tile ? {
-    background: tileLight,
-    borderColor: tileDark,
-    boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark),
-  } : {
-    boxShadow: generateBoxShadow(shadowHeight, tipped, tileDark, "var(--color-taupe-200)"),
-  };
+  const tileStyle = !tile
+    ? {
+      background: tileLight,
+      borderColor: tileDark,
+      boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark),
+    }
+    : {
+      boxShadow: generateBoxShadow(shadowHeight, tipped, tileDark, "var(--color-taupe-200)"),
+    };
 
   return (
     <motion.div
       layoutId={layoutId}
+      initial={animateIn && { y: "-3rem", opacity: 0 }}
+      animate={{ y: "0", opacity: 1 }}
       className={clsx(
         className,
         tileClassName,
@@ -53,7 +66,11 @@ export default function Tile({ tile, className, size = "lg", tipped = false, mes
             <span
               className={clsx(
                 "absolute top-1 left-0 right-0 font-bold scale-65 text-center",
-                { sm: "text-[0.5rem] mt-0.5 lg:text-xs lg:mt-1", md: "text-xs mt-1", lg: "text-xs lg:text-sm xl:text-base" }[size]
+                {
+                  sm: "text-[0.5rem] mt-0.5 lg:text-xs lg:mt-1",
+                  md: "text-xs mt-1",
+                  lg: "text-xs lg:text-sm xl:text-base",
+                }[size],
               )}
               style={{ color: tileDark }}
             >

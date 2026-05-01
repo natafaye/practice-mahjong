@@ -19,12 +19,13 @@ export default function DrawSpot({ className }: Props) {
     const wall = useSelector(selectWall)
     const gameState = useSelector(selectGameState)
     const currentPlayer = useSelector(selectCurrentPlayer)
-    const tilesToShow = Math.min(20, wall.length)
+    const tilesToShow = Math.min(4, wall.length)
+    
     return (
         <div className={clsx(className, "flex flex-col items-end")}>
             <div className="flex justify-end pb-4">
-                {Array.from(Array(tilesToShow).keys()).map((index) => (
-                    <Tile key={index} layoutId={wall[index].id} message={wall.length - (tilesToShow - index - 1)} />
+                {wall.slice(-tilesToShow).map((tile, index) => (
+                    <Tile key={tile.id} layoutId={tile.id} message={wall.length - (tilesToShow - index - 1)} />
                 ))}
             </div>
             <Button
