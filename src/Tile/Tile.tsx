@@ -32,13 +32,13 @@ export default function Tile({
 
   const tileStyle = !tile
     ? {
-      background: tileLight,
-      borderColor: tileDark,
-      boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark),
-    }
+        background: tileLight,
+        borderColor: tileDark,
+        boxShadow: generateBoxShadow(shadowHeight, tipped, "var(--color-taupe-200)", tileDark),
+      }
     : {
-      boxShadow: generateBoxShadow(shadowHeight, tipped, tileDark, "var(--color-taupe-200)"),
-    };
+        boxShadow: generateBoxShadow(shadowHeight, tipped, tileDark, "var(--color-taupe-200)"),
+      };
 
   return (
     <motion.div
@@ -78,7 +78,14 @@ export default function Tile({
             </span>
           )}
           <div
-            className="border-3 rounded-lg flex justify-center items-center m-1 grow"
+            className={clsx(
+              "flex justify-center items-center grow",
+              {
+                sm: "border-2 m-0.5 p-0.5 rounded-md lg:border-3 lg:m-1 lg:rounded-lg",
+                md: "border-3 m-1 rounded-lg",
+                lg: "border-3 m-1 rounded-lg",
+              }[size],
+            )}
             style={{ borderColor: tileColors[tile.suit] }}
           >
             <img

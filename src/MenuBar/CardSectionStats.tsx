@@ -50,7 +50,12 @@ export default function CardSectionStats({ cardName, section, highlightedHandID,
             )}>
               <td className="p-1 px-2"><HandDisplayText hand={hand} /></td>
               <td className="p-1 px-2 text-taupe-600 text-sm min-w-0 w-full max-w-0 items-baseline me-2 truncate font-sans">
-                ({hand.text})
+                {hand.text && <>({hand.text})</>}
+              </td>
+              <td>
+                {hand.concealed && (
+                  <span className="bg-gray-400 px-1 rounded text-white">C</span>
+                )}
               </td>
               <td className="p-1 px-2 text-end">
                 {stats[hand.id] || 0}
