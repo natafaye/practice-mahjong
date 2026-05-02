@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import undoable, { groupByActionTypes, type StateWithHistory } from 'redux-undo';
-import gameReducer, { rearrangeUnexposed } from './gameSlice';
+import gameReducer, { rearrangeConcealed } from './gameSlice';
 import type { MahjongGameData } from '../types';
 import { THIS_PLAYER } from '../constants';
 import { recordHandWin } from './localStorage';
@@ -8,7 +8,7 @@ import { recordHandWin } from './localStorage';
 const store = configureStore({
   reducer: {
     game: undoable(gameReducer, {
-      groupBy: groupByActionTypes([rearrangeUnexposed.type])
+      groupBy: groupByActionTypes([rearrangeConcealed.type])
     }),
   }
 });

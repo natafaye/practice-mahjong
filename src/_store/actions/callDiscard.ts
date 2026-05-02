@@ -6,7 +6,7 @@ type Payload = {
   playerIndex: number
 }
 
-export const pickUpDiscard = (state: MahjongGameData, { playerIndex }: Payload) => {
+export const callDiscard = (state: MahjongGameData, { playerIndex }: Payload) => {
   // Can't pick up discard if it's empty, a joker, not discard pick up time, or not your turn to call
   if (state.discard.length === 0
     || state.discard.at(-1)!.suit === JOKER_SUIT

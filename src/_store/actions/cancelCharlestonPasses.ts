@@ -1,12 +1,12 @@
 import { PLAYING, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
-import { removeFromPass } from "./removeFromPass";
+import { removeFromPassTiles } from "./removeFromPassTiles";
 
-export const cancelCharleston = (state: MahjongGameData): MahjongGameData => {
+export const cancelCharlestonPasses = (state: MahjongGameData): MahjongGameData => {
   // Put any tiles in passing back into the player's hand
   let nextState = state;
   while(nextState.passing[THIS_PLAYER].length) {
-    nextState = removeFromPass(nextState, { 
+    nextState = removeFromPassTiles(nextState, { 
       playerIndex: THIS_PLAYER, 
       passingTileIndex: 0 
     })

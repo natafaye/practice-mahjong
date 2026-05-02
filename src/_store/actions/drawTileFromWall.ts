@@ -3,7 +3,7 @@ import type { MahjongGameData } from "../../types";
 import { clonePlayers } from "./clonePlayers";
 import { handleGameWin } from "./handleGameWin";
 
-export const drawFromWall = (state: MahjongGameData, { playerIndex } : { playerIndex: number }) => {
+export const drawTileFromWall = (state: MahjongGameData, { playerIndex } : { playerIndex: number }) => {
   // Can't draw if it's not your turn, or not the right time
   if (state.currentPlayer !== playerIndex || state.gameState !== DRAWING) return state;
   // If the wall is empty, the game is over

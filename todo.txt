@@ -1,6 +1,7 @@
 ---- HIGH PRIORITY ----
 Show percentage chance of winning with the hand (update as tiles are added to passing spots)
-Fix action creators named the same as logic
+Allow removing from pass and rearrange drop back into tiles
+Intelligent AI (calling, only joker substitute when it makes sense)
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and resize tile thickness for smaller view sizes?
@@ -8,7 +9,5 @@ More and better themes
 Switch to sprites
 Call button?
 Message if AI cancels Charleston
-Allow removing from pass and rearrange drop back into tiles
-Intelligent AI (calling, only joker substitute when it makes sense)
 2 player Mahjong?
 2026_50 should allow any dragons to be the set of 4 (1234 doesn't have to match set of 4 dragons suit)

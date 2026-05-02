@@ -1,19 +1,19 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { MahjongGameData } from "../types";
 import { generateInitialData } from "./generate/generateInitialData";
-import { discardTile as discardTileLogic } from "./actions/discardTile";
-import { drawFromWall as drawFromWallLogic } from "./actions/drawFromWall";
-import { swapJoker as swapJokerLogic } from "./actions/swapJoker";
-import { pickUpDiscard as pickUpDiscardLogic } from "./actions/pickUpDiscard";
-import { addToPass as addToPassLogic } from "./actions/addToPass";
-import { removeFromPass as removeFromPassLogic } from "./actions/removeFromPass";
-import { markReadyToPass as markReadyToPassLogic } from "./actions/markReadyToPass";
-import { skipDiscard as skipDiscardLogic } from "./actions/skipDiscard";
-import { addToMeld as addToMeldLogic } from "./actions/addToMeld";
-import { cancelMeld as cancelMeldLogic } from "./actions/cancelMeld";
-import { cancelCharleston as cancelCharlestonLogic } from "./actions/cancelCharleston";
-import { confirmMeld as confirmMeldLogic } from "./actions/confirmMeld";
-import { rearrangeUnexposed as rearrangeUnexposedLogic } from "./actions/rearrangeUnexposed";
+import { drawTileFromWall } from "./actions/drawTileFromWall";
+import { makeJokerSwap } from "./actions/makeJokerSwap";
+import { callDiscard } from "./actions/callDiscard";
+import { addToPassTiles } from "./actions/addToPassTiles";
+import { removeFromPassTiles } from "./actions/removeFromPassTiles";
+import { markPlayerReadyToPass } from "./actions/markPlayerReadyToPass";
+import { skipDiscardTile } from "./actions/skipDiscardTile";
+import { discardTile } from "./actions/discardTile";
+import { addToPlayerMeld } from "./actions/addToPlayerMeld";
+import { cancelPlayerMeld } from "./actions/cancelPlayerMeld";
+import { confirmPlayerMeld } from "./actions/confirmPlayerMeld";
+import { cancelCharlestonPasses } from "./actions/cancelCharlestonPasses";
+import { rearrangeTiles } from "./actions/rearrangeTiles";
 import { doAICalls } from "./aiPlayer/doAICalls";
 import { doAIPasses } from "./aiPlayer/doAIPasses";
 import { defaultCard } from "../_data/CARDS";
@@ -36,13 +36,13 @@ const gameSlice = createSlice({
       return nextState
     },
     addToPass: (state, action: PayloadAction<{ playerIndex: number; tileIndexes: number[] }>) => {
-      return addToPassLogic(state, action.payload);
+      return addToPassTiles(state, action.payload);
     },
     removeFromPass: (state, action: PayloadAction<{ playerIndex: number; passingTileIndex: number }>) => {
-      return removeFromPassLogic(state, action.payload);
+      return removeFromPassTiles(state, action.payload);
     },
     markReadyToPass: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      let nextState = markReadyToPassLogic(state, action.payload);
+      let nextState = markPlayerReadyToPass(state, action.payload);
       nextState = doAIPasses(nextState);
       // If it's now an AI's turn, do their turn
       if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
@@ -50,7 +50,7 @@ const gameSlice = createSlice({
       return nextState;
     },
     drawFromWall: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      return drawFromWallLogic(state, action.payload);
+      return drawTileFromWall(state, action.payload);
     },
     swapJoker: (
       state,
@@ -61,35 +61,35 @@ const gameSlice = createSlice({
         targetTileIndex: number;
       }>,
     ) => {
-      return swapJokerLogic(state, action.payload);
+      return makeJokerSwap(state, action.payload);
     },
-    discardTile: (state, action: PayloadAction<{ playerIndex: number; tileIndex: number }>) => {
-      let nextState = discardTileLogic(state, action.payload);
+    discard: (state, action: PayloadAction<{ playerIndex: number; tileIndex: number }>) => {
+      let nextState = discardTile(state, action.payload);
       nextState = doAICalls(nextState);
       return nextState;
     },
     skipDiscard: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      let nextState = skipDiscardLogic(state, action.payload);
+      let nextState = skipDiscardTile(state, action.payload);
       nextState = doAICalls(nextState);
       return nextState;
     },
     pickUpDiscard: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      return pickUpDiscardLogic(state, action.payload);
+      return callDiscard(state, action.payload);
     },
     addToMeld: (state, action: PayloadAction<{ playerIndex: number; tileIndexes: number[] }>) => {
-      return addToMeldLogic(state, action.payload);
+      return addToPlayerMeld(state, action.payload);
     },
     confirmMeld: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      return confirmMeldLogic(state, action.payload);
+      return confirmPlayerMeld(state, action.payload);
     },
-    rearrangeUnexposed: (state, action: PayloadAction<{ startIndex: number; endIndex: number }>) => {
-      return rearrangeUnexposedLogic(state, action.payload);
+    rearrangeConcealed: (state, action: PayloadAction<{ startIndex: number; endIndex: number }>) => {
+      return rearrangeTiles(state, action.payload);
     },
     cancelMeld: (state) => {
-      return cancelMeldLogic(state);
+      return cancelPlayerMeld(state);
     },
     cancelCharleston: (state) => {
-      let nextState = cancelCharlestonLogic(state);
+      let nextState = cancelCharlestonPasses(state);
       // If it's now an AI's turn, do their turn
       if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
         nextState = doAITurn(nextState, false);
@@ -105,12 +105,12 @@ export const {
   markReadyToPass,
   drawFromWall,
   swapJoker,
-  discardTile,
+  discard,
   skipDiscard,
   pickUpDiscard,
   addToMeld,
   confirmMeld,
-  rearrangeUnexposed,
+  rearrangeConcealed,
   cancelMeld,
   cancelCharleston,
 } = gameSlice.actions;

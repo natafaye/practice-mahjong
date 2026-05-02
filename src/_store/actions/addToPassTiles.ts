@@ -7,7 +7,7 @@ type Payload = {
     tileIndexes: number[]
 }
 
-export const addToPass = (state: MahjongGameData, { playerIndex, tileIndexes }: Payload) => {
+export const addToPassTiles = (state: MahjongGameData, { playerIndex, tileIndexes }: Payload) => {
     const tilesToAdd = tileIndexes.map(index => state.players[playerIndex].concealed[index])
     if(
         // You can't add to passing tiles if there's already 3

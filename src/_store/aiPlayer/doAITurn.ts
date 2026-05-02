@@ -1,8 +1,8 @@
 import { GAME_OVER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { discardTile } from "../actions/discardTile";
-import { drawFromWall } from "../actions/drawFromWall";
-import { swapJoker } from "../actions/swapJoker";
+import { drawTileFromWall } from "../actions/drawTileFromWall";
+import { makeJokerSwap } from "../actions/makeJokerSwap";
 import { doAICalls } from "./doAICalls";
 import { lookForJokerSwap } from "./lookForJokerSwap";
 import { pickDiscardIndexes } from "./pickDiscardIndexes";
@@ -21,11 +21,11 @@ export const doAITurn = (state: MahjongGameData, shouldDraw: boolean = true): Ma
   if (gameState === GAME_OVER) return state;
   // Draw a tile if we should
   if(shouldDraw)
-    nextState = drawFromWall(nextState, { playerIndex: currentPlayer });
+    nextState = drawTileFromWall(nextState, { playerIndex: currentPlayer });
   // Look for any joker swaps
   let jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
   while (jokerSwapInfo) {
-    nextState = swapJoker(nextState, jokerSwapInfo);
+    nextState = makeJokerSwap(nextState, jokerSwapInfo);
     jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
   }
   // Discard a tile

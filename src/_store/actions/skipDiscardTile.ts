@@ -5,7 +5,7 @@ type Payload = {
     playerIndex: number
 }
 
-export const skipDiscard = (state: MahjongGameData, { playerIndex }: Payload) => {
+export const skipDiscardTile = (state: MahjongGameData, { playerIndex }: Payload) => {
     // Can't skip discard if it isn't your turn to call
     if(playerIndex !== state.callingPlayer) return state
     const nextCallingPlayer = (state.callingPlayer + 1) % state.players.length

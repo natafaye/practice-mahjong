@@ -7,7 +7,7 @@ type Payload = {
     passingTileIndex: number;
 };
 
-export const removeFromPass = (state: MahjongGameData, { playerIndex, passingTileIndex }: Payload) => {
+export const removeFromPassTiles = (state: MahjongGameData, { playerIndex, passingTileIndex }: Payload) => {
     const tileToRemove = state.passing[playerIndex][passingTileIndex];
     // Can't remove if it's not there
     if (!tileToRemove) return state;

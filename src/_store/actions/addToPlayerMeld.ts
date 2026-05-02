@@ -7,7 +7,7 @@ type Payload = {
   tileIndexes: number[];
 };
 
-export const addToMeld = (
+export const addToPlayerMeld = (
   state: MahjongGameData,
   { playerIndex, tileIndexes }: Payload,
 ): MahjongGameData => {

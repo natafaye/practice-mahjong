@@ -7,7 +7,7 @@ type Payload = {
     endIndex: number;
 };
 
-export const rearrangeUnexposed = (state: MahjongGameData, { startIndex, endIndex }: Payload) => {
+export const rearrangeTiles = (state: MahjongGameData, { startIndex, endIndex }: Payload) => {
     // If it didn't move or it's a discard or passing tile, we're done
     if (startIndex === endIndex || startIndex === undefined) return state;
     const newPlayers = clonePlayers(state);

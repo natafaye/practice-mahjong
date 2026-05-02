@@ -10,7 +10,7 @@ type Payload = {
   targetTileIndex: number;
 };
 
-export const swapJoker = (state: MahjongGameData, payload: Payload) => {
+export const makeJokerSwap = (state: MahjongGameData, payload: Payload) => {
   const { sourcePlayerIndex, sourceTileIndex, targetPlayerIndex, targetTileIndex } = payload;
   // You can only swap on your own turn
   if (sourcePlayerIndex !== state.currentPlayer) return state;

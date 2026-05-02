@@ -1,9 +1,9 @@
 import { DISCARD, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
-import { addToMeld } from "../actions/addToMeld";
-import { confirmMeld } from "../actions/confirmMeld";
-import { pickUpDiscard } from "../actions/pickUpDiscard";
-import { skipDiscard } from "../actions/skipDiscard";
+import { addToPlayerMeld } from "../actions/addToPlayerMeld";
+import { confirmPlayerMeld } from "../actions/confirmPlayerMeld";
+import { callDiscard } from "../actions/callDiscard";
+import { skipDiscardTile } from "../actions/skipDiscardTile";
 import { doAITurn } from "./doAITurn";
 import { wantDiscard } from "./wantDiscard";
 
@@ -21,17 +21,17 @@ export const doAICalls = (state: MahjongGameData) => {
     // If they want the discard, call it, meld it as planned, and do that AI's turn
     const meldPlan = wantDiscard(nextState.players[nextState.callingPlayer], nextState);
     if (meldPlan) {
-      nextState = pickUpDiscard(nextState, { playerIndex: nextState.callingPlayer });
-      nextState = addToMeld(nextState, {
+      nextState = callDiscard(nextState, { playerIndex: nextState.callingPlayer });
+      nextState = addToPlayerMeld(nextState, {
         playerIndex: nextState.callingPlayer!,
         tileIndexes: meldPlan.tileIndexes,
       });
-      nextState = confirmMeld(nextState, { playerIndex: nextState.callingPlayer! });
+      nextState = confirmPlayerMeld(nextState, { playerIndex: nextState.callingPlayer! });
       // Do their turn, but without the draw at the beginning
       return doAITurn(nextState, false);
     }
     // Else skip and let the next player decide whether or not to call
-    nextState = skipDiscard(nextState, { playerIndex: nextState.callingPlayer });
+    nextState = skipDiscardTile(nextState, { playerIndex: nextState.callingPlayer });
   }
   // If we got through all the calling players, and it's not the human's turn, then it's the AI's turn
   if (nextState.callingPlayer === undefined && nextState.currentPlayer !== THIS_PLAYER) {

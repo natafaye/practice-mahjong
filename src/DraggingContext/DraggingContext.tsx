@@ -14,9 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectGameState } from "../_store/selectors";
 import {
   addToPass,
-  discardTile,
+  discard,
   pickUpDiscard,
-  rearrangeUnexposed,
+  rearrangeConcealed,
   removeFromPass,
   swapJoker,
 } from "../_store/gameSlice";
@@ -72,12 +72,10 @@ export function DraggingContext({ children }: Props) {
     if (targetId.startsWith(SLOT_ID)) {
       const [, targetSlotIndexStr] = targetId.split("_");
       const targetSlotIndex = parseInt(targetSlotIndexStr);
-      dispatch(
-        rearrangeUnexposed({
-          startIndex: source.data.tileIndex,
-          endIndex: targetSlotIndex,
-        }),
-      );
+      dispatch(rearrangeConcealed({
+        startIndex: source.data.tileIndex,
+        endIndex: targetSlotIndex,
+      }));
       currentDragIndex.current = targetSlotIndex;
     }
   };
@@ -95,49 +93,39 @@ export function DraggingContext({ children }: Props) {
     if (target.id === PLAY_AREA_ID && !source.id.toString().startsWith(GAP_ID)) {
       if (CHARLESTONS.includes(gameState)) {
         // Add to Charleston Pass
-        dispatch(
-          addToPass({
-            playerIndex: THIS_PLAYER,
-            tileIndexes: [finalIndex],
-          }),
-        );
+        dispatch(addToPass({
+          playerIndex: THIS_PLAYER,
+          tileIndexes: [finalIndex],
+        }));
       } else {
         // Discard
-        dispatch(
-          discardTile({
-            playerIndex: THIS_PLAYER,
-            tileIndex: finalIndex,
-          }),
-        );
+        dispatch(discard({
+          playerIndex: THIS_PLAYER,
+          tileIndex: finalIndex,
+        }));
       }
     } else if (target.id === WHOLE_RACK_ID) {
       if (source.data.playerIndex === PASSING_ID) {
-        dispatch(
-          removeFromPass({
-            playerIndex: THIS_PLAYER,
-            passingTileIndex: finalIndex,
-          }),
-        );
+        dispatch(removeFromPass({
+          playerIndex: THIS_PLAYER,
+          passingTileIndex: finalIndex,
+        }));
       } else {
         // Pick up discard
-        dispatch(
-          pickUpDiscard({
-            playerIndex: THIS_PLAYER,
-          }),
-        );
+        dispatch(pickUpDiscard({
+          playerIndex: THIS_PLAYER,
+        }));
       }
     } else if (target.id === EXPOSED_RACK_ID) {
       // Check for a joker swap
       const jokerSwapIndex = getJokerSwapIndex(source.data.tile, target.data.player.exposed);
       if (jokerSwapIndex !== -1) {
-        dispatch(
-          swapJoker({
-            sourcePlayerIndex: THIS_PLAYER,
-            sourceTileIndex: finalIndex,
-            targetPlayerIndex: target.data.player.index,
-            targetTileIndex: jokerSwapIndex,
-          }),
-        );
+        dispatch(swapJoker({
+          sourcePlayerIndex: THIS_PLAYER,
+          sourceTileIndex: finalIndex,
+          targetPlayerIndex: target.data.player.index,
+          targetTileIndex: jokerSwapIndex,
+        }));
       }
     }
   };

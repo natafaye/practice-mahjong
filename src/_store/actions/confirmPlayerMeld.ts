@@ -8,7 +8,7 @@ type Payload = {
   playerIndex: number;
 };
 
-export const confirmMeld = (state: MahjongGameData, { playerIndex }: Payload) => {
+export const confirmPlayerMeld = (state: MahjongGameData, { playerIndex }: Payload) => {
   const handsData = getHandsData(state.cardName);
   // Can't meld if it's not your turn to call or if it isn't a valid meld
   if (state.callingPlayer !== playerIndex || !checkIfMeldValid(state.melding, handsData.callableMelds))

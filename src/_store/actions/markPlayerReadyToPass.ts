@@ -11,7 +11,7 @@ type Payload = {
  * If that was the last player marked as ready, make the pass
  * If it's now the AI player's turn, do their turn
  */
-export const markReadyToPass = (state: MahjongGameData, { playerIndex } : Payload) => {
+export const markPlayerReadyToPass = (state: MahjongGameData, { playerIndex } : Payload) => {
   // Can't pass the charleston if we're not doing that right now
   if (!CHARLESTONS.includes(state.gameState)) return state;
   const [, type] = state.gameState.split("_");
