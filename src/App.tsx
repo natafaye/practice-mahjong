@@ -7,6 +7,7 @@ import { useTheme } from "./useTheme/useTheme";
 import { DraggingContext } from './DraggingContext';
 import { THIS_PLAYER } from "./constants";
 import MenuBar from './MenuBar';
+import JokerSwapDropOverlay from './Rack/JokerSwapDropOverlay';
 
 export default function App() {
   const players = useSelector(selectPlayers)
@@ -18,21 +19,24 @@ export default function App() {
       <div className="fixed inset-0 overflow-hidden flex flex-col select-none"
         style={{ background: tableLight }}
       >
-        <div className="sm:flex">
-          {players.map((player, index) => index !== THIS_PLAYER && (
-            <Rack
-              key={index}
-              player={player}
-              concealed
-              isCurrentPlayer={currentPlayer === index}
-              size="sm"
-              className={"grow sm:mt-0"}
-            />
-          ))}
-        </div>
-        <div>
-          <div className="h-1.5 lg:h-2 relative vertical-shadow" style={{ background: rackLight }}></div>
-          <div className="h-1.5 lg:h-2" style={{ background: rackDark }}></div>
+        <div className="relative">
+          <div className="sm:flex">
+            {players.map((player, index) => index !== THIS_PLAYER && (
+              <Rack
+                key={index}
+                player={player}
+                isCurrentPlayer={currentPlayer === index}
+                size="sm"
+                className={"grow sm:mt-0"}
+                concealed
+              />
+            ))}
+          </div>
+          <div>
+            <div className="h-1.5 lg:h-2 relative vertical-shadow" style={{ background: rackLight }}></div>
+            <div className="h-1.5 lg:h-2" style={{ background: rackDark }}></div>
+          </div>
+          <JokerSwapDropOverlay />
         </div>
         <PlayArea className="grow min-h-0" />
         <Rack

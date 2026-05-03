@@ -19,7 +19,7 @@ export const doAIPasses = (state: MahjongGameData) => {
     const [, type] = nextState.gameState.split("_");
     nextState = addToPassTiles(nextState, {
       playerIndex,
-      tileIndexes: pickDiscardIndexes(nextState.players[playerIndex], 3, nextState, type !== NORMAL_PASS),
+      tileIndexes: pickDiscardIndexes(nextState.players[playerIndex], 3, nextState, type !== NORMAL_PASS, false),
     });
     // When last AI player marks as ready to pass, the Charleston pass will happen
     nextState = markPlayerReadyToPass(nextState, { playerIndex });

@@ -26,7 +26,7 @@ export const SLOT_ID = "SLOT_";
 export const DISCARD_ID = "DISCARD";
 export const PASSING_ID = "PASSING";
 export const PLAY_AREA_ID = "PLAY_AREA";
-export const EXPOSED_RACK_ID = "EXPOSED_RACK";
+export const EXPOSED_RACK_ID = "EXPOSED_RACK_";
 export const WHOLE_RACK_ID = "WHOLE_RACK";
 
 type DraggingData = {
@@ -66,8 +66,8 @@ export function DraggingContext({ children }: Props) {
   };
 
   const onDragOver: DragOverEvent = ({ operation: { source, target } }) => {
-    if (!target || !source || currentDragIndex.current === null) return;
     console.log(`Dragged ${source?.id} over ${target?.id}`);
+    if (!target || !source || currentDragIndex.current === null) return;
     const targetId = String(target.id);
     if (targetId.startsWith(SLOT_ID)) {
       const [, targetSlotIndexStr] = targetId.split("_");
@@ -116,7 +116,7 @@ export function DraggingContext({ children }: Props) {
           playerIndex: THIS_PLAYER,
         }));
       }
-    } else if (target.id === EXPOSED_RACK_ID) {
+    } else if (target.id.toString().startsWith(EXPOSED_RACK_ID)) {
       // Check for a joker swap
       const jokerSwapIndex = getJokerSwapIndex(source.data.tile, target.data.player.exposed);
       if (jokerSwapIndex !== -1) {

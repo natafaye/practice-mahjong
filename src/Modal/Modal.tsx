@@ -21,7 +21,7 @@ export default function Modal({ show, setShow, size = "md", children }: Props) {
             <div
                 className={clsx(
                   "bg-white rounded-lg shadow-xl w-full max-h-[90vh] p-5 flex flex-col",
-                  { sm: "max-w-sm", md: "max-w-md", lg: "max-w-3xl" }[size]
+                  { sm: "max-w-sm", md: "max-w-md", lg: "max-w-4xl" }[size]
                 )}
                 onClick={(e) => e.stopPropagation()}
             >

@@ -10,5 +10,5 @@ export const shouldAICancelCharleston = (player: MahjongPlayer, state: MahjongGa
   
   // If the AI already has 10 or more matches for their best hand, they probably want to stop
   // and keep what they have rather than risk passing away something useful
-  return matchData.matches >= 10;
+  return matchData.matches > player.concealed.length - 3;
 };

@@ -1,4 +1,4 @@
-import { DISCARD, THIS_PLAYER } from "../../constants";
+import { DISCARD, GAME_OVER, THIS_PLAYER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { addToPlayerMeld } from "../actions/addToPlayerMeld";
 import { confirmPlayerMeld } from "../actions/confirmPlayerMeld";
@@ -22,6 +22,7 @@ export const doAICalls = (state: MahjongGameData) => {
     const meldPlan = wantDiscard(nextState.players[nextState.callingPlayer], nextState);
     if (meldPlan) {
       nextState = callDiscard(nextState, { playerIndex: nextState.callingPlayer });
+      if(nextState.gameState === GAME_OVER) return nextState;
       nextState = addToPlayerMeld(nextState, {
         playerIndex: nextState.callingPlayer!,
         tileIndexes: meldPlan.tileIndexes,
@@ -34,9 +35,8 @@ export const doAICalls = (state: MahjongGameData) => {
     nextState = skipDiscardTile(nextState, { playerIndex: nextState.callingPlayer });
   }
   // If we got through all the calling players, and it's not the human's turn, then it's the AI's turn
-  if (nextState.callingPlayer === undefined && nextState.currentPlayer !== THIS_PLAYER) {
+  if (nextState.callingPlayer === undefined && nextState.currentPlayer !== THIS_PLAYER)
     return doAITurn(nextState);
-  }
   // If not then it's the human's turn to decide whether or not to call
   return nextState;
 };

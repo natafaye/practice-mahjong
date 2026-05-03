@@ -26,17 +26,15 @@ export function DropOverlay({ dropId, show, data, background, textShadowColor, c
       ref={ref}
       className={clsx(
         className,
-        "absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center z-10 transition-opacity text-4xl",
+        "absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center",
+        "z-10 transition-opacity text-4xl",
       )}
       style={{
+        backgroundColor: `color-mix(in srgb, ${background} 80%, transparent)`,
         opacity: isDragging && show ? 1 : 0,
         pointerEvents: isDragging && show ? "all" : "none",
       }}
     >
-      <div
-        className="absolute top-0 left-0 right-0 bottom-0 opacity-80 starting:opacity-0 transition-opacity"
-        style={{ background: background }}
-      />
       <p
         className="relative font-bold p-1 rounded-lg text-white text-shadow-md"
         style={

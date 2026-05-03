@@ -33,9 +33,8 @@ export default function ReferenceCard({ className }: Props) {
 
   return (
     <div className={clsx(
-      "flex flex-col align-top bg-white p-4 pt-0 rounded-lg rounded-t-none min-h-0",
-      maximized ? "absolute top-0 left-0 right-0 bottom-0 max-h-full z-20" : "",
-      maximized ? "grow shrink" : "shrink-0",
+      "flex flex-col align-top bg-white p-4 pt-0 rounded-lg rounded-t-none min-h-0 grow-shrink",
+      maximized && "absolute top-0 left-0 right-0 bottom-0 max-h-full z-20",
       className
     )}>
       <div className="overflow-y-auto flex-1 min-h-0 pb-3 pt-4 border-b-taupe-400 border-b-2">

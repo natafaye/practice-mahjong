@@ -7,9 +7,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheTheme] = useState<Theme>(THEMES[0])
 
   const setTheme = (newTheme: Theme) => {
-    console.log(newTheme)
     setTheTheme(newTheme)
   }
+  
   return (
     <ThemeContext.Provider value={{ ...theme, setTheme}}>
       {children}

@@ -8,13 +8,13 @@ import MiniRack from "./MiniRack"
 type Props = {
   playerIndex: number
 }
+
 export default function WonGameStats({ playerIndex }: Props) {
   const winningPlayer = useSelector(selectPlayer(playerIndex))!
   const winningHandId = useSelector(selectWinningHand)
   const [cardName, index] = winningHandId!.split("_")
   const winningHand = CARDS.find(card => card.name === cardName)!.hands[parseInt(index)]
   const stats = getWinStats()
-  console.log(winningPlayer)
   return (
     <div>
       <MiniRack tiles={winningPlayer.exposed.slice(0, -1)} isWinner={true}/>

@@ -11,7 +11,6 @@ export const handleGameWin = (state: MahjongGameData, newPlayers: MahjongPlayer[
   const handsData = getHandsData(state.cardName);
   const currentPlayer = newPlayers[state.currentPlayer];
   const bestHand = findBestHand(currentPlayer, handsData.hands);
-  console.log(bestHand)
   if (bestHand.matches === 14) {
     currentPlayer.exposed = putInHandOrder(currentPlayer, bestHand.hand);
     currentPlayer.concealed = [];

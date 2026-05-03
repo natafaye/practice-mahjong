@@ -9,6 +9,7 @@ import type { MahjongPlayer, Size } from "../types";
 import type { CSSProperties } from "react";
 import { useSelector } from "react-redux";
 import { selectWinningPlayer } from "../_store/selectors";
+import { THIS_PLAYER } from "../constants";
 
 type Props = {
   player: MahjongPlayer;
@@ -57,14 +58,16 @@ export default function Rack({
           )}
         </div>
       </div>
-      <DropOverlay
-        dropId={WHOLE_RACK_ID}
-        show={!concealed && (isDraggingDiscard || isDraggingPass) && !isDraggingJoker}
-        background={rackLight}
-        textShadowColor={rackDark}
-      >
-        {isDraggingPass ? "Remove from Pass" : "Pick Up Discard"}
-      </DropOverlay>
+      {player.index === THIS_PLAYER && (
+        <DropOverlay
+          dropId={WHOLE_RACK_ID}
+          show={(isDraggingDiscard || isDraggingPass) && !isDraggingJoker}
+          background={rackLight}
+          textShadowColor={rackDark}
+        >
+          {isDraggingPass ? "Remove from Pass" : "Pick Up Discard"}
+        </DropOverlay>
+      )}
     </div>
   );
 }

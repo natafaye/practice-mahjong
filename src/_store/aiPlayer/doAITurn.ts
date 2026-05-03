@@ -22,12 +22,14 @@ export const doAITurn = (state: MahjongGameData, shouldDraw: boolean = true): Ma
   // Draw a tile if we should
   if(shouldDraw)
     nextState = drawTileFromWall(nextState, { playerIndex: currentPlayer });
+  if(nextState.gameState === GAME_OVER) return nextState;
   // Look for any joker swaps
   let jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
   while (jokerSwapInfo) {
     nextState = makeJokerSwap(nextState, jokerSwapInfo);
     jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
   }
+  if(nextState.gameState === GAME_OVER) return nextState;
   // Discard a tile
   const discardIndexes = pickDiscardIndexes(nextState.players[currentPlayer], 1, state);
   nextState = discardTile(nextState, {
