@@ -1,9 +1,10 @@
-import type { MahjongPlayer } from "../../types";
-import { getJokerSwapIndex } from "../../_shared";
+import type { MahjongHand, MahjongPlayer } from "../../types";
+import { findBestHand, getJokerSwapIndex } from "../../_shared";
 
 export const lookForJokerSwap = (
   players: MahjongPlayer[],
   currentPlayer: number,
+  hands: MahjongHand[]
 ) => {
   // Loop through each tile
   const concealed = players[currentPlayer].concealed;
@@ -17,6 +18,15 @@ export const lookForJokerSwap = (
         players[playerIndex].exposed,
       );
       if (jokerIndex !== -1) {
+        // If the player is worse off with the joker instead, don't make the swap
+        // (like if they need that tile for a pair or run)
+        const bestHandBeforeSwap = findBestHand(players[currentPlayer], hands)
+        const concealedWithSwap = [...players[currentPlayer].concealed]
+        concealedWithSwap[tileIndex] = players[playerIndex].exposed[jokerIndex]
+        const playerWithSwap = { ...players[currentPlayer], concealed: concealedWithSwap }
+        const bestHandAfterSwap = findBestHand(playerWithSwap, hands)
+        if(bestHandBeforeSwap.matches > bestHandAfterSwap.matches) continue;
+        // Else if they're not worse off, make the swap
         return {
           sourcePlayerIndex: currentPlayer,
           sourceTileIndex: tileIndex,

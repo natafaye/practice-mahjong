@@ -1,3 +1,4 @@
+import { getHandsData } from "../../_shared";
 import { GAME_OVER } from "../../constants";
 import type { MahjongGameData } from "../../types";
 import { discardTile } from "../actions/discardTile";
@@ -24,10 +25,11 @@ export const doAITurn = (state: MahjongGameData, shouldDraw: boolean = true): Ma
     nextState = drawTileFromWall(nextState, { playerIndex: currentPlayer });
   if(nextState.gameState === GAME_OVER) return nextState;
   // Look for any joker swaps
-  let jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
+  const hands = getHandsData(state.cardName).hands
+  let jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer, hands);
   while (jokerSwapInfo) {
     nextState = makeJokerSwap(nextState, jokerSwapInfo);
-    jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer);
+    jokerSwapInfo = lookForJokerSwap(nextState.players, currentPlayer, hands);
   }
   if(nextState.gameState === GAME_OVER) return nextState;
   // Discard a tile
