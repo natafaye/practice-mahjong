@@ -8,6 +8,7 @@ Auto draw and instead have call button
 Put cached exactMelds in handsData instead of cache?
 Fix weird reduxtoolkit proxy situation with findBestHand cache?
 Track dead hands and exclude from findBestHand checks?
+Check for win during Charleston?
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and resize tile thickness for smaller view sizes?

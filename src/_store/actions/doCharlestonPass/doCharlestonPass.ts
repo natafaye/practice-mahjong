@@ -42,6 +42,11 @@ export const doCharlestonPass = (state: MahjongGameData): MahjongGameData => {
       });
     }
   }
+
+  // If this is a one-player game, and this is the last charleston, we only want 24 tiles left in the wall
+  if(state.players.length === 1 && CHARLESTONS.indexOf(state.gameState) === CHARLESTONS.length - 1)
+    newWall.splice(24)
+
   return {
     ...state,
     players: newPlayers,

@@ -11,9 +11,14 @@ export const cancelCharlestonPasses = (state: MahjongGameData): MahjongGameData 
       passingTileIndex: 0 
     })
   }
+
+  // If this is a one-player game, we only want 24 tiles left in the wall
+  let wall = state.players.length === 1 ? state.wall.slice(0, 24) : state.wall
+
   // Finish passing and switch to playing
   return {
     ...nextState,
+    wall,
     passing: state.players.map(() => []),
     readyToPass: state.players.map(() => false),
     gameState: PLAYING,
