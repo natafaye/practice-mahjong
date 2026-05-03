@@ -15,10 +15,12 @@ export const removeFromPassTiles = (state: MahjongGameData, { playerIndex, passi
     const passing = state.passing.map((tiles, index) =>
         index !== playerIndex ? tiles : tiles.filter((_, i) => i !== passingTileIndex)
     );
-    // Put the tile back in the hand, replacing the last added gap
+    // Map the passingTileIndex to the gaps currently in the hand
     const players = clonePlayers(state)
     const concealed = players[playerIndex].concealed
-    const gapIndex = concealed.indexOf(PASSING_GAPS[state.passing[playerIndex].length - 1])
+    const existingGaps = concealed.filter(t => typeof t === "string" && PASSING_GAPS.includes(t)).toSorted()
+    const gapToReplace = existingGaps[passingTileIndex]
+    const gapIndex = concealed.indexOf(gapToReplace)
     concealed[gapIndex] = tileToRemove
     return {
         ...state,

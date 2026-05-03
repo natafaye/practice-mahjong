@@ -3,8 +3,7 @@ Show percentage chance of winning with the hand (update as tiles are added to pa
 Auto draw and instead have call button
 Message if AI cancels Charleston
 2 player Mahjong?
-Setting to not allow AI win
-Allow removing from pass and rearrange drop back into tiles
+Setting for AI brains (stupid never-win or smart sometimes-win)
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and resize tile thickness for smaller view sizes?
@@ -15,3 +14,4 @@ Put cached exactMelds in handsData instead of cache?
 Fix weird reduxtoolkit proxy situation with findBestHand cache?
 Track dead hands and exclude from findBestHand checks?
 Check for win during Charleston? Only dealer could win
+Improve drop back into tiles

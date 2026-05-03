@@ -15,10 +15,10 @@ type Props = {
 }
 
 export default function RackSlot({ index, size, children, isEmpty, className, style }: Props) {
-    const { isDraggingDiscard, isDraggingPass } = useIsDragging()
+    const { isDraggingDiscard } = useIsDragging()
     const { ref, isDropTarget } = useDroppable({ 
         id: SLOT_ID + index,
-        disabled: isDraggingDiscard || isDraggingPass
+        disabled: isDraggingDiscard
     });
 
     return (

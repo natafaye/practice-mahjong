@@ -23,14 +23,16 @@ export const addToPassTiles = (state: MahjongGameData, { playerIndex, tileIndexe
     );
     // Remove the tiles from the player's tiles and replace with gaps
     const players = clonePlayers(state)
-    let nextGapIndex = state.passing[playerIndex].length
+    const usedGaps = players[playerIndex].concealed.filter(t => typeof t === "string" && PASSING_GAPS.includes(t))
+    const availableGaps = PASSING_GAPS.filter(g => !usedGaps.includes(g))
+
     const sortedIndexes = tileIndexes.toSorted((a, b) => b - a)
     sortedIndexes.forEach(tileIndex => {
         players[playerIndex].concealed.splice(tileIndex, 1)
     })
     // Add in the gaps after splicing out the passed tiles, so it doesn't change the indexes
     sortedIndexes.forEach(() => {
-        players[playerIndex].concealed.unshift(PASSING_GAPS[nextGapIndex++])
+        players[playerIndex].concealed.unshift(availableGaps.shift()!)
     })
     return {
         ...state,

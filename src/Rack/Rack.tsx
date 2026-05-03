@@ -31,7 +31,7 @@ export default function Rack({
   isIdle = false,
 }: Props) {
   const { rackLight, rackDark } = useTheme();
-  const { isDraggingDiscard, isDraggingPass, isDraggingJoker } = useIsDragging();
+  const { isDraggingDiscard, isDraggingJoker } = useIsDragging();
   const winningPlayer = useSelector(selectWinningPlayer);
 
   return (
@@ -61,11 +61,11 @@ export default function Rack({
       {player.index === THIS_PLAYER && (
         <DropOverlay
           dropId={WHOLE_RACK_ID}
-          show={(isDraggingDiscard || isDraggingPass) && !isDraggingJoker}
+          show={isDraggingDiscard && !isDraggingJoker}
           background={rackLight}
           textShadowColor={rackDark}
         >
-          {isDraggingPass ? "Remove from Pass" : "Pick Up Discard"}
+          Pick Up Discard
         </DropOverlay>
       )}
     </div>

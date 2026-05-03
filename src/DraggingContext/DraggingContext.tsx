@@ -9,9 +9,9 @@ import {
 import Tile from "../Tile/Tile";
 import { getJokerSwapIndex } from "../_shared";
 import type { MahjongTile } from "../types";
-import { CHARLESTONS, THIS_PLAYER } from "../constants";
+import { CHARLESTONS, PASSING_GAPS, THIS_PLAYER } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { selectGameState } from "../_store/selectors";
+import { selectGameState, selectPlayers } from "../_store/selectors";
 import {
   addToPass,
   discard,
@@ -50,6 +50,7 @@ type Props = {
 
 export function DraggingContext({ children }: Props) {
   const gameState = useSelector(selectGameState);
+  const players = useSelector(selectPlayers);
   const dispatch = useDispatch();
   const [activeTile, setActiveTile] = useState<MahjongTile | null>(null);
   const [draggingData, setDraggingData] = useState<DraggingData | undefined>(undefined);
@@ -70,12 +71,26 @@ export function DraggingContext({ children }: Props) {
     if (!target || !source || currentDragIndex.current === null) return;
     const targetId = String(target.id);
     if (targetId.startsWith(SLOT_ID)) {
-      const [, targetSlotIndexStr] = targetId.split("_");
-      const targetSlotIndex = parseInt(targetSlotIndexStr);
-      dispatch(rearrangeConcealed({
-        startIndex: source.data.tileIndex,
-        endIndex: targetSlotIndex,
-      }));
+      const [, targetSlotIndexString] = targetId.split("_");
+      const targetSlotIndex = parseInt(targetSlotIndexString);
+
+      let startIndex = source.data.tileIndex;
+      if (source.data.playerIndex === PASSING_ID) {
+        // Find the index of the corresponding gap in the rack to move that around
+        const player = players[THIS_PLAYER];
+        const existingGaps = player.concealed
+          .filter((t) => typeof t === "string" && PASSING_GAPS.includes(t))
+          .toSorted();
+        const gapToMove = existingGaps[source.data.tileIndex];
+        startIndex = player.concealed.indexOf(gapToMove);
+      }
+
+      dispatch(
+        rearrangeConcealed({
+          startIndex,
+          endIndex: targetSlotIndex,
+        }),
+      );
       currentDragIndex.current = targetSlotIndex;
     }
   };
@@ -93,28 +108,36 @@ export function DraggingContext({ children }: Props) {
     if (target.id === PLAY_AREA_ID && !source.id.toString().startsWith(GAP_ID)) {
       if (CHARLESTONS.includes(gameState)) {
         // Add to Charleston Pass
-        dispatch(addToPass({
-          playerIndex: THIS_PLAYER,
-          tileIndexes: [finalIndex],
-        }));
+        dispatch(
+          addToPass({
+            playerIndex: THIS_PLAYER,
+            tileIndexes: [finalIndex],
+          }),
+        );
       } else {
         // Discard
-        dispatch(discard({
-          playerIndex: THIS_PLAYER,
-          tileIndex: finalIndex,
-        }));
+        dispatch(
+          discard({
+            playerIndex: THIS_PLAYER,
+            tileIndex: finalIndex,
+          }),
+        );
       }
-    } else if (target.id === WHOLE_RACK_ID) {
+    } else if (target.id === WHOLE_RACK_ID || target.id.toString().startsWith(SLOT_ID)) {
       if (source.data.playerIndex === PASSING_ID) {
-        dispatch(removeFromPass({
-          playerIndex: THIS_PLAYER,
-          passingTileIndex: finalIndex,
-        }));
-      } else {
+        dispatch(
+          removeFromPass({
+            playerIndex: THIS_PLAYER,
+            passingTileIndex: source.data.tileIndex, // TODO: finalIndex??
+          }),
+        );
+      } else if (target.id === WHOLE_RACK_ID) {
         // Pick up discard
-        dispatch(pickUpDiscard({
-          playerIndex: THIS_PLAYER,
-        }));
+        dispatch(
+          pickUpDiscard({
+            playerIndex: THIS_PLAYER,
+          }),
+        );
       }
     } else if (target.id.toString().startsWith(EXPOSED_RACK_ID)) {
       // Check for a joker swap
