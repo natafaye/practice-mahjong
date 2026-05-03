@@ -33,7 +33,7 @@ export const getWinWithHandChance = (hand: MahjongHand, gameData: MahjongGameDat
 
   // Loop through every combination of suits and numbers that satisfy this hand's melds
   // and get the best chance among all the possible exact hand combinations
-  const exactHandCombos = getExactMeldCombinations(hand.melds);
+  const exactHandCombos = getExactMeldCombinations(hand);
   let bestChance = 0;
   let bestExactHand = exactHandCombos[0];
   for (const exactHand of exactHandCombos) {

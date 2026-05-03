@@ -1,10 +1,12 @@
 import { BAMS, DOTS, CRAKS, WIND_SUIT, FLOWER_SUIT } from "../constants";
-import type { MahjongHandMeld } from "../types";
+import type { MahjongHand } from "../types";
 
 export type ExactMeld = {
   suit: string;
   numbers: string;
 };
+
+const exactMeldsCache = new Map<string, ExactMeld[][]>()
 
 // These suits in a CARD don't get mapped by G, R, B they stay as they are
 const OTHER_SUITS = {
@@ -27,20 +29,23 @@ const SUIT_PERMUTATIONS = [
  * Non specific: 1111 FFFFFF 2222, Any 1 Suit, Any 2 Consecutive Numbers
  * Exact: 3333(dots) FFFFFF(flowers) 2222(dots)
  */
-export const getExactMeldCombinations = (melds: MahjongHandMeld[]): ExactMeld[][] => {
+export const getExactMeldCombinations = (hand: MahjongHand): ExactMeld[][] => {
+  // Check the cache first
+  if(exactMeldsCache.has(hand.id)) return exactMeldsCache.get(hand.id)!
+
   const exactCombinationsSet = new Set<string>();
   const results: ExactMeld[][] = [];
 
-  if (melds.length === 0) return [];
+  if (hand.melds.length === 0) return [];
 
   // Check every combo of suits (G is BAMS or G is CRAKS, etc)
   for (const suitMap of SUIT_PERMUTATIONS) {
     // Check every combo of numbers (222 or 444 or 666 for an even meld of 3, etc)
     // Loop for the maximum number of options any meld has (for example, there are 4 options for any even: 2, 4, 6 or 8)
-    const maxOptions = Math.max(...melds.map((s) => s.numbers.length));
+    const maxOptions = Math.max(...hand.melds.map((s) => s.numbers.length));
     for (let i = 0; i < maxOptions; i++) {
       // The melds with exact numbers and suits (instead of "any even in same suit", it's "Dot 4s")
-      const exactMelds = melds.map((meld) => {
+      const exactMelds = hand.melds.map((meld) => {
         // If the meld has this index, use it, if not it's a meld that never changes so use index 0
         const numbers = meld.numbers[i] !== undefined ? meld.numbers[i] : meld.numbers[0];
         // Map the generic suit "R" to a specific suit "Dots" (leave Winds and Flowers and zeros as is)
@@ -55,5 +60,9 @@ export const getExactMeldCombinations = (melds: MahjongHandMeld[]): ExactMeld[][
       }
     }
   }
+
+  // Save to cache
+  exactMeldsCache.set(hand.id, results)
+
   return results;
 };

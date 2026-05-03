@@ -5,7 +5,9 @@ Intelligent AI (calling, only joker substitute when it makes sense)
 One player don't need to skip your own discards
 Setting to not allow AI win
 Auto draw and instead have call button
-Fix performance of calling check
+Put cached exactMelds in handsData instead of cache?
+Fix weird reduxtoolkit proxy situation with findBestHand cache?
+Track dead hands and exclude from findBestHand checks?
 
 ---- LOW PRIORITY ----
 Change tile edge to only top? and resize tile thickness for smaller view sizes?

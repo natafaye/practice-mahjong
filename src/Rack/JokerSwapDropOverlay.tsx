@@ -20,7 +20,8 @@ export default function JokerSwapDropOverlay({ playerIndex = undefined }: Props)
       const index = getJokerSwapIndex(draggingTile, players[playerIndex].exposed)
       return index !== -1 ? playerIndex : undefined
     } else {
-      return players.findIndex((p) => getJokerSwapIndex(draggingTile, p.exposed) !== -1)
+      const index = players.findIndex((p) => getJokerSwapIndex(draggingTile, p.exposed) !== -1)
+      return index !== -1 ? index : undefined
     }
   }, [draggingTile]);
 

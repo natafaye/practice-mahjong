@@ -15,20 +15,20 @@ type Props = {
 }
 
 export default function ReferenceCard({ className }: Props) {
-  const [pinnedIndexes, setPinnedIndexes] = useState<number[]>([])
+  const [pinnedIds, setPinnedIds] = useState<string[]>([])
   const [maximized, setMaximized] = useState(false)
   const cardName = useSelector(selectCardName)
-  const { hands, sections } = getHandsData(cardName)
+  const { hands, sections, handsBySection } = getHandsData(cardName)
   const stats = getWinStats()
 
-  const pin = (index: number) => {
-    if (pinnedIndexes.includes(index)) return
-    if (pinnedIndexes.length === MAX_PINNED) return
-    setPinnedIndexes([...pinnedIndexes, index])
+  const pin = (id: string) => {
+    if (pinnedIds.includes(id)) return
+    if (pinnedIds.length === MAX_PINNED) return
+    setPinnedIds([...pinnedIds, id])
   }
 
-  const unpin = (index: number) => {
-    setPinnedIndexes(pinnedIndexes.filter(i => i !== index))
+  const unpin = (id: string) => {
+    setPinnedIds(pinnedIds.filter(i => i !== id))
   }
 
   return (
@@ -42,13 +42,13 @@ export default function ReferenceCard({ className }: Props) {
           {sections.map(section => (
             <div key={section} className="mb-3 break-inside-avoid-column">
               <h3 className="font-bold">{section}</h3>
-              {hands.filter(hand => hand.section === section).map((hand, index) => {
-                const pinned = pinnedIndexes.includes(hands.indexOf(hand))
+              {handsBySection[section].map(hand => {
+                const pinned = pinnedIds.includes(hand.id)
                 return (
                   <ReferenceHand
-                    key={section + "_" + index}
+                    key={hand.id}
                     hand={hand}
-                    onClick={() => !pinned ? pin(hands.indexOf(hand)) : unpin(hands.indexOf(hand))}
+                    onClick={() => !pinned ? pin(hand.id) : unpin(hand.id)}
                     winCount={stats[hand.id] || 0}
                     expanded={maximized}
                     pinned={pinned}
@@ -62,17 +62,17 @@ export default function ReferenceCard({ className }: Props) {
 
       <div className="pt-2 flex">
         <div className="grow shrink min-w-0 columns-1 2xl:columns-2">
-          {pinnedIndexes.map(index => (
+          {pinnedIds.map(id => (
             <ReferenceHand
-              key={index}
-              hand={hands[index]}
-              onClick={() => unpin(index)}
-              winCount={stats[hands[index].id] || 0}
+              key={id}
+              hand={hands.find(h => h.id === id)!}
+              onClick={() => unpin(id)}
+              winCount={stats[id] || 0}
               expanded
               pinned
             />
           ))}
-          {pinnedIndexes.length === 0 && <span className="text-taupe-400">No hands pinned</span>}
+          {pinnedIds.length === 0 && <span className="text-taupe-400">No hands pinned</span>}
         </div>
         <div className="text-end shrink">
           <button

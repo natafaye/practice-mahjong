@@ -3,6 +3,7 @@ import type { MahjongGameData, MahjongPlayer } from "../../types";
 import { CHARLESTONS, PLAYING } from "../../constants";
 import { shuffleArray } from "./shuffleArray";
 import { Chance } from "chance";
+import { clearBestHandCache } from "../../_shared/findBestHand";
 
 type Payload = {
   cardName: string;
@@ -28,6 +29,9 @@ export const generateInitialData = ({ cardName, numberOfPlayers, seed, dealer }:
       exposed: [],
     });
   }
+
+  // Clear the findBestHand cache to free up memory
+  clearBestHandCache()
 
   return {
     seed,

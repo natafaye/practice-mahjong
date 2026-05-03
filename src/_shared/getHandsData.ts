@@ -1,5 +1,5 @@
 import { CARDS } from "../_data/CARDS";
-import type { MahjongHandsData } from "../types";
+import type { MahjongHand, MahjongHandsData } from "../types";
 
 // A cache so we only calculate the MahjongHandsData once
 const cache = new Map<string, MahjongHandsData>();
@@ -9,6 +9,7 @@ const cache = new Map<string, MahjongHandsData>();
  * name: The name of this card (2025, 2026, etc)
  * hands: All the passed in hands (passes right through from parameter)
  * sections: All the sections listed in hands
+ * handsBySection: The hands grouped by section for easy display
  * melds: All the possible melds (for example, "234" and "2025" and "FFF")
  * callableMelds: Only the callable melds (only sets of 3, 4, and 5)
  */
@@ -23,6 +24,10 @@ export const getHandsData = (name: string): MahjongHandsData => {
 
   // Sections
   const sections = [ ...new Set(hands.map((hand) => hand.section)) ];
+  const handsBySection: Record<string, MahjongHand[]> = { }
+  for(const section of sections) {
+    handsBySection[section] = hands.filter(hand => hand.section === section)
+  }
 
   // All melds
   const melds = [ ...new Set(hands.flatMap((hand) => hand.melds.flatMap((set) => set.numbers))) ];
@@ -37,6 +42,7 @@ export const getHandsData = (name: string): MahjongHandsData => {
   const result = {
     name, 
     hands,
+    handsBySection,
     sections,
     melds,
     callableMelds

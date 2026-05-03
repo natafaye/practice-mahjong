@@ -23,7 +23,7 @@ export const matchTilesToHand = (
   const exposed = getExposedMelds(exposedTiles);
 
   // Check every combo of suits and numbers (G is BAMS, 222 is meld of evens)
-  const exactHands = getExactMeldCombinations(hand.melds);
+  const exactHands = getExactMeldCombinations(hand);
   for (const exactMelds of exactHands) {
     let currentMatches = 0;
     const availableTiles = [...concealed];

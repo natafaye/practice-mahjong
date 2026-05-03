@@ -13,7 +13,7 @@ type Props = {
 }
 export default function CardSectionStats({ cardName, section, highlightedHandID, stats }: Props) {
   const handsData = getHandsData(cardName)
-  const sectionHands = handsData.hands.filter(hand => hand.section === section)
+  const sectionHands = handsData.handsBySection[section]
   const handsWithWin = sectionHands.filter(hand => stats[hand.id]).length
   const percentage = 100 * handsWithWin / sectionHands.length
   return (

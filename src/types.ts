@@ -57,6 +57,7 @@ export type MahjongCard = {
 export type MahjongHandsData = {
   hands: MahjongHand[];
   sections: string[];
+  handsBySection: Record<string, MahjongHand[]>;
   melds: string[];
   callableMelds: string[];
 };

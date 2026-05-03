@@ -1,4 +1,4 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, type PayloadAction } from "@reduxjs/toolkit";
 import type { MahjongGameData } from "../types";
 import { generateInitialData } from "./generate/generateInitialData";
 import { drawTileFromWall } from "./actions/drawTileFromWall";
@@ -42,7 +42,7 @@ const gameSlice = createSlice({
       return removeFromPassTiles(state, action.payload);
     },
     markReadyToPass: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      let nextState = markPlayerReadyToPass(state, action.payload);
+      let nextState = markPlayerReadyToPass(current(state), action.payload);
       nextState = doAIPasses(nextState);
       // If it's now an AI's turn, do their turn
       if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
@@ -64,12 +64,12 @@ const gameSlice = createSlice({
       return makeJokerSwap(state, action.payload);
     },
     discard: (state, action: PayloadAction<{ playerIndex: number; tileIndex: number }>) => {
-      let nextState = discardTile(state, action.payload);
+      let nextState = discardTile(current(state), action.payload);
       nextState = doAICalls(nextState);
       return nextState;
     },
     skipDiscard: (state, action: PayloadAction<{ playerIndex: number }>) => {
-      let nextState = skipDiscardTile(state, action.payload);
+      let nextState = skipDiscardTile(current(state), action.payload);
       nextState = doAICalls(nextState);
       return nextState;
     },
@@ -89,7 +89,7 @@ const gameSlice = createSlice({
       return cancelPlayerMeld(state);
     },
     cancelCharleston: (state) => {
-      let nextState = cancelCharlestonPasses(state);
+      let nextState = cancelCharlestonPasses(current(state));
       // If it's now an AI's turn, do their turn
       if (nextState.gameState === PLAYING && nextState.currentPlayer !== THIS_PLAYER)
         nextState = doAITurn(nextState, false);
