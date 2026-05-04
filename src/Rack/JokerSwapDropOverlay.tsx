@@ -28,7 +28,7 @@ export default function JokerSwapDropOverlay({ playerIndex = undefined }: Props)
   return (
     <DropOverlay
       dropId={EXPOSED_RACK_ID + (playerIndex !== undefined ? playerIndex : "ALL")}
-      data={{ player: jokerSwapPlayerIndex && players[jokerSwapPlayerIndex] }}
+      data={{ player: jokerSwapPlayerIndex !== undefined && players[jokerSwapPlayerIndex] }}
       show={currentPlayer === THIS_PLAYER && jokerSwapPlayerIndex !== undefined}
       background={rackLight}
       textShadowColor={rackDark}
