@@ -128,7 +128,7 @@ export function DraggingContext({ children }: Props) {
         dispatch(
           removeFromPass({
             playerIndex: THIS_PLAYER,
-            passingTileIndex: source.data.tileIndex, // TODO: finalIndex??
+            passingTileIndex: source.data.tileIndex,
           }),
         );
       } else if (target.id === WHOLE_RACK_ID) {
